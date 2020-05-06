@@ -1,0 +1,15 @@
+﻿  moc Leandro.h
+  Additive.cpp
+  Binasc.cpp
+  Channel.cpp
+  Effect.cpp
+  Instrument.cpp
+  Leandro.cpp
+  main.cpp
+  MidiEvent.cpp
+  MidiEventList.cpp
+  MidiFile.cpp
+  MidiMessage.cpp
+  Options.cpp
+  moc_Leandro.cpp
+  Leandro.vcxproj -> C:\Users\Matías\source\repos\Leandro\x64\Debug\Leandro.exe
