@@ -1,2 +1,2 @@
 
-uic.exe -o mainwindow.cpp mainwindow.ui
+uic.exe -o altfiles\mainwindow.cpp Leandro.ui

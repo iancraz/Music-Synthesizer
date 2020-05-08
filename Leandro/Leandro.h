@@ -23,10 +23,10 @@ using namespace std;
 class Channel;
 
 typedef struct {
-	vector<timedBuffer>* buffers;
+	vector<timedBuffer*>* buffers;
 	float* activeBuffer;
 	__int64* currentSample;
-	vector<Channel>* channels;
+	vector<Channel*>* channels;
 }callbackData;
 
 class Leandro : public QMainWindow
@@ -36,15 +36,15 @@ class Leandro : public QMainWindow
 public:
 	Leandro(QWidget *parent = Q_NULLPTR);
 	__int64 currentSample;
-	vector<Channel> channels;
+	vector<Channel*> channels;
 
 	callbackData callData;
 	PaStream* stream;
 
-	vector<MidiFile> midiFiles;
-	vector<midiTrack> midiTracks;
-
-	vector<timedBuffer> noteBuffers;
+	vector<MidiFile*> midiFiles;
+	vector<midiTrack*> midiTracks;
+	vector<timedBuffer*> noteBuffers;
+	
 	float* activeBuffer;
 
 	
@@ -52,10 +52,13 @@ public:
 
 	static PaStreamCallback callback;
 
-	void addChannel(Channel newChannel);
-	void destroyChannel(Channel channel);
+	void addChannel(Channel * newChannel);
+	void destroyChannel(Channel * channel);
 
-	void addMidiFile(string directory, string filename);
+	void addMidiFile(string directory, string filename, bool autoSet);
+	void updateCallbackData();
 private:
 	Ui::LeandroClass ui;
+
+
 };

@@ -12,7 +12,7 @@ Effect::~Effect() {
 int Effect::callback(
 	void* soundBuffer,
 	const unsigned int soundBufferSize,
-	unsigned int sampleRate
+	const int sampleRate
 ) {
 	// Data-processing callback here. Recieves input buffer and puts modified data into output buffer.
 	return 0;

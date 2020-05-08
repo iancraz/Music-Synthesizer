@@ -6,7 +6,7 @@
 typedef int effectCallback(
 	void* soundBuffer,
 	const unsigned int soundBufferSize,
-	unsigned int sampleRate
+	const int sampleRate
 );
 
 class Effect

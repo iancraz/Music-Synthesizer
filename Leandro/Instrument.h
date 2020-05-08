@@ -10,10 +10,11 @@ using namespace smf;
 typedef int instrumentCallback(
 	float* outputBuffer,
 	const unsigned int outputBufferSize,
-	int keyNumber,
-	float lengthInMilliseconds,
-	int velocity,
-	unsigned int sampleRate);
+	const int keyNumber,
+	const float lengthInMilliseconds,
+	const int velocity,
+	const int sampleRate
+);
 
 enum class synthType { additive, fm, karplus, sampling };
 
@@ -41,3 +42,4 @@ public:
 	samplingInstrument();
 	~samplingInstrument();
 };
+

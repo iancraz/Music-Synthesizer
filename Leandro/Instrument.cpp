@@ -4,10 +4,10 @@
 int Instrument::synthFunction(
 	float* outputBuffer,
 	const unsigned int outputBufferSize,
-	int keyNumber,
-	float lengthInMilliseconds,
-	int velocity,
-	unsigned int sampleRate) {
+	const int keyNumber,
+	const float lengthInMilliseconds,
+	const int velocity,
+	const int sampleRate) {
 
 	//The synth function for karplus instruments here
 	return 0;

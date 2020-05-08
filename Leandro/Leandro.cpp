@@ -9,15 +9,13 @@ using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 {
+	PaError err = Pa_Initialize();
+	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s",Pa_GetErrorText(err);
 	this->currentSample = 0;
 	this->activeBuffer = (float*)malloc(ACTIVE_BUFFER_FRAME_SIZE);
-	this->callData.activeBuffer = this->activeBuffer;
-	this->callData.buffers = &(this->noteBuffers);
-	this->callData.currentSample = &(this->currentSample);
-	for (int channel = 0; channel < this->channels.size(); channel++)
-		this->callData.channels->push_back(this->channels.at(channel));
+	
 
-	PaError err;
+	
 	/* Open an audio I/O stream. */
 	err = Pa_OpenDefaultStream(&(this->stream),
 		0,          /* no input channels */
@@ -34,13 +32,14 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 		this->callback, /* this is your callback function */
 		&(this->callData)); /*This is a pointer that will be passed to
 							your callback*/
-	if (err != paNoError) throw "Error: PortAudio failed to open stream!";
+	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
+
+	this->updateCallbackData();
 }
 
 
-
 Leandro::~Leandro() {
-	for (int i = 0; i < this->noteBuffers.size(); i++) free(this->noteBuffers[i].buffer);
+	for (int i = 0; i < this->noteBuffers.size(); i++) free(this->noteBuffers[i]->buffer);
 }
 
 int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers and output results to stream
@@ -54,19 +53,19 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 	// Void pointer casts
 	float* out = (float*)output;
 	callbackData* data = (callbackData*)userData;
-	vector<timedBuffer>* buffers = (data->buffers);
+	vector<timedBuffer*>* buffers = data->buffers;
 
 	// Local variable declarations
 	vector<timedBuffer*> activeBuffers;
 
 	for (int channel = 0; channel < data->channels->size(); channel++)
-		data->channels->at(channel).callback(frameCount, data->currentSample, data->buffers, &(data->channels->at(channel).callData));
+		data->channels->at(channel)->callback(frameCount, data->currentSample, data->buffers, &(data->channels->at(channel)->callData));
 
 
 	// First, get active note buffers
 	for (int i = 0; i < buffers->size(); i++)
-		if (buffers->at(i).buffer[0] != INFINITY)
-			activeBuffers.push_back(&buffers->at(i));
+		if (buffers->at(i)->buffer[0] != INFINITY)
+			activeBuffers.push_back(buffers->at(i));
 
 	for (unsigned int frame = 0; frame < frameCount; frame++) // Run through output frames
 	{
@@ -89,49 +88,63 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 	return paContinue;
 }
 
-void Leandro::addChannel(Channel newChannel) {
+void Leandro::addChannel(Channel* newChannel) {
 	// Add amount of note buffers to keep channel-buffer proportion
-	timedBuffer tempBuffer;
+	timedBuffer* tempBuffer;
 	for (int i = 0; i < MAX_SIMULTANEOUS_NOTES_PER_CHANNEL; i++) {
-		tempBuffer.buffer = (float*)malloc(MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE * sizeof(float));
-		tempBuffer.buffer[0] = INFINITY;
-		tempBuffer.startingFrame = -1;
+		tempBuffer = new timedBuffer;
+		tempBuffer->buffer = (float*)malloc(MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE * sizeof(float));
+		tempBuffer->buffer[0] = INFINITY;
+		tempBuffer->startingFrame = -1;
 		this->noteBuffers.push_back(tempBuffer);
 	}
 	// Append new channel to channel list
 	this->channels.push_back(newChannel);
-	this->callData.channels->push_back(this->channels.back());
+	this->updateCallbackData();
 }
 
-void Leandro::destroyChannel(Channel channel) { // Channel destructor
+void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 	// Free used memory and destroy note buffers, up to MAX_SIMULTANEOUS_NOTES_PER_CHANNEL, if there are enough empty ones
 	int k = MAX_SIMULTANEOUS_NOTES_PER_CHANNEL;
 	for (int i = 0; i < this->noteBuffers.size() && k>0; i++)
-		if (this->noteBuffers[i].buffer[0] == INFINITY)
+		if (this->noteBuffers[i]->buffer[0] == INFINITY)
 		{
-			free(this->noteBuffers[i].buffer);
+			free(this->noteBuffers[i]->buffer);
 			this->noteBuffers.erase(noteBuffers.begin() + i);
 		}
 	// Destroy channel and remove from channel list
 
 	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
-	channel.~Channel();
+	channel->~Channel();
 }
 
-void Leandro::addMidiFile(string directory, string filename) {
-	MidiFile midifile;
-	midifile.read(directory + filename);
-	midifile.doTimeAnalysis();
-	midifile.linkNotePairs();
-	midiTrack temp;
-	this->midiFiles.push_back(midifile);
-	temp.midifile = &(this->midiFiles.back());
-	int tracks = midifile.getTrackCount();
+void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
+	MidiFile* midifile= new MidiFile;
+	midifile->read(directory + filename);
+	midifile->doTimeAnalysis();
+	midifile->linkNotePairs();
+	midiTrack* tempTrack;
+	Channel* tempChannel;
+	int tracks = midifile->getTrackCount();
 	for (int track = 0; track < tracks; track++) {
-		temp.trackIndex = track;
-		temp.trackName = "Track " + to_string(track) + " - " + filename;
+		tempTrack = new midiTrack;
+		tempTrack->midifile = midifile;
+		tempTrack->trackIndex = track;
+		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
+		if (autoSet) {
+			tempChannel = new Channel(this->currentSample);
+			tempChannel->setChannelTrack(tempTrack);
+			this->addChannel(tempChannel);
+		}
+		this->midiTracks.push_back(tempTrack);
 	}
-	this->midiTracks.push_back(temp);
+	this->midiFiles.push_back(midifile);
+
 }
 
-
+void Leandro::updateCallbackData() {
+	this->callData.activeBuffer = this->activeBuffer;
+	this->callData.buffers = &(this->noteBuffers);
+	this->callData.currentSample = &(this->currentSample);
+	this->callData.channels=&(this->channels);
+};
