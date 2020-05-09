@@ -64,6 +64,7 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 	float debugVAR=0.0;
 
 
+
 	for (int channel = 0; channel < data->channels->size(); channel++)
 		data->channels->at(channel)->callback(frameCount, data->currentSample, data->buffers, &(data->channels->at(channel)->callData));
 
@@ -75,26 +76,29 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 
 	for (unsigned int frame = 0; frame < frameCount; frame++) // Run through output frames
 	{
+		data->activeBuffer[frame] = 0;
 		for (int bufIndex = 0; bufIndex < activeBuffers.size(); bufIndex++) // Run through buffers to check whether there's something there for this frame
 		{
-			if (activeBuffers.at(bufIndex)->startingFrame > 0) { // Check validity of starting frame
-				data->activeBuffer[frame] = 0;
-				if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
-					if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) { // If the buffer does not end at this position
-						data->activeBuffer[frame] += activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)]; // Sum this buffer's position corresponding to analyzed frame to final output buffer
-						debugVAR = data->activeBuffer[frame];
-					}
-					else { // If the buffer ends, reset it so that it can be re-used
-						activeBuffers.at(bufIndex)->buffer[0] = INFINITY;
-						activeBuffers.at(bufIndex)->startingFrame = -1;
-						activeBuffers.erase(activeBuffers.begin() + bufIndex);
-					}
-			}
-			else throw "Error! Invalid buffer starting frame";
+			
+			if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
+				if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) { // If the buffer does not end at this position
+					data->activeBuffer[frame] += activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)]; // Sum this buffer's position corresponding to analyzed frame to final output buffer
+					debugVAR = data->activeBuffer[frame];
+					if (debugVAR > 2.0 || debugVAR < -2.0)
+						continue;
+				}
+				else { // If the buffer ends, reset it so that it can be re-used
+					activeBuffers.at(bufIndex)->buffer[0] = INFINITY;
+					activeBuffers.at(bufIndex)->startingFrame = -1;
+					activeBuffers.erase(activeBuffers.begin() + bufIndex);
+					if (bufIndex>0) bufIndex--;
+
+				}
+			
 		}
-		*out++ = data->activeBuffer[frame];  // Left channel
-		*out++ = data->activeBuffer[frame];  // Right channel
-		//*data->debugStream << data->activeBuffer[frame] << endl;
+		*out++ = 20*data->activeBuffer[frame];  // Left channel
+		*out++ = 20*data->activeBuffer[frame];  // Right channel
+		*data->debugStream << 20*data->activeBuffer[frame] << endl;
 
 	}
 	*(data->currentSample) += frameCount;

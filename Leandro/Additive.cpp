@@ -9,11 +9,11 @@ additiveInstrument::additiveInstrument(adsrParams_t _params, const unsigned int 
 }
 
 int additiveInstrument::generateEnvelope(float lengthInMilisecods, float A0, int sampleRate) {
-	long noteDuration_n = lengthInMilisecods * sampleRate / 1000;
+	long noteDuration_n = lengthInMilisecods * sampleRate / 1000.0;
 	int nAttack = params.tAttack * sampleRate;
 	int nDecay = params.tDecay * sampleRate;
 	int nRelease = params.tRelease * sampleRate;
-	int synthDuration_n = (lengthInMilisecods / 1000 + params.tRelease) * sampleRate;
+	int synthDuration_n = (lengthInMilisecods / 1000.0 + params.tRelease) * sampleRate;
 
 	unsigned long i = 0;
 
@@ -66,7 +66,7 @@ int additiveInstrument::generateEnvelope(float lengthInMilisecods, float A0, int
 			i++;
 		}
 	}
-	return synthDuration_n;
+	return i-1;
 }
 
 int
@@ -81,9 +81,14 @@ additiveInstrument::synthFunction(float* outputBuffer,
 	float freq = 440.0 * pow(2.0, (keyNumber - 69.0) / 12.0);
 	unsigned int totalLength = (envelopeDuration < outputBufferSize) ? envelopeDuration : outputBufferSize;
 
-	for (int j = 0; j < totalLength - 1; j++) {
+	for (int j = 0; j < totalLength; j++) {
 		outputBuffer[j] = envelope[j] * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+		if (outputBuffer[j] > 2.0 || outputBuffer[j] < -2.0) {
+			float pedo = outputBuffer[j];
+			float pedito = envelope[j];
+		}
 	}
+	
 	outputBuffer[totalLength - 1] = INFINITY;
 
 	return 0;

@@ -8,11 +8,11 @@ int main(int argc, char *argv[])
 	Leandro program;
 
 	adsrParams_t params;
-	params.tAttack = 0.001;
-	params.tDecay = 0.002;
-	params.sustainRate = 0.5;
+	params.tAttack = 0.01;
+	params.tDecay = 0.02;
+	params.sustainRate = 0.005;
 	params.k = 1.5;
-	params.tRelease = 0.003;
+	params.tRelease = 0.03;
 
 	
 	//program.addChannel(channel1);
