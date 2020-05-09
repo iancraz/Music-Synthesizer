@@ -66,9 +66,7 @@ int additiveInstrument::generateEnvelope(float lengthInMilisecods, float A0, int
 			i++;
 		}
 	}
-
 	return synthDuration_n;
-
 }
 
 int
@@ -84,7 +82,7 @@ additiveInstrument::synthFunction(float* outputBuffer,
 	unsigned int totalLength = (envelopeDuration < outputBufferSize) ? envelopeDuration : outputBufferSize;
 
 	for (int j = 0; j < totalLength - 1; j++) {
-		outputBuffer[j] = envelope[j] * sin(2 * M_PI * (freq / (float)sampleRate) * j);
+		outputBuffer[j] = envelope[j] * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
 	}
 	outputBuffer[totalLength - 1] = INFINITY;
 
