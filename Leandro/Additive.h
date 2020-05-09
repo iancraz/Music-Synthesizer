@@ -10,10 +10,14 @@ typedef struct {
 
 class additiveInstrument : public Instrument {
 public:
-	additiveInstrument(adsrParams_t _params);
+	additiveInstrument(adsrParams_t _params, const unsigned int buffLength);
 	~additiveInstrument() {}
 
 protected:
 	adsrParams_t params;
 	instrumentCallback synthFunction;
+	int generateEnvelope(float lengthInMilisecods,
+						 float A0,
+						 int sampleRate);
+	float* envelope;
 };

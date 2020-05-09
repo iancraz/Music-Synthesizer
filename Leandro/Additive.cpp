@@ -3,90 +3,90 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-additiveInstrument::additiveInstrument(adsrParams_t _params) {
-	params.tAttack = _params.tAttack;
-	params.tDecay = _params.tRelease;
-	params.sustainRate = _params.sustainRate;
-	params.tRelease = _params.tRelease;
+additiveInstrument::additiveInstrument(adsrParams_t _params, const unsigned int buffLength) {
+	params = _params;
+	envelope = new float[buffLength];
 }
 
-int
-additiveInstrument::synthFunction(
-		float* outputBuffer,
-		const unsigned int outputBufferSize,
-		const int keyNumber,
-		const float lengthInMilliseconds,
-		const int velocity,
-		const int sampleRate
-) {
-	int noteDuration_n = (int)(lengthInMilliseconds * 1000 * SAMPLE_RATE);
-	int nAttack = params.tAttack * SAMPLE_RATE;
-	int nDecay = (int)(params.tDecay * SAMPLE_RATE);
-	int nRelease = (int)(params.tRelease * SAMPLE_RATE);
-	int synthDuration_n = (int)((lengthInMilliseconds * 1000 + params.tRelease) * SAMPLE_RATE);
-	float A0 = (float)velocity / 127.0;
-	float* envelope = nullptr;
-	envelope = new float[synthDuration_n];
+int additiveInstrument::generateEnvelope(float lengthInMilisecods, float A0, int sampleRate) {
+	long noteDuration_n = lengthInMilisecods * sampleRate / 1000;
+	int nAttack = params.tAttack * sampleRate;
+	int nDecay = params.tDecay * sampleRate;
+	int nRelease = params.tRelease * sampleRate;
+	int synthDuration_n = (lengthInMilisecods / 1000 + params.tRelease) * sampleRate;
 
-	float freq = 440.0 * pow(2, (keyNumber - 69) / 12);
+	unsigned long i = 0;
 
-	int i = 0;
 	if (noteDuration_n > nAttack + nDecay) {
-		while (i < nAttack && i < outputBufferSize)
-		{
-			envelope[i] = (params.k * A0) / params.tAttack * (float)i / SAMPLE_RATE;
+		while (i < nAttack) {
+			envelope[i] = (params.k * A0) / params.tAttack * (float)i / (float)sampleRate;
 			i++;
 		}
-		while (i < nAttack + nDecay && i < outputBufferSize) {
-			envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - (nAttack + nDecay)) / SAMPLE_RATE;
+		while (i < nAttack + nDecay) {
+			envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / (float)sampleRate;
 			i++;
 		}
 		int nSustain = noteDuration_n - (nAttack + nDecay);
-		while (i < nAttack + nDecay + nSustain && i < outputBufferSize) {
-			if (A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / SAMPLE_RATE > 0)
-				envelope[i] = A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / SAMPLE_RATE;
+		while (i < nAttack + nDecay + nSustain) {
+			if (A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / (float)sampleRate > 0)
+				envelope[i] = A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / (float)sampleRate;
 			else
 				break;
 			i++;
 		}
 		float Ar = envelope[i - 1];
-		while (i < nAttack + nDecay + nRelease && i < outputBufferSize) {
-			envelope[i] = Ar - Ar / params.tRelease * (float)(i - (nAttack + nDecay + nSustain)) / SAMPLE_RATE;
+		while (i < nAttack + nDecay + nSustain + nRelease) {
+			envelope[i] = Ar - Ar / params.tRelease * (float)(i - (nAttack + nDecay + nSustain)) / (float)sampleRate;
 			i++;
 		}
 	}
 	else if (noteDuration_n > nAttack && noteDuration_n < nAttack + nDecay) {
 		while (i < nAttack) {
-			envelope[i] = (float)i / SAMPLE_RATE * (params.k * (float)A0) / params.tAttack;
+			envelope[i] = (float)i / (float)sampleRate * (params.k * (float)A0) / params.tAttack;
 			i++;
 		}
 		while (i < (noteDuration_n)) {
-			envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / SAMPLE_RATE;
+			envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / (float)sampleRate;
 			i++;
 		}
 		float Ar = envelope[i - 1];
 		while (i < noteDuration_n + nDecay) {
-			envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / SAMPLE_RATE;
+			envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / (float)sampleRate;
 			i++;
 		}
 	}
 	else if (noteDuration_n < nAttack) {
 		while (i < noteDuration_n) {
-			envelope[i] += (float)i / SAMPLE_RATE * (params.k * (float)A0) / params.tAttack;
+			envelope[i] = (float)i / (float)sampleRate * (params.k * (float)A0) / params.tAttack;
 			i++;
 		}
 		float Ar = envelope[i - 1];
 		while (i < noteDuration_n + nRelease) {
-			envelope[i] += Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / SAMPLE_RATE;
+			envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / (float)sampleRate;
 			i++;
 		}
 	}
 
-	int len = synthDuration_n < outputBufferSize ? synthDuration_n : outputBufferSize;
-	for (int i = 0; i < len - 1; i++) {
-		outputBuffer[i] = envelope[i] * (sin(2 * M_PI * freq / SAMPLE_RATE * i) >= 0.0 ? 1.0 : -1.0);
+	return synthDuration_n;
+
+}
+
+int
+additiveInstrument::synthFunction(float* outputBuffer,
+								  const unsigned int outputBufferSize,
+								  const int keyNumber,
+								  const float lengthInMilliseconds,
+								  const int velocity,
+								  const int sampleRate) {
+
+	unsigned int envelopeDuration = generateEnvelope(lengthInMilliseconds, (float)velocity / 127.0, sampleRate);
+	float freq = 440.0 * pow(2.0, (keyNumber - 69.0) / 12.0);
+	unsigned int totalLength = (envelopeDuration < outputBufferSize) ? envelopeDuration : outputBufferSize;
+
+	for (int j = 0; j < totalLength - 1; j++) {
+		outputBuffer[j] = envelope[j] * sin(2 * M_PI * (freq / (float)sampleRate) * j);
 	}
+	outputBuffer[totalLength - 1] = INFINITY;
 
 	return 0;
-
 }

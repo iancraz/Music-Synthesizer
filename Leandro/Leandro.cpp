@@ -3,6 +3,7 @@
 #include "Leandro.h"
 #include "Channel.h"
 #include "portaudio.h"
+#include "Additive.h"
 
 using namespace std;
 
@@ -10,29 +11,49 @@ using namespace std;
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 {
 	PaError err = Pa_Initialize();
-	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s",Pa_GetErrorText(err);
+	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->currentSample = 0;
 	this->activeBuffer = (float*)malloc(ACTIVE_BUFFER_FRAME_SIZE);
-	
 
-	
+
 	/* Open an audio I/O stream. */
 	err = Pa_OpenDefaultStream(&(this->stream),
-		0,          /* no input channels */
-		2,          /* stereo output */
-		paFloat32,  /* 32 bit floating point output */
-		SAMPLE_RATE,
-		256,        /* frames per buffer, i.e. the number
-							of sample frames that PortAudio will
-							request from the callback. Many apps
-							may want to use
-							paFramesPerBufferUnspecified, which
-							tells PortAudio to pick the best,
-							possibly changing, buffer size.*/
-		this->callback, /* this is your callback function */
-		&(this->callData)); /*This is a pointer that will be passed to
-							your callback*/
+							   0,          /* no input channels */
+							   2,          /* stereo output */
+							   paFloat32,  /* 32 bit floating point output */
+							   SAMPLE_RATE,
+							   256,        /* frames per buffer, i.e. the number
+												   of sample frames that PortAudio will
+												   request from the callback. Many apps
+												   may want to use
+												   paFramesPerBufferUnspecified, which
+												   tells PortAudio to pick the best,
+												   possibly changing, buffer size.*/
+							   this->callback, /* this is your callback function */
+							   &(this->callData)); /*This is a pointer that will be passed to
+												   your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
+
+	adsrParams_t params;
+	params.tAttack = 0.001;
+	params.tDecay = 0.002;
+	params.sustainRate = 0.5;
+	params.k = 1.5;
+	params.tRelease = 0.003;
+
+
+	Channel* channel1 = new Channel(currentSample);
+	//program.addChannel(channel1);
+	addMidiFile("", "sm64.mid", true);
+	for (int i = 0; i < channels.size(); i++) {
+		Instrument* instrument = new additiveInstrument(params, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+		channels[i]->setChannelInstrument(instrument);
+	}
+	//program.channels.front()->setChannelTrack(program.midiTracks.front());
+	//additiveInstrument* piano = new additiveInstrument;
+
+	//program.channels.front()->setChannelInstrument(piano);
+	Pa_StartStream(stream);
 
 	this->updateCallbackData();
 }
