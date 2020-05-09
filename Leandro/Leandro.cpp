@@ -4,6 +4,7 @@
 #include "Channel.h"
 #include "portaudio.h"
 #include "Additive.h"
+#include <fstream>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->currentSample = 0;
 	this->activeBuffer = (float*)malloc(ACTIVE_BUFFER_FRAME_SIZE);
+	this->debugStream.open("debug.txt");
 
 
 	/* Open an audio I/O stream. */
@@ -22,7 +24,8 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 							   2,          /* stereo output */
 							   paFloat32,  /* 32 bit floating point output */
 							   SAMPLE_RATE,
-							   256,        /* frames per buffer, i.e. the number
+							   paFramesPerBufferUnspecified,       
+								  /* frames per buffer, i.e. the number
 												   of sample frames that PortAudio will
 												   request from the callback. Many apps
 												   may want to use
@@ -34,27 +37,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 												   your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
-	adsrParams_t params;
-	params.tAttack = 0.001;
-	params.tDecay = 0.002;
-	params.sustainRate = 0.5;
-	params.k = 1.5;
-	params.tRelease = 0.003;
-
-
-	Channel* channel1 = new Channel(currentSample);
-	//program.addChannel(channel1);
-	addMidiFile("", "sm64.mid", true);
-	for (int i = 0; i < channels.size(); i++) {
-		Instrument* instrument = new additiveInstrument(params, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
-		channels[i]->setChannelInstrument(instrument);
-	}
-	//program.channels.front()->setChannelTrack(program.midiTracks.front());
-	//additiveInstrument* piano = new additiveInstrument;
-
-	//program.channels.front()->setChannelInstrument(piano);
-	Pa_StartStream(stream);
-
+	
 	this->updateCallbackData();
 }
 
@@ -78,6 +61,8 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 
 	// Local variable declarations
 	vector<timedBuffer*> activeBuffers;
+	float debugVAR=0.0;
+
 
 	for (int channel = 0; channel < data->channels->size(); channel++)
 		data->channels->at(channel)->callback(frameCount, data->currentSample, data->buffers, &(data->channels->at(channel)->callData));
@@ -93,19 +78,26 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		for (int bufIndex = 0; bufIndex < activeBuffers.size(); bufIndex++) // Run through buffers to check whether there's something there for this frame
 		{
 			if (activeBuffers.at(bufIndex)->startingFrame > 0) { // Check validity of starting frame
+				data->activeBuffer[frame] = 0;
 				if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
-					if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) // If the buffer does not end at this position
+					if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) { // If the buffer does not end at this position
 						data->activeBuffer[frame] += activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)]; // Sum this buffer's position corresponding to analyzed frame to final output buffer
+						debugVAR = data->activeBuffer[frame];
+					}
 					else { // If the buffer ends, reset it so that it can be re-used
 						activeBuffers.at(bufIndex)->buffer[0] = INFINITY;
 						activeBuffers.at(bufIndex)->startingFrame = -1;
+						activeBuffers.erase(activeBuffers.begin() + bufIndex);
 					}
 			}
+			else throw "Error! Invalid buffer starting frame";
 		}
 		*out++ = data->activeBuffer[frame];  // Left channel
 		*out++ = data->activeBuffer[frame];  // Right channel
+		//*data->debugStream << data->activeBuffer[frame] << endl;
+
 	}
-	data->currentSample += frameCount;
+	*(data->currentSample) += frameCount;
 	return paContinue;
 }
 
@@ -140,6 +132,7 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 }
 
 void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
+
 	MidiFile* midifile= new MidiFile;
 	midifile->read(directory + filename);
 	midifile->doTimeAnalysis();
@@ -160,7 +153,7 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 		this->midiTracks.push_back(tempTrack);
 	}
 	this->midiFiles.push_back(midifile);
-
+	this->updateCallbackData();
 }
 
 void Leandro::updateCallbackData() {
@@ -168,4 +161,5 @@ void Leandro::updateCallbackData() {
 	this->callData.buffers = &(this->noteBuffers);
 	this->callData.currentSample = &(this->currentSample);
 	this->callData.channels=&(this->channels);
+	this->callData.debugStream = &this->debugStream;
 };

@@ -13,6 +13,7 @@
 #include "Effect.h"
 #include<list>
 #include<vector>
+#include <fstream>
 
 #define SAMPLE_RATE (44100)
 #define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 8
@@ -28,6 +29,7 @@ typedef struct {
 	float* activeBuffer;
 	__int64* currentSample;
 	vector<Channel*>* channels;
+	ofstream* debugStream;
 }callbackData;
 
 class Leandro : public QMainWindow
@@ -41,7 +43,7 @@ public:
 
 	callbackData callData;
 	PaStream* stream;
-
+	ofstream debugStream;
 	vector<MidiFile*> midiFiles;
 	vector<midiTrack*> midiTracks;
 	vector<timedBuffer*> noteBuffers;

@@ -55,30 +55,30 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 
 	while (true) {
 
-		if (data->events->size() > 0) {
-			if (data->events->front().startSample < *(currentSample)+frameCount) { // If the event in front of the midi track event queue is before the end of this timeframe
-				currentEvent = data->events->front(); // Set this event as the event to process in this iteration
-				data->events->pop(); // Remove the event from the queue
+		if (!(data->events->size() > 0)) break;
+		if (data->events->front().startSample < *currentSample+frameCount) { // If the event in front of the midi track event queue is before the end of this timeframe
+			currentEvent = data->events->front(); // Set this event as the event to process in this iteration
+			data->events->pop(); // Remove the event from the queue
 
-				for (int i = 0; buffer == nullptr && i < buffers->size(); i++) // Run a loop through the current note buffers
-					if (buffers->at(i)->buffer[0] == INFINITY) { // If the buffer is free
-						buffer = buffers->at(i)->buffer; // Select this buffer to save the result of the event processing
-						buffers->at(i)->startingFrame = currentEvent.startSample; // Remember when to play this buffer
-						emptyBufferFound = true;
-					}
-				if (!emptyBufferFound) throw "Could not save note: no free buffers left! MAX_SIMULTANEOUS_NOTES_PER_BUFFER should be higher";
+			for (int i = 0; buffer == nullptr && i < buffers->size(); i++) // Run a loop through the current note buffers
+				if (buffers->at(i)->buffer[0] == INFINITY) { // If the buffer is free
+					buffer = buffers->at(i)->buffer; // Select this buffer to save the result of the event processing
+					buffers->at(i)->startingFrame = currentEvent.startSample; // Remember when to play this buffer
+					emptyBufferFound = true;
+				}
+			if (!emptyBufferFound) throw "Could not save note: no free buffers left! MAX_SIMULTANEOUS_NOTES_PER_BUFFER should be higher";
 
-				// First, call the instrument function
+			// First, call the instrument function
 
-				data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * 44100, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
+			data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * 44100, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
 
-				// Then, iterate through the vector of effects, calling each one of them
+			// Then, iterate through the vector of effects, calling each one of them
 
-				for (int i = 0; i < (data->effects->size()); i++)
-					data->effects->at(i)->callback(buffer, MAX_NOTE_LENGTH_SECONDS * 44100, SAMPLE_RATE);
-			}
-			else break; // If the next note is out of scope, exit the while loop: no need for processing whole track at this point
+			for (int i = 0; i < (data->effects->size()); i++)
+				data->effects->at(i)->callback(buffer, MAX_NOTE_LENGTH_SECONDS * 44100, SAMPLE_RATE);
 		}
+		else break; // If the next note is out of scope, exit the while loop: no need for processing whole track at this point
+		
 	}
 }
 
