@@ -8,18 +8,21 @@ int main(int argc, char *argv[])
 	Leandro program;
 
 	adsrParams_t params;
-	params.tAttack = 0.01;
-	params.tDecay = 0.02;
-	params.sustainRate = 0.005;
+	params.tAttack = 0.5;
+	params.tDecay = 0.9;
+	params.sustainRate = 0.3;
 	params.k = 1.5;
-	params.tRelease = 0.03;
+	params.tRelease = 0.5;
+	params.sustainLevel = 0.5;
 
 	
 	//program.addChannel(channel1);
 	program.addMidiFile("", "sm64.mid", true);
 	for (int i = 0; i < program.channels.size(); i++) {
-		Instrument* instrument = new additiveInstrument(params, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+		Instrument* instrument = new additiveInstrument(&params, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS,	SAMPLE_RATE);
+		
 		program.channels[i]->setChannelInstrument(instrument);
+		
 	}
 	//program.channels.front()->setChannelTrack(program.midiTracks.front());
 	//additiveInstrument* piano = new additiveInstrument;

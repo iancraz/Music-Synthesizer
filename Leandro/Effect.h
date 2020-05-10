@@ -2,7 +2,7 @@
 
 typedef void effectCallback(
 	void* soundBuffer,
-	const unsigned int soundBufferSize,
+	const unsigned int maxSoundBufferSize,
 	const int sampleRate
 );
 
@@ -47,7 +47,7 @@ private:
 
 class vibratoEffect : public Effect {
 public:
-	vibratoEffect(float W, float fo, float M_avg); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
+	vibratoEffect(float W, float fo, float M_avg, const int sampleRate); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
 	~vibratoEffect();
 	effectCallback callback;
 protected:

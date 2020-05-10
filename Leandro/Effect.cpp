@@ -30,6 +30,12 @@ void reverbEffect::callback(void* soundBuffer, const unsigned int soundBufferSiz
 	float* buff = (float*)soundBuffer;
 	unsigned int numDelay = (int)(this->delay * sampleRate);
 
+	//int k = 0;
+	//while (buff[k] != INFINITY) k++;
+	//int soundBufferSize = k;
+	
+
+
 	if (this->mode == E_PLAIN) {
 		for (unsigned int i = 0; i < soundBufferSize; i++) {
 			if (i >= numDelay) {
@@ -124,12 +130,12 @@ float flangerEffect::linearInterpolation(float num, float * in) {
 	return answr;
 }
 
-vibratoEffect::vibratoEffect(float W, float fo, float M_avg) {
+vibratoEffect::vibratoEffect(float W, float fo, float M_avg, const int sampleRate) {
 	this->W = W / (2 * E_PI * fo);
 	this->fo = fo;
 	this->in = new float[MAX_BUFFER_SIZE];
 	this->comodin = new float[MAX_BUFFER_SIZE];
-	this->M_avg = M_avg;
+	this->M_avg = M_avg * (float)sampleRate;
 	return;
 }
 
@@ -139,15 +145,20 @@ vibratoEffect::~vibratoEffect() {
 	return;
 }
 
-void vibratoEffect::callback(void* soundBuffer, const unsigned int soundBufferSize, const int sampleRate) {
-	this->M_avg = this->M_avg * sampleRate;
+void vibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+	
 	
 	float* buff = (float*)soundBuffer;
-	for (int i = 0; i < soundBufferSize; i++) {
+	int i = 0;
+	while(buff[i]!=INFINITY){
+	
+	//for (int i = 0; i < soundBufferSize; i++) {
 		in[i] = buff[i];
+		i++;
 	}
+	int soundBufferSize = i;
 	for (int i = 0; i < soundBufferSize; i++) {
-		float Mn = M_avg + W * sin(2 * E_PI * i * fo / sampleRate);
+		float Mn = M_avg + W * sin(2 * E_PI * i * fo / (float)sampleRate);
 		if (i - Mn > 0) {
 			buff[i] = linearInterpolation(i - Mn);
 		}

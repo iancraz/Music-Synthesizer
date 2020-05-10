@@ -24,7 +24,8 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 							   2,          /* stereo output */
 							   paFloat32,  /* 32 bit floating point output */
 							   SAMPLE_RATE,
-							   paFramesPerBufferUnspecified,       
+							   paFramesPerBufferUnspecified,   
+								//5000,
 								  /* frames per buffer, i.e. the number
 												   of sample frames that PortAudio will
 												   request from the callback. Many apps
@@ -79,26 +80,21 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		data->activeBuffer[frame] = 0;
 		for (int bufIndex = 0; bufIndex < activeBuffers.size(); bufIndex++) // Run through buffers to check whether there's something there for this frame
 		{
-			
 			if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
 				if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) { // If the buffer does not end at this position
 					data->activeBuffer[frame] += activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)]; // Sum this buffer's position corresponding to analyzed frame to final output buffer
 					debugVAR = data->activeBuffer[frame];
-					if (debugVAR > 2.0 || debugVAR < -2.0)
-						continue;
 				}
 				else { // If the buffer ends, reset it so that it can be re-used
 					activeBuffers.at(bufIndex)->buffer[0] = INFINITY;
 					activeBuffers.at(bufIndex)->startingFrame = -1;
 					activeBuffers.erase(activeBuffers.begin() + bufIndex);
-					if (bufIndex>0) bufIndex--;
-
+					if (bufIndex > 0) bufIndex--;
 				}
-			
 		}
-		*out++ = 20*data->activeBuffer[frame];  // Left channel
-		*out++ = 20*data->activeBuffer[frame];  // Right channel
-		*data->debugStream << 20*data->activeBuffer[frame] << endl;
+		*out++ = data->activeBuffer[frame];  // Left channel
+		*out++ = data->activeBuffer[frame];  // Right channel
+		*data->debugStream << 20.0*data->activeBuffer[frame] << endl;
 
 	}
 	*(data->currentSample) += frameCount;

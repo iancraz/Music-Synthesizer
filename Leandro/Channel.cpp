@@ -70,12 +70,12 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 
 			// First, call the instrument function
 
-			data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * 44100, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
+			data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
 
 			// Then, iterate through the vector of effects, calling each one of them
 
 			for (int i = 0; i < (data->effects->size()); i++)
-				data->effects->at(i)->callback(buffer, MAX_NOTE_LENGTH_SECONDS * 44100, SAMPLE_RATE);
+				data->effects->at(i)->callback(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		}
 		else break; // If the next note is out of scope, exit the while loop: no need for processing whole track at this point
 		
