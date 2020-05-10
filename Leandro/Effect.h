@@ -47,7 +47,7 @@ protected:
 
 class flangerEffect : public Effect {
 public:
-	flangerEffect(float fo = 0.5, float Mo = 1e-3, float Mw = 5, float g_fb =0.3, float g_ff = 0.9, const int sampleRate = 44e3);	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
+	flangerEffect(float fo = 0.5, float Mw = 5, float Mo = 1e-3, float g_fb =0.3, float g_ff = 0.9, const int sampleRate = 44e3);	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
 	~flangerEffect();
 	void callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate = 44e3);
 protected:

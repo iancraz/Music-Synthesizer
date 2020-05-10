@@ -158,7 +158,7 @@ void reverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 ////////////////////////////////////////////////////////////////////////////////////////
 //									FLANGER EFFECT									  //
 
-flangerEffect::flangerEffect(float fo, float Mo,float Mw, float g_fb, float g_ff, const int sampleRate) {
+flangerEffect::flangerEffect(float fo, float Mw, float Mo, float g_fb, float g_ff, const int sampleRate) {
 	this->fo = fo;
 	this->Mo = Mo * sampleRate;
 	this->Mw = this->Mo * Mw;
