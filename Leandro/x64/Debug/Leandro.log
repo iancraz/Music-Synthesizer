@@ -1,18 +1,19 @@
-﻿  QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly.
+﻿  Reading Qt configuration (C:\Qt\5.9.9\msvc2017_64\bin\qmake.exe)
+  rcc Leandro.qrc
+  moc Leandro.h
+   RCC: Warning: No resources in 'C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Leandro.qrc'.
   Additive.cpp
   Binasc.cpp
-C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Instrument.h(2,10): fatal error C1083: Cannot open include file: 'portaudio.h': No such file or directory (compiling source file Additive.cpp)
   Channel.cpp
-C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Leandro.h(4,10): fatal error C1083: Cannot open include file: 'QtWidgets/QMainWindow': No such file or directory (compiling source file Channel.cpp)
   Effect.cpp
   Instrument.cpp
-C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Instrument.h(2,10): fatal error C1083: Cannot open include file: 'portaudio.h': No such file or directory (compiling source file Instrument.cpp)
   Leandro.cpp
-C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Leandro.h(4,10): fatal error C1083: Cannot open include file: 'QtWidgets/QMainWindow': No such file or directory (compiling source file Leandro.cpp)
   main.cpp
-C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Leandro.h(4,10): fatal error C1083: Cannot open include file: 'QtWidgets/QMainWindow': No such file or directory (compiling source file main.cpp)
   MidiEvent.cpp
   MidiEventList.cpp
   MidiFile.cpp
   MidiMessage.cpp
   Options.cpp
+  qrc_Leandro.cpp
+  moc_Leandro.cpp
+  Leandro.vcxproj -> C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
