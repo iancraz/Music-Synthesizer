@@ -12,7 +12,6 @@ Effect::Effect() {
 
 Effect::~Effect() {
 	// Effect destructor here. Should destruct all items and free all allocated memory on stack.
-
 }
 
 void Effect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, int sampleRate) {
@@ -152,7 +151,6 @@ void reverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 	return;
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -175,7 +173,6 @@ flangerEffect::~flangerEffect() {
 }
 
 void flangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
-	
 	// SIMPLE
 	/*
 	float* buff = (float*)soundBuffer;
@@ -202,15 +199,15 @@ void flangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 	//FEEDBACK
 	bool exit = false;
 	float* buff = (float*)soundBuffer;
-	unsigned int soundBufferSize = copyBuffer2in(buff, in,maxSoundBufferSize); //Copio el buffer a in, y tengo el tamaño del buffer hasta INF
-	setBufferCrap2zero(buff,maxSoundBufferSize);
+	unsigned int soundBufferSize = copyBuffer2in(buff, in, maxSoundBufferSize); //Copio el buffer a in, y tengo el tamaño del buffer hasta INF
+	setBufferCrap2zero(buff, maxSoundBufferSize);
 	restartAverage();
 
 	for (int i = 0; (i < (int)maxSoundBufferSize) && (exit == false); i++) {
 		float Mw = Mo * 10;
 		float Mn = (float)(Mo + (Mw / 2) * (1 + sinf((float)(2 * E_PI * fo * i / (float)sampleRate))));
-		if (i - Mn > 0 && (i-Mn) < soundBufferSize) {
-			buff[i] = g_fb * linearInterpolation(i-Mn,buff) + in[i] + (g_ff - g_fb) * linearInterpolation(i - Mn, in);
+		if (i - Mn > 0 && (i - Mn) < soundBufferSize) {
+			buff[i] = g_fb * linearInterpolation(i - Mn, buff) + in[i] + (g_ff - g_fb) * linearInterpolation(i - Mn, in);
 		}
 		else if (i - Mn < 0) {
 			float temp;
@@ -231,10 +228,9 @@ void flangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 	return;
 }
 
-float flangerEffect::linearInterpolation(float num, float * in) {
+float flangerEffect::linearInterpolation(float num, float* in) {
 	return ((((int)(num)) + 1 - num) * in[(int)num] + (num - ((int)(num))) * in[(int)num + 1]);
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -259,12 +255,12 @@ vibratoEffect::~vibratoEffect() {
 
 void vibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* buff = (float*)soundBuffer;
-	unsigned int soundBufferSize = copyBuffer2in(buff, in,maxSoundBufferSize);
+	unsigned int soundBufferSize = copyBuffer2in(buff, in, maxSoundBufferSize);
 	bool exit = false;
 
 	for (int i = 0; (i < (int)soundBufferSize) && (exit == false); i++) {
 		float Mn = (float)(M_avg + W * sin(2 * E_PI * i * fo / (float)sampleRate));
-		if (((i - Mn) > 0) && ((i-Mn) < soundBufferSize)) {
+		if (((i - Mn) > 0) && ((i - Mn) < soundBufferSize)) {
 			buff[i] = linearInterpolation(i - Mn);
 		}
 		else if (i - Mn < 0) {

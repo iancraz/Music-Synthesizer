@@ -19,7 +19,7 @@ protected:
 	adsrParams_t params;
 	instrumentCallback synthFunction;
 	int generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength);
-	
+
 	float* envelope;
 	float* release;
 };

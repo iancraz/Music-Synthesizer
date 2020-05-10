@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <QtWidgets/QMainWindow>
 #include "ui_Leandro.h"
 #include "midifile.h"
@@ -37,7 +36,7 @@ class Leandro : public QMainWindow
 	Q_OBJECT
 
 public:
-	Leandro(QWidget *parent = Q_NULLPTR);
+	Leandro(QWidget* parent = Q_NULLPTR);
 	__int64 currentSample;
 	vector<Channel*> channels;
 
@@ -47,21 +46,18 @@ public:
 	vector<MidiFile*> midiFiles;
 	vector<midiTrack*> midiTracks;
 	vector<timedBuffer*> noteBuffers;
-	
+
 	float* activeBuffer;
 
-	
 	~Leandro();
 
 	static PaStreamCallback callback;
 
-	void addChannel(Channel * newChannel);
-	void destroyChannel(Channel * channel);
+	void addChannel(Channel* newChannel);
+	void destroyChannel(Channel* channel);
 
 	void addMidiFile(string directory, string filename, bool autoSet);
 	void updateCallbackData();
 private:
 	Ui::LeandroClass ui;
-
-
 };
