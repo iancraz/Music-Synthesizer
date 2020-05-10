@@ -8,7 +8,7 @@ typedef void effectCallback(
 	const int sampleRate
 );
 
-typedef enum {E_PLAIN, E_ECO, E_LOWPASS}mode_t;
+typedef enum { E_PLAIN, E_ECO, E_LOWPASS }mode_t;
 
 class Effect
 {
@@ -35,7 +35,7 @@ protected:
 class reverbEffect : public Effect
 {
 public:
-	reverbEffect(mode_t mode = E_PLAIN, float delay = 0.5, float att = 0.5, unsigned int maxSoundBufferSize = (44e3*15));  //Modo tipo plano, Eco, o lowpass. Tiempo de delay en segundos, attenuacion. (Valores sugeridos (E_PLAIN,0.5,0.5))
+	reverbEffect(mode_t mode = E_PLAIN, float delay = 0.5, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15));  //Modo tipo plano, Eco, o lowpass. Tiempo de delay en segundos, attenuacion. (Valores sugeridos (E_PLAIN,0.5,0.5))
 	~reverbEffect();
 	effectCallback callback;
 protected:
@@ -47,7 +47,7 @@ protected:
 
 class flangerEffect : public Effect {
 public:
-	flangerEffect(float fo = 0.5, float Mw = 5, float Mo = 1e-3, float g_fb =0.3, float g_ff = 0.9, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15));	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
+	flangerEffect(float fo = 0.5, float Mw = 5, float Mo = 1e-3, float g_fb = 0.3, float g_ff = 0.9, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15));	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
 	~flangerEffect();
 	effectCallback callback;
 protected:
@@ -58,12 +58,12 @@ protected:
 	float g_ff;
 	float* in;
 private:
-	float linearInterpolation(float num, float * in);
+	float linearInterpolation(float num, float* in);
 };
 
 class vibratoEffect : public Effect {
 public:
-	vibratoEffect(float W = 1e3, float fo = 5, float M_avg = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3*15)); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
+	vibratoEffect(float W = 1e3, float fo = 5, float M_avg = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15)); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
 	~vibratoEffect();
 	effectCallback callback;
 protected:

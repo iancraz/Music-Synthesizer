@@ -23,7 +23,7 @@ Channel::Channel(__int64 currentSample) {
 	while (!this->events.empty()) this->events.pop();
 
 	// Callback update
-	this->updateCallbackData(); 
+	this->updateCallbackData();
 }
 
 void Channel::updateCallbackData() { // Function to be called at the end of every setter
@@ -54,9 +54,8 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 	float* buffer = nullptr;
 
 	while (true) {
-
 		if (!(data->events->size() > 0)) break;
-		if (data->events->front().startSample < *currentSample+frameCount) { // If the event in front of the midi track event queue is before the end of this timeframe
+		if (data->events->front().startSample < *currentSample + frameCount) { // If the event in front of the midi track event queue is before the end of this timeframe
 			currentEvent = data->events->front(); // Set this event as the event to process in this iteration
 			data->events->pop(); // Remove the event from the queue
 
@@ -78,7 +77,6 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 				data->effects->at(i)->callback(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		}
 		else break; // If the next note is out of scope, exit the while loop: no need for processing whole track at this point
-		
 	}
 }
 
@@ -99,7 +97,7 @@ void Channel::setChannelTrack(midiTrack* miditrack) {
 			tempEvent.eventID = event;
 			tempEvent.note = (*file)[track][event].getKeyNumber();
 			tempEvent.velocity = (*file)[track][event].getVelocity();
-			
+
 			this->events.push(tempEvent);
 		}
 	}

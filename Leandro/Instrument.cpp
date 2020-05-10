@@ -1,6 +1,5 @@
 #include "Instrument.h"
 
-
 int Instrument::synthFunction(
 	float* outputBuffer,
 	const unsigned int outputBufferSize,
@@ -8,11 +7,9 @@ int Instrument::synthFunction(
 	const float lengthInMilliseconds,
 	const int velocity,
 	const int sampleRate) {
-
 	//The synth function for karplus instruments here
 	return 0;
 }
-
 
 // KARPLUS-STRONG CLASS FUNCTIONS
 
@@ -24,9 +21,6 @@ karplusInstrument::~karplusInstrument() {
 	// Destructor class for karplusInstrument. Should destroy all elements and free all allocated memory on stack.
 }
 
-
-
-
 //	SAMPLING CLASS FUNCTIONS
 
 samplingInstrument::samplingInstrument() {
@@ -36,5 +30,3 @@ samplingInstrument::samplingInstrument() {
 samplingInstrument::~samplingInstrument() {
 	// Destructor class for samplingInstrument. Should destroy all elements and free all allocated memory on stack.
 }
-
-

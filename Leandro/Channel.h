@@ -31,7 +31,7 @@ typedef void channelCallback(	// Take midi file, select events in timeframe, syn
 class Channel {
 public:
 	channelCallbackData callData; // Data pointers to use callback
-	
+
 	Channel(__int64 currentSample);
 	~Channel();
 

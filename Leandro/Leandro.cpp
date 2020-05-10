@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 {
 	PaError err = Pa_Initialize();
@@ -17,31 +16,28 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 	this->activeBuffer = (float*)malloc(ACTIVE_BUFFER_FRAME_SIZE);
 	this->debugStream.open("debug.txt");
 
-
 	/* Open an audio I/O stream. */
 	err = Pa_OpenDefaultStream(&(this->stream),
-							   0,          /* no input channels */
-							   2,          /* stereo output */
-							   paFloat32,  /* 32 bit floating point output */
-							   SAMPLE_RATE,
-							   paFramesPerBufferUnspecified,   
-								//5000,
-								  /* frames per buffer, i.e. the number
-												   of sample frames that PortAudio will
-												   request from the callback. Many apps
-												   may want to use
-												   paFramesPerBufferUnspecified, which
-												   tells PortAudio to pick the best,
-												   possibly changing, buffer size.*/
-							   this->callback, /* this is your callback function */
-							   &(this->callData)); /*This is a pointer that will be passed to
-												   your callback*/
+		0,          /* no input channels */
+		2,          /* stereo output */
+		paFloat32,  /* 32 bit floating point output */
+		SAMPLE_RATE,
+		paFramesPerBufferUnspecified,
+		//5000,
+		  /* frames per buffer, i.e. the number
+						   of sample frames that PortAudio will
+						   request from the callback. Many apps
+						   may want to use
+						   paFramesPerBufferUnspecified, which
+						   tells PortAudio to pick the best,
+						   possibly changing, buffer size.*/
+		this->callback, /* this is your callback function */
+		&(this->callData)); /*This is a pointer that will be passed to
+							your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
-	
 	this->updateCallbackData();
 }
-
 
 Leandro::~Leandro() {
 	for (int i = 0; i < this->noteBuffers.size(); i++) free(this->noteBuffers[i]->buffer);
@@ -54,7 +50,6 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 	const PaStreamCallbackTimeInfo* timeInfo,
 	PaStreamCallbackFlags statusFlags,
 	void* userData) {
-
 	// Void pointer casts
 	float* out = (float*)output;
 	callbackData* data = (callbackData*)userData;
@@ -62,40 +57,42 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 
 	// Local variable declarations
 	vector<timedBuffer*> activeBuffers;
-	float debugVAR=0.0;
-
-
+	float debugVAR = 0.0;
 
 	for (int channel = 0; channel < data->channels->size(); channel++)
 		data->channels->at(channel)->callback(frameCount, data->currentSample, data->buffers, &(data->channels->at(channel)->callData));
-
 
 	// First, get active note buffers
 	for (int i = 0; i < buffers->size(); i++)
 		if (buffers->at(i)->buffer[0] != INFINITY)
 			activeBuffers.push_back(buffers->at(i));
 
-	for (unsigned int frame = 0; frame < frameCount; frame++) // Run through output frames
+	for (int frame = 0; frame < frameCount; frame++) // Run through output frames
 	{
 		data->activeBuffer[frame] = 0;
+		float addedFrames = 0.0;
 		for (int bufIndex = 0; bufIndex < activeBuffers.size(); bufIndex++) // Run through buffers to check whether there's something there for this frame
 		{
-			if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
+			if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) { // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
+				//if ((*(data->currentSample) == 440768) && (frame == 611))
+				if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] == INFINITY)
+					int hola = 0;
 				if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) { // If the buffer does not end at this position
 					data->activeBuffer[frame] += activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)]; // Sum this buffer's position corresponding to analyzed frame to final output buffer
-					debugVAR = data->activeBuffer[frame];
+					addedFrames++;
 				}
 				else { // If the buffer ends, reset it so that it can be re-used
 					activeBuffers.at(bufIndex)->buffer[0] = INFINITY;
 					activeBuffers.at(bufIndex)->startingFrame = -1;
 					activeBuffers.erase(activeBuffers.begin() + bufIndex);
-					if (bufIndex > 0) bufIndex--;
+					bufIndex--;
 				}
+			}
 		}
-		*out++ = data->activeBuffer[frame];  // Left channel
-		*out++ = data->activeBuffer[frame];  // Right channel
-		*data->debugStream << 20.0*data->activeBuffer[frame] << endl;
-
+		if (!addedFrames) addedFrames = 1.0;
+		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Left channel
+		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Right channel
+		//*data->debugStream << 20.0*data->activeBuffer[frame] << endl;
 	}
 	*(data->currentSample) += frameCount;
 	return paContinue;
@@ -132,8 +129,7 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 }
 
 void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
-
-	MidiFile* midifile= new MidiFile;
+	MidiFile* midifile = new MidiFile;
 	midifile->read(directory + filename);
 	midifile->doTimeAnalysis();
 	midifile->linkNotePairs();
@@ -160,6 +156,6 @@ void Leandro::updateCallbackData() {
 	this->callData.activeBuffer = this->activeBuffer;
 	this->callData.buffers = &(this->noteBuffers);
 	this->callData.currentSample = &(this->currentSample);
-	this->callData.channels=&(this->channels);
+	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
 };
