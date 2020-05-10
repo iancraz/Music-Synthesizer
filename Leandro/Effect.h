@@ -37,7 +37,7 @@ class reverbEffect : public Effect
 public:
 	reverbEffect(mode_t mode = E_PLAIN, float delay = 0.5, float att = 0.5);  //Modo tipo plano, Eco, o lowpass. Tiempo de delay en segundos, attenuacion. (Valores sugeridos (E_PLAIN,0.5,0.5))
 	~reverbEffect();
-	void callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate = 44e3);
+	effectCallback callback;
 protected:
 	short int mode;
 	float delay;
@@ -49,7 +49,7 @@ class flangerEffect : public Effect {
 public:
 	flangerEffect(float fo = 0.5, float Mw = 5, float Mo = 1e-3, float g_fb =0.3, float g_ff = 0.9, const int sampleRate = 44e3);	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
 	~flangerEffect();
-	void callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate = 44e3);
+	effectCallback callback;
 protected:
 	float fo;
 	float Mo;
@@ -65,7 +65,7 @@ class vibratoEffect : public Effect {
 public:
 	vibratoEffect(float W = 1e3, float fo = 5, float M_avg = 10, const int sampleRate = 44e3); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
 	~vibratoEffect();
-	void callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate = 44e3);
+	effectCallback callback;
 protected:
 	float W;
 	float fo;
