@@ -21,7 +21,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 	/* Open an audio I/O stream. */
 	err = Pa_OpenDefaultStream(&(this->stream),
 							   0,          /* no input channels */
-							   2,          /* stereo output */
+							   1,          /* stereo output */
 							   paFloat32,  /* 32 bit floating point output */
 							   SAMPLE_RATE,
 							   paFramesPerBufferUnspecified,       
@@ -96,9 +96,9 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 				}
 			
 		}
-		*out++ = 20*data->activeBuffer[frame];  // Left channel
-		*out++ = 20*data->activeBuffer[frame];  // Right channel
-		*data->debugStream << 20*data->activeBuffer[frame] << endl;
+		*out++ = 10*data->activeBuffer[frame];  // Left channel
+		*out++ = 10*data->activeBuffer[frame];  // Right channel
+		*data->debugStream << 10*data->activeBuffer[frame] << endl;
 
 	}
 	*(data->currentSample) += frameCount;
