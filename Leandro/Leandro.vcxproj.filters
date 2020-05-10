@@ -123,6 +123,7 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="sm64.mid" />
+    <None Include="mario_midi.mid" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="mididata.txt" />

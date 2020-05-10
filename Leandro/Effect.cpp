@@ -3,10 +3,11 @@
 
 #define MAX_BUFFER_SIZE 440000
 #define E_PI	3.14159265359
+#define AVERAGE_TRESHOLD	1e-5
 
 Effect::Effect() {
 	// Effect constructor here. Should set defaults, load data and allocate memory as needed.
-
+	setArray2zero(average, AVERAGE_SIZE);
 }
 
 Effect::~Effect() {
@@ -14,56 +15,158 @@ Effect::~Effect() {
 
 }
 
-void Effect::callback(void* soundBuffer, const unsigned int soundBufferSize, int sampleRate) {
+void Effect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, int sampleRate) {
 	// Data-processing callback here. Recieves input buffer and puts modified data into output buffer.
 	return;
 }
+
+unsigned int Effect::getBufferSize(float* buffer) {
+	unsigned int i;	//Habria que poner try y catch, pero por ahora vamos con esto
+	for (i = 0; buffer[i] != INFINITY; i++);
+	return i;
+}
+
+unsigned int Effect::copyBuffer2in(float* buffer, float* in) {
+	unsigned int i;
+	setArray2zero(in, MAX_BUFFER_SIZE);
+	for (i = 0; buffer[i] != INFINITY; i++) {
+		in[i] = buffer[i];
+	}
+	return i;
+}
+
+unsigned int Effect::setBufferCrap2zero(float* buffer, unsigned int maxBufferSize) {
+	unsigned int i;	//Habria que poner try y catch, pero por ahora vamos con esto
+	for (i = 0; buffer[i] != INFINITY; i++);
+	for (unsigned int u = i; u < maxBufferSize; u++)
+		buffer[u] = 0;
+	return i;
+}
+
+void Effect::setArray2zero(float* arr, unsigned int size) {
+	for (unsigned int i = 0; i < size; i++)
+		arr[i] = 0;
+	return;
+}
+
+float Effect::getAverage() {
+	float avg = 0.0;
+	for (unsigned int i = 0; i < AVERAGE_SIZE; i++)
+		avg += average[i];
+	return (avg / (float)AVERAGE_SIZE);
+}
+
+void Effect::pushBackandPop(float element) {
+	if (element < 0)
+		element = -element;
+	if (avgPtr < AVERAGE_SIZE) {
+		average[avgPtr] = element;
+		avgPtr++;
+	}
+	else if (avgPtr >= AVERAGE_SIZE) {
+		avgPtr = 0;
+		average[avgPtr] = element;
+		avgFull = true;
+	}
+}
+
+bool Effect::isEffectFinished() {
+	float temp = getAverage();
+	bool exit = false;
+	if (temp <= AVERAGE_TRESHOLD && (avgFull == true))
+		exit = true;
+	return exit;
+}
+
+void Effect::restartAverage() {
+	setArray2zero(average, AVERAGE_SIZE);
+	avgFull = false;
+	return;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//									REVERB EFFECT									  //
 
 reverbEffect::reverbEffect(mode_t mode, float delay, float att) {
 	this->mode = (short int)mode;
 	this->delay = delay; //In seconds
 	this->a = att;
+	this->in = new float[MAX_BUFFER_SIZE];
+	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
 
-void reverbEffect::callback(void* soundBuffer, const unsigned int soundBufferSize, const int sampleRate) {
+reverbEffect::~reverbEffect() {
+	delete[] this->in;
+}
+
+void reverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* buff = (float*)soundBuffer;
 	unsigned int numDelay = (int)(this->delay * sampleRate);
+	copyBuffer2in(buff, in);
+	unsigned int soundBufferSize = setBufferCrap2zero(buff, maxSoundBufferSize);
+	bool exit = false;
+	restartAverage();
 
 	if (this->mode == E_PLAIN) {
-		for (unsigned int i = 0; i < soundBufferSize; i++) {
+		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
 			if (i >= numDelay) {
 				buff[i] += this->a * buff[i - numDelay];
+				pushBackandPop(buff[i]);
+				if (isEffectFinished()) {
+					buff[i] = INFINITY;
+					exit = true;
+				}
 			}
 		}
 	}
 	else if (this->mode == E_ECO) {
-		for (int i = soundBufferSize-1; i >= 0; i--) {
+		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
 			if (i >= numDelay) {
-				buff[i] += this->a * buff[i - numDelay];
+				buff[i] = in[i] + this->a * in[i - numDelay];
+			}
+			pushBackandPop(buff[i]);
+			if (isEffectFinished()) {
+				buff[i] = INFINITY;
+				exit = true;
 			}
 		}
 	}
 	else if (this->mode == E_LOWPASS) {
-		for (int i = soundBufferSize-1; i >= 0; i--) {
-			if (i >= numDelay + 1) {
-				buff[i] += 0.5 * this->a * (buff[i - numDelay] + buff[i - numDelay - 1]);
+		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
+			if (i > numDelay - 1) {
+				buff[i] += 0.5 * this->a * (in[i - numDelay] + in[i - numDelay - 1]);
 			}
-			else if (i >= numDelay) {
-				buff[i] += 0.5 * this->a * (buff[i - numDelay]);
+			else if (i > numDelay) {
+				buff[i] += 0.5 * this->a * (in[i - numDelay]);
+			}
+			pushBackandPop(buff[i]);
+			if (isEffectFinished()) {
+				buff[i] = INFINITY;
+				exit = true;
 			}
 		}
 	}
 	return;
 }
 
-flangerEffect::flangerEffect(float fo, float Mo, float g_fb, float g_ff) {
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//									FLANGER EFFECT									  //
+
+flangerEffect::flangerEffect(float fo, float Mo,float Mw, float g_fb, float g_ff, const int sampleRate) {
 	this->fo = fo;
-	this->Mo = Mo;
+	this->Mo = Mo * sampleRate;
+	this->Mw = this->Mo * Mw;
 	//this->offset = offset;
 	this->g_fb = g_fb;
 	this->g_ff = g_ff;
 	this->in = new float[MAX_BUFFER_SIZE];
+	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
 
@@ -71,7 +174,7 @@ flangerEffect::~flangerEffect() {
 	delete[] this->in;
 }
 
-void flangerEffect::callback(void* soundBuffer, const unsigned int soundBufferSize, const int sampleRate) {
+void flangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	
 	// SIMPLE
 	/*
@@ -97,39 +200,51 @@ void flangerEffect::callback(void* soundBuffer, const unsigned int soundBufferSi
 	return;*/
 
 	//FEEDBACK
-
-	this->Mo = this->Mo * sampleRate;
-
+	bool exit = false;
 	float* buff = (float*)soundBuffer;
-	for (int i = 0; i < soundBufferSize; i++)
-		in[i] = buff[i];
-	for (int i = 0; i < soundBufferSize; i++) {
+	unsigned int soundBufferSize = copyBuffer2in(buff, in); //Copio el buffer a in, y tengo el tamaño del buffer hasta INF
+	setBufferCrap2zero(buff,maxSoundBufferSize);
+	restartAverage();
+
+	for (int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
 		//float fo = 0.5;
 		//float Mo = 1e-3 * SAMPLE_RATE;
-		float Mw = Mo * 1;
-		float Mn = Mo + (Mw / 2) * (1 + sinf(2 * E_PI * fo * i / sampleRate));
 		//float g_fb = 0.3;
 		//float g_ff = 1;
+		float Mw = Mo * 10;
+		float Mn = Mo + (Mw / 2) * (1 + sinf(2 * E_PI * fo * i / sampleRate));
 		if (i - Mn > 0) {
 			buff[i] = g_fb * linearInterpolation(i-Mn,buff) + in[i] + (g_ff - g_fb) * linearInterpolation(i - Mn, in);
 		}
 		/*else if (i - Mn < 0) {
 			buff[i] = g_fb * buff[i] + in[i] + (g_ff - g_fb) * linearInterpolation(i - Mn + soundBufferSize, in);
 		}*/
+		pushBackandPop(buff[i]);
+		if (isEffectFinished()) {
+			buff[i] = INFINITY;
+			exit = true;
+		}
 	}
+	return;
 }
 
 float flangerEffect::linearInterpolation(float num, float * in) {
-	float answr = (((int)(num)) + 1 - num) * in[(int)num] + (num - ((int)(num))) * in[(int)num + 1];
-	return answr;
+	return ((((int)(num)) + 1 - num) * in[(int)num] + (num - ((int)(num))) * in[(int)num + 1]);
 }
 
-vibratoEffect::vibratoEffect(float W, float fo, float M_avg) {
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//									VIBRATO EFFECT									  //
+
+vibratoEffect::vibratoEffect(float W, float fo, float M_avg, const int sampleRate) {
 	this->W = W / (2 * E_PI * fo);
 	this->fo = fo;
 	this->in = new float[MAX_BUFFER_SIZE];
 	this->comodin = new float[MAX_BUFFER_SIZE];
-	this->M_avg = M_avg;
+	this->M_avg = M_avg * (float)sampleRate;
+	restartAverage();
 	return;
 }
 
@@ -139,35 +254,43 @@ vibratoEffect::~vibratoEffect() {
 	return;
 }
 
-void vibratoEffect::callback(void* soundBuffer, const unsigned int soundBufferSize, const int sampleRate) {
-	this->M_avg = this->M_avg * sampleRate;
-	
+void vibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* buff = (float*)soundBuffer;
-	for (int i = 0; i < soundBufferSize; i++) {
-		in[i] = buff[i];
-	}
-	for (int i = 0; i < soundBufferSize; i++) {
-		float Mn = M_avg + W * sin(2 * E_PI * i * fo / sampleRate);
-		if (i - Mn > 0) {
+	unsigned int soundBufferSize = copyBuffer2in(buff, in);
+	bool exit = false;
+
+	for (int i = 0; (i < soundBufferSize) && (exit == false); i++) {
+		float Mn = M_avg + W * sin(2 * E_PI * i * fo / (float)sampleRate);
+		if (((i - Mn) > 0) && ((i-Mn) < soundBufferSize)) {
 			buff[i] = linearInterpolation(i - Mn);
 		}
 		else if (i - Mn < 0) {
-			buff[i] = linearInterpolation(i - Mn + soundBufferSize);
+			float temp;
+			for (temp = i - Mn; temp < 0; temp += soundBufferSize);
+			buff[i] = linearInterpolation(temp);
+		}
+		else if ((i - Mn) > soundBufferSize) {
+			float temp;
+			for (temp = i - Mn; temp > soundBufferSize; temp -= soundBufferSize);
+			buff[i] = linearInterpolation(temp);
 		}
 		comodin[i] = buff[i];
 	}
 
-	for (int i = 0; i < soundBufferSize; i++) {
-		if (i + M_avg < soundBufferSize)
+	for (int i = 0; i < maxSoundBufferSize; i++) {
+		if ((i + M_avg) < maxSoundBufferSize)
 			buff[i] = comodin[(int)(i + M_avg)];
-		else
-			buff[i] = comodin[(int)(i + M_avg)-soundBufferSize];
+		else {
+			float temp;
+			for (temp = i + M_avg; temp > maxSoundBufferSize; temp -= maxSoundBufferSize);
+			buff[i] = comodin[(int)temp];
+		}
 	}
+	return;
 }
 
 float vibratoEffect::linearInterpolation(float num) {
-	float answr = (((int)(num)) + 1 - num) * this->in[(int)num] + (num - ((int)(num))) * this->in[(int)num + 1];
-	return answr;
+	return ((((int)(num)) + 1 - num) * this->in[(int)num] + (num - ((int)(num))) * this->in[(int)num + 1]);
 }
 
 /*wahwahEffect::wahwahEffect(float damping, float width, float min_cutoff, float max_cutoff) {

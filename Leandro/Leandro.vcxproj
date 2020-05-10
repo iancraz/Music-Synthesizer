@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="generateFiles.bat" />
+    <None Include="mario_midi.mid" />
     <None Include="sm64.mid" />
   </ItemGroup>
   <ItemGroup>
