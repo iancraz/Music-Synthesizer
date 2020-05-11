@@ -195,6 +195,9 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 	float A0 = (float)velocity / 127.0;
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 
+	if (*outputBuffer != INFINITY)
+		int pedo = 0;
+
 	for (int h = 0; h < outputBufferSize; h++) {
 		outputBuffer[h] = 0;
 	}

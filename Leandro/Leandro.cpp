@@ -103,7 +103,7 @@ void Leandro::addChannel(Channel* newChannel) {
 	timedBuffer* tempBuffer;
 	for (int i = 0; i < MAX_SIMULTANEOUS_NOTES_PER_CHANNEL; i++) {
 		tempBuffer = new timedBuffer;
-		tempBuffer->buffer = (float*)malloc(MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE * sizeof(float));
+		tempBuffer->buffer = new float[MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE];
 		tempBuffer->buffer[0] = INFINITY;
 		tempBuffer->startingFrame = -1;
 		this->noteBuffers.push_back(tempBuffer);
