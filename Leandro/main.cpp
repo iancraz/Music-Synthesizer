@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	params2.sustainLevel = 0.3;
 
 	//program.addChannel(channel1);
-	program.addMidiFile("", "mario_midi.mid", true);
+	program.addMidiFile("", "pirates.mid", true);
 	Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
 		//Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);

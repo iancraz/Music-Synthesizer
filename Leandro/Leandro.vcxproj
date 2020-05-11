@@ -120,9 +120,11 @@
     <ClInclude Include="ui_Leandro.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="calesita64.mid" />
     <None Include="generateFiles.bat" />
     <None Include="mario_midi.mid" />
     <None Include="packages.config" />
+    <None Include="pirates.mid" />
     <None Include="sm64.mid" />
   </ItemGroup>
   <ItemGroup>

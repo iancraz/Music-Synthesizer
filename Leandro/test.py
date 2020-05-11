@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import math
 from scipy.io import wavfile
 
-with open('note.txt') as data:
+with open('debug.txt') as data:
     y = data.readlines()
     y = [float(i) for i in y]
 

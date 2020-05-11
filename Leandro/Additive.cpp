@@ -222,10 +222,10 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 		}
 		last = i;
 	}
-	//for (int j = 0; j < last - 1; j++) {
-	//	outputBuffer[j] /= maxValue;
-	//	file << outputBuffer[j] << std::endl;
-	//}
+	for (int j = 0; j < last - 1; j++) {
+		outputBuffer[j] /= maxValue;
+		//file << outputBuffer[j] << std::endl;
+	}
 	//file.close();
 	outputBuffer[last - 1] = INFINITY;
 	return 0;
