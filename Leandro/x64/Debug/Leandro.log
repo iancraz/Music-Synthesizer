@@ -1,2 +1,7 @@
-﻿  Leandro.cpp
+﻿  moc Leandro.h
+  Additive.cpp
+  Channel.cpp
+  Leandro.cpp
+  main.cpp
+  moc_Leandro.cpp
   Leandro.vcxproj -> C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe

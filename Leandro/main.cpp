@@ -8,15 +8,15 @@ int main(int argc, char* argv[])
 	Leandro program;
 
 	adsrParams_t params;
-	params.tAttack = 0.05;
-	params.tDecay = 0.05;
+	params.tAttack = 0.2;
+	params.tDecay = 0.3;
 	params.sustainRate = 0.3;
 	params.k = 1.5;
 	params.tRelease = 0.5;
 	params.sustainLevel = 0.5;
 
 	//program.addChannel(channel1);
-	program.addMidiFile("", "sm64.mid", true);
+	program.addMidiFile("", "slide64.mid", true);
 	for (int i = 0; i < program.channels.size(); i++) {
 		Instrument* instrument = new additiveInstrument(&params, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS, SAMPLE_RATE);
 		Effect* effect = new vibratoEffect();
