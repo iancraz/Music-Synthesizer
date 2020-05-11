@@ -192,7 +192,7 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 									   const int sampleRate) {
 	int noteDuration_n = lengthInSeconds * sampleRate;
 	int synthDuration = (noteDuration_n < outputBufferSize) ? noteDuration_n : outputBufferSize;
-	float A0 = (float)velocity / 127.0;
+	float A0 = pow((float)velocity / 127.0, 1.0/7.0);
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 
 	for (int h = 0; h < outputBufferSize; h++) {
