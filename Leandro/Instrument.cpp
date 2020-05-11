@@ -13,20 +13,20 @@ int Instrument::synthFunction(
 
 // KARPLUS-STRONG CLASS FUNCTIONS
 
-karplusInstrument::karplusInstrument() {
-	// Constructor class for karplusInstrument. Should set defaults, load files and allocate memory as needed.
+KarplusInstrument::KarplusInstrument() {
+	// Constructor class for KarplusInstrument. Should set defaults, load files and allocate memory as needed.
 }
 
-karplusInstrument::~karplusInstrument() {
-	// Destructor class for karplusInstrument. Should destroy all elements and free all allocated memory on stack.
+KarplusInstrument::~KarplusInstrument() {
+	// Destructor class for KarplusInstrument. Should destroy all elements and free all allocated memory on stack.
 }
 
 //	SAMPLING CLASS FUNCTIONS
 
-samplingInstrument::samplingInstrument() {
-	// Constructor class for samplingInstrument. Should set defaults, load files and allocate memory as needed.
+SamplingInstrument::SamplingInstrument() {
+	// Constructor class for SamplingInstrument. Should set defaults, load files and allocate memory as needed.
 }
 
-samplingInstrument::~samplingInstrument() {
-	// Destructor class for samplingInstrument. Should destroy all elements and free all allocated memory on stack.
+SamplingInstrument::~SamplingInstrument() {
+	// Destructor class for SamplingInstrument. Should destroy all elements and free all allocated memory on stack.
 }

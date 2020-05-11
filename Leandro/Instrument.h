@@ -27,17 +27,17 @@ public:
 	virtual instrumentCallback synthFunction; // Instrument callback function: defined by typedef
 };
 
-class karplusInstrument : public Instrument {
+class KarplusInstrument : public Instrument {
 public:
 	// Parameter declarations for Karplus-Strong algorhythm based instruments here
 
-	karplusInstrument();
-	~karplusInstrument();
+	KarplusInstrument();
+	~KarplusInstrument();
 };
 
-class samplingInstrument : public Instrument {
+class SamplingInstrument : public Instrument {
 public:
 
-	samplingInstrument();
-	~samplingInstrument();
+	SamplingInstrument();
+	~SamplingInstrument();
 };

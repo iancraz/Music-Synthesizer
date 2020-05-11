@@ -10,10 +10,10 @@ typedef struct {
 	float k;
 }adsrParams_t;
 
-class additiveInstrument : public Instrument {
+class ADSRInstrument : public Instrument {
 public:
-	additiveInstrument(adsrParams_t* _params, const unsigned int buffLength, const unsigned int sampleRate);
-	~additiveInstrument() {}
+	ADSRInstrument(adsrParams_t* _params, const unsigned int buffLength, const unsigned int sampleRate);
+	~ADSRInstrument() {}
 	void setParams(adsrParams_t* params);
 
 protected:
