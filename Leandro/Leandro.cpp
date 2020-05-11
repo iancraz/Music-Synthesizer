@@ -12,6 +12,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 {
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
+	this->channelCreationCounter = 0;
 	this->currentSample = 0;
 	this->activeBuffer = (float*)malloc(ACTIVE_BUFFER_FRAME_SIZE);
 	this->debugStream.open("debug.txt");
@@ -74,9 +75,6 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		for (int bufIndex = 0; bufIndex < activeBuffers.size(); bufIndex++) // Run through buffers to check whether there's something there for this frame
 		{
 			if ((activeBuffers.at(bufIndex)->startingFrame) - (*(data->currentSample) + frame) <= 0) { // If we've reached or surpassed the note's beginning... (note-starting-time agnostic)
-				//if ((*(data->currentSample) == 440768) && (frame == 611))
-				if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] == INFINITY)
-					int hola = 0;
 				if (activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)] != INFINITY) { // If the buffer does not end at this position
 					data->activeBuffer[frame] += activeBuffers.at(bufIndex)->buffer[*(data->currentSample) + frame - (activeBuffers.at(bufIndex)->startingFrame)]; // Sum this buffer's position corresponding to analyzed frame to final output buffer
 					addedFrames++;
@@ -142,9 +140,11 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 		tempTrack->trackIndex = track;
 		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
 		if (autoSet) {
-			tempChannel = new Channel(this->currentSample);
+			tempChannel = new Channel(this->channelCreationCounter);
+			this->channelCreationCounter++;
 			tempChannel->setChannelTrack(tempTrack);
-			this->addChannel(tempChannel);
+			if (tempChannel->events.size() != 0) this->addChannel(tempChannel);
+			else delete tempChannel;
 		}
 		this->midiTracks.push_back(tempTrack);
 	}

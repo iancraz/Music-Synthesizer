@@ -15,7 +15,7 @@
 #include <fstream>
 
 #define SAMPLE_RATE (44100)
-#define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 8
+#define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 15
 #define MAX_NOTE_LENGTH_SECONDS 10
 #define	ACTIVE_BUFFER_FRAME_SIZE 44100
 
@@ -37,6 +37,7 @@ class Leandro : public QMainWindow
 
 public:
 	Leandro(QWidget* parent = Q_NULLPTR);
+	int channelCreationCounter;
 	__int64 currentSample;
 	vector<Channel*> channels;
 
