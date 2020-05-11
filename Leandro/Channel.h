@@ -32,7 +32,7 @@ class Channel {
 public:
 	channelCallbackData callData; // Data pointers to use callback
 
-	Channel(__int64 currentSample);
+	Channel(int channelCreationCounter);
 	~Channel();
 
 	bool operator== (Channel const& channel);
@@ -47,9 +47,10 @@ public:
 	void addEffectToChannel(Effect* effect);
 	void setVolume(float vol);
 	void setKeyboard(bool keyboard);
+	queue<midiEvent> events; // Queue of events in the midi track the channel's currently playing
 
 private:
-	__int64 creationTime;
+	int ID;
 	float volume; // Volume multiplier between 0 and 1
 	bool keyboard; // True if input is directly through keyboard
 
@@ -57,5 +58,4 @@ private:
 	Instrument* instrument; // Instance of instrument
 
 	vector<Effect*> effects; // This channel's stack of effects
-	queue<midiEvent> events; // Queue of events in the midi track the channel's currently playing
 };

@@ -119,11 +119,11 @@ int additiveInstrument::generateEnvelope(const unsigned int sampleRate, const un
 
 int
 additiveInstrument::synthFunction(float* outputBuffer,
-								  const unsigned int outputBufferSize,
-								  const int keyNumber,
-								  const float durSeconds,
-								  const int velocity,
-								  const int sampleRate) {
+	const unsigned int outputBufferSize,
+	const int keyNumber,
+	const float durSeconds,
+	const int velocity,
+	const int sampleRate) {
 	//unsigned int envelopeDuration = generateEnvelope(durSeconds, (float)velocity / 127.0, sampleRate);
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 	unsigned int nPressedLength = durSeconds * sampleRate;
@@ -185,18 +185,15 @@ AdditiveInstrument::AdditiveInstrument(std::string fileName, std::string _name) 
 }
 
 int AdditiveInstrument::synthFunction(float* outputBuffer,
-									   const unsigned int outputBufferSize,
-									   const int keyNumber,
-									   const float lengthInSeconds,
-									   const int velocity,
-									   const int sampleRate) {
+	const unsigned int outputBufferSize,
+	const int keyNumber,
+	const float lengthInSeconds,
+	const int velocity,
+	const int sampleRate) {
 	int noteDuration_n = lengthInSeconds * sampleRate;
 	int synthDuration = (noteDuration_n < outputBufferSize) ? noteDuration_n : outputBufferSize;
-	float A0 = pow((float)velocity / 127.0, 1.0/7.0);
+	float A0 = pow((float)velocity / 127.0, 1.0 / 7.0);
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
-
-	if (*outputBuffer != INFINITY)
-		int pedo = 0;
 
 	for (int h = 0; h < outputBufferSize; h++) {
 		outputBuffer[h] = 0;
@@ -216,7 +213,6 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 		}
 		last = i;
 	}
-	outputBuffer[last-1] = INFINITY;
+	outputBuffer[last - 1] = INFINITY;
 	return 0;
 }
-
