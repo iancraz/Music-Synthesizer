@@ -89,7 +89,7 @@ void Effect::restartAverage() {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									REVERB EFFECT									  //
 
-reverbEffect::reverbEffect(mode_t mode, float delay, float att, unsigned int maxSoundBufferSize) {
+ReverbEffect::ReverbEffect(mode_t mode, float delay, float att, unsigned int maxSoundBufferSize) {
 	this->mode = (short int)mode;
 	this->delay = delay; //In seconds
 	this->a = att;
@@ -98,11 +98,11 @@ reverbEffect::reverbEffect(mode_t mode, float delay, float att, unsigned int max
 	return;
 }
 
-reverbEffect::~reverbEffect() {
+ReverbEffect::~ReverbEffect() {
 	delete[] this->in;
 }
 
-void reverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* buff = (float*)soundBuffer;
 	unsigned int numDelay = (int)(this->delay * sampleRate);
 	copyBuffer2in(buff, in, maxSoundBufferSize);
@@ -157,7 +157,7 @@ void reverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 ////////////////////////////////////////////////////////////////////////////////////////
 //									FLANGER EFFECT									  //
 
-flangerEffect::flangerEffect(float fo, float Mw, float Mo, float g_fb, float g_ff, const int sampleRate, unsigned int maxSoundBufferSize) {
+FlangerEffect::FlangerEffect(float fo, float Mw, float Mo, float g_fb, float g_ff, const int sampleRate, unsigned int maxSoundBufferSize) {
 	this->fo = fo;
 	this->Mo = Mo * sampleRate;
 	this->Mw = this->Mo * Mw;
@@ -169,11 +169,11 @@ flangerEffect::flangerEffect(float fo, float Mw, float Mo, float g_fb, float g_f
 	return;
 }
 
-flangerEffect::~flangerEffect() {
+FlangerEffect::~FlangerEffect() {
 	delete[] this->in;
 }
 
-void flangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+void FlangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	// SIMPLE
 	/*
 	float* buff = (float*)soundBuffer;
@@ -229,7 +229,7 @@ void flangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 	return;
 }
 
-float flangerEffect::linearInterpolation(float num, float* in) {
+float FlangerEffect::linearInterpolation(float num, float* in) {
 	return ((((int)(num)) + 1 - num) * in[(int)num] + (num - ((int)(num))) * in[(int)num + 1]);
 }
 
@@ -238,7 +238,7 @@ float flangerEffect::linearInterpolation(float num, float* in) {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									VIBRATO EFFECT									  //
 
-vibratoEffect::vibratoEffect(float W, float fo, float M_avg, const int sampleRate, unsigned int maxSoundBufferSize) {
+VibratoEffect::VibratoEffect(float W, float fo, float M_avg, const int sampleRate, unsigned int maxSoundBufferSize) {
 	this->W = (float)(W / (2 * E_PI * fo));
 	this->fo = fo;
 	this->in = new float[maxSoundBufferSize];
@@ -248,13 +248,13 @@ vibratoEffect::vibratoEffect(float W, float fo, float M_avg, const int sampleRat
 	return;
 }
 
-vibratoEffect::~vibratoEffect() {
+VibratoEffect::~VibratoEffect() {
 	delete[] this->in;
 	delete[] this->comodin;
 	return;
 }
 
-void vibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+void VibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* buff = (float*)soundBuffer;
 	unsigned int soundBufferSize = copyBuffer2in(buff, in, maxSoundBufferSize);
 	bool exit = false;
@@ -289,7 +289,7 @@ void vibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 	return;
 }
 
-float vibratoEffect::linearInterpolation(float num) {
+float VibratoEffect::linearInterpolation(float num) {
 	return ((((int)(num)) + 1 - num) * this->in[(int)num] + (num - ((int)(num))) * this->in[(int)num + 1]);
 }
 

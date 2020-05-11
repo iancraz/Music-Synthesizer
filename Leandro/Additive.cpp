@@ -4,14 +4,14 @@
 #include <math.h>
 #include <boost/algorithm/string.hpp>
 
-void additiveInstrument::setParams(adsrParams_t* _params) {
+void ADSRInstrument::setParams(adsrParams_t* _params) {
 	if (_params->tAttack < 15.0 && _params->tDecay < 15.0 && _params->sustainLevel <= 1.0 && _params->sustainRate <= 1.0 && _params->tRelease < 15 && _params->k < 5.0 && _params->tAttack > 0.0 && _params->tDecay > 0.0 && _params->sustainLevel > 0.0 && _params->sustainRate > 0.0 && _params->tRelease > 0.0 && _params->k > 0.0)
 		params = *_params;
 	else
 		throw "Error! ADSR parameters are invalid";
 }
 
-additiveInstrument::additiveInstrument(adsrParams_t* _params, const unsigned int buffLength, const unsigned int sampleRate) {
+ADSRInstrument::ADSRInstrument(adsrParams_t* _params, const unsigned int buffLength, const unsigned int sampleRate) {
 	if (_params) setParams(_params);
 	else {
 		params.tAttack = 0.2;
@@ -27,7 +27,7 @@ additiveInstrument::additiveInstrument(adsrParams_t* _params, const unsigned int
 	generateEnvelope(sampleRate, buffLength);
 }
 
-int additiveInstrument::generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength) {
+int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength) {
 	//long noteDuration_n = durSeconds * (float)sampleRate;
 	int nAttack = params.tAttack * (float)sampleRate;
 	int nDecay = params.tDecay * (float)sampleRate;
@@ -118,7 +118,7 @@ int additiveInstrument::generateEnvelope(const unsigned int sampleRate, const un
 }
 
 int
-additiveInstrument::synthFunction(float* outputBuffer,
+ADSRInstrument::synthFunction(float* outputBuffer,
 	const unsigned int outputBufferSize,
 	const int keyNumber,
 	const float durSeconds,

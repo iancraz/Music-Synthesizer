@@ -31,16 +31,16 @@ int main(int argc, char* argv[])
 	program.addMidiFile("", "sm64.mid", true);
 	//Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
-		Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
+		Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		//Instrument* instrument = randInst();
-		Effect* effect = new vibratoEffect();
+		Effect* effect = new VibratoEffect();
 		program.channels[i]->setChannelInstrument(instrument);
 		//program.channels[i]->addEffectToChannel(effect);
 	}
-	//Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
-	//Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
+	//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
+	//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 	//program.channels.front()->setChannelTrack(program.midiTracks.front());
-	//additiveInstrument* piano = new additiveInstrument;
+	//ADSRInstrument* piano = new ADSRInstrument;
 
 	//program.channels.front()->setChannelInstrument(piano);
 	PaError err = Pa_StartStream(program.stream);

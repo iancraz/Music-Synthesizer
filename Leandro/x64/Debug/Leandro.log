@@ -1,5 +1,7 @@
 ﻿  Additive.cpp
   Channel.cpp
+  Effect.cpp
+  Instrument.cpp
   Leandro.cpp
   main.cpp
   moc_Leandro.cpp
