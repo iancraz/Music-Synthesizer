@@ -1,6 +1,6 @@
 #pragma once
 
-#define AVERAGE_SIZE	50
+#define AVERAGE_SIZE	100
 
 typedef void effectCallback(
 	void* soundBuffer,
@@ -35,7 +35,7 @@ protected:
 class reverbEffect : public Effect
 {
 public:
-	reverbEffect(mode_t mode = E_PLAIN, float delay = 0.5, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15));  //Modo tipo plano, Eco, o lowpass. Tiempo de delay en segundos, attenuacion. (Valores sugeridos (E_PLAIN,0.5,0.5))
+	reverbEffect(mode_t mode = E_PLAIN, float delay = 0.2, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15));  //Modo tipo plano, Eco, o lowpass. Tiempo de delay en segundos, attenuacion. (Valores sugeridos (E_PLAIN,0.5,0.5))
 	~reverbEffect();
 	effectCallback callback;
 protected:
@@ -63,7 +63,7 @@ private:
 
 class vibratoEffect : public Effect {
 public:
-	vibratoEffect(float W = 1e3, float fo = 5, float M_avg = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15)); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
+	vibratoEffect(float W = 1e3, float fo = 10, float M_avg = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15)); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
 	~vibratoEffect();
 	effectCallback callback;
 protected:

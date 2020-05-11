@@ -3,7 +3,7 @@
 
 //#define MAX_BUFFER_SIZE 440000
 #define E_PI	3.14159265359
-#define E_AVERAGE_TRESHOLD	1e-5
+#define E_AVERAGE_TRESHOLD	1e-3
 
 Effect::Effect() {
 	// Effect constructor here. Should set defaults, load data and allocate memory as needed.
@@ -80,6 +80,7 @@ bool Effect::isEffectFinished() {
 void Effect::restartAverage() {
 	setArray2zero(average, AVERAGE_SIZE);
 	avgFull = false;
+	avgPtr = 0;
 	return;
 }
 
@@ -135,7 +136,7 @@ void reverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 	}
 	else if (this->mode == E_LOWPASS) {
 		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
-			if (i > numDelay - 1) {
+			if (i > numDelay + 1) {
 				buff[i] += (float)(0.5 * this->a * (in[i - numDelay] + in[i - numDelay - 1]));
 			}
 			else if (i > numDelay) {
@@ -276,12 +277,12 @@ void vibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 		comodin[i] = buff[i];
 	}
 
-	for (int i = 0; i < (int)maxSoundBufferSize; i++) {
-		if ((i + M_avg) < maxSoundBufferSize)
+	for (int i = 0; i < (int)soundBufferSize; i++) {
+		if ((i + M_avg) < soundBufferSize)
 			buff[i] = comodin[(int)(i + M_avg)];
 		else {
 			float temp;
-			for (temp = i + M_avg; temp > maxSoundBufferSize; temp -= maxSoundBufferSize);
+			for (temp = i + M_avg; temp > soundBufferSize; temp -= soundBufferSize);
 			buff[i] = comodin[(int)temp];
 		}
 	}
