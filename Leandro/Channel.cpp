@@ -54,6 +54,7 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 	float* buffer = nullptr;
 
 	while (true) {
+		float* buffer = nullptr;
 		if (!(data->events->size() > 0)) break;
 		if (data->events->front().startSample < *currentSample + frameCount) { // If the event in front of the midi track event queue is before the end of this timeframe
 			currentEvent = data->events->front(); // Set this event as the event to process in this iteration
@@ -70,6 +71,15 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 			// First, call the instrument function
 
 			data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
+			int s = 0;
+			int c = 0;
+			while (buffer[s] != INFINITY) {
+				if (buffer[s] < 0.005) c++;
+				if (c > 1000) {
+					buffer[s] = INFINITY;
+					break;
+				}
+			}
 
 			// Then, iterate through the vector of effects, calling each one of them
 
