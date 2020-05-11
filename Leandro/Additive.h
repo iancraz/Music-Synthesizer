@@ -1,4 +1,5 @@
 #include "Instrument.h"
+#include <string>
 
 typedef struct {
 	float tAttack;
@@ -21,5 +22,16 @@ protected:
 	int generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength);
 
 	float* envelope;
+	float* release;
+};
+
+class AdditiveInstrument : public Instrument {
+public:
+	AdditiveInstrument(std::string envelope_file, std::string _name);
+private:
+	instrumentCallback synthFunction;
+	float* envelope[7];
+	int envelopeLength;
+	int releaseLength;
 	float* release;
 };

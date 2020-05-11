@@ -2,6 +2,10 @@
 #include "Additive.h"
 #include <QtWidgets/QApplication>
 #include <stdio.h>
+#include <time.h>
+
+Instrument* randInst();
+
 int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
@@ -16,9 +20,10 @@ int main(int argc, char* argv[])
 	params.sustainLevel = 0.5;
 
 	//program.addChannel(channel1);
-	program.addMidiFile("", "slide64.mid", true);
+	program.addMidiFile("", "mario_midi.mid", true);
 	for (int i = 0; i < program.channels.size(); i++) {
-		Instrument* instrument = new additiveInstrument(&params, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS, SAMPLE_RATE);
+		Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
+		//Instrument* instrument = randInst();
 		Effect* effect = new vibratoEffect();
 		program.channels[i]->setChannelInstrument(instrument);
 		//	program.channels[i]->addEffectToChannel(effect);
@@ -32,4 +37,30 @@ int main(int argc, char* argv[])
 
 	program.show();
 	return a.exec();
+}
+
+Instrument* randInst() {
+	srand(time(NULL));
+	int randInt = rand() % 3 + 1;
+	Instrument* ret;
+	std::string str;
+	std::string name;
+	switch (randInt) {
+	case 1:
+		str = "guitar_envelope.txt";
+		name = "Additive Guitar";
+		break;
+	case 2:
+		str = "piano_envelope.txt";
+		name = "Additive Piano";
+		break;
+	case 3:
+		str = "trumpet_envelope.txt";
+		name = "Additive Trumpet";
+		break;
+	default:
+		break;
+	}
+	ret = new AdditiveInstrument(str, name);
+	return ret;
 }
