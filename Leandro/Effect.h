@@ -1,6 +1,6 @@
 #pragma once
 
-#define AVERAGE_SIZE	100
+#define AVERAGE_SIZE	150
 
 typedef void effectCallback(
 	void* soundBuffer,
@@ -8,7 +8,7 @@ typedef void effectCallback(
 	const int sampleRate
 );
 
-typedef enum { E_PLAIN, E_ECO, E_LOWPASS }mode_t;
+typedef enum {E_PLAIN, E_ECO, E_LOWPASS}mode_t;
 
 class Effect
 {
@@ -42,7 +42,7 @@ protected:
 	short int mode;
 	float delay;
 	float a;
-	float* in;
+	float* x;
 };
 
 class FlangerEffect : public Effect {
@@ -56,7 +56,7 @@ protected:
 	float Mw;
 	float g_fb;
 	float g_ff;
-	float* in;
+	float* x;
 private:
 	float linearInterpolation(float num, float* in);
 };
@@ -69,21 +69,54 @@ public:
 protected:
 	float W;
 	float fo;
-	float* in;
+	float* x;
 	float* comodin;
 	float M_avg;
 private:
 	float linearInterpolation(float num);
 };
 
-/*
-class wahwahEffect : public Effect {
+typedef struct {
+	float A, B, C, D;
+}filter1_t;
+
+typedef struct {
+	float A, B, C, D,E;
+}filter2_t;
+
+class EqualizatorEffect : public Effect {
+	//Habria que corregirle algunos parametros para que suene mejor
 public:
-	wahwahEffect(float damping, float width, float min_cutoff, float max_cutoff);
+	EqualizatorEffect(float gainLow = 0.5, float gainMid = 0.5, float gainHigh = 0.5, unsigned int maxSoundBufferSize = 44e3*15); //Las ganancias en porcentajes de 0 a 1, en 0 atenua 12dB y en 1 amplifica 12dB
+	~EqualizatorEffect();
+	effectCallback callback;
+	void changeGains(float gainLow, float gainMid, float gainHigh);
+protected:
+	void compFilterParameters();
+	float gainLow, gainMid, gainHigh;
+	filter1_t lowFilter;
+	filter1_t highFilter;
+	filter2_t midFilter;
+	float* x;
+};
+
+typedef struct {
+	float b0, b1, b2, a0, a1, a2;
+}wahFilter_t;
+
+class WahwahEffect : public Effect {
+public:
+	WahwahEffect(float f_min = 400, float f_LFO = 3, unsigned int samplingRate = 44e3, unsigned int maxBufferSize = (44e3*15));
+	~WahwahEffect();
 	effectCallback callback;
 protected:
-	float damping;
+	float getFrecuency(unsigned int n);
+	wahFilter_t getFilterParameters(float K);
 	float width;
-	float min_cutoff;
-	float max_cutoff;
-};*/
+	float f_min;
+	float f_LFO;
+	float G_c;
+	float Q;
+	unsigned int samplingRate;
+	float* x;
+};

@@ -3,7 +3,7 @@
 
 //#define MAX_BUFFER_SIZE 440000
 #define E_PI	3.14159265359
-#define E_AVERAGE_TRESHOLD	1e-3
+#define E_AVERAGE_TRESHOLD	1e-4
 
 Effect::Effect() {
 	// Effect constructor here. Should set defaults, load data and allocate memory as needed.
@@ -93,58 +93,58 @@ ReverbEffect::ReverbEffect(mode_t mode, float delay, float att, unsigned int max
 	this->mode = (short int)mode;
 	this->delay = delay; //In seconds
 	this->a = att;
-	this->in = new float[maxSoundBufferSize];
+	this->x = new float[maxSoundBufferSize];
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
 
 ReverbEffect::~ReverbEffect() {
-	delete[] this->in;
+	delete[] this->x;
 }
 
 void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
-	float* buff = (float*)soundBuffer;
-	unsigned int numDelay = (int)(this->delay * sampleRate);
-	copyBuffer2in(buff, in, maxSoundBufferSize);
-	unsigned int soundBufferSize = setBufferCrap2zero(buff, maxSoundBufferSize);
+	float* y = (float*)soundBuffer;
+	unsigned int M = (unsigned int)(this->delay * sampleRate);
+	copyBuffer2in(y, x, maxSoundBufferSize);
+	unsigned int soundBufferSize = setBufferCrap2zero(y, maxSoundBufferSize);
 	bool exit = false;
 	restartAverage();
 
 	if (this->mode == E_PLAIN) {
-		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
-			if (i >= numDelay) {
-				buff[i] += this->a * buff[i - numDelay];
-				pushBackandPop(buff[i]);
+		for (unsigned int n = 0; (n < maxSoundBufferSize) && (exit == false); n++) {
+			if (n >= M) {
+				y[n] = x[n] + this->a * y[n - M];
+				pushBackandPop(y[n]);
 				if (isEffectFinished()) {
-					buff[i] = INFINITY;
+					y[n] = INFINITY;
 					exit = true;
 				}
 			}
 		}
 	}
 	else if (this->mode == E_ECO) {
-		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
-			if (i >= numDelay) {
-				buff[i] = in[i] + this->a * in[i - numDelay];
+		for (unsigned int n = 0; (n < maxSoundBufferSize) && (exit == false); n++) {
+			if (n >= M) {
+				y[n] = x[n] + this->a * x[n - M];
 			}
-			pushBackandPop(buff[i]);
+			pushBackandPop(y[n]);
 			if (isEffectFinished()) {
-				buff[i] = INFINITY;
+				y[n] = INFINITY;
 				exit = true;
 			}
 		}
 	}
 	else if (this->mode == E_LOWPASS) {
-		for (unsigned int i = 0; (i < maxSoundBufferSize) && (exit == false); i++) {
-			if (i > numDelay + 1) {
-				buff[i] += (float)(0.5 * this->a * (in[i - numDelay] + in[i - numDelay - 1]));
+		for (unsigned int n = 0; (n < maxSoundBufferSize) && (exit == false); n++) {
+			if (n > M + 1) {
+				y[n] = x[n] + (float)(0.5 * this->a * (y[n - M] + y[n - M - 1]));
 			}
-			else if (i > numDelay) {
-				buff[i] += (float)(0.5 * this->a * (in[i - numDelay]));
+			else if (n > M) {
+				y[n] = x[n] + (float)(0.5 * this->a * (y[n - M]));
 			}
-			pushBackandPop(buff[i]);
+			pushBackandPop(y[n]);
 			if (isEffectFinished()) {
-				buff[i] = INFINITY;
+				y[n] = INFINITY;
 				exit = true;
 			}
 		}
@@ -164,13 +164,13 @@ FlangerEffect::FlangerEffect(float fo, float Mw, float Mo, float g_fb, float g_f
 	//this->offset = offset;
 	this->g_fb = g_fb;
 	this->g_ff = g_ff;
-	this->in = new float[maxSoundBufferSize];
+	this->x = new float[maxSoundBufferSize];
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
 
 FlangerEffect::~FlangerEffect() {
-	delete[] this->in;
+	delete[] this->x;
 }
 
 void FlangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
@@ -199,30 +199,30 @@ void FlangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 
 	//FEEDBACK
 	bool exit = false;
-	float* buff = (float*)soundBuffer;
-	unsigned int soundBufferSize = copyBuffer2in(buff, in, maxSoundBufferSize); //Copio el buffer a in, y tengo el tamaño del buffer hasta INF
-	setBufferCrap2zero(buff, maxSoundBufferSize);
+	float* y = (float*)soundBuffer;
+	unsigned int soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize); //Copio el buffer a in, y tengo el tamaño del buffer hasta INF
+	setBufferCrap2zero(y, maxSoundBufferSize);
 	restartAverage();
 
-	for (int i = 0; (i < (int)maxSoundBufferSize) && (exit == false); i++) {
+	for (int n = 0; (n < (int)maxSoundBufferSize) && (exit == false); n++) {
 		float Mw = Mo * 10;
-		float Mn = (float)(Mo + (Mw / 2) * (1 + sinf((float)(2 * E_PI * fo * i / (float)sampleRate))));
-		if (i - Mn > 0 && (i - Mn) < soundBufferSize) {
-			buff[i] = g_fb * linearInterpolation(i - Mn, buff) + in[i] + (g_ff - g_fb) * linearInterpolation(i - Mn, in);
+		float Mn = (float)(Mo + (Mw / 2) * (1 + sinf((float)(2 * E_PI * fo * n / (float)sampleRate))));
+		if (n - Mn > 0 && (n - Mn) < soundBufferSize) {
+			y[n] = g_fb * linearInterpolation(n - Mn, y) + x[n] + (g_ff - g_fb) * linearInterpolation(n - Mn, x);
 		}
-		else if (i - Mn < 0) {
+		else if (n - Mn < 0) {
 			float temp;
-			for (temp = (i - Mn); temp < 0; temp += soundBufferSize);
-			buff[i] = g_fb * buff[i] + in[i] + (g_ff - g_fb) * linearInterpolation(temp, in);
+			for (temp = (n - Mn); temp < 0; temp += soundBufferSize);
+			y[n] = g_fb * y[n] + x[n] + (g_ff - g_fb) * linearInterpolation(temp, x);
 		}
-		else if ((i - Mn) > soundBufferSize) {
+		else if ((n - Mn) > soundBufferSize) {
 			float temp;
-			for (temp = (i - Mn); temp > soundBufferSize; temp -= soundBufferSize);
-			buff[i] = g_fb * buff[i] + in[i] + (g_ff - g_fb) * linearInterpolation(temp, in);
+			for (temp = (n - Mn); temp > soundBufferSize; temp -= soundBufferSize);
+			y[n] = g_fb * y[n] + x[n] + (g_ff - g_fb) * linearInterpolation(temp, x);
 		}
-		pushBackandPop(buff[i]);
+		pushBackandPop(y[n]);
 		if (isEffectFinished()) {
-			buff[i] = INFINITY;
+			y[n] = INFINITY;
 			exit = true;
 		}
 	}
@@ -241,7 +241,7 @@ float FlangerEffect::linearInterpolation(float num, float* in) {
 VibratoEffect::VibratoEffect(float W, float fo, float M_avg, const int sampleRate, unsigned int maxSoundBufferSize) {
 	this->W = (float)(W / (2 * E_PI * fo));
 	this->fo = fo;
-	this->in = new float[maxSoundBufferSize];
+	this->x = new float[maxSoundBufferSize];
 	this->comodin = new float[maxSoundBufferSize];
 	this->M_avg = M_avg * (float)sampleRate;
 	restartAverage();
@@ -249,64 +249,196 @@ VibratoEffect::VibratoEffect(float W, float fo, float M_avg, const int sampleRat
 }
 
 VibratoEffect::~VibratoEffect() {
-	delete[] this->in;
+	delete[] this->x;
 	delete[] this->comodin;
 	return;
 }
 
 void VibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
-	float* buff = (float*)soundBuffer;
-	unsigned int soundBufferSize = copyBuffer2in(buff, in, maxSoundBufferSize);
+	float* y = (float*)soundBuffer;
+	unsigned int soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
 	bool exit = false;
 
-	for (int i = 0; (i < (int)soundBufferSize) && (exit == false); i++) {
-		float Mn = (float)(M_avg + W * sin(2 * E_PI * i * fo / (float)sampleRate));
-		if (((i - Mn) > 0) && ((i - Mn) < soundBufferSize)) {
-			buff[i] = linearInterpolation(i - Mn);
+	for (int n = 0; (n < (int)soundBufferSize) && (exit == false); n++) {
+		float Mn = (float)(M_avg + W * sin(2 * E_PI * n * fo / (float)sampleRate));
+		if (((n - Mn) > 0) && ((n - Mn) < soundBufferSize)) {
+			y[n] = linearInterpolation(n - Mn);
 		}
-		else if (i - Mn < 0) {
+		else if (n - Mn < 0) {
 			float temp;
-			for (temp = i - Mn; temp < 0; temp += soundBufferSize);
-			buff[i] = linearInterpolation(temp);
+			for (temp = n - Mn; temp < 0; temp += soundBufferSize);
+			y[n] = linearInterpolation(temp);
 		}
-		else if ((i - Mn) > soundBufferSize) {
+		else if ((n - Mn) > soundBufferSize) {
 			float temp;
-			for (temp = i - Mn; temp > soundBufferSize; temp -= soundBufferSize);
-			buff[i] = linearInterpolation(temp);
+			for (temp = n - Mn; temp > soundBufferSize; temp -= soundBufferSize);
+			y[n] = linearInterpolation(temp);
 		}
-		comodin[i] = buff[i];
+		comodin[n] = y[n];
 	}
 
-	for (int i = 0; i < (int)soundBufferSize; i++) {
-		if ((i + M_avg) < soundBufferSize)
-			buff[i] = comodin[(int)(i + M_avg)];
+	for (int n = 0; n < (int)soundBufferSize; n++) {
+		if ((n + M_avg) < soundBufferSize)
+			y[n] = comodin[(int)(n + M_avg)];
 		else {
 			float temp;
-			for (temp = i + M_avg; temp > soundBufferSize; temp -= soundBufferSize);
-			buff[i] = comodin[(int)temp];
+			for (temp = n + M_avg; temp > soundBufferSize; temp -= soundBufferSize);
+			y[n] = comodin[(int)temp];
 		}
 	}
 	return;
 }
 
 float VibratoEffect::linearInterpolation(float num) {
-	return ((((int)(num)) + 1 - num) * this->in[(int)num] + (num - ((int)(num))) * this->in[(int)num + 1]);
+	return ((((int)(num)) + 1 - num) * this->x[(int)num] + (num - ((int)(num))) * this->x[(int)num + 1]);
 }
 
-/*wahwahEffect::wahwahEffect(float damping, float width, float min_cutoff, float max_cutoff) {
-	this->damping = damping;
-	this->width = width;
-	this->min_cutoff = min_cutoff;
-	this->max_cutoff = max_cutoff;
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//									EQUALIZATOR EFFECT								  //
+
+
+EqualizatorEffect::EqualizatorEffect(float gainLow, float gainMid, float gainHigh, unsigned int maxSoundBufferSize) {
+	changeGains(gainLow, gainMid, gainHigh);
+	this->x = new float[maxSoundBufferSize];
 	return;
 }
 
-void wahwahEffect::callback(void* soundBuffer, const unsigned int soundBufferSize) {
-	float* buff = (float*)soundBuffer;
-	float center_freq = this->width / SAMPLE_RATE;
-	float pi = 3.14159265359;
-	float F1 = 2 * sin(pi * this->min_cutoff) / SAMPLE_RATE;
-	float Q1 = 2 * damping;
+EqualizatorEffect::~EqualizatorEffect() {
+	delete[] this->x;
+	return;
+}
+
+void EqualizatorEffect::compFilterParameters() {
+	lowFilter.A = (float)(2.2e-3 * gainLow + sqrt(gainLow));
+	lowFilter.B = (float)(2.2e-3 * gainLow - sqrt(gainLow));
+	lowFilter.C = (float)(2.2e-3 + sqrt(gainLow));
+	lowFilter.D = (float)(2.2e-3 - sqrt(gainLow));
+
+	highFilter.A = (float)(56e-3 * sqrt(gainHigh) + gainHigh);
+	highFilter.B = (float)(56e-3 * sqrt(gainHigh) - gainHigh);
+	highFilter.C = (float)(56e-3 * sqrt(gainHigh) + 1);
+	highFilter.D = (float)(56e-3 * sqrt(gainHigh) - 1);
+
+	midFilter.A = (float)(sqrt(gainMid)+ 5.3e-3 * gainMid);
+	midFilter.B = (float)(-1.999);
+	midFilter.C = (float)(sqrt(gainMid) - 5.3e-3 * gainMid);
+	midFilter.D = (float)(sqrt(gainMid) + 5.3e-3);
+	midFilter.E = (float)(sqrt(gainMid) - 5.3e-3);
 
 	return;
-}*/
+}
+
+void EqualizatorEffect::changeGains(float gainLow, float gainMid, float gainHigh) {
+	this->gainLow = (float)(0.25 + gainLow * 3.75);
+	this->gainMid = (float)(0.25 + gainMid * 3.75);
+	this->gainHigh = (float)(0.25 + gainHigh * 3.75);
+	compFilterParameters();
+}
+
+void EqualizatorEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+
+	float* y = (float*)soundBuffer;
+	//Primero paso por el ecualizador de bajos
+	unsigned int soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
+	for (unsigned int n = 0; n < soundBufferSize; n++) {
+		if (n >= 1) {
+			y[n] = (lowFilter.A * x[n] + lowFilter.B * x[n - 1] - lowFilter.D * y[n - 1]) / lowFilter.C;
+		}
+		else {
+			y[n] = (lowFilter.A * x[n]) / lowFilter.C;
+		}
+	}
+
+	//Ecualizador de medios
+	soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
+	for (unsigned int n = 0; n < soundBufferSize; n++) {
+		if (n >= 2) {
+			y[n] = (midFilter.A * x[n] + midFilter.B * x[n - 1] + midFilter.C * x[n - 2]- midFilter.B * y[n-1] - midFilter.E * y[n-2]) / midFilter.D;
+		}
+		else if (n == 1) {
+			y[n] = (midFilter.A * x[n] + midFilter.B * x[n - 1] - midFilter.B * y[n - 1]) / midFilter.D;
+		}
+		else {
+			y[n] = (midFilter.A * x[n]) / midFilter.D;
+		}
+	}
+
+	//Ecualizador de agudos
+	soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
+	for (unsigned int n = 0; n < soundBufferSize; n++) {
+		if (n >= 1) {
+			y[n] = (highFilter.A * x[n] + highFilter.B * x[n - 1] - highFilter.D * y[n - 1]) / highFilter.C;
+		}
+		else {
+			y[n] = (highFilter.A * x[n]) / highFilter.C;
+		}
+	}
+
+	return;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//									WAH-WAH EFFECT									  //
+
+
+WahwahEffect::WahwahEffect(float f_min, float f_LFO, unsigned int samplingRate, unsigned int maxBufferSize) {
+	this->f_LFO = f_LFO;
+	this->f_min = f_min;
+	this->samplingRate = samplingRate;
+	this->x = new float[maxBufferSize];
+	this->Q = 5; //De 2 a 10
+	this->width = 500;
+	this->G_c = 1.5; // Correción de volumen
+	return;
+}
+
+WahwahEffect::~WahwahEffect() {
+	delete[] this->x;
+	return;
+}
+
+float WahwahEffect::getFrecuency(unsigned int n) {
+	return (float)(f_min + ((width / 2) * (1 + cos(2 * E_PI * n * f_LFO / (float)samplingRate))));
+}
+
+void WahwahEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+	wahFilter_t filter;
+	float* y = (float*)soundBuffer;
+	unsigned int soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
+
+	for (unsigned int n = 0; n < soundBufferSize; n++) {
+		float f_c = getFrecuency(n);
+		float K = (float)tan(E_PI * f_c/(float)sampleRate);
+		filter = getFilterParameters(K);
+
+		if (n >= 2) {
+			y[n] = filter.b0 * x[n] + filter.b1 * x[n - 1] + filter.b2 * x[n - 2] - filter.a1 * y[n - 1] - filter.a2 * y[n - 2];
+		}
+		else if (n == 1) {
+			y[n] = filter.b0 * x[n] + filter.b1 * x[n - 1] - filter.a1 * y[n - 1];
+		}
+		else if (n == 0) {
+			y[n] = filter.b0 * x[n];
+		}
+	}
+
+	return;
+}
+
+wahFilter_t WahwahEffect::getFilterParameters(float K) {
+	wahFilter_t filter;
+	filter.b0 = (float)(K / (pow(K, 2) * Q + K + Q)) * G_c;
+	filter.b1 = 0;
+	filter.b2 = -filter.b0 * G_c;
+	filter.a0 = 1;
+	filter.a1 = (float)((2 * Q * (pow(K, 2) - 1)) / (pow(K, 2) * Q + K + Q));
+	filter.a2 = (float)((pow(K, 2) * Q - K + Q) / (pow(K, 2) * Q + K + Q));
+	return filter;
+}
