@@ -50,11 +50,10 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 
 	// Local variable declarations
 	midiEvent currentEvent;
-	bool emptyBufferFound = false;
-	float* buffer = nullptr;
 
 	while (true) {
 		float* buffer = nullptr;
+		bool emptyBufferFound = false;
 		if (!(data->events->size() > 0)) break;
 		if (data->events->front().startSample < *currentSample + frameCount) { // If the event in front of the midi track event queue is before the end of this timeframe
 			currentEvent = data->events->front(); // Set this event as the event to process in this iteration
@@ -66,13 +65,25 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 					buffers->at(i)->startingFrame = currentEvent.startSample; // Remember when to play this buffer
 					emptyBufferFound = true;
 				}
-			if (!emptyBufferFound) throw "Could not save note: no free buffers left! MAX_SIMULTANEOUS_NOTES_PER_BUFFER should be higher";
+			if (!emptyBufferFound)
+			{ // If there were no empty buffers, replace the oldest one with the new data
+				__int64 minStartFrame = 9999999999999;
+				int bufferToReplace = 0;
+				for (int j = 0; buffer == nullptr && j < buffers->size(); j++) // Run a loop through the current note buffers
+					if (buffers->at(j)->startingFrame < minStartFrame) // Look for the oldest buffer
+					{
+						minStartFrame = buffers->at(j)->startingFrame;
+						bufferToReplace = j;
+					}
+				buffers->at(bufferToReplace)->buffer[0] = INFINITY;
+				buffer = buffers->at(bufferToReplace)->buffer; // Select this buffer to save the result of the event processing
+				buffers->at(bufferToReplace)->startingFrame = currentEvent.startSample; // Remember when to play this buffer
+			}
 
 			// First, call the instrument function
-			if (!buffer)
-				int hola = 0;
+
 			data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
-			
+			/*
 			int s = 0;
 			int c = 0;
 			bool noteStarted = false;
@@ -86,7 +97,7 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 				}
 				s++;
 			}
-			
+			*/
 			// Then, iterate through the vector of effects, calling each one of them
 
 			for (int i = 0; i < (data->effects->size()); i++)

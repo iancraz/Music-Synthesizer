@@ -11,25 +11,34 @@ int main(int argc, char* argv[])
 	QApplication a(argc, argv);
 	Leandro program;
 
-	adsrParams_t params;
-	params.tAttack = 0.2;
-	params.tDecay = 0.3;
-	params.sustainRate = 0.3;
-	params.k = 1.5;
-	params.tRelease = 0.5;
-	params.sustainLevel = 0.5;
+	adsrParams_t params1;
+	params1.tAttack = 0.5;
+	params1.tDecay = 2;
+	params1.sustainRate = 0.005;
+	params1.k = 1.5;
+	params1.tRelease = 1;
+	params1.sustainLevel = 0.7;
+
+	adsrParams_t params2;
+	params2.tAttack = 0.05;
+	params2.tDecay = 0.2;
+	params2.sustainRate = 0.1;
+	params2.k = 1.5;
+	params2.tRelease = 0.5;
+	params2.sustainLevel = 0.3;
 
 	//program.addChannel(channel1);
-	program.addMidiFile("", "mario_midi.mid", true);
-	Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
+	program.addMidiFile("", "sm64.mid", true);
+	//Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
-		
-		//Instrument* instrument = new additiveInstrument(&params,MAX_NOTE_LENGTH_SECONDS*SAMPLE_RATE,SAMPLE_RATE);
+		Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		//Instrument* instrument = randInst();
 		Effect* effect = new vibratoEffect();
 		program.channels[i]->setChannelInstrument(instrument);
-		//	program.channels[i]->addEffectToChannel(effect);
+		//program.channels[i]->addEffectToChannel(effect);
 	}
+	//Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
+	//Instrument* instrument = new additiveInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 	//program.channels.front()->setChannelTrack(program.midiTracks.front());
 	//additiveInstrument* piano = new additiveInstrument;
 

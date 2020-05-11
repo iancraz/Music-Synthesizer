@@ -58,5 +58,4 @@ private:
 	Instrument* instrument; // Instance of instrument
 
 	vector<Effect*> effects; // This channel's stack of effects
-	
 };
