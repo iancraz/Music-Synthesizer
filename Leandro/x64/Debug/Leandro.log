@@ -1,24 +1,2 @@
-<<<<<<< HEAD
-﻿  Reading Qt configuration (C:\Qt\5.9.9\msvc2017_64\bin\qmake.exe)
-  rcc Leandro.qrc
-  moc Leandro.h
-   RCC: Warning: No resources in 'C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\Leandro.qrc'.
-  Additive.cpp
-  Binasc.cpp
-  Channel.cpp
-  Effect.cpp
-  Instrument.cpp
-  Leandro.cpp
-  main.cpp
-  MidiEvent.cpp
-  MidiEventList.cpp
-  MidiFile.cpp
-  MidiMessage.cpp
-  Options.cpp
-  qrc_Leandro.cpp
-  moc_Leandro.cpp
+﻿  main.cpp
   Leandro.vcxproj -> C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
-=======
-﻿  Leandro.cpp
-  Leandro.vcxproj -> C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
->>>>>>> e5dc5581f0a53849d1f6d0c819c15a401fc12ef9
