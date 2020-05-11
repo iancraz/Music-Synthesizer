@@ -2,6 +2,8 @@
 #include "Leandro.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <iostream>
+#include <fstream>
 #include <boost/algorithm/string.hpp>
 
 void ADSRInstrument::setParams(adsrParams_t* _params) {
@@ -175,11 +177,11 @@ AdditiveInstrument::AdditiveInstrument(std::string fileName, std::string _name) 
 			i++;
 		}
 	}
-	releaseLength = 0.0005 * 44100;
+	releaseLength = 0.2 * 44100;
 	release = new float[releaseLength];
 	int i = 0;
 	while (i < releaseLength) {
-		release[i] = exp(i * log(0.01) / releaseLength);
+		release[i] = (float)exp((float)i * log(0.001) / (float)releaseLength);
 		i++;
 	}
 }
@@ -195,24 +197,35 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 	float A0 = pow((float)velocity / 127.0, 1.0 / 7.0);
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 
+
+	//TODO: for debug
+	//ofstream file("note.txt");
+
 	for (int h = 0; h < outputBufferSize; h++) {
 		outputBuffer[h] = 0;
 	}
-
+	float maxValue = 0;
 	int last;
 	for (int k = 0; k < 7; k++) {
 		int i = 0;
 		while (i < noteDuration_n && i < outputBufferSize) {
 			outputBuffer[i] += envelope[k][i] * A0 * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
+			maxValue = abs(outputBuffer[i]) > maxValue ? abs(outputBuffer[i]) : maxValue;
 			i++;
 		}
 		last = i;
 		while (i < noteDuration_n + releaseLength && i < outputBufferSize) {
-			outputBuffer[i + noteDuration_n] += release[i - noteDuration_n] * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
+			outputBuffer[i] += envelope[k][last-1] * release[i - noteDuration_n] * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
+			maxValue = abs(outputBuffer[i]) > maxValue ? abs(outputBuffer[i]) : maxValue;
 			i++;
 		}
 		last = i;
 	}
+	//for (int j = 0; j < last - 1; j++) {
+	//	outputBuffer[j] /= maxValue;
+	//	file << outputBuffer[j] << std::endl;
+	//}
+	//file.close();
 	outputBuffer[last - 1] = INFINITY;
 	return 0;
 }
