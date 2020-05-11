@@ -37,6 +37,7 @@ class Leandro : public QMainWindow
 
 public:
 	Leandro(QWidget* parent = Q_NULLPTR);
+	int channelCreationCounter;
 	__int64 currentSample;
 	vector<Channel*> channels;
 

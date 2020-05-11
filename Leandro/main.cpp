@@ -21,8 +21,10 @@ int main(int argc, char* argv[])
 
 	//program.addChannel(channel1);
 	program.addMidiFile("", "mario_midi.mid", true);
+	Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
-		Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
+		
+		//Instrument* instrument = new additiveInstrument(&params,MAX_NOTE_LENGTH_SECONDS*SAMPLE_RATE,SAMPLE_RATE);
 		//Instrument* instrument = randInst();
 		Effect* effect = new vibratoEffect();
 		program.channels[i]->setChannelInstrument(instrument);

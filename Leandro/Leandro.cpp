@@ -12,6 +12,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 {
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
+	this->channelCreationCounter = 0;
 	this->currentSample = 0;
 	this->activeBuffer = (float*)malloc(ACTIVE_BUFFER_FRAME_SIZE);
 	this->debugStream.open("debug.txt");
@@ -92,7 +93,7 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		if (!addedFrames) addedFrames = 1.0;
 		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Left channel
 		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Right channel
-		*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
+		//*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
 	}
 	*(data->currentSample) += frameCount;
 	return paContinue;
@@ -142,9 +143,11 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 		tempTrack->trackIndex = track;
 		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
 		if (autoSet) {
-			tempChannel = new Channel(this->currentSample);
+			tempChannel = new Channel(this->channelCreationCounter);
+			this->channelCreationCounter++;
 			tempChannel->setChannelTrack(tempTrack);
-			this->addChannel(tempChannel);
+			if (tempChannel->events.size() != 0) this->addChannel(tempChannel);
+			else delete tempChannel;
 		}
 		this->midiTracks.push_back(tempTrack);
 	}

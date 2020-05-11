@@ -5,9 +5,9 @@
 using namespace std;
 using namespace smf;
 
-Channel::Channel(__int64 currentSample) {
+Channel::Channel(int channelCreationCounter) {
 	// Variable initialization
-	this->creationTime = currentSample;
+	this->ID = channelCreationCounter;
 	this->volume = 1.0;
 	this->keyboard = false;
 
@@ -37,7 +37,7 @@ void Channel::updateCallbackData() { // Function to be called at the end of ever
 Channel::~Channel() {}
 
 bool Channel::operator== (Channel const& channel) {
-	if (this->creationTime == channel.creationTime) return true;
+	if (this->ID == channel.ID) return true;
 	else return false;
 }
 
@@ -69,18 +69,24 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 			if (!emptyBufferFound) throw "Could not save note: no free buffers left! MAX_SIMULTANEOUS_NOTES_PER_BUFFER should be higher";
 
 			// First, call the instrument function
-
+			if (!buffer)
+				int hola = 0;
 			data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
+			
 			int s = 0;
 			int c = 0;
+			bool noteStarted = false;
 			while (buffer[s] != INFINITY) {
-				if (buffer[s] < 0.005) c++;
-				if (c > 1000) {
+				if (buffer[s] > 0.5) noteStarted=true;
+				if (buffer[s] < 0.005&& buffer[s] > -0.005) c++;
+				if (buffer[s] > 0.005 || buffer[s] < -0.005) c=0;
+				if (c > 1000 && noteStarted == true) {
 					buffer[s] = INFINITY;
 					break;
 				}
+				s++;
 			}
-
+			
 			// Then, iterate through the vector of effects, calling each one of them
 
 			for (int i = 0; i < (data->effects->size()); i++)
