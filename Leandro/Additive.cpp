@@ -202,7 +202,7 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 	int last;
 	for (int k = 0; k < 7; k++) {
 		int i = 0;
-		while (i < noteDuration_n) {
+		while (i < noteDuration_n && i < outputBufferSize) {
 			while (i < envelopeLength) {
 				outputBuffer[i] += envelope[k][i] * A0 * sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
 				i++;
@@ -212,13 +212,13 @@ int AdditiveInstrument::synthFunction(float* outputBuffer,
 			i++;
 		}
 		last = i;
-		while (i < noteDuration_n + releaseLength) {
+		while (i < noteDuration_n + releaseLength && i < outputBufferSize) {
 			outputBuffer[i + noteDuration_n] += release[i - noteDuration_n] * sin(2.0 * M_PI * freq * (float)(k + 1) / 4.0 / (float)sampleRate * (float)i);
 			i++;
 		}
 		last = i;
 	}
-	outputBuffer[last] = INFINITY;
+	outputBuffer[last-1] = INFINITY;
 	return 0;
 }
 
