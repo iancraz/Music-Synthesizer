@@ -22,7 +22,7 @@ void Effect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, 
 unsigned int Effect::getBufferSize(float* buffer) {
 	unsigned int i;	//Habria que poner try y catch, pero por ahora vamos con esto
 	for (i = 0; buffer[i] != INFINITY; i++);
-	return i;
+	return i-1;
 }
 
 unsigned int Effect::copyBuffer2in(float* buffer, float* in, unsigned int maxSize) {
@@ -31,15 +31,15 @@ unsigned int Effect::copyBuffer2in(float* buffer, float* in, unsigned int maxSiz
 	for (i = 0; buffer[i] != INFINITY; i++) {
 		in[i] = buffer[i];
 	}
-	return i;
+	return i-1;
 }
 
 unsigned int Effect::setBufferCrap2zero(float* buffer, unsigned int maxBufferSize) {
 	unsigned int i;	//Habria que poner try y catch, pero por ahora vamos con esto
 	for (i = 0; buffer[i] != INFINITY; i++);
-	for (unsigned int u = i; u < maxBufferSize; u++)
+	for (unsigned int u = i-1; u < maxBufferSize; u++)
 		buffer[u] = 0;
-	return i;
+	return i-1;
 }
 
 void Effect::setArray2zero(float* arr, unsigned int size) {
@@ -213,7 +213,7 @@ void FlangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 		else if (n - Mn < 0) {
 			float temp;
 			for (temp = (n - Mn); temp < 0; temp += soundBufferSize);
-			y[n] = g_fb * y[n] + x[n] + (g_ff - g_fb) * linearInterpolation(temp, x);
+			y[n] = g_fb * y[n] + x[n];//+ (g_ff - g_fb) * linearInterpolation(temp, x);
 		}
 		else if ((n - Mn) > soundBufferSize) {
 			float temp;
@@ -276,6 +276,7 @@ void VibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 		}
 		comodin[n] = y[n];
 	}
+	comodin[soundBufferSize] = y[0];
 
 	for (int n = 0; n < (int)soundBufferSize; n++) {
 		if ((n + M_avg) < soundBufferSize)
