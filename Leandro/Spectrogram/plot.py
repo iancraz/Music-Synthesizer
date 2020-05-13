@@ -46,3 +46,8 @@ if save:
     plt.savefig('Spectrogram.png')
 else:
     plt.show()
+
+#if True:
+#    plt.plot(time)
+#    plt.grid(which="major")
+#    plt.show()
