@@ -3,7 +3,7 @@
 #include "Leandro.h"
 #include "Channel.h"
 #include "portaudio.h"
-#include "Additive.h"
+#include "instrument.h"
 #include <fstream>
 
 using namespace std;
@@ -38,6 +38,12 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
+
+	// GUI function connections
+
+	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
+	
+
 }
 
 Leandro::~Leandro() {
@@ -107,6 +113,7 @@ void Leandro::addChannel(Channel* newChannel) {
 		this->noteBuffers.push_back(tempBuffer);
 	}
 	// Append new channel to channel list
+	this->activeChannel = newChannel;
 	this->channels.push_back(newChannel);
 	this->updateCallbackData();
 }
@@ -140,7 +147,7 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 		tempTrack->trackIndex = track;
 		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
 		if (autoSet) {
-			tempChannel = new Channel(this->channelCreationCounter);
+			tempChannel = new Channel(this->channelCreationCounter,this);
 			this->channelCreationCounter++;
 			tempChannel->setChannelTrack(tempTrack);
 			if (tempChannel->events.size() != 0) this->addChannel(tempChannel);
@@ -150,6 +157,7 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 	}
 	this->midiFiles.push_back(midifile);
 	this->updateCallbackData();
+	this->updateGUIMidiLists();
 }
 
 void Leandro::updateCallbackData() {
@@ -159,3 +167,94 @@ void Leandro::updateCallbackData() {
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
 };
+
+void Leandro::addToAvailableAssets(instrumentModel* model) {
+	instrumentModels.push_back(model);
+
+}
+
+void Leandro::addToAvailableAssets(effectModel* model) {
+	effectModels.push_back(model);
+}
+
+
+// GUI-related, system-triggered functions
+
+void Leandro::updateAvailableAssets() {
+	ui.instrumentsList->clear();
+
+}
+
+void Leandro::updateGUIMidiLists() {
+	for (int i = 0; i < channels.size(); i++) {
+		channels.at(i)->midiListChannel->clear();
+		for (int j = 0; j < midiTracks.size(); j++) {
+			char* trackName = new char[(midiTracks.at(j)->trackName.size()) + 1];
+			strcpy(trackName, midiTracks.at(j)->trackName.c_str());
+			QListWidgetItem* ___qlistwidgetitem = new QListWidgetItem;
+			___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", trackName, nullptr));
+			channels.at(i)->midiListChannel->addItem(___qlistwidgetitem);
+		}
+	}
+}
+
+
+void Leandro::setActiveChannel(Channel* channel) {
+	activeChannel->setActiveButtonChannel->setEnabled(true);
+	activeChannel = channel;
+	activeChannel->setActiveButtonChannel->setDisabled(true);
+	ui.instrumentLayout->removeItem(ui.instrumentLayout->takeAt(0));
+	ui.instrumentLayout->addItem(channel->instrumentLayout);
+	ui.effectsScrollAreaLayout->removeItem(ui.effectsScrollAreaLayout->takeAt(0));
+	ui.effectsScrollAreaLayout->addItem(channel->effectsLayout);
+
+} 
+
+
+// GUI-triggered functions
+
+void Leandro::setInstrumentForActiveChannel() {
+	Instrument* instrument = nullptr;
+	for(int i=0;i<instrumentModels.size();i++)
+		if (ui.instrumentsList->currentItem()->text().toStdString() == instrumentModels.at(i)->instrumentName) {
+			switch (instrumentModels.at(i)->type) {
+			case synthType::adsr:
+				instrument = new ADSRInstrument((adsrParams_t*)instrumentModels.at(i)->params);
+				break;
+			case synthType::additive:
+				instrument = new AdditiveInstrument((additiveParams_t*)instrumentModels.at(i)->params);
+				break;
+			case synthType::karplus:
+				instrument = new KarplusInstrument((karplusParams_t*)instrumentModels.at(i)->params);
+				break;
+			case synthType::sampling:
+				instrument = new SamplingInstrument((samplingParams_t*)instrumentModels.at(i)->params);
+				break;
+			}
+			break;
+		}
+	activeChannel->setChannelInstrument(instrument);
+}
+
+void Leandro::addEffectToActiveChannel() {
+	Effect* effect = nullptr;
+	for (int i = 0; i < effectModels.size(); i++)
+		if (ui.effectsList->currentItem()->text().toStdString() == effectModels.at(i)->effectName) {
+			switch (effectModels.at(i)->type) {
+			case effectType::flanger:
+				effect = new FlangerEffect((flangerParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::reverb:
+				effect = new ReverbEffect((reverbParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::vibrato:
+				effect = new VibratoEffect((vibratoParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::wahwah:
+	//			effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
+				break;
+			}
+			break;
+		}
+	activeChannel->addEffectToChannel(effect);
+}

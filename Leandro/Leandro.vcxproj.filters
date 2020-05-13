@@ -61,6 +61,9 @@
     <ClCompile Include="Options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ADSR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Leandro.h">
@@ -78,9 +81,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Additive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Binasc.h">
       <Filter>Header Files</Filter>
     </ClInclude>

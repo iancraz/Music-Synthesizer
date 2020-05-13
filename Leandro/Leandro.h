@@ -21,6 +21,20 @@
 
 using namespace std;
 
+typedef struct {
+	string instrumentName;
+	synthType type;
+	void* params;
+}instrumentModel;
+
+typedef struct {
+	string effectName;
+	effectType type;
+	void* params;
+	float** resourceMatrix;
+}effectModel;
+
+
 class Channel;
 
 typedef struct {
@@ -44,21 +58,39 @@ public:
 	callbackData callData;
 	PaStream* stream;
 	ofstream debugStream;
+
 	vector<MidiFile*> midiFiles;
 	vector<midiTrack*> midiTracks;
 	vector<timedBuffer*> noteBuffers;
-
+	vector<instrumentModel*> instrumentModels;
+	vector<effectModel*> effectModels;
 	float* activeBuffer;
+	Channel* activeChannel;
 
 	~Leandro();
 
 	static PaStreamCallback callback;
+	void updateCallbackData();
 
 	void addChannel(Channel* newChannel);
 	void destroyChannel(Channel* channel);
-
 	void addMidiFile(string directory, string filename, bool autoSet);
-	void updateCallbackData();
+	
+
+	// GUI-related, system-triggered functions
+
+	void updateAvailableAssets();
+	void addToAvailableAssets(instrumentModel* model);
+	void addToAvailableAssets(effectModel* model);
+	void updateGUIMidiLists();
+	void setActiveChannel(Channel* channel);
+	
+
+	// GUI-triggered functions
+
+	void setInstrumentForActiveChannel();
+	void addEffectToActiveChannel();
+
 private:
 	Ui::LeandroClass ui;
 };

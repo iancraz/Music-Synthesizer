@@ -1,5 +1,5 @@
 #include "Leandro.h"
-#include "Additive.h"
+#include "Instrument.h"
 #include <QtWidgets/QApplication>
 #include <stdio.h>
 #include <time.h>
@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
 	Leandro program;
-
+/*
 	adsrParams_t params1;
 	params1.tAttack = 0.5;
 	params1.tDecay = 2;
@@ -26,15 +26,15 @@ int main(int argc, char* argv[])
 	params2.k = 1.5;
 	params2.tRelease = 0.5;
 	params2.sustainLevel = 0.3;
-
+*/
 	//program.addChannel(channel1);
 	program.addMidiFile("", "sm64.mid", true);
 	//Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
-		Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
+		//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		//Instrument* instrument = randInst();
-		Effect* effect = new VibratoEffect();
-		program.channels[i]->setChannelInstrument(instrument);
+		//Effect* effect = new VibratoEffect();
+		//program.channels[i]->setChannelInstrument(instrument);
 		//program.channels[i]->addEffectToChannel(effect);
 	}
 	//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
@@ -72,6 +72,9 @@ Instrument* randInst() {
 	default:
 		break;
 	}
-	ret = new AdditiveInstrument(str, name);
+	additiveParams_t* params= new additiveParams_t;
+	params->envelope_file = str;
+	params->_name = name;
+	ret = new AdditiveInstrument(params);
 	return ret;
 }

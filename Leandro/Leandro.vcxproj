@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Additive.cpp" />
+    <ClCompile Include="ADSR.cpp" />
     <ClCompile Include="Binasc.cpp" />
     <ClCompile Include="Channel.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -105,7 +106,6 @@
     <QtRcc Include="Leandro.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Additive.h" />
     <ClInclude Include="Binasc.h" />
     <ClInclude Include="bufferAssets.h" />
     <ClInclude Include="Channel.h" />

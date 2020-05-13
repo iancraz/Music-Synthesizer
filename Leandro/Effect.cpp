@@ -89,11 +89,11 @@ void Effect::restartAverage() {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									REVERB EFFECT									  //
 
-ReverbEffect::ReverbEffect(mode_t mode, float delay, float att, unsigned int maxSoundBufferSize) {
-	this->mode = (short int)mode;
-	this->delay = delay; //In seconds
-	this->a = att;
-	this->in = new float[maxSoundBufferSize];
+ReverbEffect::ReverbEffect(reverbParams_t* _params) {
+	this->mode = (short int)_params->mode;
+	this->delay = _params->delay; //In seconds
+	this->a = _params->att;
+	this->in = new float[_params->maxSoundBufferSize];
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
@@ -157,14 +157,14 @@ void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 ////////////////////////////////////////////////////////////////////////////////////////
 //									FLANGER EFFECT									  //
 
-FlangerEffect::FlangerEffect(float fo, float Mw, float Mo, float g_fb, float g_ff, const int sampleRate, unsigned int maxSoundBufferSize) {
-	this->fo = fo;
-	this->Mo = Mo * sampleRate;
-	this->Mw = this->Mo * Mw;
+FlangerEffect::FlangerEffect(flangerParams_t* _params) {
+	this->fo = _params->fo;
+	this->Mo = _params->Mo * _params->sampleRate;
+	this->Mw = this->Mo * _params->Mw;
 	//this->offset = offset;
-	this->g_fb = g_fb;
-	this->g_ff = g_ff;
-	this->in = new float[maxSoundBufferSize];
+	this->g_fb = _params->g_fb;
+	this->g_ff = _params->g_ff;
+	this->in = new float[_params->maxSoundBufferSize];
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
@@ -238,12 +238,12 @@ float FlangerEffect::linearInterpolation(float num, float* in) {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									VIBRATO EFFECT									  //
 
-VibratoEffect::VibratoEffect(float W, float fo, float M_avg, const int sampleRate, unsigned int maxSoundBufferSize) {
-	this->W = (float)(W / (2 * E_PI * fo));
-	this->fo = fo;
-	this->in = new float[maxSoundBufferSize];
-	this->comodin = new float[maxSoundBufferSize];
-	this->M_avg = M_avg * (float)sampleRate;
+VibratoEffect::VibratoEffect(vibratoParams_t* _params) {
+	this->W = (float)(_params->W / (2 * E_PI * _params->fo));
+	this->fo = _params->fo;
+	this->in = new float[_params->maxSoundBufferSize];
+	this->comodin = new float[_params->maxSoundBufferSize];
+	this->M_avg = _params->M_avg * (float)_params->sampleRate;
 	restartAverage();
 	return;
 }
@@ -293,11 +293,11 @@ float VibratoEffect::linearInterpolation(float num) {
 	return ((((int)(num)) + 1 - num) * this->in[(int)num] + (num - ((int)(num))) * this->in[(int)num + 1]);
 }
 
-/*wahwahEffect::wahwahEffect(float damping, float width, float min_cutoff, float max_cutoff) {
-	this->damping = damping;
-	this->width = width;
-	this->min_cutoff = min_cutoff;
-	this->max_cutoff = max_cutoff;
+/*wahwahEffect::wahwahEffect(wahwahParams_t* _params) {
+	this->damping = _params->damping;
+	this->width = _params->width;
+	this->min_cutoff = _params->min_cutoff;
+	this->max_cutoff = _params->max_cutoff;
 	return;
 }
 
