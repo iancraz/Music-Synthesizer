@@ -1,4 +1,5 @@
 #include "SoundEffects.h"
+#include "Effect.h"
 
 SoundEffects::SoundEffects(QWidget* parent) : QMainWindow(parent)
 {
@@ -75,19 +76,34 @@ void SoundEffects::computeEffects() {
 	if (eff.reverbPlain) {
  		float delay = ((float)ui.reverbDelay->sliderPosition()) / 100.0 * 3.0;
 		float attenuation = (float)(ui.AttSlider->sliderPosition() / 100.0);
-		ReverbEffect effect(E_PLAIN, delay,attenuation,numSamples);
+		reverbParams_t params;
+		params.att = attenuation;
+		params.delay = delay;
+		params.mode = E_PLAIN;
+		params.maxSoundBufferSize = numSamples;
+		ReverbEffect effect(&params);
 		effect.callback((void *)input, numSamples, sampleRate);
 	}
 	else if (eff.reverbEco) {
 		float delay = ((float)ui.reverbDelay->sliderPosition()) / 100.0 * 3.0;
 		float attenuation = (float)(ui.AttSlider->sliderPosition() / 100.0);
-		ReverbEffect effect(E_ECO, delay, attenuation, numSamples);
+		reverbParams_t params;
+		params.att = attenuation;
+		params.delay = delay;
+		params.mode = E_ECO;
+		params.maxSoundBufferSize = numSamples;
+		ReverbEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	else if (eff.reverbLowpass) {
 		float delay = ((float)ui.reverbDelay->sliderPosition()) / 100.0 * 3.0;
 		float attenuation = (float)(ui.AttSlider->sliderPosition() / 100.0);
-		ReverbEffect effect(E_LOWPASS, delay, attenuation, numSamples);
+		reverbParams_t params;
+		params.att = attenuation;
+		params.delay = delay;
+		params.mode = E_PLAIN;
+		params.maxSoundBufferSize = numSamples;
+		ReverbEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	if (eff.eq) {
@@ -95,23 +111,48 @@ void SoundEffects::computeEffects() {
 		gainLow = ui.eqBass->sliderPosition() / 100.0;
 		gainMid = ui.eqMid->sliderPosition() / 100.0;
 		gainHigh = ui.eqHigh->sliderPosition() / 100.0;
-		EqualizatorEffect effect(gainLow,gainMid,gainHigh,numSamples);
+		equalizatorParams_t params;
+		params.gainLow = gainLow;
+		params.gainMid = gainMid;
+		params.gainHigh = gainHigh;
+		params.maxSoundBufferSize = numSamples;
+		params.sampleRate = sampleRate;
+		EqualizatorEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	if (eff.wahwah) {
 		float freqMin = ui.wahFreqMin->sliderPosition() / 100.0 * (1e3 - 200.0) + 200.0;
 		float freqLFO = ui.wahFreqLFO->sliderPosition() / 100.0 * (5.0 - 0.2) + 0.2;
-		WahwahEffect effect(freqMin, freqLFO, sampleRate, maxSoundBufferSize);
+		wahwahParams_t params;
+		params.f_LFO = freqLFO;
+		params.f_min = freqMin;
+		params.maxBufferSize = numSamples;
+		params.samplingRate = sampleRate;
+		WahwahEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	if (eff.flanger) {
 		float freq = ui.flangerFreq->sliderPosition() / 100.0 * (5.0 - 0.1) + 0.1;
-		FlangerEffect effect(freq, sampleRate, maxSoundBufferSize);
+		flangerParams_t params;
+		params.fo = freq;
+		params.sampleRate = sampleRate;
+		params.maxSoundBufferSize = numSamples;
+		params.Mw = 5;
+		params.Mo = 1e-3;
+		params.g_fb = 0.3;
+		params.g_ff = 0.9;
+		FlangerEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	if (eff.vibrato) {
 		float freq = ui.vibratoFreq->sliderPosition() / 100.0 * (20.0 - 0.5) + 0.5;
-		VibratoEffect effect(freq, sampleRate, maxSoundBufferSize);
+		vibratoParams_t params;
+		params.fo = freq;
+		params.maxSoundBufferSize = numSamples;
+		params.sampleRate = sampleRate;
+		params.W = 1e3;
+		params.M_avg = 10;
+		VibratoEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	return;

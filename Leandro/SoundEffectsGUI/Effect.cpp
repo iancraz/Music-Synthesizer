@@ -89,11 +89,12 @@ void Effect::restartAverage() {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									REVERB EFFECT									  //
 
-ReverbEffect::ReverbEffect(mode_t mode, float delay, float att, unsigned int maxSoundBufferSize) {
-	this->mode = (short int)mode;
-	this->delay = delay; //In seconds
-	this->a = att;
-	this->x = new float[maxSoundBufferSize];
+//ReverbEffect::ReverbEffect(mode_t mode, float delay, float att, unsigned int maxSoundBufferSize) {
+ReverbEffect::ReverbEffect(reverbParams_t * _params){
+	this->mode = (short int)_params->mode;
+	this->delay = _params->delay; //In seconds
+	this->a = _params->att;
+	this->x = new float[_params->maxSoundBufferSize];
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
@@ -157,14 +158,14 @@ void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 ////////////////////////////////////////////////////////////////////////////////////////
 //									FLANGER EFFECT									  //
 
-FlangerEffect::FlangerEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float Mw, float Mo, float g_fb, float g_ff) {
-	this->fo = fo;
-	this->Mo = Mo * sampleRate;
-	this->Mw = this->Mo * Mw;
-	//this->offset = offset;
-	this->g_fb = g_fb;
-	this->g_ff = g_ff;
-	this->x = new float[maxSoundBufferSize];
+//FlangerEffect::FlangerEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float Mw, float Mo, float g_fb, float g_ff) {
+FlangerEffect::FlangerEffect(flangerParams_t * _params){
+	this->fo = _params->fo;
+	this->Mo = _params->Mo * _params->sampleRate;
+	this->Mw = this->Mo * _params->Mw;
+	this->g_fb = _params->g_fb;
+	this->g_ff = _params->g_ff;
+	this->x = new float[_params->maxSoundBufferSize];
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
@@ -213,7 +214,7 @@ void FlangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 		else if (n - Mn < 0) {
 			float temp;
 			for (temp = (n - Mn); temp < 0; temp += soundBufferSize);
-			y[n] = g_fb * y[n] + x[n];//+ (g_ff - g_fb) * linearInterpolation(temp, x);
+			y[n] = g_fb * y[n] + x[n];// +(g_ff - g_fb) * linearInterpolation(temp, x);
 		}
 		else if ((n - Mn) > soundBufferSize) {
 			float temp;
@@ -238,12 +239,13 @@ float FlangerEffect::linearInterpolation(float num, float* in) {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									VIBRATO EFFECT									  //
 
-VibratoEffect::VibratoEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float W, float M_avg) {
-	this->W = (float)(W / (2 * E_PI * fo));
-	this->fo = fo;
-	this->x = new float[maxSoundBufferSize];
-	this->comodin = new float[maxSoundBufferSize];
-	this->M_avg = M_avg * (float)sampleRate;
+//VibratoEffect::VibratoEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float W, float M_avg) {
+VibratoEffect::VibratoEffect(vibratoParams_t * _params){
+	this->W = (float)(_params->W / (2 * E_PI * _params->fo));
+	this->fo = _params->fo;
+	this->x = new float[_params->maxSoundBufferSize];
+	this->comodin = new float[_params->maxSoundBufferSize];
+	this->M_avg = _params->M_avg * (float)_params->sampleRate;
 	restartAverage();
 	return;
 }
@@ -301,14 +303,14 @@ float VibratoEffect::linearInterpolation(float num) {
 //									EQUALIZATOR EFFECT								  //
 
 
-EqualizatorEffect::EqualizatorEffect(float gainLow, float gainMid, float gainHigh, unsigned int maxSoundBufferSize) {
-	float sampleRate = 44e3;
-	this->x = new float[maxSoundBufferSize];
-	lowFreq = 300.0  * 2 * E_PI / (sampleRate);
-	midFreq = 700.0 * 2 * E_PI / sampleRate;
-	midB = 400.0 * 2 * E_PI / sampleRate;
-	highFreq = 1.5e3 * 2 * E_PI / sampleRate;
-	changeGains(gainLow, gainMid, gainHigh);
+//EqualizatorEffect::EqualizatorEffect(float gainLow, float gainMid, float gainHigh, unsigned int maxSoundBufferSize) {
+EqualizatorEffect::EqualizatorEffect(equalizatorParams_t * _params){
+	this->x = new float[_params->maxSoundBufferSize];
+	lowFreq = 300.0  * 2 * E_PI / (_params->sampleRate);
+	midFreq = 700.0 * 2 * E_PI / _params->sampleRate;
+	midB = 400.0 * 2 * E_PI / _params->sampleRate;
+	highFreq = 1.5e3 * 2 * E_PI / _params->sampleRate;
+	changeGains(_params->gainLow, _params->gainMid, _params->gainHigh);
 	return;
 }
 
@@ -393,11 +395,12 @@ void EqualizatorEffect::callback(void* soundBuffer, const unsigned int maxSoundB
 //									WAH-WAH EFFECT									  //
 
 
-WahwahEffect::WahwahEffect(float f_min, float f_LFO, unsigned int samplingRate, unsigned int maxBufferSize) {
-	this->f_LFO = f_LFO;
-	this->f_min = f_min;
-	this->samplingRate = samplingRate;
-	this->x = new float[maxBufferSize];
+//WahwahEffect::WahwahEffect(float f_min, float f_LFO, unsigned int samplingRate, unsigned int maxBufferSize) {
+WahwahEffect::WahwahEffect(wahwahParams_t * _params){
+	this->f_LFO = _params->f_LFO;
+	this->f_min = _params->f_min;
+	this->samplingRate = _params->samplingRate;
+	this->x = new float[_params->maxBufferSize];
 	this->Q = 5; //De 2 a 10
 	this->width = 500;
 	this->G_c = 1.5; // Correción de volumen

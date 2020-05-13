@@ -1,6 +1,8 @@
 #pragma once
+#include <QtWidgets/QFrame>
 
 #define AVERAGE_SIZE	150
+
 
 typedef void effectCallback(
 	void* soundBuffer,
@@ -10,6 +12,46 @@ typedef void effectCallback(
 
 typedef enum {E_PLAIN, E_ECO, E_LOWPASS}mode_t;
 
+typedef struct {
+	mode_t mode;
+	float delay;
+	float att;
+	unsigned int maxSoundBufferSize;
+}reverbParams_t;
+
+typedef struct {
+	float fo;
+	int sampleRate;
+	unsigned int maxSoundBufferSize;
+	float Mw;
+	float Mo;
+	float g_fb;
+	float g_ff;
+}flangerParams_t;
+
+typedef struct {
+	float fo;
+	int sampleRate;
+	unsigned int maxSoundBufferSize;
+	float W;
+	float M_avg;
+}vibratoParams_t;
+
+typedef struct {
+	float gainLow;
+	float gainMid;
+	float gainHigh;
+	unsigned int maxSoundBufferSize;
+	unsigned int sampleRate;
+}equalizatorParams_t;
+
+typedef struct {
+	float f_min;
+	float f_LFO;
+	unsigned int samplingRate;
+	unsigned int maxBufferSize;
+}wahwahParams_t;
+
 class Effect
 {
 public:
@@ -18,6 +60,7 @@ public:
 	Effect();
 	~Effect();
 	virtual effectCallback callback;
+	QFrame* effectFrame;
 protected:
 	unsigned int getBufferSize(float* buffer); //Da el tamaño del buffer hasta el elemento que contenga INFINITY
 	unsigned int copyBuffer2in(float* buffer, float* in, unsigned int maxSize); //Copia el array Buffer al array in, y devuelve el tamaño del buffer hasta el elemento INFINITY
@@ -35,7 +78,8 @@ protected:
 class ReverbEffect : public Effect
 {
 public:
-	ReverbEffect(mode_t mode = E_PLAIN, float delay = 0.2, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15)); 
+	//ReverbEffect(mode_t mode = E_PLAIN, float delay = 0.2, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15));
+	ReverbEffect(reverbParams_t* _params);
 	//Existen 3 modos de uso:	E_PLAIN   -> REVERBERACION PLANA
 	//							E_ECO     -> DELAY SIMPLE
 	//							E_LOWPASS -> REVERBERACIÓN PLANA CON PASABAJOS SIMPLE
@@ -60,7 +104,8 @@ protected:
 
 class FlangerEffect : public Effect {
 public:
-	FlangerEffect(float fo = 0.5, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15), float Mw = 5, float Mo = 1e-3, float g_fb = 0.3, float g_ff = 0.9);	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
+	//FlangerEffect(float fo = 0.5, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15), float Mw = 5, float Mo = 1e-3, float g_fb = 0.3, float g_ff = 0.9);
+	FlangerEffect(flangerParams_t* _params);
 	//Si bien se pueden configurar muchos parámetros, lo recomendable es solamente cambiar fo
 	//El intervalo de fo debe estar dado entre:
 	//				fo = [0.1 ; 5]
@@ -79,7 +124,8 @@ private:
 
 class VibratoEffect : public Effect {
 public:
-	VibratoEffect( float fo = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15), float W = 1e3, float M_avg = 10);
+	//VibratoEffect( float fo = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15), float W = 1e3, float M_avg = 10);
+	VibratoEffect(vibratoParams_t* _params);
 	//Si bien se pueden configurar muchos parámetros, lo recomendable es solamente cambiar fo
 	//El intervalo de fo debe estar dado entre:
 	//				fo = [0.5 ; 20]
@@ -106,7 +152,8 @@ typedef struct {
 class EqualizatorEffect : public Effect {
 	//Habria que corregirle algunos parametros para que suene mejor
 public:
-	EqualizatorEffect(float gainLow = 0.5, float gainMid = 0.5, float gainHigh = 0.5, unsigned int maxSoundBufferSize = 44e3*15); //Las ganancias en porcentajes de 0 a 1, en 0 atenua 12dB y en 1 amplifica 12dB
+	//EqualizatorEffect(float gainLow = 0.5, float gainMid = 0.5, float gainHigh = 0.5, unsigned int maxSoundBufferSize = 44e3*15); //Las ganancias en porcentajes de 0 a 1, en 0 atenua 12dB y en 1 amplifica 12dB
+	EqualizatorEffect(equalizatorParams_t* _params);
 	// En el ecualizador se puede dar la ganancia deseada a discrecion, los valores máximos y minimos para cada una serán:
 	//			gainLow = [0 ; 1]
 	//			gainMid = [0 ; 1]
@@ -130,7 +177,8 @@ typedef struct {
 
 class WahwahEffect : public Effect {
 public:
-	WahwahEffect(float f_min = 400, float f_LFO = 3, unsigned int samplingRate = 44e3, unsigned int maxBufferSize = (44e3*15));
+	//WahwahEffect(float f_min = 400, float f_LFO = 3, unsigned int samplingRate = 44e3, unsigned int maxBufferSize = (44e3*15));
+	WahwahEffect(wahwahParams_t* _params);
 	//Para el wah-wah el usuario debe poder modificar f_min y f_LFO, los intervalos son:
 	//			f_min = [200 ; 1000]
 	//			f_LFO = [0.2 ; 5]
