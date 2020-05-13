@@ -1,6 +1,8 @@
 #include "Spectrogram.h"
 #include <fstream>
 
+#define DEBUG
+
 Spectrogram::Spectrogram(float* signal, unsigned int signalSize) {
     this->sig = new float[signalSize];
     for (unsigned int i = 0; i < signalSize; i++)
@@ -14,16 +16,23 @@ Spectrogram::~Spectrogram() {
     return;
 }
 
-void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window, bool save) {
+void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window,bool showTime , bool save, string name) {
     ofstream out("data.ian");
+    out << name << endl;
     out << to_string(samplingRate) << ',' << to_string(nfft) <<',' << to_string(window) << ',';
     if (save)
+        out << to_string(1) << ',';
+    else
+        out << to_string(0) << ',';
+    if (showTime)
         out << to_string(1);
     else
         out << to_string(0);
     out << endl;
-
-    cout << "Calculando el Espectrograma" << endl;
+    // Samplingrate, nfft,window,save
+#ifdef DEBUG
+    cout << "Calculando el Espectrograma.." << endl;
+#endif
     for (unsigned int i = 0; i < this->sigSize; i++) {
         out << to_string(sig[i]);
         if (i != this->sigSize)
@@ -32,9 +41,12 @@ void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, 
     out << endl;
     out.close();
     system("python ./plot.py");
-
+#ifdef DEBUG
+    cout << "Finalizado el calculo." << endl;
+#endif
 }
 
+/*
 void Spectrogram::fft(std::complex<float>* in, std::complex<float>* out, size_t n) {
     vector<complex<double>> temp;
 
@@ -75,6 +87,7 @@ std::vector<complex<double>> Spectrogram::Cooley_Tukey(std::vector<complex<doubl
 
     return freqBins;
 }
+*/
 
 
 

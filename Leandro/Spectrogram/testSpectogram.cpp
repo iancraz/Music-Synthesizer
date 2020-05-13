@@ -3,7 +3,7 @@
 
 int main(void) {
     AudioFile<double> audioFile;
-    audioFile.load("./out.wav");
+    audioFile.load("./tst.wav");
     int channel = 0;
     int numSamples = audioFile.getNumSamplesPerChannel();
     float* signal = new float[numSamples];
@@ -16,9 +16,8 @@ int main(void) {
     unsigned int samplingRate = 44000;
     unsigned int nfft = 1024;
     Spectrogram test(signal, numSamples);
-    test.calcSpectrogram(samplingRate, nfft, WINDOW_NONE, true);
+    test.calcSpectrogram(samplingRate, nfft, WINDOW_BLACKMAN, true,false, "hola.png");
     return 0;
-
 }
 
 
