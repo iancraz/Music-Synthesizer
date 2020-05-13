@@ -35,7 +35,20 @@ protected:
 class ReverbEffect : public Effect
 {
 public:
-	ReverbEffect(mode_t mode = E_PLAIN, float delay = 0.2, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15));  //Modo tipo plano, Eco, o lowpass. Tiempo de delay en segundos, attenuacion. (Valores sugeridos (E_PLAIN,0.5,0.5))
+	ReverbEffect(mode_t mode = E_PLAIN, float delay = 0.2, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15)); 
+	//Existen 3 modos de uso:	E_PLAIN   -> REVERBERACION PLANA
+	//							E_ECO     -> DELAY SIMPLE
+	//							E_LOWPASS -> REVERBERACIÓN PLANA CON PASABAJOS SIMPLE
+	//Los parametros disponibles al usuario deben ser los siguientes para cada caso: (Se puede jugar, pero se recomienda mantenerse dentro de los intervalos dados)
+	//	E_PLAIN:
+	//				delay = [0 ; 3]
+	//				att = [0 ; 0.99]
+	//	E_ECO:
+	//				delay [0 ; 3]
+	//				att = [0 ; 0.99]
+	//	E_LOWPASS:
+	//				delay [0 ; 3]
+	//				att = [0 ; 0.99]
 	~ReverbEffect();
 	effectCallback callback;
 protected:
@@ -47,7 +60,10 @@ protected:
 
 class FlangerEffect : public Effect {
 public:
-	FlangerEffect(float fo = 0.5, float Mw = 5, float Mo = 1e-3, float g_fb = 0.3, float g_ff = 0.9, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15));	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
+	FlangerEffect(float fo = 0.5, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15), float Mw = 5, float Mo = 1e-3, float g_fb = 0.3, float g_ff = 0.9);	// Frecuencia del LFO fo. (valores sugeridos (0.5,1e-3,5,0.3,0.9,sampleRate))
+	//Si bien se pueden configurar muchos parámetros, lo recomendable es solamente cambiar fo
+	//El intervalo de fo debe estar dado entre:
+	//				fo = [0.1 ; 5]
 	~FlangerEffect();
 	effectCallback callback;
 protected:
@@ -63,7 +79,10 @@ private:
 
 class VibratoEffect : public Effect {
 public:
-	VibratoEffect(float W = 1e3, float fo = 10, float M_avg = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15)); // W para la cual queremos que esto funcione, frecuencia del LFO fo, Distancia average (Valores sugeridos (1e3,5,0.5))
+	VibratoEffect( float fo = 10, const int sampleRate = 44e3, unsigned int maxSoundBufferSize = (44e3 * 15), float W = 1e3, float M_avg = 10);
+	//Si bien se pueden configurar muchos parámetros, lo recomendable es solamente cambiar fo
+	//El intervalo de fo debe estar dado entre:
+	//				fo = [0.5 ; 20]
 	~VibratoEffect();
 	effectCallback callback;
 protected:
@@ -88,6 +107,10 @@ class EqualizatorEffect : public Effect {
 	//Habria que corregirle algunos parametros para que suene mejor
 public:
 	EqualizatorEffect(float gainLow = 0.5, float gainMid = 0.5, float gainHigh = 0.5, unsigned int maxSoundBufferSize = 44e3*15); //Las ganancias en porcentajes de 0 a 1, en 0 atenua 12dB y en 1 amplifica 12dB
+	// En el ecualizador se puede dar la ganancia deseada a discrecion, los valores máximos y minimos para cada una serán:
+	//			gainLow = [0 ; 1]
+	//			gainMid = [0 ; 1]
+	//			gainHig = [0 ; 1]
 	~EqualizatorEffect();
 	effectCallback callback;
 	void changeGains(float gainLow, float gainMid, float gainHigh);
@@ -108,6 +131,9 @@ typedef struct {
 class WahwahEffect : public Effect {
 public:
 	WahwahEffect(float f_min = 400, float f_LFO = 3, unsigned int samplingRate = 44e3, unsigned int maxBufferSize = (44e3*15));
+	//Para el wah-wah el usuario debe poder modificar f_min y f_LFO, los intervalos son:
+	//			f_min = [200 ; 1000]
+	//			f_LFO = [0.2 ; 5]
 	~WahwahEffect();
 	effectCallback callback;
 protected:

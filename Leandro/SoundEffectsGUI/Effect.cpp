@@ -157,7 +157,7 @@ void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 ////////////////////////////////////////////////////////////////////////////////////////
 //									FLANGER EFFECT									  //
 
-FlangerEffect::FlangerEffect(float fo, float Mw, float Mo, float g_fb, float g_ff, const int sampleRate, unsigned int maxSoundBufferSize) {
+FlangerEffect::FlangerEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float Mw, float Mo, float g_fb, float g_ff) {
 	this->fo = fo;
 	this->Mo = Mo * sampleRate;
 	this->Mw = this->Mo * Mw;
@@ -238,7 +238,7 @@ float FlangerEffect::linearInterpolation(float num, float* in) {
 ////////////////////////////////////////////////////////////////////////////////////////
 //									VIBRATO EFFECT									  //
 
-VibratoEffect::VibratoEffect(float W, float fo, float M_avg, const int sampleRate, unsigned int maxSoundBufferSize) {
+VibratoEffect::VibratoEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float W, float M_avg) {
 	this->W = (float)(W / (2 * E_PI * fo));
 	this->fo = fo;
 	this->x = new float[maxSoundBufferSize];

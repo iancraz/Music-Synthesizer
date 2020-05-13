@@ -106,12 +106,12 @@ void SoundEffects::computeEffects() {
 	}
 	if (eff.flanger) {
 		float freq = ui.flangerFreq->sliderPosition() / 100.0 * (5.0 - 0.1) + 0.1;
-		FlangerEffect effect(freq, 5, 1e-3, 0.3, 0.9, sampleRate, maxSoundBufferSize);
+		FlangerEffect effect(freq, sampleRate, maxSoundBufferSize);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	if (eff.vibrato) {
 		float freq = ui.vibratoFreq->sliderPosition() / 100.0 * (20.0 - 0.5) + 0.5;
-		VibratoEffect effect(1e3, freq, 10, sampleRate, maxSoundBufferSize);
+		VibratoEffect effect(freq, sampleRate, maxSoundBufferSize);
 		effect.callback(input, numSamples, sampleRate);
 	}
 	return;
