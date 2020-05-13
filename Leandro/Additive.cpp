@@ -4,7 +4,7 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
-#include <boost/algorithm/string.hpp>
+
 
 void ADSRInstrument::setParams(adsrParams_t* _params) {
 	if (_params->tAttack < 15.0 && _params->tDecay < 15.0 && _params->sustainLevel <= 1.0 && _params->sustainRate <= 1.0 && _params->tRelease < 15 && _params->k < 5.0 && _params->tAttack > 0.0 && _params->tDecay > 0.0 && _params->sustainLevel > 0.0 && _params->sustainRate > 0.0 && _params->tRelease > 0.0 && _params->k > 0.0)
@@ -149,41 +149,7 @@ ADSRInstrument::synthFunction(float* outputBuffer,
 }
 
 AdditiveInstrument::AdditiveInstrument(std::string fileName, std::string _name) {
-	std::ifstream file(fileName);
-	// count lines
-	int count = 0;
-	if (file.is_open()) {
-		std::string str;
-		while (std::getline(file, str)) {
-			count++;
-		}
-		file.close();
-	}
-	envelopeLength = count;
-	// allocate memory
-	for (int i = 0; i < 7; i++) {
-		envelope[i] = new float[envelopeLength];
-	}
-	file.open(fileName);
-	if (file.is_open()) {
-		std::string line;
-		int i = 0;
-		while (std::getline(file, line)) {
-			std::vector<std::string> parts;
-			split(parts, line, boost::is_any_of("\t"));
-			for (int k = 0; k < 7; k++) {
-				envelope[k][i] = std::stof(parts[k]);
-			}
-			i++;
-		}
-	}
-	releaseLength = 0.2 * 44100;
-	release = new float[releaseLength];
-	int i = 0;
-	while (i < releaseLength) {
-		release[i] = (float)exp((float)i * log(0.001) / (float)releaseLength);
-		i++;
-	}
+
 }
 
 int AdditiveInstrument::synthFunction(float* outputBuffer,
