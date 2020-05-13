@@ -94,6 +94,7 @@ public:
 protected:
 	void compFilterParameters();
 	float gainLow, gainMid, gainHigh;
+	float highFreq, lowFreq, midFreq, midB;
 	filter1_t lowFilter;
 	filter1_t highFilter;
 	filter2_t midFilter;

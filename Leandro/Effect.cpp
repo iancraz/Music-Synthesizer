@@ -302,8 +302,13 @@ float VibratoEffect::linearInterpolation(float num) {
 
 
 EqualizatorEffect::EqualizatorEffect(float gainLow, float gainMid, float gainHigh, unsigned int maxSoundBufferSize) {
-	changeGains(gainLow, gainMid, gainHigh);
+	float sampleRate = 44e3;
 	this->x = new float[maxSoundBufferSize];
+	lowFreq = 300.0  * 2 * E_PI / (sampleRate);
+	midFreq = 700.0 * 2 * E_PI / sampleRate;
+	midB = 400.0 * 2 * E_PI / sampleRate;
+	highFreq = 1.5e3 * 2 * E_PI / sampleRate;
+	changeGains(gainLow, gainMid, gainHigh);
 	return;
 }
 
@@ -313,22 +318,21 @@ EqualizatorEffect::~EqualizatorEffect() {
 }
 
 void EqualizatorEffect::compFilterParameters() {
-	lowFilter.A = (float)(2.2e-3 * gainLow + sqrt(gainLow));
-	lowFilter.B = (float)(2.2e-3 * gainLow - sqrt(gainLow));
-	lowFilter.C = (float)(2.2e-3 + sqrt(gainLow));
-	lowFilter.D = (float)(2.2e-3 - sqrt(gainLow));
+	lowFilter.A = (float)(tan(lowFreq / 2) * gainLow + sqrt(gainLow));
+	lowFilter.B = (float)(tan(lowFreq / 2) * gainLow - sqrt(gainLow));
+	lowFilter.C = (float)(tan(lowFreq / 2) + sqrt(gainLow));
+	lowFilter.D = (float)(tan(lowFreq / 2) - sqrt(gainLow));
 
-	highFilter.A = (float)(56e-3 * sqrt(gainHigh) + gainHigh);
-	highFilter.B = (float)(56e-3 * sqrt(gainHigh) - gainHigh);
-	highFilter.C = (float)(56e-3 * sqrt(gainHigh) + 1);
-	highFilter.D = (float)(56e-3 * sqrt(gainHigh) - 1);
+	highFilter.A = (float)(tan(highFreq / 2) * sqrt(gainHigh) + gainHigh);
+	highFilter.B = (float)(tan(highFreq / 2) * sqrt(gainHigh) - gainHigh);
+	highFilter.C = (float)(tan(highFreq / 2) * sqrt(gainHigh) + 1);
+	highFilter.D = (float)(tan(highFreq / 2) * sqrt(gainHigh) - 1);
 
-	midFilter.A = (float)(sqrt(gainMid)+ 5.3e-3 * gainMid);
-	midFilter.B = (float)(-1.999);
-	midFilter.C = (float)(sqrt(gainMid) - 5.3e-3 * gainMid);
-	midFilter.D = (float)(sqrt(gainMid) + 5.3e-3);
-	midFilter.E = (float)(sqrt(gainMid) - 5.3e-3);
-
+	midFilter.A = (float)(sqrt(gainMid) + tan(midB / 2) * gainMid);
+	midFilter.B = (float)(-2*cos(midFreq)* sqrt(gainMid));
+	midFilter.C = (float)(sqrt(gainMid) - tan(midB / 2) * gainMid);
+	midFilter.D = (float)(sqrt(gainMid) + tan(midB / 2));
+	midFilter.E = (float)(sqrt(gainMid) - tan(midB / 2));
 	return;
 }
 
