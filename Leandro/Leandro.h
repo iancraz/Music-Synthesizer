@@ -104,6 +104,10 @@ public:
 
 	void loadData();
 
+	void loadEffectsData();
+
+	void loadSynthData();
+
 
 private:
 	Ui::LeandroClass ui;

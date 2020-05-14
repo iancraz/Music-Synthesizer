@@ -102,8 +102,11 @@ public:
 
 	static additiveParams_t parseAdditiveJson(Json::Value _data);
 	static vector<float*> parseEnvelopeFile(std::string path, vector<int>* envelopesLengths);
+	float getHarmonicFactor(int index) { return harmonicFactors[index]; }
+	void setHarmonicFactor(int index, float value);
 
 protected:
+	vector<float> harmonicFactors;
 	unsigned int firstKey;
 	unsigned int lastKey;
 	unsigned int harmonicsCount;
@@ -111,19 +114,6 @@ protected:
 	std::vector<std::vector<float*>> octavesEnvelopes;
 	float*** envelopes;
 };
-
-typedef struct {
-
-}karplusParams_t;
-
-class KarplusInstrument : public Instrument {
-public:
-	// Parameter declarations for Karplus-Strong algorhythm based instruments here
-
-	KarplusInstrument(karplusParams_t* _params);
-	~KarplusInstrument();
-};
-
 
 typedef struct {
 	vector<Sample*>* samples;
@@ -161,4 +151,63 @@ private:
 	int get_nearest_peak(Sample* selected_sample, int number);
 	void key_modification(int num_octava, float B, float new_note_pressed_time);
 	void velocityAdjust(int velocity);
+};
+
+// Macro enumeration for default instruments
+typedef enum { PLUNKED_CORD, DRUM } alg_t;
+// Enumeration for random generation  noise type
+typedef enum { UNIFORM_RANDOM, NORMAL_RANDOM } noise_t;
+
+//Karplus parameters structure
+typedef struct {
+	// Random generation distribution for noise
+	noise_t noiseType;
+	// Decay loss factor with value between 0 and 1. Default value 1.
+	float Grl;
+	// Blend factor with values between 0 and 1. Plunked cord for 1. Drums with 0.5.
+	float BFactor;
+	// Stretch factor multiply the decay time. Values between 1 and infinity. Not stretched algorithm (default) with 1.
+	float SFactor;
+	// Digital filter for guitar body reaction.
+	bool bodyFilter = false;
+}karPlusParams_t;
+
+class karplusInstrument : public Instrument {
+public:
+	// Parameter declarations for Karplus-Strong algorhythm based instruments here
+	// Default constructor for regular parameters.
+	karplusInstrument(karPlusParams_t* _params);
+	// Default constructor for predefined parameters with macro enumerations.
+	karplusInstrument(alg_t type);
+	// syntFunction for note synthesis defined at parent class
+	instrumentCallback synthFunction;
+	// Getters functions
+	float getSFactor();
+	float getBFactor();
+	float getRlFactor();
+	// Setters function which return is 0 for valid value and -1 for error values.
+	int setSFactor(float number);
+	int setBFactor(float number);
+	int setRlFactor(float number);
+	// Body filter mode
+	void activeFilter();
+	void deactiveFilter();
+protected:
+	// Instruments parameters defined by macros.
+	int plunkedCordSet();
+	int drumSet();
+
+	// Karplus synthesis parametters.
+	karPlusParams_t params;
+
+	// Function algResponse: general algorithm for stretched drums which can be plunked cord adapted.
+	// Input:	Float pointer (table) to row table with relative frecuency value (p) size.
+	//			Input buffer float pointer (table). Relative frecuency value (p). 
+	//			Output number of samples (n_samples).
+	int algResponse(float* table, float* buffer, const unsigned int p, const unsigned int n_samples);
+
+	// Function bodyFilter: Digital filter which emulate the body shape effect on the generate sound.
+	// Input:	Float pointer for input buffer (bufferIn) and output buffer (bufferOut). Buffer size (size).
+	//			Float type filter parameters a1, a2 and t.
+	int karplusInstrument::bodyFilter(float* bufferIn, float* bufferOut, const unsigned int size, float fc, int fs, float deltaf);
 };

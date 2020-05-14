@@ -1,9 +1,24 @@
-﻿  ADSR.cpp
+﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
+  uic Leandro.ui
+  rcc Leandro.qrc
+  moc Leandro.h
+   RCC: Warning: No resources in 'C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.qrc'.
   Additive.cpp
+  ADSR.cpp
+  Binasc.cpp
   Channel.cpp
+  Effect.cpp
   Instrument.cpp
+  Karplus.cpp
   Leandro.cpp
-  Sampling.cpp
   main.cpp
+  MidiEvent.cpp
+  MidiEventList.cpp
+  MidiFile.cpp
+  MidiMessage.cpp
+  Options.cpp
+  Sample.cpp
+  Sampling.cpp
+  qrc_Leandro.cpp
   moc_Leandro.cpp
   Leandro.vcxproj -> C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe

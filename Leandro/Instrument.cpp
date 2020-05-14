@@ -10,14 +10,3 @@ int Instrument::synthFunction(
 	//The synth function for karplus instruments here
 	return 0;
 }
-
-// KARPLUS-STRONG CLASS FUNCTIONS
-
-KarplusInstrument::KarplusInstrument(karplusParams_t* _params) {
-	
-	// Constructor class for KarplusInstrument. Should set defaults, load files and allocate memory as needed.
-}
-
-KarplusInstrument::~KarplusInstrument() {
-	// Destructor class for KarplusInstrument. Should destroy all elements and free all allocated memory on stack.
-}

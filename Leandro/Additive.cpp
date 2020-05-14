@@ -128,3 +128,10 @@ AdditiveInstrument::parseEnvelopeFile(std::string path, vector<int>* envelopesLe
 	}
 	return ret;
 }
+
+void AdditiveInstrument::setHarmonicFactor(int index, float value) {
+	if (index < harmonicsCount) {
+		harmonicFactors[index] = value;
+	}
+}
+

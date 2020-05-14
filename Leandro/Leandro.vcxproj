@@ -86,6 +86,7 @@
     <ClCompile Include="Channel.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Instrument.cpp" />
+    <ClCompile Include="Karplus.cpp" />
     <ClCompile Include="Leandro.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiEvent.cpp" />

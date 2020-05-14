@@ -245,7 +245,7 @@ void Leandro::showInstrument(Instrument* instrument) {
 	ADSRInstrument* adsrinst = (ADSRInstrument*)instrument;
 	AdditiveInstrument* additiveinst = (AdditiveInstrument*)instrument;
 	SamplingInstrument* samplinginst = (SamplingInstrument*)instrument;
-	KarplusInstrument* karplusinst = (KarplusInstrument*)instrument;
+	karplusInstrument* karplusinst = (karplusInstrument*)instrument;
 
 
 
@@ -347,7 +347,7 @@ void Leandro::setInstrumentForActiveChannel() {
 				instrument = new AdditiveInstrument((additiveParams_t*)instrumentModels.at(i)->params);
 				break;
 			case synthType::karplus:
-				instrument = new KarplusInstrument((karplusParams_t*)instrumentModels.at(i)->params);
+				instrument = new karplusInstrument((karPlusParams_t*)instrumentModels.at(i)->params);
 				break;
 			case synthType::sampling:
 				instrument = new SamplingInstrument((samplingParams_t*)instrumentModels.at(i)->params);
@@ -453,6 +453,15 @@ void Leandro::addEffectToActiveChannel() {
 }
 
 void Leandro::loadData() {
+	loadSynthData();
+	loadEffectsData();
+}
+
+void Leandro::loadEffectsData() {
+
+}
+
+void Leandro::loadSynthData() {
 	// parseo el json
 	Json::Value root;
 	Json::CharReaderBuilder builder;
@@ -537,6 +546,34 @@ void Leandro::loadData() {
 		model.type = synthType::sampling;
 		instrumentModels.push_back(new instrumentModel(model));
 	}
+	
+
+	// Karplus
+	Json::Value karplusData = root["karplus"];
+	typesList.clear();
+	for (int i = 0; i < karplusData["types"].size(); i++) {
+		typesList.push_back(karplusData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value instrumentModelData = karplusData[*it];
+		karPlusParams_t* params = new karPlusParams_t;
+		params->BFactor = karplusData["b-factor"].asFloat();
+		params->SFactor = karplusData["s-factor"].asFloat();
+		params->Grl = karplusData["grl"].asFloat();
+		params->bodyFilter = karplusData["body-filter"].asBool();
+		string noiseType = karplusData["noise-type"].asCString();
+		if (noiseType == "normal")
+			params->noiseType = NORMAL_RANDOM;
+		else if (noiseType == "uniform")
+			params->noiseType = UNIFORM_RANDOM;
+		instrumentModel model;
+		model.params = (void*)params;
+		model.instrumentName = *it;
+		model.type = synthType::karplus;
+		instrumentModels.push_back(new instrumentModel(model));
+	}
+
 }
 
 
