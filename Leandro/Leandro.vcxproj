@@ -117,6 +117,7 @@
     <ClInclude Include="MidiFile.h" />
     <ClInclude Include="MidiMessage.h" />
     <ClInclude Include="Options.h" />
+    <ClInclude Include="rapidcsv.h" />
     <ClInclude Include="ui_Leandro.h" />
   </ItemGroup>
   <ItemGroup>

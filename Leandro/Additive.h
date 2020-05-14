@@ -1,5 +1,7 @@
 #include "Instrument.h"
+#include "json/json.h"
 #include <string>
+
 
 typedef struct {
 	float tAttack;
@@ -25,13 +27,36 @@ protected:
 	float* release;
 };
 
+
+
+typedef struct {
+	std::string name;
+	unsigned int octavesCount;
+	unsigned int harmonicsCount;
+	vector<int> envelopeLengths;
+	unsigned int firstKey;
+	unsigned int lastKey;
+	vector<vector<float*>> octavesEnvelopes;
+}additiveParams_t;
+
+
 class AdditiveInstrument : public Instrument {
 public:
-	AdditiveInstrument(std::string envelope_file, std::string _name);
-private:
-	instrumentCallback synthFunction;
-	float* envelope[7];
-	int envelopeLength;
-	int releaseLength;
-	float* release;
+	AdditiveInstrument(additiveParams_t params, unsigned int bufferLength);
+	void synthNote(float* outputBuffer,
+				   const unsigned int outputBufferSize,
+				   const int keyNumber,
+				   const float lengthInMilisecnds,
+				   const int velocity,
+				   const int sampleRate);
+
+	static additiveParams_t parseAdditiveJson(Json::Value _data);
+	static vector<float*> parseEnvelopeFile(std::string path, vector<int>* envelopesLengths);
+	
+protected:
+	unsigned int firstKey;
+	unsigned int lastKey;
+	unsigned int harmonicsCount;
+	std::vector<int> envelopeLengths;
+	std::vector<std::vector<float*>> octavesEnvelopes;
 };

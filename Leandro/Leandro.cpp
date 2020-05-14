@@ -38,6 +38,8 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
+
+
 }
 
 Leandro::~Leandro() {
@@ -158,4 +160,8 @@ void Leandro::updateCallbackData() {
 	this->callData.currentSample = &(this->currentSample);
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
-};
+}
+void Leandro::loadData() {
+	//
+}
+;
