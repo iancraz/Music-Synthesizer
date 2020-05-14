@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < program.channels.size(); i++) {
 		Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		//Instrument* instrument = randInst();
-		Effect* effect = new VibratoEffect();
+		//Effect* effect = new VibratoEffect();
 		program.channels[i]->setChannelInstrument(instrument);
 		//program.channels[i]->addEffectToChannel(effect);
 	}
