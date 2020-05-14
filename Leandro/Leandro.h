@@ -104,10 +104,11 @@ public:
 
 	void loadData();
 
-	void loadEffectsData();
+	void loadEffectsData(Json::Value effectsRoot);
 
-	void loadSynthData();
+	void loadSynthData(Json::Value synthRoot);
 
+	void loadEqualizerData(Json::Value equialzierRoot);
 
 private:
 	Ui::LeandroClass ui;
