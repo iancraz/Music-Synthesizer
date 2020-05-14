@@ -43,10 +43,10 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label_7;
     QListWidget *instrumentsList;
-    QPushButton *addChannelButton;
+    QPushButton *setInstrumentButton;
     QLabel *label_8;
     QListWidget *effectsList;
-    QPushButton *setInstrumentButton;
+    QPushButton *addEffectButton;
     QScrollArea *scrollAreaChannels_2;
     QWidget *scrollAreaChannelsWidgetContents_2;
     QHBoxLayout *channelsContainerLayout;
@@ -99,6 +99,7 @@ public:
     QFrame *line;
     QFrame *envelopeParamsFrame;
     QVBoxLayout *verticalLayout_16;
+    QSpacerItem *verticalSpacer_9;
     QLabel *envelopeParamsLabel;
     QHBoxLayout *envelopeParamsHLayout;
     QVBoxLayout *attackVLayout;
@@ -116,6 +117,7 @@ public:
     QVBoxLayout *releaseVLayout;
     QDial *releaseDialADSR;
     QLabel *releaseLabel;
+    QSpacerItem *verticalSpacer_10;
     QFrame *additiveInstrumentFrame;
     QGridLayout *gridLayout_7;
     QHBoxLayout *nameHLayout_4;
@@ -167,25 +169,6 @@ public:
     QSlider *sliderH11;
     QLabel *label_2;
     QFrame *line_9;
-    QFrame *envelopeParamsFrame_4;
-    QVBoxLayout *verticalLayout_25;
-    QLabel *envelopeParamsLabel_4;
-    QHBoxLayout *envelopeParamsHLayout_4;
-    QVBoxLayout *attackVLayout_4;
-    QDial *attackDialAdditive;
-    QLabel *attackLabel_4;
-    QVBoxLayout *decayVLayout_4;
-    QDial *delayDialAdditive;
-    QLabel *decayLabel_4;
-    QVBoxLayout *sustainVLayout_4;
-    QDial *sustainLevelDialAdditive;
-    QLabel *sustainLabel_4;
-    QVBoxLayout *releaseVLayout_6;
-    QDial *sustainRateDialAdditive;
-    QLabel *sustainRateLabel_2;
-    QVBoxLayout *releaseVLayout_4;
-    QDial *releaseDialAdditive;
-    QLabel *releaseLabel_4;
     QFrame *samplingInstrumentFrame;
     QGridLayout *gridLayout_6;
     QHBoxLayout *nameHLayout_3;
@@ -195,47 +178,25 @@ public:
     QLabel *instrumentNameSampling;
     QFrame *line_6;
     QVBoxLayout *framesVLayout_3;
-    QFrame *oscillator1Frame_3;
-    QVBoxLayout *verticalLayout_20;
-    QLabel *oscillator1Label_3;
-    QHBoxLayout *oscillator1HLayout_3;
-    QVBoxLayout *oscillator1WaveVLayout_3;
-    QLabel *waveform1Label_3;
-    QComboBox *waveform1ComboBox_3;
-    QHBoxLayout *oscillator1LevelHLayout_3;
-    QLabel *level1Label_3;
-    QDial *level1Dial_3;
-    QFrame *oscillator2Frame_3;
-    QVBoxLayout *verticalLayout_21;
-    QLabel *oscillator2Label_3;
-    QHBoxLayout *oscillator2HLayout_3;
-    QVBoxLayout *waveform2VLayout_3;
-    QLabel *waveform2Label_3;
-    QComboBox *waveform2ComboBox_3;
-    QHBoxLayout *oscillator2LevelHLayout_3;
-    QLabel *level2Label_3;
-    QDial *level2Dial_3;
     QFrame *line_7;
     QFrame *envelopeParamsFrame_3;
     QVBoxLayout *verticalLayout_22;
     QLabel *envelopeParamsLabel_3;
     QHBoxLayout *envelopeParamsHLayout_3;
-    QVBoxLayout *attackVLayout_3;
-    QDial *attackDial_3;
-    QLabel *attackLabel_3;
-    QVBoxLayout *decayVLayout_3;
-    QDial *decayDial_3;
-    QLabel *decayLabel_3;
     QVBoxLayout *sustainVLayout_3;
-    QDial *sustainDial_3;
+    QSpacerItem *verticalSpacer_5;
+    QDial *samplingLoopStartDial;
     QLabel *sustainLabel_3;
+    QSpacerItem *verticalSpacer_7;
     QVBoxLayout *releaseVLayout_3;
-    QDial *releaseDial_3;
+    QSpacerItem *verticalSpacer_6;
+    QDial *samplingLoopEndDial;
     QLabel *releaseLabel_3;
+    QSpacerItem *verticalSpacer_8;
     QFrame *karplusInstrumentFrame;
     QGridLayout *gridLayout_5;
     QHBoxLayout *nameHLayout_2;
-    QPushButton *deleteInstrumentButton_2;
+    QPushButton *deleteKarplusButton;
     QLabel *instrumentNameLabel_2;
     QSpacerItem *horizontalSpacer_10;
     QLabel *instrumentNameKarplus;
@@ -391,8 +352,8 @@ public:
     QSlider *wahwahLFOSlider;
     QLabel *label_33;
     QHBoxLayout *horizontalLayout_10;
-    QPushButton *importButton;
-    QPushButton *pushButton_16;
+    QPushButton *newChannelButton;
+    QPushButton *importMidiButton;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *playButton_2;
     QPushButton *pauseButton;
@@ -405,7 +366,7 @@ public:
     {
         if (LeandroClass->objectName().isEmpty())
             LeandroClass->setObjectName(QStringLiteral("LeandroClass"));
-        LeandroClass->resize(2989, 742);
+        LeandroClass->resize(2989, 783);
         LeandroClass->setMinimumSize(QSize(800, 0));
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
@@ -549,21 +510,22 @@ public:
 
         verticalLayout_2->addWidget(instrumentsList);
 
-        addChannelButton = new QPushButton(frame_3);
-        addChannelButton->setObjectName(QStringLiteral("addChannelButton"));
+        setInstrumentButton = new QPushButton(frame_3);
+        setInstrumentButton->setObjectName(QStringLiteral("setInstrumentButton"));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(addChannelButton->sizePolicy().hasHeightForWidth());
-        addChannelButton->setSizePolicy(sizePolicy1);
-        addChannelButton->setMaximumSize(QSize(16777215, 15));
+        sizePolicy1.setHeightForWidth(setInstrumentButton->sizePolicy().hasHeightForWidth());
+        setInstrumentButton->setSizePolicy(sizePolicy1);
+        setInstrumentButton->setMaximumSize(QSize(16777215, 15));
+        setInstrumentButton->setBaseSize(QSize(0, 0));
         QFont font2;
         font2.setPointSize(7);
-        addChannelButton->setFont(font2);
-        addChannelButton->setAutoFillBackground(true);
-        addChannelButton->setFlat(true);
+        setInstrumentButton->setFont(font2);
+        setInstrumentButton->setAutoFillBackground(true);
+        setInstrumentButton->setFlat(true);
 
-        verticalLayout_2->addWidget(addChannelButton, 0, Qt::AlignHCenter);
+        verticalLayout_2->addWidget(setInstrumentButton, 0, Qt::AlignHCenter);
 
         label_8 = new QLabel(frame_3);
         label_8->setObjectName(QStringLiteral("label_8"));
@@ -580,17 +542,16 @@ public:
 
         verticalLayout_2->addWidget(effectsList);
 
-        setInstrumentButton = new QPushButton(frame_3);
-        setInstrumentButton->setObjectName(QStringLiteral("setInstrumentButton"));
-        sizePolicy1.setHeightForWidth(setInstrumentButton->sizePolicy().hasHeightForWidth());
-        setInstrumentButton->setSizePolicy(sizePolicy1);
-        setInstrumentButton->setMaximumSize(QSize(16777215, 15));
-        setInstrumentButton->setBaseSize(QSize(0, 0));
-        setInstrumentButton->setFont(font2);
-        setInstrumentButton->setAutoFillBackground(true);
-        setInstrumentButton->setFlat(true);
+        addEffectButton = new QPushButton(frame_3);
+        addEffectButton->setObjectName(QStringLiteral("addEffectButton"));
+        sizePolicy1.setHeightForWidth(addEffectButton->sizePolicy().hasHeightForWidth());
+        addEffectButton->setSizePolicy(sizePolicy1);
+        addEffectButton->setMaximumSize(QSize(16777215, 15));
+        addEffectButton->setFont(font2);
+        addEffectButton->setAutoFillBackground(true);
+        addEffectButton->setFlat(true);
 
-        verticalLayout_2->addWidget(setInstrumentButton, 0, Qt::AlignHCenter);
+        verticalLayout_2->addWidget(addEffectButton, 0, Qt::AlignHCenter);
 
 
         horizontalLayout_5->addWidget(frame_3, 0, Qt::AlignHCenter);
@@ -618,7 +579,7 @@ public:
         scrollAreaChannels_2->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2831, 274));
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2831, 283));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -1039,16 +1000,24 @@ public:
 
         envelopeParamsFrame = new QFrame(adsrInstrumentFrame);
         envelopeParamsFrame->setObjectName(QStringLiteral("envelopeParamsFrame"));
-        sizePolicy8.setHeightForWidth(envelopeParamsFrame->sizePolicy().hasHeightForWidth());
-        envelopeParamsFrame->setSizePolicy(sizePolicy8);
+        QSizePolicy sizePolicy11(QSizePolicy::Maximum, QSizePolicy::Expanding);
+        sizePolicy11.setHorizontalStretch(0);
+        sizePolicy11.setVerticalStretch(0);
+        sizePolicy11.setHeightForWidth(envelopeParamsFrame->sizePolicy().hasHeightForWidth());
+        envelopeParamsFrame->setSizePolicy(sizePolicy11);
         envelopeParamsFrame->setFrameShape(QFrame::Panel);
         envelopeParamsFrame->setFrameShadow(QFrame::Sunken);
         envelopeParamsFrame->setLineWidth(2);
+        envelopeParamsFrame->setMidLineWidth(0);
         verticalLayout_16 = new QVBoxLayout(envelopeParamsFrame);
         verticalLayout_16->setSpacing(6);
         verticalLayout_16->setContentsMargins(11, 11, 11, 11);
         verticalLayout_16->setObjectName(QStringLiteral("verticalLayout_16"));
         verticalLayout_16->setContentsMargins(-1, 2, -1, 2);
+        verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_16->addItem(verticalSpacer_9);
+
         envelopeParamsLabel = new QLabel(envelopeParamsFrame);
         envelopeParamsLabel->setObjectName(QStringLiteral("envelopeParamsLabel"));
         envelopeParamsLabel->setMaximumSize(QSize(16777215, 14));
@@ -1066,7 +1035,7 @@ public:
         attackDialADSR->setObjectName(QStringLiteral("attackDialADSR"));
         sizePolicy8.setHeightForWidth(attackDialADSR->sizePolicy().hasHeightForWidth());
         attackDialADSR->setSizePolicy(sizePolicy8);
-        attackDialADSR->setMaximumSize(QSize(60, 60));
+        attackDialADSR->setMaximumSize(QSize(60, 175885));
         attackDialADSR->setMinimum(5);
         attackDialADSR->setMaximum(15000);
         attackDialADSR->setSingleStep(1);
@@ -1180,6 +1149,10 @@ public:
 
         verticalLayout_16->addLayout(envelopeParamsHLayout);
 
+        verticalSpacer_10 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_16->addItem(verticalSpacer_10);
+
 
         framesVLayout->addWidget(envelopeParamsFrame);
 
@@ -1257,8 +1230,11 @@ public:
         framesVLayout_4->setObjectName(QStringLiteral("framesVLayout_4"));
         oscillator2Frame_4 = new QFrame(additiveInstrumentFrame);
         oscillator2Frame_4->setObjectName(QStringLiteral("oscillator2Frame_4"));
-        sizePolicy10.setHeightForWidth(oscillator2Frame_4->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_4->setSizePolicy(sizePolicy10);
+        QSizePolicy sizePolicy12(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy12.setHorizontalStretch(0);
+        sizePolicy12.setVerticalStretch(0);
+        sizePolicy12.setHeightForWidth(oscillator2Frame_4->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_4->setSizePolicy(sizePolicy12);
         oscillator2Frame_4->setFrameShape(QFrame::Panel);
         oscillator2Frame_4->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_4->setLineWidth(2);
@@ -1276,11 +1252,11 @@ public:
 
         slidersFrame = new QFrame(oscillator2Frame_4);
         slidersFrame->setObjectName(QStringLiteral("slidersFrame"));
-        QSizePolicy sizePolicy11(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy11.setHorizontalStretch(0);
-        sizePolicy11.setVerticalStretch(0);
-        sizePolicy11.setHeightForWidth(slidersFrame->sizePolicy().hasHeightForWidth());
-        slidersFrame->setSizePolicy(sizePolicy11);
+        QSizePolicy sizePolicy13(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy13.setHorizontalStretch(0);
+        sizePolicy13.setVerticalStretch(0);
+        sizePolicy13.setHeightForWidth(slidersFrame->sizePolicy().hasHeightForWidth());
+        slidersFrame->setSizePolicy(sizePolicy13);
         slidersFrame->setFrameShape(QFrame::StyledPanel);
         slidersFrame->setFrameShadow(QFrame::Raised);
         horizontalLayout_2 = new QHBoxLayout(slidersFrame);
@@ -1525,11 +1501,11 @@ public:
 
         label_2 = new QLabel(slidersFrame);
         label_2->setObjectName(QStringLiteral("label_2"));
-        QSizePolicy sizePolicy12(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy12.setHorizontalStretch(0);
-        sizePolicy12.setVerticalStretch(0);
-        sizePolicy12.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy12);
+        QSizePolicy sizePolicy14(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy14.setHorizontalStretch(0);
+        sizePolicy14.setVerticalStretch(0);
+        sizePolicy14.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy14);
 
         verticalLayout_3->addWidget(label_2, 0, Qt::AlignHCenter);
 
@@ -1548,158 +1524,6 @@ public:
         line_9->setFrameShadow(QFrame::Sunken);
 
         framesVLayout_4->addWidget(line_9);
-
-        envelopeParamsFrame_4 = new QFrame(additiveInstrumentFrame);
-        envelopeParamsFrame_4->setObjectName(QStringLiteral("envelopeParamsFrame_4"));
-        QSizePolicy sizePolicy13(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy13.setHorizontalStretch(0);
-        sizePolicy13.setVerticalStretch(0);
-        sizePolicy13.setHeightForWidth(envelopeParamsFrame_4->sizePolicy().hasHeightForWidth());
-        envelopeParamsFrame_4->setSizePolicy(sizePolicy13);
-        envelopeParamsFrame_4->setFrameShape(QFrame::Panel);
-        envelopeParamsFrame_4->setFrameShadow(QFrame::Sunken);
-        envelopeParamsFrame_4->setLineWidth(2);
-        verticalLayout_25 = new QVBoxLayout(envelopeParamsFrame_4);
-        verticalLayout_25->setSpacing(6);
-        verticalLayout_25->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_25->setObjectName(QStringLiteral("verticalLayout_25"));
-        verticalLayout_25->setContentsMargins(-1, 2, -1, 2);
-        envelopeParamsLabel_4 = new QLabel(envelopeParamsFrame_4);
-        envelopeParamsLabel_4->setObjectName(QStringLiteral("envelopeParamsLabel_4"));
-        envelopeParamsLabel_4->setMaximumSize(QSize(16777215, 14));
-        envelopeParamsLabel_4->setFont(font1);
-
-        verticalLayout_25->addWidget(envelopeParamsLabel_4, 0, Qt::AlignHCenter);
-
-        envelopeParamsHLayout_4 = new QHBoxLayout();
-        envelopeParamsHLayout_4->setSpacing(6);
-        envelopeParamsHLayout_4->setObjectName(QStringLiteral("envelopeParamsHLayout_4"));
-        attackVLayout_4 = new QVBoxLayout();
-        attackVLayout_4->setSpacing(6);
-        attackVLayout_4->setObjectName(QStringLiteral("attackVLayout_4"));
-        attackDialAdditive = new QDial(envelopeParamsFrame_4);
-        attackDialAdditive->setObjectName(QStringLiteral("attackDialAdditive"));
-        sizePolicy8.setHeightForWidth(attackDialAdditive->sizePolicy().hasHeightForWidth());
-        attackDialAdditive->setSizePolicy(sizePolicy8);
-        attackDialAdditive->setMaximumSize(QSize(60, 16777215));
-        attackDialAdditive->setMinimum(5);
-        attackDialAdditive->setMaximum(15000);
-        attackDialAdditive->setNotchesVisible(true);
-
-        attackVLayout_4->addWidget(attackDialAdditive, 0, Qt::AlignHCenter);
-
-        attackLabel_4 = new QLabel(envelopeParamsFrame_4);
-        attackLabel_4->setObjectName(QStringLiteral("attackLabel_4"));
-        sizePolicy8.setHeightForWidth(attackLabel_4->sizePolicy().hasHeightForWidth());
-        attackLabel_4->setSizePolicy(sizePolicy8);
-
-        attackVLayout_4->addWidget(attackLabel_4, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_4->addLayout(attackVLayout_4);
-
-        decayVLayout_4 = new QVBoxLayout();
-        decayVLayout_4->setSpacing(6);
-        decayVLayout_4->setObjectName(QStringLiteral("decayVLayout_4"));
-        delayDialAdditive = new QDial(envelopeParamsFrame_4);
-        delayDialAdditive->setObjectName(QStringLiteral("delayDialAdditive"));
-        sizePolicy8.setHeightForWidth(delayDialAdditive->sizePolicy().hasHeightForWidth());
-        delayDialAdditive->setSizePolicy(sizePolicy8);
-        delayDialAdditive->setMaximumSize(QSize(60, 16777215));
-        delayDialAdditive->setMinimum(5);
-        delayDialAdditive->setMaximum(15000);
-        delayDialAdditive->setNotchesVisible(true);
-
-        decayVLayout_4->addWidget(delayDialAdditive, 0, Qt::AlignHCenter);
-
-        decayLabel_4 = new QLabel(envelopeParamsFrame_4);
-        decayLabel_4->setObjectName(QStringLiteral("decayLabel_4"));
-        sizePolicy8.setHeightForWidth(decayLabel_4->sizePolicy().hasHeightForWidth());
-        decayLabel_4->setSizePolicy(sizePolicy8);
-
-        decayVLayout_4->addWidget(decayLabel_4, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_4->addLayout(decayVLayout_4);
-
-        sustainVLayout_4 = new QVBoxLayout();
-        sustainVLayout_4->setSpacing(6);
-        sustainVLayout_4->setObjectName(QStringLiteral("sustainVLayout_4"));
-        sustainLevelDialAdditive = new QDial(envelopeParamsFrame_4);
-        sustainLevelDialAdditive->setObjectName(QStringLiteral("sustainLevelDialAdditive"));
-        sizePolicy8.setHeightForWidth(sustainLevelDialAdditive->sizePolicy().hasHeightForWidth());
-        sustainLevelDialAdditive->setSizePolicy(sizePolicy8);
-        sustainLevelDialAdditive->setMaximumSize(QSize(60, 16777215));
-        sustainLevelDialAdditive->setAutoFillBackground(false);
-        sustainLevelDialAdditive->setMinimum(0);
-        sustainLevelDialAdditive->setMaximum(99);
-        sustainLevelDialAdditive->setNotchesVisible(true);
-
-        sustainVLayout_4->addWidget(sustainLevelDialAdditive, 0, Qt::AlignHCenter);
-
-        sustainLabel_4 = new QLabel(envelopeParamsFrame_4);
-        sustainLabel_4->setObjectName(QStringLiteral("sustainLabel_4"));
-        sizePolicy8.setHeightForWidth(sustainLabel_4->sizePolicy().hasHeightForWidth());
-        sustainLabel_4->setSizePolicy(sizePolicy8);
-
-        sustainVLayout_4->addWidget(sustainLabel_4, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_4->addLayout(sustainVLayout_4);
-
-        releaseVLayout_6 = new QVBoxLayout();
-        releaseVLayout_6->setSpacing(6);
-        releaseVLayout_6->setObjectName(QStringLiteral("releaseVLayout_6"));
-        sustainRateDialAdditive = new QDial(envelopeParamsFrame_4);
-        sustainRateDialAdditive->setObjectName(QStringLiteral("sustainRateDialAdditive"));
-        sizePolicy8.setHeightForWidth(sustainRateDialAdditive->sizePolicy().hasHeightForWidth());
-        sustainRateDialAdditive->setSizePolicy(sizePolicy8);
-        sustainRateDialAdditive->setMaximumSize(QSize(60, 16777215));
-        sustainRateDialAdditive->setMinimum(5);
-        sustainRateDialAdditive->setMaximum(15000);
-        sustainRateDialAdditive->setNotchesVisible(true);
-
-        releaseVLayout_6->addWidget(sustainRateDialAdditive);
-
-        sustainRateLabel_2 = new QLabel(envelopeParamsFrame_4);
-        sustainRateLabel_2->setObjectName(QStringLiteral("sustainRateLabel_2"));
-        sizePolicy8.setHeightForWidth(sustainRateLabel_2->sizePolicy().hasHeightForWidth());
-        sustainRateLabel_2->setSizePolicy(sizePolicy8);
-
-        releaseVLayout_6->addWidget(sustainRateLabel_2, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_4->addLayout(releaseVLayout_6);
-
-        releaseVLayout_4 = new QVBoxLayout();
-        releaseVLayout_4->setSpacing(6);
-        releaseVLayout_4->setObjectName(QStringLiteral("releaseVLayout_4"));
-        releaseDialAdditive = new QDial(envelopeParamsFrame_4);
-        releaseDialAdditive->setObjectName(QStringLiteral("releaseDialAdditive"));
-        sizePolicy8.setHeightForWidth(releaseDialAdditive->sizePolicy().hasHeightForWidth());
-        releaseDialAdditive->setSizePolicy(sizePolicy8);
-        releaseDialAdditive->setMaximumSize(QSize(60, 16777215));
-        releaseDialAdditive->setMinimum(5);
-        releaseDialAdditive->setMaximum(15000);
-        releaseDialAdditive->setNotchesVisible(true);
-
-        releaseVLayout_4->addWidget(releaseDialAdditive, 0, Qt::AlignHCenter);
-
-        releaseLabel_4 = new QLabel(envelopeParamsFrame_4);
-        releaseLabel_4->setObjectName(QStringLiteral("releaseLabel_4"));
-        sizePolicy8.setHeightForWidth(releaseLabel_4->sizePolicy().hasHeightForWidth());
-        releaseLabel_4->setSizePolicy(sizePolicy8);
-
-        releaseVLayout_4->addWidget(releaseLabel_4, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_4->addLayout(releaseVLayout_4);
-
-
-        verticalLayout_25->addLayout(envelopeParamsHLayout_4);
-
-
-        framesVLayout_4->addWidget(envelopeParamsFrame_4);
 
 
         gridLayout_7->addLayout(framesVLayout_4, 2, 0, 1, 1);
@@ -1773,152 +1597,6 @@ public:
         framesVLayout_3 = new QVBoxLayout();
         framesVLayout_3->setSpacing(6);
         framesVLayout_3->setObjectName(QStringLiteral("framesVLayout_3"));
-        oscillator1Frame_3 = new QFrame(samplingInstrumentFrame);
-        oscillator1Frame_3->setObjectName(QStringLiteral("oscillator1Frame_3"));
-        oscillator1Frame_3->setFrameShape(QFrame::Panel);
-        oscillator1Frame_3->setFrameShadow(QFrame::Sunken);
-        oscillator1Frame_3->setLineWidth(2);
-        verticalLayout_20 = new QVBoxLayout(oscillator1Frame_3);
-        verticalLayout_20->setSpacing(6);
-        verticalLayout_20->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_20->setObjectName(QStringLiteral("verticalLayout_20"));
-        verticalLayout_20->setContentsMargins(-1, 2, -1, 2);
-        oscillator1Label_3 = new QLabel(oscillator1Frame_3);
-        oscillator1Label_3->setObjectName(QStringLiteral("oscillator1Label_3"));
-        oscillator1Label_3->setMaximumSize(QSize(16777215, 14));
-        oscillator1Label_3->setFont(font1);
-
-        verticalLayout_20->addWidget(oscillator1Label_3, 0, Qt::AlignHCenter);
-
-        oscillator1HLayout_3 = new QHBoxLayout();
-        oscillator1HLayout_3->setSpacing(6);
-        oscillator1HLayout_3->setObjectName(QStringLiteral("oscillator1HLayout_3"));
-        oscillator1WaveVLayout_3 = new QVBoxLayout();
-        oscillator1WaveVLayout_3->setSpacing(6);
-        oscillator1WaveVLayout_3->setObjectName(QStringLiteral("oscillator1WaveVLayout_3"));
-        waveform1Label_3 = new QLabel(oscillator1Frame_3);
-        waveform1Label_3->setObjectName(QStringLiteral("waveform1Label_3"));
-        sizePolicy10.setHeightForWidth(waveform1Label_3->sizePolicy().hasHeightForWidth());
-        waveform1Label_3->setSizePolicy(sizePolicy10);
-        waveform1Label_3->setMaximumSize(QSize(16777215, 10));
-
-        oscillator1WaveVLayout_3->addWidget(waveform1Label_3);
-
-        waveform1ComboBox_3 = new QComboBox(oscillator1Frame_3);
-        waveform1ComboBox_3->setObjectName(QStringLiteral("waveform1ComboBox_3"));
-        sizePolicy1.setHeightForWidth(waveform1ComboBox_3->sizePolicy().hasHeightForWidth());
-        waveform1ComboBox_3->setSizePolicy(sizePolicy1);
-        waveform1ComboBox_3->setMaximumSize(QSize(16777215, 15));
-        waveform1ComboBox_3->setAutoFillBackground(true);
-        waveform1ComboBox_3->setFrame(false);
-
-        oscillator1WaveVLayout_3->addWidget(waveform1ComboBox_3);
-
-
-        oscillator1HLayout_3->addLayout(oscillator1WaveVLayout_3);
-
-        oscillator1LevelHLayout_3 = new QHBoxLayout();
-        oscillator1LevelHLayout_3->setSpacing(6);
-        oscillator1LevelHLayout_3->setObjectName(QStringLiteral("oscillator1LevelHLayout_3"));
-        level1Label_3 = new QLabel(oscillator1Frame_3);
-        level1Label_3->setObjectName(QStringLiteral("level1Label_3"));
-        sizePolicy1.setHeightForWidth(level1Label_3->sizePolicy().hasHeightForWidth());
-        level1Label_3->setSizePolicy(sizePolicy1);
-        level1Label_3->setMaximumSize(QSize(16777215, 11));
-
-        oscillator1LevelHLayout_3->addWidget(level1Label_3);
-
-        level1Dial_3 = new QDial(oscillator1Frame_3);
-        level1Dial_3->setObjectName(QStringLiteral("level1Dial_3"));
-        sizePolicy1.setHeightForWidth(level1Dial_3->sizePolicy().hasHeightForWidth());
-        level1Dial_3->setSizePolicy(sizePolicy1);
-        level1Dial_3->setMaximumSize(QSize(57, 16777215));
-
-        oscillator1LevelHLayout_3->addWidget(level1Dial_3);
-
-
-        oscillator1HLayout_3->addLayout(oscillator1LevelHLayout_3);
-
-
-        verticalLayout_20->addLayout(oscillator1HLayout_3);
-
-
-        framesVLayout_3->addWidget(oscillator1Frame_3);
-
-        oscillator2Frame_3 = new QFrame(samplingInstrumentFrame);
-        oscillator2Frame_3->setObjectName(QStringLiteral("oscillator2Frame_3"));
-        sizePolicy10.setHeightForWidth(oscillator2Frame_3->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_3->setSizePolicy(sizePolicy10);
-        oscillator2Frame_3->setFrameShape(QFrame::Panel);
-        oscillator2Frame_3->setFrameShadow(QFrame::Sunken);
-        oscillator2Frame_3->setLineWidth(2);
-        verticalLayout_21 = new QVBoxLayout(oscillator2Frame_3);
-        verticalLayout_21->setSpacing(6);
-        verticalLayout_21->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_21->setObjectName(QStringLiteral("verticalLayout_21"));
-        verticalLayout_21->setContentsMargins(-1, 2, -1, 2);
-        oscillator2Label_3 = new QLabel(oscillator2Frame_3);
-        oscillator2Label_3->setObjectName(QStringLiteral("oscillator2Label_3"));
-        oscillator2Label_3->setMaximumSize(QSize(16777215, 14));
-        oscillator2Label_3->setFont(font1);
-
-        verticalLayout_21->addWidget(oscillator2Label_3, 0, Qt::AlignHCenter);
-
-        oscillator2HLayout_3 = new QHBoxLayout();
-        oscillator2HLayout_3->setSpacing(6);
-        oscillator2HLayout_3->setObjectName(QStringLiteral("oscillator2HLayout_3"));
-        waveform2VLayout_3 = new QVBoxLayout();
-        waveform2VLayout_3->setSpacing(6);
-        waveform2VLayout_3->setObjectName(QStringLiteral("waveform2VLayout_3"));
-        waveform2Label_3 = new QLabel(oscillator2Frame_3);
-        waveform2Label_3->setObjectName(QStringLiteral("waveform2Label_3"));
-        sizePolicy10.setHeightForWidth(waveform2Label_3->sizePolicy().hasHeightForWidth());
-        waveform2Label_3->setSizePolicy(sizePolicy10);
-        waveform2Label_3->setMaximumSize(QSize(16777215, 10));
-
-        waveform2VLayout_3->addWidget(waveform2Label_3);
-
-        waveform2ComboBox_3 = new QComboBox(oscillator2Frame_3);
-        waveform2ComboBox_3->setObjectName(QStringLiteral("waveform2ComboBox_3"));
-        sizePolicy1.setHeightForWidth(waveform2ComboBox_3->sizePolicy().hasHeightForWidth());
-        waveform2ComboBox_3->setSizePolicy(sizePolicy1);
-        waveform2ComboBox_3->setMaximumSize(QSize(16777215, 15));
-        waveform2ComboBox_3->setAutoFillBackground(true);
-        waveform2ComboBox_3->setFrame(false);
-
-        waveform2VLayout_3->addWidget(waveform2ComboBox_3);
-
-
-        oscillator2HLayout_3->addLayout(waveform2VLayout_3);
-
-        oscillator2LevelHLayout_3 = new QHBoxLayout();
-        oscillator2LevelHLayout_3->setSpacing(6);
-        oscillator2LevelHLayout_3->setObjectName(QStringLiteral("oscillator2LevelHLayout_3"));
-        level2Label_3 = new QLabel(oscillator2Frame_3);
-        level2Label_3->setObjectName(QStringLiteral("level2Label_3"));
-        sizePolicy1.setHeightForWidth(level2Label_3->sizePolicy().hasHeightForWidth());
-        level2Label_3->setSizePolicy(sizePolicy1);
-        level2Label_3->setMaximumSize(QSize(16777215, 11));
-
-        oscillator2LevelHLayout_3->addWidget(level2Label_3);
-
-        level2Dial_3 = new QDial(oscillator2Frame_3);
-        level2Dial_3->setObjectName(QStringLiteral("level2Dial_3"));
-        sizePolicy1.setHeightForWidth(level2Dial_3->sizePolicy().hasHeightForWidth());
-        level2Dial_3->setSizePolicy(sizePolicy1);
-        level2Dial_3->setMaximumSize(QSize(57, 16777215));
-
-        oscillator2LevelHLayout_3->addWidget(level2Dial_3);
-
-
-        oscillator2HLayout_3->addLayout(oscillator2LevelHLayout_3);
-
-
-        verticalLayout_21->addLayout(oscillator2HLayout_3);
-
-
-        framesVLayout_3->addWidget(oscillator2Frame_3);
-
         line_7 = new QFrame(samplingInstrumentFrame);
         line_7->setObjectName(QStringLiteral("line_7"));
         line_7->setFrameShape(QFrame::HLine);
@@ -1928,8 +1606,8 @@ public:
 
         envelopeParamsFrame_3 = new QFrame(samplingInstrumentFrame);
         envelopeParamsFrame_3->setObjectName(QStringLiteral("envelopeParamsFrame_3"));
-        sizePolicy8.setHeightForWidth(envelopeParamsFrame_3->sizePolicy().hasHeightForWidth());
-        envelopeParamsFrame_3->setSizePolicy(sizePolicy8);
+        sizePolicy2.setHeightForWidth(envelopeParamsFrame_3->sizePolicy().hasHeightForWidth());
+        envelopeParamsFrame_3->setSizePolicy(sizePolicy2);
         envelopeParamsFrame_3->setFrameShape(QFrame::Panel);
         envelopeParamsFrame_3->setFrameShadow(QFrame::Sunken);
         envelopeParamsFrame_3->setLineWidth(2);
@@ -1948,58 +1626,22 @@ public:
         envelopeParamsHLayout_3 = new QHBoxLayout();
         envelopeParamsHLayout_3->setSpacing(6);
         envelopeParamsHLayout_3->setObjectName(QStringLiteral("envelopeParamsHLayout_3"));
-        attackVLayout_3 = new QVBoxLayout();
-        attackVLayout_3->setSpacing(6);
-        attackVLayout_3->setObjectName(QStringLiteral("attackVLayout_3"));
-        attackDial_3 = new QDial(envelopeParamsFrame_3);
-        attackDial_3->setObjectName(QStringLiteral("attackDial_3"));
-        sizePolicy8.setHeightForWidth(attackDial_3->sizePolicy().hasHeightForWidth());
-        attackDial_3->setSizePolicy(sizePolicy8);
-        attackDial_3->setMaximumSize(QSize(60, 60));
-
-        attackVLayout_3->addWidget(attackDial_3);
-
-        attackLabel_3 = new QLabel(envelopeParamsFrame_3);
-        attackLabel_3->setObjectName(QStringLiteral("attackLabel_3"));
-        sizePolicy8.setHeightForWidth(attackLabel_3->sizePolicy().hasHeightForWidth());
-        attackLabel_3->setSizePolicy(sizePolicy8);
-
-        attackVLayout_3->addWidget(attackLabel_3, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_3->addLayout(attackVLayout_3);
-
-        decayVLayout_3 = new QVBoxLayout();
-        decayVLayout_3->setSpacing(6);
-        decayVLayout_3->setObjectName(QStringLiteral("decayVLayout_3"));
-        decayDial_3 = new QDial(envelopeParamsFrame_3);
-        decayDial_3->setObjectName(QStringLiteral("decayDial_3"));
-        sizePolicy8.setHeightForWidth(decayDial_3->sizePolicy().hasHeightForWidth());
-        decayDial_3->setSizePolicy(sizePolicy8);
-        decayDial_3->setMaximumSize(QSize(60, 16777215));
-
-        decayVLayout_3->addWidget(decayDial_3);
-
-        decayLabel_3 = new QLabel(envelopeParamsFrame_3);
-        decayLabel_3->setObjectName(QStringLiteral("decayLabel_3"));
-        sizePolicy8.setHeightForWidth(decayLabel_3->sizePolicy().hasHeightForWidth());
-        decayLabel_3->setSizePolicy(sizePolicy8);
-
-        decayVLayout_3->addWidget(decayLabel_3, 0, Qt::AlignHCenter);
-
-
-        envelopeParamsHLayout_3->addLayout(decayVLayout_3);
-
         sustainVLayout_3 = new QVBoxLayout();
         sustainVLayout_3->setSpacing(6);
         sustainVLayout_3->setObjectName(QStringLiteral("sustainVLayout_3"));
-        sustainDial_3 = new QDial(envelopeParamsFrame_3);
-        sustainDial_3->setObjectName(QStringLiteral("sustainDial_3"));
-        sizePolicy8.setHeightForWidth(sustainDial_3->sizePolicy().hasHeightForWidth());
-        sustainDial_3->setSizePolicy(sizePolicy8);
-        sustainDial_3->setMaximumSize(QSize(60, 16777215));
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        sustainVLayout_3->addWidget(sustainDial_3);
+        sustainVLayout_3->addItem(verticalSpacer_5);
+
+        samplingLoopStartDial = new QDial(envelopeParamsFrame_3);
+        samplingLoopStartDial->setObjectName(QStringLiteral("samplingLoopStartDial"));
+        sizePolicy8.setHeightForWidth(samplingLoopStartDial->sizePolicy().hasHeightForWidth());
+        samplingLoopStartDial->setSizePolicy(sizePolicy8);
+        samplingLoopStartDial->setMaximumSize(QSize(60, 16777215));
+        samplingLoopStartDial->setMaximum(100);
+        samplingLoopStartDial->setNotchesVisible(true);
+
+        sustainVLayout_3->addWidget(samplingLoopStartDial, 0, Qt::AlignHCenter);
 
         sustainLabel_3 = new QLabel(envelopeParamsFrame_3);
         sustainLabel_3->setObjectName(QStringLiteral("sustainLabel_3"));
@@ -2008,19 +1650,29 @@ public:
 
         sustainVLayout_3->addWidget(sustainLabel_3, 0, Qt::AlignHCenter);
 
+        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        sustainVLayout_3->addItem(verticalSpacer_7);
+
 
         envelopeParamsHLayout_3->addLayout(sustainVLayout_3);
 
         releaseVLayout_3 = new QVBoxLayout();
         releaseVLayout_3->setSpacing(6);
         releaseVLayout_3->setObjectName(QStringLiteral("releaseVLayout_3"));
-        releaseDial_3 = new QDial(envelopeParamsFrame_3);
-        releaseDial_3->setObjectName(QStringLiteral("releaseDial_3"));
-        sizePolicy8.setHeightForWidth(releaseDial_3->sizePolicy().hasHeightForWidth());
-        releaseDial_3->setSizePolicy(sizePolicy8);
-        releaseDial_3->setMaximumSize(QSize(60, 16777215));
+        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        releaseVLayout_3->addWidget(releaseDial_3);
+        releaseVLayout_3->addItem(verticalSpacer_6);
+
+        samplingLoopEndDial = new QDial(envelopeParamsFrame_3);
+        samplingLoopEndDial->setObjectName(QStringLiteral("samplingLoopEndDial"));
+        sizePolicy8.setHeightForWidth(samplingLoopEndDial->sizePolicy().hasHeightForWidth());
+        samplingLoopEndDial->setSizePolicy(sizePolicy8);
+        samplingLoopEndDial->setMaximumSize(QSize(60, 16777215));
+        samplingLoopEndDial->setMaximum(100);
+        samplingLoopEndDial->setNotchesVisible(true);
+
+        releaseVLayout_3->addWidget(samplingLoopEndDial, 0, Qt::AlignHCenter);
 
         releaseLabel_3 = new QLabel(envelopeParamsFrame_3);
         releaseLabel_3->setObjectName(QStringLiteral("releaseLabel_3"));
@@ -2028,6 +1680,10 @@ public:
         releaseLabel_3->setSizePolicy(sizePolicy8);
 
         releaseVLayout_3->addWidget(releaseLabel_3, 0, Qt::AlignHCenter);
+
+        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        releaseVLayout_3->addItem(verticalSpacer_8);
 
 
         envelopeParamsHLayout_3->addLayout(releaseVLayout_3);
@@ -2069,16 +1725,16 @@ public:
         nameHLayout_2 = new QHBoxLayout();
         nameHLayout_2->setSpacing(6);
         nameHLayout_2->setObjectName(QStringLiteral("nameHLayout_2"));
-        deleteInstrumentButton_2 = new QPushButton(karplusInstrumentFrame);
-        deleteInstrumentButton_2->setObjectName(QStringLiteral("deleteInstrumentButton_2"));
-        sizePolicy9.setHeightForWidth(deleteInstrumentButton_2->sizePolicy().hasHeightForWidth());
-        deleteInstrumentButton_2->setSizePolicy(sizePolicy9);
-        deleteInstrumentButton_2->setFocusPolicy(Qt::StrongFocus);
-        deleteInstrumentButton_2->setIcon(icon);
-        deleteInstrumentButton_2->setIconSize(QSize(15, 15));
-        deleteInstrumentButton_2->setFlat(true);
+        deleteKarplusButton = new QPushButton(karplusInstrumentFrame);
+        deleteKarplusButton->setObjectName(QStringLiteral("deleteKarplusButton"));
+        sizePolicy9.setHeightForWidth(deleteKarplusButton->sizePolicy().hasHeightForWidth());
+        deleteKarplusButton->setSizePolicy(sizePolicy9);
+        deleteKarplusButton->setFocusPolicy(Qt::StrongFocus);
+        deleteKarplusButton->setIcon(icon);
+        deleteKarplusButton->setIconSize(QSize(15, 15));
+        deleteKarplusButton->setFlat(true);
 
-        nameHLayout_2->addWidget(deleteInstrumentButton_2);
+        nameHLayout_2->addWidget(deleteKarplusButton);
 
         instrumentNameLabel_2 = new QLabel(karplusInstrumentFrame);
         instrumentNameLabel_2->setObjectName(QStringLiteral("instrumentNameLabel_2"));
@@ -2255,7 +1911,7 @@ public:
         effectsScrollArea->setWidgetResizable(true);
         effectsScrollAreaContents = new QWidget();
         effectsScrollAreaContents->setObjectName(QStringLiteral("effectsScrollAreaContents"));
-        effectsScrollAreaContents->setGeometry(QRect(0, 0, 1534, 376));
+        effectsScrollAreaContents->setGeometry(QRect(0, 0, 1603, 401));
         horizontalLayout_9 = new QHBoxLayout(effectsScrollAreaContents);
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
@@ -2350,11 +2006,11 @@ public:
 
         oscillator2Frame_6 = new QFrame(eq8Frame);
         oscillator2Frame_6->setObjectName(QStringLiteral("oscillator2Frame_6"));
-        QSizePolicy sizePolicy14(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy14.setHorizontalStretch(0);
-        sizePolicy14.setVerticalStretch(0);
-        sizePolicy14.setHeightForWidth(oscillator2Frame_6->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_6->setSizePolicy(sizePolicy14);
+        QSizePolicy sizePolicy15(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy15.setHorizontalStretch(0);
+        sizePolicy15.setVerticalStretch(0);
+        sizePolicy15.setHeightForWidth(oscillator2Frame_6->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_6->setSizePolicy(sizePolicy15);
         oscillator2Frame_6->setFrameShape(QFrame::Panel);
         oscillator2Frame_6->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_6->setLineWidth(2);
@@ -2372,8 +2028,8 @@ public:
 
         slidersFrame_3 = new QFrame(oscillator2Frame_6);
         slidersFrame_3->setObjectName(QStringLiteral("slidersFrame_3"));
-        sizePolicy11.setHeightForWidth(slidersFrame_3->sizePolicy().hasHeightForWidth());
-        slidersFrame_3->setSizePolicy(sizePolicy11);
+        sizePolicy13.setHeightForWidth(slidersFrame_3->sizePolicy().hasHeightForWidth());
+        slidersFrame_3->setSizePolicy(sizePolicy13);
         slidersFrame_3->setFrameShape(QFrame::StyledPanel);
         slidersFrame_3->setFrameShadow(QFrame::Raised);
         horizontalLayout_6 = new QHBoxLayout(slidersFrame_3);
@@ -2638,11 +2294,8 @@ public:
 
         frame_4 = new QFrame(reverbEffectFrame);
         frame_4->setObjectName(QStringLiteral("frame_4"));
-        QSizePolicy sizePolicy15(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy15.setHorizontalStretch(0);
-        sizePolicy15.setVerticalStretch(0);
-        sizePolicy15.setHeightForWidth(frame_4->sizePolicy().hasHeightForWidth());
-        frame_4->setSizePolicy(sizePolicy15);
+        sizePolicy12.setHeightForWidth(frame_4->sizePolicy().hasHeightForWidth());
+        frame_4->setSizePolicy(sizePolicy12);
         frame_4->setFrameShape(QFrame::Panel);
         frame_4->setFrameShadow(QFrame::Sunken);
         frame_4->setLineWidth(2);
@@ -2676,8 +2329,8 @@ public:
 
         oscillator2Frame_7 = new QFrame(reverbEffectFrame);
         oscillator2Frame_7->setObjectName(QStringLiteral("oscillator2Frame_7"));
-        sizePolicy14.setHeightForWidth(oscillator2Frame_7->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_7->setSizePolicy(sizePolicy14);
+        sizePolicy15.setHeightForWidth(oscillator2Frame_7->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_7->setSizePolicy(sizePolicy15);
         oscillator2Frame_7->setFrameShape(QFrame::Panel);
         oscillator2Frame_7->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_7->setLineWidth(2);
@@ -2820,8 +2473,8 @@ public:
 
         oscillator2Frame_8 = new QFrame(flangerEffectFrame);
         oscillator2Frame_8->setObjectName(QStringLiteral("oscillator2Frame_8"));
-        sizePolicy15.setHeightForWidth(oscillator2Frame_8->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_8->setSizePolicy(sizePolicy15);
+        sizePolicy12.setHeightForWidth(oscillator2Frame_8->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_8->setSizePolicy(sizePolicy12);
         oscillator2Frame_8->setFrameShape(QFrame::Panel);
         oscillator2Frame_8->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_8->setLineWidth(2);
@@ -3013,8 +2666,8 @@ public:
 
         oscillator2Frame_5 = new QFrame(vibratoEffectFrame);
         oscillator2Frame_5->setObjectName(QStringLiteral("oscillator2Frame_5"));
-        sizePolicy15.setHeightForWidth(oscillator2Frame_5->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_5->setSizePolicy(sizePolicy15);
+        sizePolicy12.setHeightForWidth(oscillator2Frame_5->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_5->setSizePolicy(sizePolicy12);
         oscillator2Frame_5->setFrameShape(QFrame::Panel);
         oscillator2Frame_5->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_5->setLineWidth(2);
@@ -3186,8 +2839,8 @@ public:
 
         oscillator2Frame_9 = new QFrame(wahwahEffectFrame);
         oscillator2Frame_9->setObjectName(QStringLiteral("oscillator2Frame_9"));
-        sizePolicy15.setHeightForWidth(oscillator2Frame_9->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_9->setSizePolicy(sizePolicy15);
+        sizePolicy12.setHeightForWidth(oscillator2Frame_9->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_9->setSizePolicy(sizePolicy12);
         oscillator2Frame_9->setFrameShape(QFrame::Panel);
         oscillator2Frame_9->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_9->setLineWidth(2);
@@ -3272,32 +2925,32 @@ public:
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setSpacing(6);
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        importButton = new QPushButton(centralWidget);
-        importButton->setObjectName(QStringLiteral("importButton"));
+        newChannelButton = new QPushButton(centralWidget);
+        newChannelButton->setObjectName(QStringLiteral("newChannelButton"));
         QFont font6;
         font6.setPointSize(8);
         font6.setBold(true);
         font6.setWeight(75);
-        importButton->setFont(font6);
-        importButton->setAutoFillBackground(true);
+        newChannelButton->setFont(font6);
+        newChannelButton->setAutoFillBackground(true);
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/icons/icons/003-plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        importButton->setIcon(icon3);
-        importButton->setIconSize(QSize(18, 18));
-        importButton->setFlat(true);
+        newChannelButton->setIcon(icon3);
+        newChannelButton->setIconSize(QSize(18, 18));
+        newChannelButton->setFlat(true);
 
-        horizontalLayout_10->addWidget(importButton);
+        horizontalLayout_10->addWidget(newChannelButton);
 
-        pushButton_16 = new QPushButton(centralWidget);
-        pushButton_16->setObjectName(QStringLiteral("pushButton_16"));
-        pushButton_16->setFont(font1);
-        pushButton_16->setAutoFillBackground(true);
+        importMidiButton = new QPushButton(centralWidget);
+        importMidiButton->setObjectName(QStringLiteral("importMidiButton"));
+        importMidiButton->setFont(font1);
+        importMidiButton->setAutoFillBackground(true);
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/icons/icons/043-add folder.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_16->setIcon(icon4);
-        pushButton_16->setFlat(true);
+        importMidiButton->setIcon(icon4);
+        importMidiButton->setFlat(true);
 
-        horizontalLayout_10->addWidget(pushButton_16);
+        horizontalLayout_10->addWidget(importMidiButton);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -3372,9 +3025,9 @@ public:
     {
         LeandroClass->setWindowTitle(QApplication::translate("LeandroClass", "Leandro", Q_NULLPTR));
         label_7->setText(QApplication::translate("LeandroClass", "Instruments", Q_NULLPTR));
-        addChannelButton->setText(QApplication::translate("LeandroClass", "Add to Channel", Q_NULLPTR));
-        label_8->setText(QApplication::translate("LeandroClass", "Effects", Q_NULLPTR));
         setInstrumentButton->setText(QApplication::translate("LeandroClass", "Set for Channel", Q_NULLPTR));
+        label_8->setText(QApplication::translate("LeandroClass", "Effects", Q_NULLPTR));
+        addEffectButton->setText(QApplication::translate("LeandroClass", "Add to Channel", Q_NULLPTR));
         nameLabelChannel1->setText(QApplication::translate("LeandroClass", "Channel 1", Q_NULLPTR));
         closeButtonChannel1->setText(QString());
         setActiveButtonChannel1_2->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
@@ -3434,39 +3087,13 @@ public:
         label_24->setText(QApplication::translate("LeandroClass", "9", Q_NULLPTR));
         label_25->setText(QApplication::translate("LeandroClass", "10", Q_NULLPTR));
         label_2->setText(QApplication::translate("LeandroClass", "11", Q_NULLPTR));
-        envelopeParamsLabel_4->setText(QApplication::translate("LeandroClass", "Envelope Parameters", Q_NULLPTR));
-        attackLabel_4->setText(QApplication::translate("LeandroClass", "Attack", Q_NULLPTR));
-        decayLabel_4->setText(QApplication::translate("LeandroClass", "Decay", Q_NULLPTR));
-        sustainLabel_4->setText(QApplication::translate("LeandroClass", "Sustain Level", Q_NULLPTR));
-        sustainRateLabel_2->setText(QApplication::translate("LeandroClass", "Sustain Rate", Q_NULLPTR));
-        releaseLabel_4->setText(QApplication::translate("LeandroClass", "Release", Q_NULLPTR));
         deleteSamplingButton->setText(QString());
         instrumentNameLabel_3->setText(QApplication::translate("LeandroClass", "Sampling", Q_NULLPTR));
         instrumentNameSampling->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
-        oscillator1Label_3->setText(QApplication::translate("LeandroClass", "Oscillator 1", Q_NULLPTR));
-        waveform1Label_3->setText(QApplication::translate("LeandroClass", "Waveform", Q_NULLPTR));
-        waveform1ComboBox_3->clear();
-        waveform1ComboBox_3->insertItems(0, QStringList()
-         << QApplication::translate("LeandroClass", "Sine", Q_NULLPTR)
-         << QApplication::translate("LeandroClass", "Square", Q_NULLPTR)
-         << QApplication::translate("LeandroClass", "Sawtooth", Q_NULLPTR)
-        );
-        level1Label_3->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
-        oscillator2Label_3->setText(QApplication::translate("LeandroClass", "Oscillator 2", Q_NULLPTR));
-        waveform2Label_3->setText(QApplication::translate("LeandroClass", "Waveform", Q_NULLPTR));
-        waveform2ComboBox_3->clear();
-        waveform2ComboBox_3->insertItems(0, QStringList()
-         << QApplication::translate("LeandroClass", "Sine", Q_NULLPTR)
-         << QApplication::translate("LeandroClass", "Square", Q_NULLPTR)
-         << QApplication::translate("LeandroClass", "Sawtooth", Q_NULLPTR)
-        );
-        level2Label_3->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
-        envelopeParamsLabel_3->setText(QApplication::translate("LeandroClass", "Envelope Parameters", Q_NULLPTR));
-        attackLabel_3->setText(QApplication::translate("LeandroClass", "Attack", Q_NULLPTR));
-        decayLabel_3->setText(QApplication::translate("LeandroClass", "Decay", Q_NULLPTR));
-        sustainLabel_3->setText(QApplication::translate("LeandroClass", "Sustain", Q_NULLPTR));
-        releaseLabel_3->setText(QApplication::translate("LeandroClass", "Release", Q_NULLPTR));
-        deleteInstrumentButton_2->setText(QString());
+        envelopeParamsLabel_3->setText(QApplication::translate("LeandroClass", "Sample Playback Parameters", Q_NULLPTR));
+        sustainLabel_3->setText(QApplication::translate("LeandroClass", "Loop Start", Q_NULLPTR));
+        releaseLabel_3->setText(QApplication::translate("LeandroClass", "Loop End", Q_NULLPTR));
+        deleteKarplusButton->setText(QString());
         instrumentNameLabel_2->setText(QApplication::translate("LeandroClass", "Karplus-Strong", Q_NULLPTR));
         instrumentNameKarplus->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
         decayLabel_2->setText(QApplication::translate("LeandroClass", "Stretch", Q_NULLPTR));
@@ -3521,8 +3148,8 @@ public:
         wahwahMoveRightButton->setText(QString());
         label_32->setText(QApplication::translate("LeandroClass", "Fmin", Q_NULLPTR));
         label_33->setText(QApplication::translate("LeandroClass", "LFO Frequency", Q_NULLPTR));
-        importButton->setText(QApplication::translate("LeandroClass", "Add Channel", Q_NULLPTR));
-        pushButton_16->setText(QApplication::translate("LeandroClass", " Import MIDI File...", Q_NULLPTR));
+        newChannelButton->setText(QApplication::translate("LeandroClass", "Add Channel", Q_NULLPTR));
+        importMidiButton->setText(QApplication::translate("LeandroClass", " Import MIDI File...", Q_NULLPTR));
         playButton_2->setText(QString());
         pauseButton->setText(QString());
         stopButton_2->setText(QString());

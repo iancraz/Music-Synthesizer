@@ -78,3 +78,4 @@ Instrument* randInst() {
 	ret = new AdditiveInstrument(params);
 	return ret;
 }
+

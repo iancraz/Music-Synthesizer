@@ -1,8 +1,10 @@
-﻿  Additive.cpp
+﻿  moc Leandro.h
+  Additive.cpp
   ADSR.cpp
   Channel.cpp
   Instrument.cpp
   Leandro.cpp
   main.cpp
+  qrc_Leandro.cpp
   moc_Leandro.cpp
   Leandro.vcxproj -> C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe

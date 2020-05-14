@@ -37,7 +37,28 @@ void Channel::updateCallbackData() { // Function to be called at the end of ever
 	this->callData.events = &(this->events);
 }
 
-Channel::~Channel() {}
+Channel::~Channel() {
+	delete(frameChannel);
+	delete(verticalLayoutFrameChannel);
+	delete(nameLabelChannel);
+	delete(setActiveButtonChannel);
+	delete(verticalSpacerChannel);
+	delete(inputComboBoxLayoutChannel);
+	delete(InputLabelChannel);
+	delete(inputComboBoxChannel);
+	delete(midiListChannel);
+	delete(levelDialChannel);
+	delete(levelLabelChannel);
+	delete(instrument);
+	for (int i = 0; i < effects.size(); i++)
+		delete(effects.at(i));
+	/*
+	while (!events.empty()) {
+		delete(events.front());
+		events.pop();
+	}
+	*/
+}
 
 bool Channel::operator== (Channel const& channel) {
 	if (this->ID == channel.ID) return true;
@@ -290,23 +311,19 @@ void Channel::addToGUI(Ui_LeandroClass* programUI) {
 	QObject::connect(levelDialChannel, &QDial::valueChanged, this, &Channel::setVolume);
 	QObject::connect(inputComboBoxChannel, &QComboBox::currentTextChanged, this, &Channel::setKeyboard);
 	QObject::connect(midiListChannel, &QListWidget::currentItemChanged, this, &Channel::updateMidiTrack);
+	QObject::connect(closeButtonChannel, &QPushButton::clicked, this, &Channel::destroyThisChannelFromProgram);
 	
+}
+
+void Channel::destroyThisChannelFromProgram() {
+	program->destroyChannel(this);
 
 }
 
+
 void Channel::removeFromGUI(Ui_LeandroClass* programUI) {
 	programUI->channelsContainerLayout->removeWidget(frameChannel);
-	delete(frameChannel);
-	delete(verticalLayoutFrameChannel);
-	delete(nameLabelChannel);
-	delete(setActiveButtonChannel);
-	delete(verticalSpacerChannel);
-	delete(inputComboBoxLayoutChannel);
-	delete(InputLabelChannel);
-	delete(inputComboBoxChannel);
-	delete(midiListChannel);
-	delete(levelDialChannel);
-	delete(levelLabelChannel);
+	
 }
 
 
@@ -361,6 +378,7 @@ void Channel::setKeyboard() {
 	if((inputComboBoxChannel->currentText().toStdString()=="PC Keyboard")) this->keyboard = true;
 	this->updateCallbackData();
 }
+
 
 void Channel::updateMidiTrack() {
 	for (int i =0; i<program->midiTracks.size();i++)

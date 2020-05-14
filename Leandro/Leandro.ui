@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>2989</width>
-    <height>742</height>
+    <height>783</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -653,7 +653,7 @@
             </widget>
            </item>
            <item alignment="Qt::AlignHCenter">
-            <widget class="QPushButton" name="addChannelButton">
+            <widget class="QPushButton" name="setInstrumentButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -666,6 +666,12 @@
                <height>15</height>
               </size>
              </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>7</pointsize>
@@ -675,7 +681,7 @@
               <bool>true</bool>
              </property>
              <property name="text">
-              <string>Add to Channel</string>
+              <string>Set for Channel</string>
              </property>
              <property name="flat">
               <bool>true</bool>
@@ -718,7 +724,7 @@
             </widget>
            </item>
            <item alignment="Qt::AlignHCenter">
-            <widget class="QPushButton" name="setInstrumentButton">
+            <widget class="QPushButton" name="addEffectButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -731,12 +737,6 @@
                <height>15</height>
               </size>
              </property>
-             <property name="baseSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="font">
               <font>
                <pointsize>7</pointsize>
@@ -746,7 +746,7 @@
               <bool>true</bool>
              </property>
              <property name="text">
-              <string>Set for Channel</string>
+              <string>Add to Channel</string>
              </property>
              <property name="flat">
               <bool>true</bool>
@@ -852,7 +852,7 @@
              <x>0</x>
              <y>0</y>
              <width>2831</width>
-             <height>274</height>
+             <height>283</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -1783,7 +1783,7 @@
                     <item>
                      <widget class="QFrame" name="envelopeParamsFrame">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
@@ -1797,6 +1797,9 @@
                       <property name="lineWidth">
                        <number>2</number>
                       </property>
+                      <property name="midLineWidth">
+                       <number>0</number>
+                      </property>
                       <layout class="QVBoxLayout" name="verticalLayout_16">
                        <property name="topMargin">
                         <number>2</number>
@@ -1804,6 +1807,19 @@
                        <property name="bottomMargin">
                         <number>2</number>
                        </property>
+                       <item>
+                        <spacer name="verticalSpacer_9">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
                        <item alignment="Qt::AlignHCenter">
                         <widget class="QLabel" name="envelopeParamsLabel">
                          <property name="maximumSize">
@@ -1838,7 +1854,7 @@
                              <property name="maximumSize">
                               <size>
                                <width>60</width>
-                               <height>60</height>
+                               <height>175885</height>
                               </size>
                              </property>
                              <property name="minimum">
@@ -2030,6 +2046,19 @@
                           </layout>
                          </item>
                         </layout>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_10">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </spacer>
                        </item>
                       </layout>
                      </widget>
@@ -2232,7 +2261,7 @@
                     <item>
                      <widget class="QFrame" name="oscillator2Frame_4">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
@@ -2657,269 +2686,6 @@
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QFrame" name="envelopeParamsFrame_4">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="frameShape">
-                       <enum>QFrame::Panel</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
-                      </property>
-                      <property name="lineWidth">
-                       <number>2</number>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_25">
-                       <property name="topMargin">
-                        <number>2</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>2</number>
-                       </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="envelopeParamsLabel_4">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>14</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Envelope Parameters</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <layout class="QHBoxLayout" name="envelopeParamsHLayout_4">
-                         <item>
-                          <layout class="QVBoxLayout" name="attackVLayout_4">
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QDial" name="attackDialAdditive">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="minimum">
-                              <number>5</number>
-                             </property>
-                             <property name="maximum">
-                              <number>15000</number>
-                             </property>
-                             <property name="notchesVisible">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="attackLabel_4">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Attack</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QVBoxLayout" name="decayVLayout_4">
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QDial" name="delayDialAdditive">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="minimum">
-                              <number>5</number>
-                             </property>
-                             <property name="maximum">
-                              <number>15000</number>
-                             </property>
-                             <property name="notchesVisible">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="decayLabel_4">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Decay</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QVBoxLayout" name="sustainVLayout_4">
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QDial" name="sustainLevelDialAdditive">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="autoFillBackground">
-                              <bool>false</bool>
-                             </property>
-                             <property name="minimum">
-                              <number>0</number>
-                             </property>
-                             <property name="maximum">
-                              <number>99</number>
-                             </property>
-                             <property name="notchesVisible">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="sustainLabel_4">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Sustain Level</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QVBoxLayout" name="releaseVLayout_6">
-                           <item>
-                            <widget class="QDial" name="sustainRateDialAdditive">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="minimum">
-                              <number>5</number>
-                             </property>
-                             <property name="maximum">
-                              <number>15000</number>
-                             </property>
-                             <property name="notchesVisible">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="sustainRateLabel_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Sustain Rate</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QVBoxLayout" name="releaseVLayout_4">
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QDial" name="releaseDialAdditive">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="minimum">
-                              <number>5</number>
-                             </property>
-                             <property name="maximum">
-                              <number>15000</number>
-                             </property>
-                             <property name="notchesVisible">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="releaseLabel_4">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Release</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
                    </layout>
                   </item>
                  </layout>
@@ -3116,298 +2882,6 @@
                   <item row="2" column="0">
                    <layout class="QVBoxLayout" name="framesVLayout_3">
                     <item>
-                     <widget class="QFrame" name="oscillator1Frame_3">
-                      <property name="frameShape">
-                       <enum>QFrame::Panel</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
-                      </property>
-                      <property name="lineWidth">
-                       <number>2</number>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_20">
-                       <property name="topMargin">
-                        <number>2</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>2</number>
-                       </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="oscillator1Label_3">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>14</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Oscillator 1</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <layout class="QHBoxLayout" name="oscillator1HLayout_3">
-                         <item>
-                          <layout class="QVBoxLayout" name="oscillator1WaveVLayout_3">
-                           <item>
-                            <widget class="QLabel" name="waveform1Label_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>10</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Waveform</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QComboBox" name="waveform1ComboBox_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>15</height>
-                              </size>
-                             </property>
-                             <property name="autoFillBackground">
-                              <bool>true</bool>
-                             </property>
-                             <property name="frame">
-                              <bool>false</bool>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>Sine</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Square</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Sawtooth</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QHBoxLayout" name="oscillator1LevelHLayout_3">
-                           <item>
-                            <widget class="QLabel" name="level1Label_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>11</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Level</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QDial" name="level1Dial_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>57</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QFrame" name="oscillator2Frame_3">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="frameShape">
-                       <enum>QFrame::Panel</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
-                      </property>
-                      <property name="lineWidth">
-                       <number>2</number>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_21">
-                       <property name="topMargin">
-                        <number>2</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>2</number>
-                       </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="oscillator2Label_3">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>14</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Oscillator 2</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <layout class="QHBoxLayout" name="oscillator2HLayout_3">
-                         <item>
-                          <layout class="QVBoxLayout" name="waveform2VLayout_3">
-                           <item>
-                            <widget class="QLabel" name="waveform2Label_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>10</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Waveform</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QComboBox" name="waveform2ComboBox_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>15</height>
-                              </size>
-                             </property>
-                             <property name="autoFillBackground">
-                              <bool>true</bool>
-                             </property>
-                             <property name="frame">
-                              <bool>false</bool>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>Sine</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Square</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Sawtooth</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QHBoxLayout" name="oscillator2LevelHLayout_3">
-                           <item>
-                            <widget class="QLabel" name="level2Label_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>11</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Level</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QDial" name="level2Dial_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>57</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
                      <widget class="Line" name="line_7">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -3417,7 +2891,7 @@
                     <item>
                      <widget class="QFrame" name="envelopeParamsFrame_3">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
@@ -3453,82 +2927,29 @@
                           </font>
                          </property>
                          <property name="text">
-                          <string>Envelope Parameters</string>
+                          <string>Sample Playback Parameters</string>
                          </property>
                         </widget>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="envelopeParamsHLayout_3">
                          <item>
-                          <layout class="QVBoxLayout" name="attackVLayout_3">
-                           <item>
-                            <widget class="QDial" name="attackDial_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>60</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="attackLabel_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Attack</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QVBoxLayout" name="decayVLayout_3">
-                           <item>
-                            <widget class="QDial" name="decayDial_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="decayLabel_3">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Decay</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
                           <layout class="QVBoxLayout" name="sustainVLayout_3">
                            <item>
-                            <widget class="QDial" name="sustainDial_3">
+                            <spacer name="verticalSpacer_5">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QDial" name="samplingLoopStartDial">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -3540,6 +2961,12 @@
                                <width>60</width>
                                <height>16777215</height>
                               </size>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="notchesVisible">
+                              <bool>true</bool>
                              </property>
                             </widget>
                            </item>
@@ -3552,16 +2979,42 @@
                               </sizepolicy>
                              </property>
                              <property name="text">
-                              <string>Sustain</string>
+                              <string>Loop Start</string>
                              </property>
                             </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_7">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
                            </item>
                           </layout>
                          </item>
                          <item>
                           <layout class="QVBoxLayout" name="releaseVLayout_3">
                            <item>
-                            <widget class="QDial" name="releaseDial_3">
+                            <spacer name="verticalSpacer_6">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QDial" name="samplingLoopEndDial">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -3574,6 +3027,12 @@
                                <height>16777215</height>
                               </size>
                              </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="notchesVisible">
+                              <bool>true</bool>
+                             </property>
                             </widget>
                            </item>
                            <item alignment="Qt::AlignHCenter">
@@ -3585,9 +3044,22 @@
                               </sizepolicy>
                              </property>
                              <property name="text">
-                              <string>Release</string>
+                              <string>Loop End</string>
                              </property>
                             </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_8">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
                            </item>
                           </layout>
                          </item>
@@ -3710,7 +3182,7 @@
                      <number>6</number>
                     </property>
                     <item>
-                     <widget class="QPushButton" name="deleteInstrumentButton_2">
+                     <widget class="QPushButton" name="deleteKarplusButton">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -4112,8 +3584,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1534</width>
-             <height>376</height>
+             <width>1603</width>
+             <height>401</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -6242,7 +5714,7 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_10">
       <item>
-       <widget class="QPushButton" name="importButton">
+       <widget class="QPushButton" name="newChannelButton">
         <property name="font">
          <font>
           <pointsize>8</pointsize>
@@ -6272,7 +5744,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_16">
+       <widget class="QPushButton" name="importMidiButton">
         <property name="font">
          <font>
           <weight>75</weight>
