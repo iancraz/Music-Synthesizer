@@ -49,33 +49,3 @@ int main(int argc, char* argv[])
 	program.show();
 	return a.exec();
 }
-
-Instrument* randInst() {
-	srand(time(NULL));
-	int randInt = rand() % 3 + 1;
-	Instrument* ret;
-	std::string str;
-	std::string name;
-	switch (randInt) {
-	case 1:
-		str = "guitar_envelope.txt";
-		name = "Additive Guitar";
-		break;
-	case 2:
-		str = "piano_envelope.txt";
-		name = "Additive Piano";
-		break;
-	case 3:
-		str = "trumpet_envelope.txt";
-		name = "Additive Trumpet";
-		break;
-	default:
-		break;
-	}
-	additiveParams_t* params= new additiveParams_t;
-	params->envelope_file = str;
-	params->_name = name;
-	ret = new AdditiveInstrument(params);
-	return ret;
-}
-
