@@ -93,6 +93,8 @@
     <ClCompile Include="MidiFile.cpp" />
     <ClCompile Include="MidiMessage.cpp" />
     <ClCompile Include="Options.cpp" />
+    <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="Sampling.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Leandro.h" />
@@ -106,6 +108,7 @@
     <QtRcc Include="Leandro.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioFile.h" />
     <ClInclude Include="Binasc.h" />
     <ClInclude Include="bufferAssets.h" />
     <ClInclude Include="Channel.h" />
@@ -117,9 +120,12 @@
     <ClInclude Include="MidiFile.h" />
     <ClInclude Include="MidiMessage.h" />
     <ClInclude Include="Options.h" />
+    <ClInclude Include="rapidcsv.h" />
+    <ClInclude Include="Sample.h" />
     <ClInclude Include="ui_Leandro.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.json" />
     <None Include="generateFiles.bat" />
     <None Include="mario_midi.mid" />
     <None Include="packages.config" />

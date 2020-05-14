@@ -102,6 +102,8 @@ public:
 	void removeEq8BandEffect();
 	void removeWahwahEffect();
 
+	void loadData();
+
 
 private:
 	Ui::LeandroClass ui;

@@ -5,6 +5,9 @@
 #include "bufferAssets.h"
 #include "Leandro.h"
 #include "Channel.h"
+#include "json/json.h"
+#include "Sample.h"
+
 using namespace std;
 using namespace smf;
 
@@ -18,7 +21,7 @@ typedef int instrumentCallback(
 );
 
 enum class synthType { adsr, additive, fm, karplus, sampling };
-enum waveform { sine, square, sawtooth };
+typedef enum { sine, square, sawtooth }waveform;
 
 
 class Instrument
@@ -31,7 +34,6 @@ public:
 	virtual instrumentCallback synthFunction; // Instrument callback function: defined by typedef
 	
 };
-
 
 typedef struct {
 	float tAttack;
@@ -84,26 +86,35 @@ protected:
 };
 
 typedef struct {
-	std::string envelope_file;
-	std::string _name;
-	float*** resourceMatrix;
+	std::string name;
+	unsigned int octavesCount;
+	unsigned int harmonicsCount;
+	vector<int> envelopeLengths;
+	unsigned int firstKey;
+	unsigned int lastKey;
+	vector<vector<float*>> octavesEnvelopes;
 }additiveParams_t;
 
 class AdditiveInstrument : public Instrument {
 public:
-	AdditiveInstrument(additiveParams_t* _params);
-private:
+	AdditiveInstrument(additiveParams_t * params);
 	instrumentCallback synthFunction;
-	float* envelope[7];
-	int envelopeLength;
-	int releaseLength;
-	float* release;
+
+	static additiveParams_t parseAdditiveJson(Json::Value _data);
+	static vector<float*> parseEnvelopeFile(std::string path, vector<int>* envelopesLengths);
+
+protected:
+	unsigned int firstKey;
+	unsigned int lastKey;
+	unsigned int harmonicsCount;
+	std::vector<int> envelopeLengths;
+	std::vector<std::vector<float*>> octavesEnvelopes;
+	float*** envelopes;
 };
 
 typedef struct {
 
 }karplusParams_t;
-
 
 class KarplusInstrument : public Instrument {
 public:
@@ -113,18 +124,41 @@ public:
 	~KarplusInstrument();
 };
 
+
 typedef struct {
-	float tAttack;
-	float tDecay;
-	float sustainRate;
-	float sustainLevel;
-	float tRelease;
-	float k;
+	vector<Sample*>* samples;
+	int minOctave;
+	int maxOctave;
+	float notePressedTime;
+	string name;
+	unsigned int buffLength;
 }samplingParams_t;
 
 class SamplingInstrument : public Instrument {
 public:
 
-	SamplingInstrument(samplingParams_t* _params);
+	SamplingInstrument(samplingParams_t * params);
 	~SamplingInstrument();
+
+	float repeat_time_begin; //Tiempo a partir del cual se empieza a repetir en caso en que se desee un tiempo de presionado de nota mayor al sample
+	float repeat_time_end; //Limite del tiempo de repeticion
+
+
+	int synthFunction(float* outputBuffer, const unsigned int outputBufferSize, const int keyNumber, const float lengthInMilliseconds, const int velocity, const int sampleRate);
+
+	static samplingParams_t * parseSamplingJson(Json::Value data);
+	
+private:
+	vector <Sample*>* samples;
+
+	int min_octave;
+	int	max_octave;
+
+	float* temp_buffer;
+	float* temp_buffer_2;
+	int lenght_temp_buffer;
+	float note_pressed_time;
+	int get_nearest_peak(Sample* selected_sample, int number);
+	void key_modification(int num_octava, float B, float new_note_pressed_time);
+	void velocityAdjust(int velocity);
 };

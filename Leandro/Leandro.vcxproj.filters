@@ -64,6 +64,12 @@
     <ClCompile Include="ADSR.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Leandro.h">
@@ -117,6 +123,15 @@
     <ClInclude Include="ui_Leandro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rapidcsv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="generateFiles.bat">
@@ -125,6 +140,7 @@
     <None Include="sm64.mid" />
     <None Include="mario_midi.mid" />
     <None Include="packages.config" />
+    <None Include="config.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="mididata.txt" />

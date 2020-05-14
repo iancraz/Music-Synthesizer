@@ -358,7 +358,6 @@ void Leandro::setInstrumentForActiveChannel() {
 	activeChannel->setChannelInstrument(instrument);
 }
 
-
 void Leandro::removeEffectFromActiveChannel() {
 	
 	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
@@ -404,6 +403,7 @@ void Leandro::removeInstrumentFromActiveChannel() {
 	updateActiveAssetsBay();
 
 }
+
 void Leandro::removeReverbEffect() {
 	ui.reverbEffectFrame->setHidden(true);
 	removeEffectFromActiveChannel();
@@ -429,7 +429,6 @@ void Leandro::removeWahwahEffect() {
 	removeEffectFromActiveChannel();
 }
 
-
 void Leandro::addEffectToActiveChannel() {
 	Effect* effect = nullptr;
 	for (int i = 0; i < effectModels.size(); i++)
@@ -453,5 +452,94 @@ void Leandro::addEffectToActiveChannel() {
 	activeChannel->addEffectToChannel(effect);
 }
 
+void Leandro::loadData() {
+	// parseo el json
+	Json::Value root;
+	Json::CharReaderBuilder builder;
+	ifstream configFile("config.json");
+	JSONCPP_STRING errs;
+	Json::parseFromStream(builder, configFile, &root, &errs);
+
+	//agarro los instrumentos aditivos
+	Json::Value additiveData = root["additive"];
+
+	list<string> typesList;
+	for (int i = 0; i < additiveData["types"].size(); i++) {
+		typesList.push_back(additiveData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value instrumentModelData = additiveData[*it];
+		additiveParams_t* instrumentParams = new additiveParams_t(AdditiveInstrument::parseAdditiveJson(instrumentModelData));
+		instrumentModel model;
+		model.type = synthType::additive;
+		model.params = (void*)instrumentParams;
+		model.instrumentName = *it;
+		instrumentModels.push_back(new instrumentModel(model));
+	}
+
+	// adsr
+	Json::Value adsrData = root["adsr"];
+
+	typesList.clear();
+	for (int i = 0; i < additiveData["types"].size(); i++) {
+		typesList.push_back(additiveData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value instrumentModelData = additiveData[*it];
+		adsrParams_t params;
+		params.buffLength = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		params.sampleRate = SAMPLE_RATE;
+		params.tAttack = adsrData["t-attack"].asFloat();
+		params.tDecay = adsrData["t-decay"].asFloat();
+		params.sustainRate = adsrData["sustain-rate"].asFloat();
+		params.sustainLevel = adsrData["sustain-level"].asFloat();
+		params.tRelease = adsrData["t-release"].asFloat();
+		params.k = adsrData["k"].asFloat();
+		string wf1 = adsrData["waveform"][0].asCString();
+		string wf2 = adsrData["waveform"][1].asCString();
+
+		if (wf1 == "sine")
+			params.wform1 = sine;
+		else if (wf1 == "square")
+			params.wform1 = square;
+		params.level1 = adsrData["levels"][0].asFloat();
+
+		if (wf2 == "sine")
+			params.wform2 = sine;
+		else if (wf2 == "square")
+			params.wform2 = square;
+		params.level2 = adsrData["levels"][1].asFloat();
+
+		instrumentModel model;
+		model.instrumentName = *it;
+		model.params = (void*)(new adsrParams_t(params));
+		model.type = synthType::adsr;
+		instrumentModels.push_back(new instrumentModel(model));
+	}
+
+	// Sampling
+	Json::Value samplingData = root["sampling"];
+
+	typesList.clear();
+	for (int i = 0; i < samplingData["types"].size(); i++) {
+		typesList.push_back(samplingData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value instrumentModelData = samplingData[*it];
+		samplingParams_t* params = SamplingInstrument::parseSamplingJson(instrumentModelData);
+		params->buffLength = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		instrumentModel model;
+		model.instrumentName = *it;
+		model.params = (void*)params;
+		model.type = synthType::sampling;
+		instrumentModels.push_back(new instrumentModel(model));
+	}
+}
+
+
 // GUI triggered setters
+
 
