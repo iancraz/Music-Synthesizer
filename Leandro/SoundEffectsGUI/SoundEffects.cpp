@@ -155,6 +155,22 @@ void SoundEffects::computeEffects() {
 		VibratoEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
+
+	//PRUEBA
+
+	/*eq8bandParams_t params;
+	params.gains[0] = 1;
+	params.gains[1] = 1;
+	params.gains[2] = 1;
+	params.gains[3] = 0;
+	params.gains[4] = 0;
+	params.gains[5] = 0;
+	params.gains[6] = 0;
+	params.gains[7] = 0;
+	params.sampleRate = sampleRate;
+	params.maxSoundBufferSize = numSamples;
+	Eq8BandEffect effect(&params);
+	effect.callback(input, numSamples, sampleRate);*/
 	return;
 }
 
