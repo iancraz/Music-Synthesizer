@@ -61,4 +61,5 @@ public:
 	void updateCallbackData();
 private:
 	Ui::LeandroClass ui;
+	void loadData();
 };

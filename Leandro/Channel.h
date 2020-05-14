@@ -53,9 +53,7 @@ private:
 	int ID;
 	float volume; // Volume multiplier between 0 and 1
 	bool keyboard; // True if input is directly through keyboard
-
 	midiTrack* currentMidiTrack;
 	Instrument* instrument; // Instance of instrument
-
 	vector<Effect*> effects; // This channel's stack of effects
 };
