@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Leandro.ui'
 **
-** Created by: Qt User Interface Compiler version 5.14.2
+** Created by: Qt User Interface Compiler version 5.9.9
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,12 +10,15 @@
 #define UI_LEANDRO_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDial>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
@@ -91,19 +94,19 @@ public:
     void setupUi(QMainWindow *LeandroClass)
     {
         if (LeandroClass->objectName().isEmpty())
-            LeandroClass->setObjectName(QString::fromUtf8("LeandroClass"));
+            LeandroClass->setObjectName(QStringLiteral("LeandroClass"));
         LeandroClass->resize(851, 594);
         centralWidget = new QWidget(LeandroClass);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
         playButton_2 = new QPushButton(centralWidget);
-        playButton_2->setObjectName(QString::fromUtf8("playButton_2"));
+        playButton_2->setObjectName(QStringLiteral("playButton_2"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -113,14 +116,14 @@ public:
         horizontalLayout_10->addWidget(playButton_2);
 
         stopButton_2 = new QPushButton(centralWidget);
-        stopButton_2->setObjectName(QString::fromUtf8("stopButton_2"));
+        stopButton_2->setObjectName(QStringLiteral("stopButton_2"));
         sizePolicy.setHeightForWidth(stopButton_2->sizePolicy().hasHeightForWidth());
         stopButton_2->setSizePolicy(sizePolicy);
 
         horizontalLayout_10->addWidget(stopButton_2);
 
         recordButton_2 = new QPushButton(centralWidget);
-        recordButton_2->setObjectName(QString::fromUtf8("recordButton_2"));
+        recordButton_2->setObjectName(QStringLiteral("recordButton_2"));
 
         horizontalLayout_10->addWidget(recordButton_2);
 
@@ -133,20 +136,20 @@ public:
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setSpacing(6);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         verticalLayout_8 = new QVBoxLayout();
         verticalLayout_8->setSpacing(6);
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
         label_7 = new QLabel(centralWidget);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
 
         verticalLayout_8->addWidget(label_7);
 
         instrumentsList_2 = new QListView(centralWidget);
-        instrumentsList_2->setObjectName(QString::fromUtf8("instrumentsList_2"));
+        instrumentsList_2->setObjectName(QStringLiteral("instrumentsList_2"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -157,17 +160,17 @@ public:
         verticalLayout_8->addWidget(instrumentsList_2);
 
         pushButton_7 = new QPushButton(centralWidget);
-        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
+        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
 
         verticalLayout_8->addWidget(pushButton_7);
 
         label_8 = new QLabel(centralWidget);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         verticalLayout_8->addWidget(label_8);
 
         effectsList_2 = new QListView(centralWidget);
-        effectsList_2->setObjectName(QString::fromUtf8("effectsList_2"));
+        effectsList_2->setObjectName(QStringLiteral("effectsList_2"));
         sizePolicy1.setHeightForWidth(effectsList_2->sizePolicy().hasHeightForWidth());
         effectsList_2->setSizePolicy(sizePolicy1);
         effectsList_2->setMaximumSize(QSize(100, 16777215));
@@ -175,7 +178,7 @@ public:
         verticalLayout_8->addWidget(effectsList_2);
 
         pushButton_8 = new QPushButton(centralWidget);
-        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
+        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
 
         verticalLayout_8->addWidget(pushButton_8);
 
@@ -183,18 +186,18 @@ public:
         horizontalLayout_5->addLayout(verticalLayout_8);
 
         scrollAreaChannels_2 = new QScrollArea(centralWidget);
-        scrollAreaChannels_2->setObjectName(QString::fromUtf8("scrollAreaChannels_2"));
+        scrollAreaChannels_2->setObjectName(QStringLiteral("scrollAreaChannels_2"));
         scrollAreaChannels_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scrollAreaChannels_2->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
-        scrollAreaChannelsWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaChannelsWidgetContents_2"));
+        scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
         scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 719, 298));
         horizontalLayout_7 = new QHBoxLayout(scrollAreaChannelsWidgetContents_2);
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         groupBoxChannel1_2 = new QGroupBox(scrollAreaChannelsWidgetContents_2);
-        groupBoxChannel1_2->setObjectName(QString::fromUtf8("groupBoxChannel1_2"));
+        groupBoxChannel1_2->setObjectName(QStringLiteral("groupBoxChannel1_2"));
         QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -203,30 +206,28 @@ public:
         gridLayoutChannel1_2 = new QGridLayout(groupBoxChannel1_2);
         gridLayoutChannel1_2->setSpacing(6);
         gridLayoutChannel1_2->setContentsMargins(11, 11, 11, 11);
-        gridLayoutChannel1_2->setObjectName(QString::fromUtf8("gridLayoutChannel1_2"));
+        gridLayoutChannel1_2->setObjectName(QStringLiteral("gridLayoutChannel1_2"));
         verticalLayoutChannel1_2 = new QVBoxLayout();
         verticalLayoutChannel1_2->setSpacing(6);
-        verticalLayoutChannel1_2->setObjectName(QString::fromUtf8("verticalLayoutChannel1_2"));
+        verticalLayoutChannel1_2->setObjectName(QStringLiteral("verticalLayoutChannel1_2"));
         setActiveButtonChannel1_2 = new QPushButton(groupBoxChannel1_2);
-        setActiveButtonChannel1_2->setObjectName(QString::fromUtf8("setActiveButtonChannel1_2"));
+        setActiveButtonChannel1_2->setObjectName(QStringLiteral("setActiveButtonChannel1_2"));
 
         verticalLayoutChannel1_2->addWidget(setActiveButtonChannel1_2);
 
         InputLabelChannel1_2 = new QLabel(groupBoxChannel1_2);
-        InputLabelChannel1_2->setObjectName(QString::fromUtf8("InputLabelChannel1_2"));
+        InputLabelChannel1_2->setObjectName(QStringLiteral("InputLabelChannel1_2"));
 
         verticalLayoutChannel1_2->addWidget(InputLabelChannel1_2);
 
         inputComboBoxChannel1_2 = new QComboBox(groupBoxChannel1_2);
-        inputComboBoxChannel1_2->addItem(QString());
-        inputComboBoxChannel1_2->addItem(QString());
-        inputComboBoxChannel1_2->setObjectName(QString::fromUtf8("inputComboBoxChannel1_2"));
+        inputComboBoxChannel1_2->setObjectName(QStringLiteral("inputComboBoxChannel1_2"));
 
         verticalLayoutChannel1_2->addWidget(inputComboBoxChannel1_2);
 
         midiListChannel1_2 = new QListWidget(groupBoxChannel1_2);
         new QListWidgetItem(midiListChannel1_2);
-        midiListChannel1_2->setObjectName(QString::fromUtf8("midiListChannel1_2"));
+        midiListChannel1_2->setObjectName(QStringLiteral("midiListChannel1_2"));
         QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -237,14 +238,14 @@ public:
         verticalLayoutChannel1_2->addWidget(midiListChannel1_2);
 
         levelDialChannel1_2 = new QDial(groupBoxChannel1_2);
-        levelDialChannel1_2->setObjectName(QString::fromUtf8("levelDialChannel1_2"));
+        levelDialChannel1_2->setObjectName(QStringLiteral("levelDialChannel1_2"));
 
         verticalLayoutChannel1_2->addWidget(levelDialChannel1_2);
 
         levelLabelChannel1_2 = new QLabel(groupBoxChannel1_2);
-        levelLabelChannel1_2->setObjectName(QString::fromUtf8("levelLabelChannel1_2"));
+        levelLabelChannel1_2->setObjectName(QStringLiteral("levelLabelChannel1_2"));
         QFont font;
-        font.setFamily(QString::fromUtf8("Oxygen"));
+        font.setFamily(QStringLiteral("Oxygen"));
         font.setPointSize(8);
         font.setBold(false);
         font.setItalic(false);
@@ -275,41 +276,41 @@ public:
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(6);
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         scrollArea_3 = new QScrollArea(centralWidget);
-        scrollArea_3->setObjectName(QString::fromUtf8("scrollArea_3"));
+        scrollArea_3->setObjectName(QStringLiteral("scrollArea_3"));
         sizePolicy3.setHeightForWidth(scrollArea_3->sizePolicy().hasHeightForWidth());
         scrollArea_3->setSizePolicy(sizePolicy3);
         scrollArea_3->setMinimumSize(QSize(0, 180));
         scrollArea_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scrollArea_3->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setObjectName(QStringLiteral("scrollAreaWidgetContents_3"));
         scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 827, 201));
         horizontalLayout_9 = new QHBoxLayout(scrollAreaWidgetContents_3);
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
         groupBox_2 = new QGroupBox(scrollAreaWidgetContents_3);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout_4 = new QGridLayout(groupBox_2);
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         gridLayout_5 = new QGridLayout();
         gridLayout_5->setSpacing(6);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         gridLayout_5->setSizeConstraint(QLayout::SetDefaultConstraint);
         verticalLayout_9 = new QVBoxLayout();
         verticalLayout_9->setSpacing(6);
-        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
         dial_5 = new QDial(groupBox_2);
-        dial_5->setObjectName(QString::fromUtf8("dial_5"));
+        dial_5->setObjectName(QStringLiteral("dial_5"));
 
         verticalLayout_9->addWidget(dial_5);
 
         label_9 = new QLabel(groupBox_2);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setObjectName(QStringLiteral("label_9"));
 
         verticalLayout_9->addWidget(label_9);
 
@@ -318,14 +319,14 @@ public:
 
         verticalLayout_10 = new QVBoxLayout();
         verticalLayout_10->setSpacing(6);
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
         dial_6 = new QDial(groupBox_2);
-        dial_6->setObjectName(QString::fromUtf8("dial_6"));
+        dial_6->setObjectName(QStringLiteral("dial_6"));
 
         verticalLayout_10->addWidget(dial_6);
 
         label_10 = new QLabel(groupBox_2);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setObjectName(QStringLiteral("label_10"));
 
         verticalLayout_10->addWidget(label_10);
 
@@ -334,9 +335,9 @@ public:
 
         verticalLayout_11 = new QVBoxLayout();
         verticalLayout_11->setSpacing(6);
-        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
         dial_7 = new QDial(groupBox_2);
-        dial_7->setObjectName(QString::fromUtf8("dial_7"));
+        dial_7->setObjectName(QStringLiteral("dial_7"));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -348,7 +349,7 @@ public:
         verticalLayout_11->addWidget(dial_7);
 
         label_11 = new QLabel(groupBox_2);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
+        label_11->setObjectName(QStringLiteral("label_11"));
         label_11->setAlignment(Qt::AlignCenter);
 
         verticalLayout_11->addWidget(label_11);
@@ -358,14 +359,14 @@ public:
 
         verticalLayout_12 = new QVBoxLayout();
         verticalLayout_12->setSpacing(6);
-        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
         dial_8 = new QDial(groupBox_2);
-        dial_8->setObjectName(QString::fromUtf8("dial_8"));
+        dial_8->setObjectName(QStringLiteral("dial_8"));
 
         verticalLayout_12->addWidget(dial_8);
 
         label_12 = new QLabel(groupBox_2);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         verticalLayout_12->addWidget(label_12);
 
@@ -379,12 +380,12 @@ public:
         horizontalLayout_9->addWidget(groupBox_2);
 
         groupBox_5 = new QGroupBox(scrollAreaWidgetContents_3);
-        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
+        groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
 
         horizontalLayout_9->addWidget(groupBox_5);
 
         groupBox_6 = new QGroupBox(scrollAreaWidgetContents_3);
-        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
+        groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
 
         horizontalLayout_9->addWidget(groupBox_6);
 
@@ -400,14 +401,14 @@ public:
 
         LeandroClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(LeandroClass);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 851, 21));
         LeandroClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(LeandroClass);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
+        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         LeandroClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(LeandroClass);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        statusBar->setObjectName(QStringLiteral("statusBar"));
         LeandroClass->setStatusBar(statusBar);
 
         retranslateUi(LeandroClass);
@@ -417,35 +418,37 @@ public:
 
     void retranslateUi(QMainWindow *LeandroClass)
     {
-        LeandroClass->setWindowTitle(QCoreApplication::translate("LeandroClass", "Leandro", nullptr));
-        playButton_2->setText(QCoreApplication::translate("LeandroClass", "Play", nullptr));
-        stopButton_2->setText(QCoreApplication::translate("LeandroClass", "Stop", nullptr));
-        recordButton_2->setText(QCoreApplication::translate("LeandroClass", "Record", nullptr));
-        label_7->setText(QCoreApplication::translate("LeandroClass", "Instruments", nullptr));
-        pushButton_7->setText(QCoreApplication::translate("LeandroClass", "Set for Channel", nullptr));
-        label_8->setText(QCoreApplication::translate("LeandroClass", "Effects", nullptr));
-        pushButton_8->setText(QCoreApplication::translate("LeandroClass", "Add to Channel", nullptr));
-        groupBoxChannel1_2->setTitle(QCoreApplication::translate("LeandroClass", "Channel 1", nullptr));
-        setActiveButtonChannel1_2->setText(QCoreApplication::translate("LeandroClass", "Set Active", nullptr));
-        InputLabelChannel1_2->setText(QCoreApplication::translate("LeandroClass", "Input", nullptr));
-        inputComboBoxChannel1_2->setItemText(0, QCoreApplication::translate("LeandroClass", "MIDI Track", nullptr));
-        inputComboBoxChannel1_2->setItemText(1, QCoreApplication::translate("LeandroClass", "PC Keyboard", nullptr));
-
+        LeandroClass->setWindowTitle(QApplication::translate("LeandroClass", "Leandro", Q_NULLPTR));
+        playButton_2->setText(QApplication::translate("LeandroClass", "Play", Q_NULLPTR));
+        stopButton_2->setText(QApplication::translate("LeandroClass", "Stop", Q_NULLPTR));
+        recordButton_2->setText(QApplication::translate("LeandroClass", "Record", Q_NULLPTR));
+        label_7->setText(QApplication::translate("LeandroClass", "Instruments", Q_NULLPTR));
+        pushButton_7->setText(QApplication::translate("LeandroClass", "Set for Channel", Q_NULLPTR));
+        label_8->setText(QApplication::translate("LeandroClass", "Effects", Q_NULLPTR));
+        pushButton_8->setText(QApplication::translate("LeandroClass", "Add to Channel", Q_NULLPTR));
+        groupBoxChannel1_2->setTitle(QApplication::translate("LeandroClass", "Channel 1", Q_NULLPTR));
+        setActiveButtonChannel1_2->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        InputLabelChannel1_2->setText(QApplication::translate("LeandroClass", "Input", Q_NULLPTR));
+        inputComboBoxChannel1_2->clear();
+        inputComboBoxChannel1_2->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
 
         const bool __sortingEnabled = midiListChannel1_2->isSortingEnabled();
         midiListChannel1_2->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = midiListChannel1_2->item(0);
-        ___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", "MIDI 1 - Track 1", nullptr));
+        ___qlistwidgetitem->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
         midiListChannel1_2->setSortingEnabled(__sortingEnabled);
 
-        levelLabelChannel1_2->setText(QCoreApplication::translate("LeandroClass", "Level", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("LeandroClass", "Instrument", nullptr));
-        label_9->setText(QCoreApplication::translate("LeandroClass", "TextLabel", nullptr));
-        label_10->setText(QCoreApplication::translate("LeandroClass", "TextLabel", nullptr));
-        label_11->setText(QCoreApplication::translate("LeandroClass", "Setting 1", nullptr));
-        label_12->setText(QCoreApplication::translate("LeandroClass", "TextLabel", nullptr));
-        groupBox_5->setTitle(QCoreApplication::translate("LeandroClass", "Effect 1", nullptr));
-        groupBox_6->setTitle(QCoreApplication::translate("LeandroClass", "Effect 2", nullptr));
+        levelLabelChannel1_2->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        groupBox_2->setTitle(QApplication::translate("LeandroClass", "Instrument", Q_NULLPTR));
+        label_9->setText(QApplication::translate("LeandroClass", "TextLabel", Q_NULLPTR));
+        label_10->setText(QApplication::translate("LeandroClass", "TextLabel", Q_NULLPTR));
+        label_11->setText(QApplication::translate("LeandroClass", "Setting 1", Q_NULLPTR));
+        label_12->setText(QApplication::translate("LeandroClass", "TextLabel", Q_NULLPTR));
+        groupBox_5->setTitle(QApplication::translate("LeandroClass", "Effect 1", Q_NULLPTR));
+        groupBox_6->setTitle(QApplication::translate("LeandroClass", "Effect 2", Q_NULLPTR));
     } // retranslateUi
 
 };
