@@ -1,6 +1,8 @@
 #include "Spectrogram.h"
 #include <fstream>
 
+#define DEBUG
+
 Spectrogram::Spectrogram(float* signal, unsigned int signalSize) {
     this->sig = new float[signalSize];
     for (unsigned int i = 0; i < signalSize; i++)
@@ -14,16 +16,23 @@ Spectrogram::~Spectrogram() {
     return;
 }
 
-void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window, bool save) {
+void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window,bool showTime , bool save, string name) {
     ofstream out("data.ian");
+    out << name << endl;
     out << to_string(samplingRate) << ',' << to_string(nfft) <<',' << to_string(window) << ',';
     if (save)
+        out << to_string(1) << ',';
+    else
+        out << to_string(0) << ',';
+    if (showTime)
         out << to_string(1);
     else
         out << to_string(0);
     out << endl;
-
-    cout << "Calculando el Espectrograma" << endl;
+    // Samplingrate, nfft,window,save
+#ifdef DEBUG
+    cout << "Calculando el Espectrograma.." << endl;
+#endif
     for (unsigned int i = 0; i < this->sigSize; i++) {
         out << to_string(sig[i]);
         if (i != this->sigSize)
@@ -32,8 +41,53 @@ void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, 
     out << endl;
     out.close();
     system("python ./plot.py");
-
+#ifdef DEBUG
+    cout << "Finalizado el calculo." << endl;
+#endif
 }
+
+/*
+void Spectrogram::fft(std::complex<float>* in, std::complex<float>* out, size_t n) {
+    vector<complex<double>> temp;
+
+    for (size_t i = 0; i < n; i++)
+        temp.push_back(in[i]);
+    temp = Cooley_Tukey(temp);
+    for (size_t i = 0; i < temp.size(); i++)
+        out[i] = temp[i];
+    return;
+}
+
+std::vector<complex<double>> Spectrogram::Cooley_Tukey(std::vector<complex<double>>& samples) {
+    unsigned int numSamples = samples.size();
+
+    if (numSamples <= 1)
+        return samples;
+    unsigned int newSampleSize = numSamples / 2;
+    std::vector<complex<double>> Xeven(newSampleSize, 0);
+    std::vector<complex<double>> Xodd(newSampleSize, 0);
+
+    for (unsigned int i = 0; i < newSampleSize; i++) {
+        Xeven[i] = samples[2 * i];
+        Xodd[i] = samples[2 * i + 1];
+    }
+    std::vector<complex<double>> Feven(newSampleSize, 0);
+    std::vector<complex<double>> Fodd(newSampleSize, 0);
+
+    Feven = fft(Xeven);
+    Fodd = fft(Xodd);
+
+    std::vector<complex<double>> freqBins(numSamples, 0);
+
+    for (int i = 0; i < (numSamples / 2); i++) {
+        complex<double> cmplxExponential = polar(1.0, (-2 * 3.14159 * i / numSamples)) * Fodd[i];
+        freqBins[i] = Feven[i] + cmplxExponential;
+        freqBins[i + numSamples / 2] = Feven[i] - cmplxExponential;
+    }
+
+    return freqBins;
+}
+*/
 
 
 

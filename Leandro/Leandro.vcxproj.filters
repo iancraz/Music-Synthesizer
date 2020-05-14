@@ -133,7 +133,6 @@
     </None>
     <None Include="sm64.mid" />
     <None Include="mario_midi.mid" />
-    <None Include="packages.config" />
     <None Include="pirates.mid" />
     <None Include="calesita64.mid" />
   </ItemGroup>

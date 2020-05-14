@@ -27,19 +27,12 @@ int main(int argc, char* argv[])
 	params2.tRelease = 0.5;
 	params2.sustainLevel = 0.3;
 
-
-	
-
-
-
-
 	//program.addChannel(channel1);
-	program.addMidiFile("", "LetItBe.mid", true);
+	program.addMidiFile("", "sm64.mid", true);
 	//Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
-		//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
+		Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
 		//Instrument* instrument = randInst();
-		Instrument* instrument = new SamplingInstrument(2, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
 		//Effect* effect = new VibratoEffect();
 		program.channels[i]->setChannelInstrument(instrument);
 		//program.channels[i]->addEffectToChannel(effect);

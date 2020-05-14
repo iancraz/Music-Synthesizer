@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <complex>
+#include <vector>
 
 typedef enum{WINDOW_NONE, WINDOW_BLACKMAN, WINDOW_HAMMING, WINDOW_BARTLETT}window_t;
 
@@ -11,8 +13,10 @@ class Spectrogram {
 public:
 	Spectrogram(float * signal, unsigned int signalSize);
 	~Spectrogram();
-	void calcSpectrogram(unsigned int samplingRate = 44000, unsigned int nfft = 1024, window_t window = WINDOW_NONE, bool save = true);
+	void calcSpectrogram(unsigned int samplingRate = 44000, unsigned int nfft = 1024, window_t window = WINDOW_NONE,bool showTime = true , bool save = true, string name = "sepcgram.png");
+	//void fft(std::complex<float>* in, std::complex<float>* out, size_t n);
 protected:
+	//std::vector<complex<double>> Cooley_Tukey(std::vector<complex<double>>& samples);
 	float* sig;
 	unsigned int sigSize;
 	std::string hola;
