@@ -80,7 +80,7 @@ public:
 	
 
 	// GUI-related, system-triggered functions
-
+	void initGUI();
 	void updateAvailableAssetsInGUI();
 	void addToAvailableAssets(instrumentModel* model);
 	void addToAvailableAssets(effectModel* model);
@@ -95,6 +95,8 @@ public:
 	void setInstrumentForActiveChannel();
 	void addEffectToActiveChannel();
 	void removeInstrumentFromActiveChannel();
+
+	void addNewChannel();
 
 	void removeReverbEffect();
 	void removeFlangerEffect();

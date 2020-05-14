@@ -42,7 +42,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 
 	// GUI function connections
 
-	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
+	
 	
 
 }
@@ -129,9 +129,9 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 			this->noteBuffers.erase(noteBuffers.begin() + i);
 		}
 	// Destroy channel and remove from channel list
-
-	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
+	channel->removeFromGUI(&this->ui);
 	channel->~Channel();
+	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
 }
 
 void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
@@ -148,8 +148,7 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 		tempTrack->trackIndex = track;
 		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
 		if (autoSet) {
-			tempChannel = new Channel(this->channelCreationCounter,this);
-			this->channelCreationCounter++;
+			tempChannel = new Channel(this->channelCreationCounter++,this);
 			tempChannel->setChannelTrack(tempTrack);
 			if (tempChannel->events.size() != 0) this->addChannel(tempChannel);
 			else delete tempChannel;
@@ -210,7 +209,6 @@ void Leandro::updateGUIMidiLists() {
 		}
 	}
 }
-
 
 void Leandro::setActiveChannel(Channel* channel) {
 	if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
@@ -335,6 +333,13 @@ void Leandro::showEffect(Effect* effect) {
 
 // GUI-triggered functions
 
+void Leandro::addNewChannel() {
+	Channel* newChannel = new Channel(this->channelCreationCounter++, this);
+	addChannel(newChannel);
+
+};
+
+
 void Leandro::setInstrumentForActiveChannel() {
 	Instrument* instrument = nullptr;
 	for(int i=0;i<instrumentModels.size();i++)
@@ -445,6 +450,9 @@ void Leandro::addEffectToActiveChannel() {
 				break;
 			case effectType::wahwah:
 				effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::eq8band:
+				effect = new Eq8BandEffect((eq8bandParams_t*)effectModels.at(i)->params);
 				break;
 			}
 			break;
@@ -580,3 +588,27 @@ void Leandro::loadSynthData() {
 // GUI triggered setters
 
 
+
+
+
+// GUI init
+
+void Leandro::initGUI() {
+	ui.setupUi(this);
+	ui.retranslateUi(this);
+	
+	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
+	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
+	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
+
+	QObject::connect(ui.deleteADSRButton, &QPushButton::clicked, this, &Leandro::removeInstrumentFromActiveChannel);
+	QObject::connect(ui.deleteAdditiveButton, &QPushButton::clicked, this, &Leandro::removeInstrumentFromActiveChannel);
+	QObject::connect(ui.deleteKarplusButton, &QPushButton::clicked, this, &Leandro::removeInstrumentFromActiveChannel);
+	QObject::connect(ui.deleteSamplingButton, &QPushButton::clicked, this, &Leandro::removeInstrumentFromActiveChannel);
+	QObject::connect(ui.delete8EqButton, &QPushButton::clicked, this, &Leandro::removeEq8BandEffect);
+	QObject::connect(ui.deleteReverbButton, &QPushButton::clicked, this, &Leandro::removeReverbEffect);
+	QObject::connect(ui.deleteVibratoButton, &QPushButton::clicked, this, &Leandro::removeVibratoEffect);
+	QObject::connect(ui.deleteFlangerButton, &QPushButton::clicked, this, &Leandro::removeFlangerEffect);
+	QObject::connect(ui.deleteWahwahButton, &QPushButton::clicked, this, &Leandro::removeWahwahEffect);
+
+}

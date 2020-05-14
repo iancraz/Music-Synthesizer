@@ -46,7 +46,7 @@ public:
 
 	void addToGUI(Ui_LeandroClass* programUI);
 	void removeFromGUI(Ui_LeandroClass* programUI);
-
+	
 	// Setters
 	void setChannelTrack(midiTrack* midiTrack); 
 	void updateMidiTrack();
@@ -59,7 +59,7 @@ public:
 	void setVolume();
 	void setKeyboard();
 	void setActive();
-
+	void destroyThisChannelFromProgram();
 	
 	queue<midiEvent> events; // Queue of events in the midi track the channel's currently playing
 	QFrame* frameChannel;
