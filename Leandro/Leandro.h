@@ -21,6 +21,8 @@
 
 using namespace std;
 
+enum class synthType;
+
 typedef struct {
 	string instrumentName;
 	synthType type;
@@ -85,11 +87,21 @@ public:
 	void updateGUIMidiLists();
 	void setActiveChannel(Channel* channel);
 	void showInstrument(Instrument* instrument);
-
+	void showEffect(Effect* effect);
+	void updateActiveAssetsBay();
+	void removeEffectFromActiveChannel();
 	// GUI-triggered functions
 
 	void setInstrumentForActiveChannel();
 	void addEffectToActiveChannel();
+	void removeInstrumentFromActiveChannel();
+
+	void removeReverbEffect();
+	void removeFlangerEffect();
+	void removeVibratoEffect();
+	void removeEq8BandEffect();
+	void removeWahwahEffect();
+
 
 private:
 	Ui::LeandroClass ui;

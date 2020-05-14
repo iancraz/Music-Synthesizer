@@ -1,71 +1,8 @@
-﻿  moc Leandro.h
-  Additive.cpp
+﻿  Additive.cpp
   ADSR.cpp
   Channel.cpp
   Instrument.cpp
   Leandro.cpp
   main.cpp
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(67,20): error C2535: 'float ADSRInstrument::getAttack(void)': función miembro ya definida o declarada (compilando archivo de origen Channel.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(62): message : vea la declaración de 'ADSRInstrument::getAttack' (compilando archivo de origen Channel.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(67,20): error C2535: 'float ADSRInstrument::getAttack(void)': función miembro ya definida o declarada (compilando archivo de origen main.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(62): message : vea la declaración de 'ADSRInstrument::getAttack' (compilando archivo de origen main.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(67,20): error C2535: 'float ADSRInstrument::getAttack(void)': función miembro ya definida o declarada (compilando archivo de origen Leandro.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(62): message : vea la declaración de 'ADSRInstrument::getAttack' (compilando archivo de origen Leandro.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\main.cpp(78,38): error C2664: 'AdditiveInstrument::AdditiveInstrument(AdditiveInstrument &&)': el argumento 1 no puede convertirse de 'additiveParams_t *' a 'const AdditiveInstrument &'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\main.cpp(78,38): message : Razón: no se puede realizar la conversión de 'additiveParams_t *' a 'const AdditiveInstrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\main.cpp(78,38): message : Ningún constructor ha podido aceptar el tipo de origen o bien la resolución de sobrecarga del constructor era ambigua
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(103,1): message : vea la declaración de 'AdditiveInstrument::AdditiveInstrument' (compilando archivo de origen main.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,12): error C2143: error de sintaxis: falta ';' delante de '*' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,12): error C2143: error de sintaxis: falta ';' delante de '*' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,12): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,12): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,12): error C2143: error de sintaxis: falta ';' delante de '*' (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,24): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,24): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,12): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(52,38): error C2061: error de sintaxis: identificador 'Instrument' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(20,24): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(52,38): error C2061: error de sintaxis: identificador 'Instrument' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(52,38): error C2061: error de sintaxis: identificador 'Instrument' (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(235,56): error C2039: 'wa': no es un miembro de 'Instrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,12): error C2143: error de sintaxis: falta ';' delante de '*' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(24): message : vea la declaración de 'Instrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,12): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,24): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(260,83): error C2664: 'ADSRInstrument::ADSRInstrument(const ADSRInstrument &)': el argumento 1 no puede convertirse de 'adsrParams_t *' a 'const ADSRInstrument &'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(260,83): message : Razón: no se puede realizar la conversión de 'adsrParams_t *' a 'const ADSRInstrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(260,83): message : Ningún constructor ha podido aceptar el tipo de origen o bien la resolución de sobrecarga del constructor era ambigua
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(86,1): message : vea la declaración de 'ADSRInstrument::ADSRInstrument' (compilando archivo de origen Leandro.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(263,91): error C2664: 'AdditiveInstrument::AdditiveInstrument(AdditiveInstrument &&)': el argumento 1 no puede convertirse de 'additiveParams_t *' a 'const AdditiveInstrument &'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(263,91): message : Razón: no se puede realizar la conversión de 'additiveParams_t *' a 'const AdditiveInstrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(263,91): message : Ningún constructor ha podido aceptar el tipo de origen o bien la resolución de sobrecarga del constructor era ambigua
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(103,1): message : vea la declaración de 'AdditiveInstrument::AdditiveInstrument' (compilando archivo de origen Leandro.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(266,89): error C2664: 'KarplusInstrument::KarplusInstrument(const KarplusInstrument &)': el argumento 1 no puede convertirse de 'karplusParams_t *' a 'const KarplusInstrument &'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(266,89): message : Razón: no se puede realizar la conversión de 'karplusParams_t *' a 'const KarplusInstrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(266,89): message : Ningún constructor ha podido aceptar el tipo de origen o bien la resolución de sobrecarga del constructor era ambigua
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(116,1): message : vea la declaración de 'KarplusInstrument::KarplusInstrument' (compilando archivo de origen Leandro.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,12): error C2143: error de sintaxis: falta ';' delante de '*' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(26,16): error C3646: 'type': especificador de invalidación desconocido (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(269,91): error C2664: 'SamplingInstrument::SamplingInstrument(const SamplingInstrument &)': el argumento 1 no puede convertirse de 'samplingParams_t *' a 'const SamplingInstrument &'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(269,91): message : Razón: no se puede realizar la conversión de 'samplingParams_t *' a 'const SamplingInstrument'
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(269,91): message : Ningún constructor ha podido aceptar el tipo de origen o bien la resolución de sobrecarga del constructor era ambigua
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(132,1): message : vea la declaración de 'SamplingInstrument::SamplingInstrument' (compilando archivo de origen Leandro.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,12): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,12): error C2143: error de sintaxis: falta ';' delante de '*' (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(26,16): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,24): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,12): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Channel.h(80,24): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(26,16): error C3646: 'type': especificador de invalidación desconocido (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(26,16): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(26,16): error C3646: 'type': especificador de invalidación desconocido (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(26,16): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(87,32): error C2061: error de sintaxis: identificador 'Instrument' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(67,20): error C2535: 'float ADSRInstrument::getAttack(void)': función miembro ya definida o declarada (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(62): message : vea la declaración de 'ADSRInstrument::getAttack' (compilando archivo de origen Additive.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(87,32): error C2061: error de sintaxis: identificador 'Instrument' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(87,32): error C2061: error de sintaxis: identificador 'Instrument' (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(67,20): error C2535: 'float ADSRInstrument::getAttack(void)': función miembro ya definida o declarada (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(62): message : vea la declaración de 'ADSRInstrument::getAttack' (compilando archivo de origen ADSR.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(67,20): error C2535: 'float ADSRInstrument::getAttack(void)': función miembro ya definida o declarada (compilando archivo de origen Instrument.cpp)
-C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(62): message : vea la declaración de 'ADSRInstrument::getAttack' (compilando archivo de origen Instrument.cpp)
+  moc_Leandro.cpp
+  Leandro.vcxproj -> C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe

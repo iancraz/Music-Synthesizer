@@ -13,7 +13,7 @@ int Instrument::synthFunction(
 
 // KARPLUS-STRONG CLASS FUNCTIONS
 
-KarplusInstrument::KarplusInstrument(karplusParams_t* _params, QFrame* instrumentsFrame) {
+KarplusInstrument::KarplusInstrument(karplusParams_t* _params) {
 	
 	// Constructor class for KarplusInstrument. Should set defaults, load files and allocate memory as needed.
 }
@@ -24,7 +24,7 @@ KarplusInstrument::~KarplusInstrument() {
 
 //	SAMPLING CLASS FUNCTIONS
 
-SamplingInstrument::SamplingInstrument(samplingParams_t* _params, QFrame* instrumentsFrame) {
+SamplingInstrument::SamplingInstrument(samplingParams_t* _params) {
 	
 	// Constructor class for SamplingInstrument. Should set defaults, load files and allocate memory as needed.
 }

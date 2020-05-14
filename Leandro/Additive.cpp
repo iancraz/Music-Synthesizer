@@ -7,7 +7,7 @@
 #include <boost/algorithm/string.hpp>
 
 
-AdditiveInstrument::AdditiveInstrument(additiveParams_t* _params, QFrame* instrumentsFrame) {
+AdditiveInstrument::AdditiveInstrument(additiveParams_t* _params) {
 	std::ifstream file(_params->envelope_file);
 
 	// count lines

@@ -18,7 +18,7 @@ typedef int instrumentCallback(
 );
 
 enum class synthType { adsr, additive, fm, karplus, sampling };
-enum class waveform { sine, square, sawtooth };
+enum waveform { sine, square, sawtooth };
 
 
 class Instrument
@@ -29,8 +29,7 @@ public:
 	string instrumentName;
 	
 	virtual instrumentCallback synthFunction; // Instrument callback function: defined by typedef
-	virtual QFrame* generateGUI(QFrame* instrumentsFrame);
-	QFrame * instrumentFrame;
+	
 };
 
 
@@ -51,7 +50,7 @@ typedef struct {
 
 class ADSRInstrument : public Instrument {
 public:
-	ADSRInstrument(adsrParams_t* _params, QFrame* instrumentsFrame);
+	ADSRInstrument(adsrParams_t* _params);
 	~ADSRInstrument() {}
 
 	// Getters
@@ -60,11 +59,10 @@ public:
 	waveform getWF2() { return wform2; }
 	float getWF2Level() { return level2; }
 	float getAttack() { return params->tAttack; }
-	float getDecay() { return params->tAttack; }
-	float getSustainRate() { return params->tAttack; }
-	float getSustainLevel() { return params->tAttack; }
-	float getRelease() { return params->tAttack; }
-	float getAttack() { return params->tAttack; }
+	float getDecay() { return params->tDecay; }
+	float getSustainRate() { return params->sustainRate; }
+	float getSustainLevel() { return params->sustainLevel; }
+	float getRelease() { return params->tRelease; }
 
 	void setParams(adsrParams_t* params);
 
@@ -72,7 +70,7 @@ protected:
 	adsrParams_t* params;
 	instrumentCallback synthFunction;
 	int generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength);
-	QFrame* generateGUI(QFrame* instrumentsFrame);
+
 	float* envelope;
 	float* release;
 
@@ -93,7 +91,7 @@ typedef struct {
 
 class AdditiveInstrument : public Instrument {
 public:
-	AdditiveInstrument(additiveParams_t* _params, QFrame* instrumentsFrame);
+	AdditiveInstrument(additiveParams_t* _params);
 private:
 	instrumentCallback synthFunction;
 	float* envelope[7];
@@ -111,7 +109,7 @@ class KarplusInstrument : public Instrument {
 public:
 	// Parameter declarations for Karplus-Strong algorhythm based instruments here
 
-	KarplusInstrument(karplusParams_t* _params, QFrame* instrumentsFrame);
+	KarplusInstrument(karplusParams_t* _params);
 	~KarplusInstrument();
 };
 
@@ -127,6 +125,6 @@ typedef struct {
 class SamplingInstrument : public Instrument {
 public:
 
-	SamplingInstrument(samplingParams_t* _params, QFrame* instrumentsFrame);
+	SamplingInstrument(samplingParams_t* _params);
 	~SamplingInstrument();
 };

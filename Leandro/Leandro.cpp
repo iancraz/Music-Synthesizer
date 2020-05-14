@@ -213,26 +213,56 @@ void Leandro::updateGUIMidiLists() {
 
 
 void Leandro::setActiveChannel(Channel* channel) {
-	activeChannel->setActiveButtonChannel->setEnabled(true);
+	if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
 	activeChannel = channel;
 	activeChannel->setActiveButtonChannel->setDisabled(true);
 
-	ui.instrumentLayout->removeItem(ui.instrumentLayout->takeAt(0));
-	ui.instrumentLayout->addItem(channel->instrumentLayout);
-
-	ui.effectsScrollAreaLayout->removeItem(ui.effectsScrollAreaLayout->takeAt(0));
-	ui.effectsScrollAreaLayout->addItem(channel->effectsLayout);
+	updateActiveAssetsBay();
 } 
 
-void Leandro::showInstrument(Instrument* instrument) {
+void Leandro::updateActiveAssetsBay() {
 	ui.adsrInstrumentFrame->setHidden(true);
 	ui.additiveInstrumentFrame->setHidden(true);
 	ui.samplingInstrumentFrame->setHidden(true);
 	ui.karplusInstrumentFrame->setHidden(true);
+	ui.flangerEffectFrame->setHidden(true);
+	ui.reverbEffectFrame->setHidden(true);
+	ui.vibratoEffectFrame->setHidden(true);
+	ui.wahwahEffectFrame->setHidden(true);
+	ui.eq8Frame->setHidden(true);
+	
+	if (activeChannel->instrument) showInstrument(activeChannel->instrument);
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+	{
+		showEffect(activeChannel->effects.at(effIndex)); // TODO PRIORITY add effect order: IDEA: implement function that reorganizes effects using replaceWidget function
+	}
+
+}
+
+void Leandro::showInstrument(Instrument* instrument) {
+	
+
+	ADSRInstrument* adsrinst = (ADSRInstrument*)instrument;
+	AdditiveInstrument* additiveinst = (AdditiveInstrument*)instrument;
+	SamplingInstrument* samplinginst = (SamplingInstrument*)instrument;
+	KarplusInstrument* karplusinst = (KarplusInstrument*)instrument;
+
+
+
 	switch (instrument->type) {
 		case synthType::adsr:
+			
 			ui.adsrInstrumentFrame->setHidden(false);
-			ui.waveform1ComboBox->setCurrentIndex(instrument->wa);
+			ui.waveform1ComboBoxADSR->setCurrentIndex(adsrinst->getWF1());
+			ui.waveform2ComboBoxADSR->setCurrentIndex(adsrinst->getWF2());
+			ui.levelWF1DialADSR->setValue((int)(adsrinst->getWF1Level() * 100));
+			ui.levelWF2DialADSR->setValue((int)(adsrinst->getWF2Level() * 100));
+			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
+			ui.decayDialADSR->setValue((int)(adsrinst->getDecay() * 1000));
+			ui.sustainRateDialADSR->setValue((int)(adsrinst->getSustainRate()*1000));
+			ui.sustainLevelDialADSR->setValue((int)(adsrinst->getSustainLevel() * 100));
+			ui.releaseDialADSR->setValue((int)(adsrinst->getRelease() * 1000));
+			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
 			break;
 		case synthType::additive:
 			ui.additiveInstrumentFrame->setHidden(false);
@@ -247,6 +277,60 @@ void Leandro::showInstrument(Instrument* instrument) {
 			
 			break;
 		}
+
+}
+
+void Leandro::showEffect(Effect* effect) {
+	FlangerEffect* flanger = (FlangerEffect*)effect;
+	ReverbEffect* reverb = (ReverbEffect*)effect;
+	VibratoEffect* vibrato = (VibratoEffect*)effect;
+	WahwahEffect* wahwah = (WahwahEffect*)effect;
+	Eq8BandEffect* eq8band= (Eq8BandEffect*)effect;
+
+
+
+	switch (effect->type) {
+	case effectType::flanger:
+		ui.flangerEffectFrame->setHidden(false);
+		ui.flangerF0Slider->setValue((int)(flanger->getFo() * 100));
+		ui.flangerGFBDial->setValue((int)(flanger->getGFB() * 100));
+		ui.flangerGFFDial->setValue((int)(flanger->getGFF() * 100));
+		ui.flangerMwDial->setValue((int)(flanger->getMw() * 100));
+		ui.flangerM0Dial->setValue((int)(flanger->getM0() * 100));
+		break; // TODO SET MAX MIN FLANGER AND NAMES
+	case effectType::reverb:
+		ui.reverbEffectFrame->setHidden(false);
+		ui.reverbTypeComboBox->setCurrentIndex(reverb->getMode());
+		ui.reverbDelayDial->setValue((int)(reverb->getDelay() * 100));
+		ui.reverbAttnDial->setValue((int)(reverb->getAtt() * 100));
+		break;
+	case effectType::vibrato:
+		ui.vibratoEffectFrame->setHidden(false);
+		ui.vibratoF0Slider->setValue((int)(vibrato->getFo() * 100));
+		ui.vibratoMAvgDial->setValue((int)(vibrato->getMavg() * 100));
+		ui.vibratoWidthDial->setValue((int)(vibrato->getWidth() * 100));
+		break;
+	case effectType::wahwah:
+		ui.wahwahEffectFrame->setHidden(false);
+		ui.wahwahFMinSlider->setValue((int)(wahwah->getFmin() * 100));
+		ui.wahwahLFOSlider->setValue((int)(wahwah->getFLFO() * 100));
+		break;
+
+	case effectType::eq8band:
+		ui.eq8Frame->setHidden(false);
+		ui.eqSlider100->setValue((int)(eq8band->getGains().gains[0] * 100));
+		ui.eqSlider200->setValue((int)(eq8band->getGains().gains[1] * 100));
+		ui.eqSlider400->setValue((int)(eq8band->getGains().gains[2] * 100));
+		ui.eqSlider800->setValue((int)(eq8band->getGains().gains[3] * 100));
+		ui.eqSlider1k4->setValue((int)(eq8band->getGains().gains[4] * 100));
+		ui.eqSlider2k7->setValue((int)(eq8band->getGains().gains[5] * 100));
+		ui.eqSlider5k->setValue((int)(eq8band->getGains().gains[6] * 100));
+		ui.eqSlider10k->setValue((int)(eq8band->getGains().gains[7] * 100));
+
+		break;
+	}
+
+
 }
 
 // GUI-triggered functions
@@ -274,6 +358,78 @@ void Leandro::setInstrumentForActiveChannel() {
 	activeChannel->setChannelInstrument(instrument);
 }
 
+
+void Leandro::removeEffectFromActiveChannel() {
+	
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+	{
+		switch (activeChannel->effects.at(effIndex)->type) {
+		case effectType::flanger:
+			if (ui.flangerEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::reverb:
+			if (ui.reverbEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::vibrato:
+			if (ui.vibratoEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::wahwah:
+			if (ui.wahwahEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::eq8band:
+			if (ui.eq8Frame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		}
+	}
+	updateActiveAssetsBay();
+}
+
+void Leandro::removeInstrumentFromActiveChannel() {
+	activeChannel->removeChannelInstrument();
+	updateActiveAssetsBay();
+
+}
+void Leandro::removeReverbEffect() {
+	ui.reverbEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeFlangerEffect() {
+	ui.flangerEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeVibratoEffect() {
+	ui.vibratoEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeEq8BandEffect() {
+	ui.eq8Frame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeWahwahEffect() {
+	ui.wahwahEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+
 void Leandro::addEffectToActiveChannel() {
 	Effect* effect = nullptr;
 	for (int i = 0; i < effectModels.size(); i++)
@@ -289,10 +445,13 @@ void Leandro::addEffectToActiveChannel() {
 				effect = new VibratoEffect((vibratoParams_t*)effectModels.at(i)->params);
 				break;
 			case effectType::wahwah:
-	//			effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
+				effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
 				break;
 			}
 			break;
 		}
 	activeChannel->addEffectToChannel(effect);
 }
+
+// GUI triggered setters
+

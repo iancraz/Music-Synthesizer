@@ -26,7 +26,7 @@ void ADSRInstrument::setParams(adsrParams_t* _params) {
 		throw "Error! ADSR parameters are invalid";
 }
 
-ADSRInstrument::ADSRInstrument(adsrParams_t* _params, QFrame* instrumentsFrame) {
+ADSRInstrument::ADSRInstrument(adsrParams_t* _params) {
 	if (_params) setParams(_params);
 
 
@@ -39,7 +39,7 @@ ADSRInstrument::ADSRInstrument(adsrParams_t* _params, QFrame* instrumentsFrame) 
 	envelope = new float[_params->buffLength];
 	release = new float[_params->buffLength];
 	generateEnvelope(_params->sampleRate, _params->buffLength);
-	instrumentFrame = generateGUI(instrumentsFrame);
+
 }
 
 int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength) {
@@ -77,59 +77,6 @@ int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsign
 	}
 
 	return i - 1;
-	/*
-
-		if (noteDuration_n > nAttack + nDecay) {
-			while (i < nAttack) {
-				envelope[i] = (params.k * A0) / params.tAttack * (float)i / (float)sampleRate;
-				i++;
-			}
-			while (i < nAttack + nDecay) {
-				envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / (float)sampleRate;
-				i++;
-			}
-			int nSustain = noteDuration_n - (nAttack + nDecay);
-			while (i < nAttack + nDecay + nSustain) {
-				if (A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / (float)sampleRate > 0)
-					envelope[i] = A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / (float)sampleRate;
-				else
-					break;
-				i++;
-			}
-			float Ar = envelope[i - 1];
-			while (i < nAttack + nDecay + nSustain + nRelease) {
-				envelope[i] = Ar - Ar / params.tRelease * (float)(i - (nAttack + nDecay + nSustain)) / (float)sampleRate;
-				i++;
-			}
-		}
-		else if (noteDuration_n > nAttack && noteDuration_n < nAttack + nDecay) {
-			while (i < nAttack) {
-				envelope[i] = (float)i / (float)sampleRate * (params.k * (float)A0) / params.tAttack;
-				i++;
-			}
-			while (i < (noteDuration_n)) {
-				envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / (float)sampleRate;
-				i++;
-			}
-			float Ar = envelope[i - 1];
-			while (i < noteDuration_n + nDecay) {
-				envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / (float)sampleRate;
-				i++;
-			}
-		}
-		else if (noteDuration_n < nAttack) {
-			while (i < noteDuration_n) {
-				envelope[i] = (float)i / (float)sampleRate * (params.k * (float)A0) / params.tAttack;
-				i++;
-			}
-			float Ar = envelope[i - 1];
-			while (i < noteDuration_n + nRelease) {
-				envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / (float)sampleRate;
-				i++;
-			}
-		}
-		return i-1;
-		*/
 }
 
 int

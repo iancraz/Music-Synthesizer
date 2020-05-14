@@ -14,6 +14,7 @@
 using namespace std;
 
 class Leandro;
+class Instrument;
 
 typedef struct {
 	midiTrack* currentMidiTrack;
@@ -51,6 +52,8 @@ public:
 	void updateMidiTrack();
 	void setChannelInstrument(Instrument* instrument);
 	void addEffectToChannel(Effect* effect);
+
+	void removeChannelInstrument();
 	
 	// Functions called by user from GUI
 	void setVolume();

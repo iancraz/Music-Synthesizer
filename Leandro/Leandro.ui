@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2310</width>
-    <height>766</height>
+    <width>2989</width>
+    <height>742</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -31,9 +31,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>165</red>
-        <green>165</green>
-        <blue>165</blue>
+        <red>253</red>
+        <green>180</green>
+        <blue>50</blue>
        </color>
       </brush>
      </colorrole>
@@ -195,9 +195,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>165</red>
-        <green>165</green>
-        <blue>165</blue>
+        <red>253</red>
+        <green>180</green>
+        <blue>50</blue>
        </color>
       </brush>
      </colorrole>
@@ -359,9 +359,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>165</red>
-        <green>165</green>
-        <blue>165</blue>
+        <red>253</red>
+        <green>180</green>
+        <blue>50</blue>
        </color>
       </brush>
      </colorrole>
@@ -851,8 +851,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>2152</width>
-             <height>294</height>
+             <width>2831</width>
+             <height>274</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -1376,7 +1376,7 @@
                      <number>6</number>
                     </property>
                     <item>
-                     <widget class="QPushButton" name="deleteInstrumentButton">
+                     <widget class="QPushButton" name="deleteADSRButton">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -1422,7 +1422,27 @@
                        </font>
                       </property>
                       <property name="text">
-                       <string>ADSR Instrument</string>
+                       <string>Waveform + ADSR</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_3">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item alignment="Qt::AlignLeft">
+                     <widget class="QLabel" name="InstrumentNameADSR">
+                      <property name="text">
+                       <string>InstrumentName</string>
                       </property>
                      </widget>
                     </item>
@@ -1498,7 +1518,7 @@
                             </widget>
                            </item>
                            <item>
-                            <widget class="QComboBox" name="waveform1ComboBox">
+                            <widget class="QComboBox" name="waveform1ComboBoxADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                                <horstretch>0</horstretch>
@@ -1558,7 +1578,7 @@
                             </widget>
                            </item>
                            <item>
-                            <widget class="QDial" name="levelWF1Dial">
+                            <widget class="QDial" name="levelWF1DialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                                <horstretch>0</horstretch>
@@ -1659,7 +1679,7 @@
                             </widget>
                            </item>
                            <item>
-                            <widget class="QComboBox" name="waveform2ComboBox">
+                            <widget class="QComboBox" name="waveform2ComboBoxADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                                <horstretch>0</horstretch>
@@ -1719,7 +1739,7 @@
                             </widget>
                            </item>
                            <item>
-                            <widget class="QDial" name="levelWF2Dial">
+                            <widget class="QDial" name="levelWF2DialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                                <horstretch>0</horstretch>
@@ -1808,7 +1828,7 @@
                          <item>
                           <layout class="QVBoxLayout" name="attackVLayout">
                            <item>
-                            <widget class="QDial" name="attackDial">
+                            <widget class="QDial" name="attackDialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -1853,7 +1873,7 @@
                          <item>
                           <layout class="QVBoxLayout" name="decayVLayout">
                            <item>
-                            <widget class="QDial" name="decayDial">
+                            <widget class="QDial" name="decayDialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -1895,7 +1915,7 @@
                          <item>
                           <layout class="QVBoxLayout" name="sustainVLayout">
                            <item>
-                            <widget class="QDial" name="sustainLevelDial">
+                            <widget class="QDial" name="sustainLevelDialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -1931,7 +1951,7 @@
                          <item>
                           <layout class="QVBoxLayout" name="releaseVLayout_5">
                            <item>
-                            <widget class="QDial" name="sustainRateDial">
+                            <widget class="QDial" name="sustainRateDialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -1970,7 +1990,7 @@
                          <item>
                           <layout class="QVBoxLayout" name="releaseVLayout">
                            <item>
-                            <widget class="QDial" name="releaseDial">
+                            <widget class="QDial" name="releaseDialADSR">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -2128,7 +2148,7 @@
                      <number>6</number>
                     </property>
                     <item>
-                     <widget class="QPushButton" name="deleteInstrumentButton_4">
+                     <widget class="QPushButton" name="deleteAdditiveButton">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2174,7 +2194,27 @@
                        </font>
                       </property>
                       <property name="text">
-                       <string>Additive Instrument</string>
+                       <string>Harmonic Addition</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_5">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="instrumentNameAdditive">
+                      <property name="text">
+                       <string>InstrumentName</string>
                       </property>
                      </widget>
                     </item>
@@ -2269,6 +2309,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_39">
                             <item>
                              <widget class="QSlider" name="sliderH0">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2299,6 +2342,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_42">
                             <item>
                              <widget class="QSlider" name="sliderH1">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2323,6 +2369,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_8">
                             <item>
                              <widget class="QSlider" name="sliderH2">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2347,6 +2396,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_33">
                             <item>
                              <widget class="QSlider" name="sliderH3">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2371,6 +2423,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_40">
                             <item>
                              <widget class="QSlider" name="sliderH4">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2395,6 +2450,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_34">
                             <item>
                              <widget class="QSlider" name="sliderH5">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2419,6 +2477,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_35">
                             <item>
                              <widget class="QSlider" name="sliderH6">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2443,6 +2504,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_41">
                             <item>
                              <widget class="QSlider" name="sliderH7">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2467,6 +2531,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_36">
                             <item>
                              <widget class="QSlider" name="sliderH8">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2491,6 +2558,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_37">
                             <item>
                              <widget class="QSlider" name="sliderH9">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2515,6 +2585,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_38">
                             <item>
                              <widget class="QSlider" name="sliderH10">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2539,6 +2612,9 @@
                            <layout class="QVBoxLayout" name="verticalLayout_3">
                             <item>
                              <widget class="QSlider" name="sliderH11">
+                              <property name="styleSheet">
+                               <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                              </property>
                               <property name="maximum">
                                <number>100</number>
                               </property>
@@ -2958,7 +3034,7 @@
                      <number>6</number>
                     </property>
                     <item>
-                     <widget class="QPushButton" name="deleteInstrumentButton_3">
+                     <widget class="QPushButton" name="deleteSamplingButton">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -3004,7 +3080,27 @@
                        </font>
                       </property>
                       <property name="text">
-                       <string>el adsr del mati</string>
+                       <string>Sampling</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_11">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="instrumentNameSampling">
+                      <property name="text">
+                       <string>InstrumentName</string>
                       </property>
                      </widget>
                     </item>
@@ -3660,7 +3756,27 @@
                        </font>
                       </property>
                       <property name="text">
-                       <string>el adsr del mati</string>
+                       <string>Karplus-Strong</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_10">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="instrumentNameKarplus">
+                      <property name="text">
+                       <string>InstrumentName</string>
                       </property>
                      </widget>
                     </item>
@@ -3676,302 +3792,9 @@
                   <item row="2" column="0">
                    <layout class="QVBoxLayout" name="framesVLayout_2">
                     <item>
-                     <widget class="QFrame" name="oscillator1Frame_2">
-                      <property name="frameShape">
-                       <enum>QFrame::Panel</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
-                      </property>
-                      <property name="lineWidth">
-                       <number>2</number>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_17">
-                       <property name="topMargin">
-                        <number>2</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>2</number>
-                       </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="oscillator1Label_2">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>14</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Oscillator 1</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <layout class="QHBoxLayout" name="oscillator1HLayout_2">
-                         <item>
-                          <layout class="QVBoxLayout" name="oscillator1WaveVLayout_2">
-                           <item>
-                            <widget class="QLabel" name="waveform1Label_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>10</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Waveform</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QComboBox" name="waveform1ComboBox_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>15</height>
-                              </size>
-                             </property>
-                             <property name="frame">
-                              <bool>true</bool>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>Sine</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Square</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Sawtooth</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QHBoxLayout" name="oscillator1LevelHLayout_2">
-                           <item>
-                            <widget class="QLabel" name="level1Label_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>11</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Level</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QDial" name="level1Dial_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>57</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QFrame" name="oscillator2Frame_2">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="frameShape">
-                       <enum>QFrame::Panel</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
-                      </property>
-                      <property name="lineWidth">
-                       <number>2</number>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_18">
-                       <property name="topMargin">
-                        <number>2</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>2</number>
-                       </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="oscillator2Label_2">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>14</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Oscillator 2</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <layout class="QHBoxLayout" name="oscillator2HLayout_2">
-                         <item>
-                          <layout class="QVBoxLayout" name="waveform2VLayout_2">
-                           <item>
-                            <widget class="QLabel" name="waveform2Label_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>10</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Waveform</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QComboBox" name="waveform2ComboBox_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>15</height>
-                              </size>
-                             </property>
-                             <property name="frame">
-                              <bool>true</bool>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>Sine</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Square</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Sawtooth</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QHBoxLayout" name="oscillator2LevelHLayout_2">
-                           <item>
-                            <widget class="QLabel" name="level2Label_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>11</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Level</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QDial" name="level2Dial_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>57</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="Line" name="line_5">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
                      <widget class="QFrame" name="envelopeParamsFrame_2">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
@@ -3992,75 +3815,41 @@
                        <property name="bottomMargin">
                         <number>2</number>
                        </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="envelopeParamsLabel_2">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>14</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Envelope Parameters</string>
-                         </property>
-                        </widget>
-                       </item>
                        <item>
                         <layout class="QHBoxLayout" name="envelopeParamsHLayout_2">
                          <item>
-                          <layout class="QVBoxLayout" name="attackVLayout_2">
-                           <item>
-                            <widget class="QDial" name="attackDial_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>60</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="attackLabel_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Attack</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
                           <layout class="QVBoxLayout" name="decayVLayout_2">
-                           <item>
-                            <widget class="QDial" name="decayDial_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QSlider" name="karplusStretchSlider">
+                             <property name="autoFillBackground">
+                              <bool>false</bool>
                              </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="minimum">
+                              <number>1</number>
+                             </property>
+                             <property name="maximum">
+                              <number>50</number>
+                             </property>
+                             <property name="value">
+                              <number>1</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>1</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="invertedAppearance">
+                              <bool>false</bool>
+                             </property>
+                             <property name="tickPosition">
+                              <enum>QSlider::TicksBothSides</enum>
+                             </property>
+                             <property name="tickInterval">
+                              <number>2</number>
                              </property>
                             </widget>
                            </item>
@@ -4073,40 +3862,7 @@
                               </sizepolicy>
                              </property>
                              <property name="text">
-                              <string>Decay</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QVBoxLayout" name="sustainVLayout_2">
-                           <item>
-                            <widget class="QDial" name="sustainDial_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="sustainLabel_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>Sustain</string>
+                              <string>Stretch</string>
                              </property>
                             </widget>
                            </item>
@@ -4114,19 +3870,34 @@
                          </item>
                          <item>
                           <layout class="QVBoxLayout" name="releaseVLayout_2">
-                           <item>
-                            <widget class="QDial" name="releaseDial_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QSlider" name="karplusDecaySlider">
+                             <property name="autoFillBackground">
+                              <bool>false</bool>
                              </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>60</width>
-                               <height>16777215</height>
-                              </size>
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>1000</number>
+                             </property>
+                             <property name="value">
+                              <number>0</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>0</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="invertedAppearance">
+                              <bool>false</bool>
+                             </property>
+                             <property name="tickPosition">
+                              <enum>QSlider::TicksBothSides</enum>
+                             </property>
+                             <property name="tickInterval">
+                              <number>50</number>
                              </property>
                             </widget>
                            </item>
@@ -4139,7 +3910,55 @@
                               </sizepolicy>
                              </property>
                              <property name="text">
-                              <string>Release</string>
+                              <string>Decay Loss</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="sustainVLayout_2">
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QSlider" name="karplusBlendSlider">
+                             <property name="autoFillBackground">
+                              <bool>false</bool>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>1000</number>
+                             </property>
+                             <property name="value">
+                              <number>0</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>0</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="invertedAppearance">
+                              <bool>false</bool>
+                             </property>
+                             <property name="tickPosition">
+                              <enum>QSlider::TicksBothSides</enum>
+                             </property>
+                             <property name="tickInterval">
+                              <number>50</number>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="sustainLabel_2">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="text">
+                              <string>Blend</string>
                              </property>
                             </widget>
                            </item>
@@ -4293,7 +4112,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>818</width>
+             <width>1534</width>
              <height>376</height>
             </rect>
            </property>
@@ -4303,7 +4122,1383 @@
               <item>
                <layout class="QHBoxLayout" name="effectsHorizontalLayout">
                 <item>
-                 <widget class="QFrame" name="frameEffect1">
+                 <widget class="QFrame" name="eq8Frame">
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>true</bool>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Panel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>2</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>0</number>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_4">
+                   <property name="leftMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>7</number>
+                   </property>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_4">
+                     <item>
+                      <widget class="QPushButton" name="delete8EqButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_5">
+                       <property name="font">
+                        <font>
+                         <family>Helvetica World</family>
+                         <weight>75</weight>
+                         <italic>false</italic>
+                         <bold>true</bold>
+                         <underline>false</underline>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>8-Band Equalizer</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_6">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="eq8MoveLeftButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="default">
+                        <bool>false</bool>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="eq8MoveRightButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_10">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="oscillator2Frame_6">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::Panel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>2</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_27">
+                      <property name="leftMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>2</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>2</number>
+                      </property>
+                      <item alignment="Qt::AlignHCenter">
+                       <widget class="QLabel" name="oscillator2Label_6">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>14</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Gain Control</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QFrame" name="slidersFrame_3">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_6">
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_50">
+                           <item>
+                            <widget class="QSlider" name="eqSlider100">
+                             <property name="autoFillBackground">
+                              <bool>false</bool>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="invertedAppearance">
+                              <bool>false</bool>
+                             </property>
+                             <property name="tickPosition">
+                              <enum>QSlider::NoTicks</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="sliderLabelH0_3">
+                             <property name="text">
+                              <string>100</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_51">
+                           <item>
+                            <widget class="QSlider" name="eqSlider200">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_35">
+                             <property name="text">
+                              <string>200</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_10">
+                           <item>
+                            <widget class="QSlider" name="eqSlider400">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_6">
+                             <property name="text">
+                              <string>400</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_52">
+                           <item>
+                            <widget class="QSlider" name="eqSlider800">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_36">
+                             <property name="text">
+                              <string>800</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_53">
+                           <item>
+                            <widget class="QSlider" name="eqSlider1k4">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_37">
+                             <property name="text">
+                              <string>1.4k</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_54">
+                           <item>
+                            <widget class="QSlider" name="eqSlider2k7">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_38">
+                             <property name="text">
+                              <string>2.7k</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_55">
+                           <item>
+                            <widget class="QSlider" name="eqSlider5k">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_39">
+                             <property name="text">
+                              <string>5k</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_56">
+                           <item>
+                            <widget class="QSlider" name="eqSlider10k">
+                             <property name="styleSheet">
+                              <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}</string>
+                             </property>
+                             <property name="maximum">
+                              <number>100</number>
+                             </property>
+                             <property name="value">
+                              <number>50</number>
+                             </property>
+                             <property name="sliderPosition">
+                              <number>50</number>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_40">
+                             <property name="text">
+                              <string>10k</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="reverbEffectFrame">
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>true</bool>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Panel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>2</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>0</number>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_11">
+                   <property name="leftMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>7</number>
+                   </property>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                     <item>
+                      <widget class="QPushButton" name="deleteReverbButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_10">
+                       <property name="font">
+                        <font>
+                         <family>Helvetica World</family>
+                         <weight>75</weight>
+                         <italic>false</italic>
+                         <bold>true</bold>
+                         <underline>false</underline>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Reverb</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_7">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="reverbMoveLeftButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="default">
+                        <bool>false</bool>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="reverbMoveRightButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_11">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frame_4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::Panel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>2</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_12">
+                      <property name="leftMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>2</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>2</number>
+                      </property>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_11">
+                        <item>
+                         <widget class="QLabel" name="label_12">
+                          <property name="font">
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Reverb Type</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="reverbTypeComboBox">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>17</height>
+                           </size>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string>Plain</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Echo</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Low-Pass</string>
+                           </property>
+                          </item>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="oscillator2Frame_7">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::Panel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>2</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_28">
+                      <property name="leftMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>2</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>2</number>
+                      </property>
+                      <item alignment="Qt::AlignHCenter">
+                       <widget class="QLabel" name="oscillator2Label_7">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>14</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Parameters</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_12">
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_13">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="reverbDelayDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="maximum">
+                             <number>300</number>
+                            </property>
+                            <property name="notchTarget">
+                             <double>9.699999999999999</double>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_13">
+                            <property name="text">
+                             <string>Delay</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_23">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="reverbAttnDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_14">
+                            <property name="text">
+                             <string>Attenuation</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="flangerEffectFrame">
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>true</bool>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Panel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>2</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>0</number>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_31">
+                   <property name="leftMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>7</number>
+                   </property>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_3">
+                     <item>
+                      <widget class="QPushButton" name="deleteFlangerButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_17">
+                       <property name="font">
+                        <font>
+                         <family>Helvetica World</family>
+                         <weight>75</weight>
+                         <italic>false</italic>
+                         <bold>true</bold>
+                         <underline>false</underline>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Flanger</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_8">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="flangerMoveLeftButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="default">
+                        <bool>false</bool>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="flangerMoveRightButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_12">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="oscillator2Frame_8">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::Panel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>2</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_32">
+                      <property name="leftMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>2</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>2</number>
+                      </property>
+                      <item>
+                       <layout class="QGridLayout" name="gridLayout_8">
+                        <item row="0" column="3">
+                         <layout class="QVBoxLayout" name="verticalLayout_43">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="flangerGFBDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_18">
+                            <property name="text">
+                             <string>GFB</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="0" column="0">
+                         <layout class="QVBoxLayout" name="verticalLayout_44">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="flangerMwDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_19">
+                            <property name="text">
+                             <string>Mw</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="1" column="0">
+                         <layout class="QVBoxLayout" name="verticalLayout_45">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="flangerM0Dial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_26">
+                            <property name="text">
+                             <string>M0</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="1" column="3">
+                         <layout class="QVBoxLayout" name="verticalLayout_46">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="flangerGFFDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_30">
+                            <property name="text">
+                             <string>GFF</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="0" column="2" rowspan="2">
+                         <layout class="QVBoxLayout" name="verticalLayout_47">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QSlider" name="flangerF0Slider">
+                            <property name="styleSheet">
+                             <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}
+</string>
+                            </property>
+                            <property name="minimum">
+                             <number>10</number>
+                            </property>
+                            <property name="maximum">
+                             <number>500</number>
+                            </property>
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="tickPosition">
+                             <enum>QSlider::TicksBothSides</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_31">
+                            <property name="text">
+                             <string>F0</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="vibratoEffectFrame">
                   <property name="maximumSize">
                    <size>
                     <width>250</width>
@@ -4406,12 +5601,12 @@
                     <number>9</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>0</number>
+                    <number>7</number>
                    </property>
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout">
                      <item>
-                      <widget class="QPushButton" name="pushButton_2">
+                      <widget class="QPushButton" name="deleteVibratoButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -4448,7 +5643,7 @@
                         </font>
                        </property>
                        <property name="text">
-                        <string>Effect 1</string>
+                        <string>Vibrato</string>
                        </property>
                       </widget>
                      </item>
@@ -4466,7 +5661,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QPushButton" name="pushButton_4">
+                      <widget class="QPushButton" name="vibratoMoveLeftButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -4495,7 +5690,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QPushButton" name="pushButton">
+                      <widget class="QPushButton" name="vibratoMoveRightButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -4530,51 +5725,506 @@
                     </widget>
                    </item>
                    <item>
-                    <layout class="QGridLayout" name="gridLayout_4">
-                     <item row="1" column="0">
-                      <layout class="QVBoxLayout" name="verticalLayout_4">
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QDial" name="dial">
-                         <property name="maximumSize">
-                          <size>
-                           <width>50</width>
-                           <height>50</height>
-                          </size>
-                         </property>
-                        </widget>
-                       </item>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="label_4">
-                         <property name="text">
-                          <string>Setting 1</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <spacer name="verticalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QFrame" name="oscillator2Frame_5">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
+                     <property name="frameShape">
+                      <enum>QFrame::Panel</enum>
                      </property>
-                    </spacer>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>2</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_26">
+                      <property name="leftMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>2</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>2</number>
+                      </property>
+                      <item>
+                       <layout class="QGridLayout" name="gridLayout_4">
+                        <item row="0" column="2" rowspan="2">
+                         <layout class="QVBoxLayout" name="verticalLayout_5">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QSlider" name="vibratoF0Slider">
+                            <property name="styleSheet">
+                             <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}
+</string>
+                            </property>
+                            <property name="minimum">
+                             <number>50</number>
+                            </property>
+                            <property name="maximum">
+                             <number>2000</number>
+                            </property>
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="tickPosition">
+                             <enum>QSlider::TicksBothSides</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_16">
+                            <property name="text">
+                             <string>F0</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="0" column="3" rowspan="2">
+                         <layout class="QVBoxLayout" name="verticalLayout_9">
+                          <item>
+                           <spacer name="verticalSpacer_3">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="vibratoMAvgDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_4">
+                            <property name="text">
+                             <string>Mavg</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_4">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="0" column="0" rowspan="2">
+                         <layout class="QVBoxLayout" name="verticalLayout_7">
+                          <item>
+                           <spacer name="verticalSpacer">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QDial" name="vibratoWidthDial">
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_9">
+                            <property name="text">
+                             <string>Width</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_2">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QGroupBox" name="groupBox_6">
-                  <property name="title">
-                   <string>Effect 2</string>
+                 <widget class="QFrame" name="wahwahEffectFrame">
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>16777215</height>
+                   </size>
                   </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>135</red>
+                        <green>135</green>
+                        <blue>135</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="Base">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                     <colorrole role="Window">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>110</red>
+                        <green>110</green>
+                        <blue>110</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>true</bool>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Panel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>2</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>0</number>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_29">
+                   <property name="leftMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>7</number>
+                   </property>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_7">
+                     <item>
+                      <widget class="QPushButton" name="deleteWahwahButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_11">
+                       <property name="font">
+                        <font>
+                         <family>Helvetica World</family>
+                         <weight>75</weight>
+                         <italic>false</italic>
+                         <bold>true</bold>
+                         <underline>false</underline>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Wah-Wah</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_9">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="wahwahMoveLeftButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="default">
+                        <bool>false</bool>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="wahwahMoveRightButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="icons.qrc">
+                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>15</width>
+                         <height>15</height>
+                        </size>
+                       </property>
+                       <property name="flat">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_13">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="oscillator2Frame_9">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::Panel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>2</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_30">
+                      <property name="leftMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>2</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>4</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>2</number>
+                      </property>
+                      <item>
+                       <layout class="QGridLayout" name="gridLayout_9">
+                        <item row="0" column="1" rowspan="2">
+                         <layout class="QVBoxLayout" name="verticalLayout_48">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QSlider" name="wahwahFMinSlider">
+                            <property name="styleSheet">
+                             <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}
+</string>
+                            </property>
+                            <property name="minimum">
+                             <number>200</number>
+                            </property>
+                            <property name="maximum">
+                             <number>1000</number>
+                            </property>
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="tickPosition">
+                             <enum>QSlider::TicksBothSides</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_32">
+                            <property name="text">
+                             <string>Fmin</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item row="0" column="2" rowspan="2">
+                         <layout class="QVBoxLayout" name="verticalLayout_49">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QSlider" name="wahwahLFOSlider">
+                            <property name="styleSheet">
+                             <string notr="true">QSlider::handle:vertical {background-color: rgb(255, 181, 50);}
+</string>
+                            </property>
+                            <property name="minimum">
+                             <number>20</number>
+                            </property>
+                            <property name="maximum">
+                             <number>500</number>
+                            </property>
+                            <property name="value">
+                             <number>20</number>
+                            </property>
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="tickPosition">
+                             <enum>QSlider::TicksBothSides</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_33">
+                            <property name="text">
+                             <string>LFO Frequency</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -4593,8 +6243,18 @@
      <layout class="QHBoxLayout" name="horizontalLayout_10">
       <item>
        <widget class="QPushButton" name="importButton">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
-         <string/>
+         <string>Add Channel</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
@@ -4605,6 +6265,29 @@
           <width>18</width>
           <height>18</height>
          </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_16">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string> Import MIDI File...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="icons.qrc">
+          <normaloff>:/icons/icons/043-add folder.svg</normaloff>:/icons/icons/043-add folder.svg</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
