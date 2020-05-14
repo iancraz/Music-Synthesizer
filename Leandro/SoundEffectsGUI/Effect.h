@@ -94,6 +94,10 @@ public:
 	//				delay [0 ; 3]
 	//				att = [0 ; 0.99]
 	~ReverbEffect();
+	float getDelay();
+	float getAtt();
+	void setDelay(float dly);
+	void setAtt(float att);
 	effectCallback callback;
 protected:
 	short int mode;
@@ -110,6 +114,8 @@ public:
 	//El intervalo de fo debe estar dado entre:
 	//				fo = [0.1 ; 5]
 	~FlangerEffect();
+	float getFo();
+	void setFo(float fo);
 	effectCallback callback;
 protected:
 	float fo;
@@ -130,6 +136,8 @@ public:
 	//El intervalo de fo debe estar dado entre:
 	//				fo = [0.5 ; 20]
 	~VibratoEffect();
+	float getFo();
+	void setFo(float fo);
 	effectCallback callback;
 protected:
 	float W;
@@ -159,6 +167,12 @@ public:
 	//			gainMid = [0 ; 1]
 	//			gainHig = [0 ; 1]
 	~EqualizatorEffect();
+	float getGainMid();
+	float getGainLow();
+	float getGainHigh();
+	void setGainLow(float g);
+	void setGainMid(float g);
+	void setGainHigh(float g);
 	effectCallback callback;
 	void changeGains(float gainLow, float gainMid, float gainHigh);
 protected:
@@ -183,6 +197,10 @@ public:
 	//			f_min = [200 ; 1000]
 	//			f_LFO = [0.2 ; 5]
 	~WahwahEffect();
+	float getFmin();
+	float getFLFO();
+	void setFmin(float f);
+	void setFLFO(float f);
 	effectCallback callback;
 protected:
 	float getFrecuency(unsigned int n);
@@ -194,4 +212,37 @@ protected:
 	float Q;
 	unsigned int samplingRate;
 	float* x;
+};
+
+
+typedef struct {
+	float gains[8]; //gains[0] = ganancia de la banda mas baja, gains[7]= ganancia de la banda mas aguda
+	float sampleRate;
+	float maxSoundBufferSize;
+}eq8bandParams_t;
+
+typedef struct {
+	float gains[8];
+}gains_t;
+
+class Eq8BandEffect : public Effect {
+public:
+	Eq8BandEffect(eq8bandParams_t* _params);
+	~Eq8BandEffect();
+	gains_t getGains();
+	void setGains(gains_t g);
+	effectCallback callback;
+protected:
+	void changeGains(eq8bandParams_t* _params);
+	void compFilterParameters();
+	void defineFrequencies(eq8bandParams_t* _params);
+	void defineBandwidth();
+	float g[8];
+	float f[8];
+	float B[8];
+	float* x;
+	filter2_t tf[8];
+	unsigned int numberOfBands = 8;
+	float freqMin = 100;
+	float freqMax = 20e3;
 };

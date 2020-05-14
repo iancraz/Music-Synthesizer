@@ -103,6 +103,24 @@ ReverbEffect::~ReverbEffect() {
 	delete[] this->x;
 }
 
+float ReverbEffect::getDelay() {
+	return this->delay;
+}
+
+float ReverbEffect::getAtt() {
+	return this->a;
+}
+
+void ReverbEffect::setDelay(float dly) {
+	this->delay = dly;
+	return;
+}
+
+void ReverbEffect::setAtt(float att) {
+	this->a = att;
+	return;
+}
+
 void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* y = (float*)soundBuffer;
 	unsigned int M = (unsigned int)(this->delay * sampleRate);
@@ -172,6 +190,15 @@ FlangerEffect::FlangerEffect(flangerParams_t * _params){
 
 FlangerEffect::~FlangerEffect() {
 	delete[] this->x;
+}
+
+float FlangerEffect::getFo() {
+	return this->fo;
+}
+
+void FlangerEffect::setFo(float fo) {
+	this->fo = fo;
+	return;
 }
 
 void FlangerEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
@@ -256,6 +283,15 @@ VibratoEffect::~VibratoEffect() {
 	return;
 }
 
+float VibratoEffect::getFo() {
+	return this->fo;
+}
+
+void VibratoEffect::setFo(float fo) {
+	this->fo = fo;
+	return;
+}
+
 void VibratoEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
 	float* y = (float*)soundBuffer;
 	unsigned int soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
@@ -307,8 +343,8 @@ float VibratoEffect::linearInterpolation(float num) {
 EqualizatorEffect::EqualizatorEffect(equalizatorParams_t * _params){
 	this->x = new float[_params->maxSoundBufferSize];
 	lowFreq = 300.0  * 2 * E_PI / (_params->sampleRate);
-	midFreq = 700.0 * 2 * E_PI / _params->sampleRate;
-	midB = 400.0 * 2 * E_PI / _params->sampleRate;
+	midFreq = 500.0 * 2 * E_PI / _params->sampleRate;
+	midB = 200.0 * 2 * E_PI / _params->sampleRate;
 	highFreq = 1.5e3 * 2 * E_PI / _params->sampleRate;
 	changeGains(_params->gainLow, _params->gainMid, _params->gainHigh);
 	return;
@@ -316,6 +352,36 @@ EqualizatorEffect::EqualizatorEffect(equalizatorParams_t * _params){
 
 EqualizatorEffect::~EqualizatorEffect() {
 	delete[] this->x;
+	return;
+}
+
+float EqualizatorEffect::getGainMid() {
+	return 20 * log10(gainMid);
+}
+
+float EqualizatorEffect::getGainLow() {
+	return 20 * log10(gainLow);
+}
+
+float EqualizatorEffect::getGainHigh() {
+	return 20 * log10(gainHigh);
+}
+
+void EqualizatorEffect::setGainLow(float g) {
+	float temp = -12.0 + g * 24.0;
+	this->gainLow = pow(10, temp / 20.0);
+	return;
+}
+
+void EqualizatorEffect::setGainMid(float g) {
+	float temp = -12.0 + g * 24.0;
+	this->gainMid = pow(10, temp / 20.0);
+	return;
+}
+
+void EqualizatorEffect::setGainHigh(float g) {
+	float temp = -12.0 + g * 24.0;
+	this->gainHigh = pow(10, temp / 20.0);
 	return;
 }
 
@@ -339,9 +405,12 @@ void EqualizatorEffect::compFilterParameters() {
 }
 
 void EqualizatorEffect::changeGains(float gainLow, float gainMid, float gainHigh) {
-	this->gainLow = (float)(0.25 + gainLow * 3.75);
-	this->gainMid = (float)(0.25 + gainMid * 3.75);
-	this->gainHigh = (float)(0.25 + gainHigh * 3.75);
+	float temp = -12.0 + gainLow * 24.0;
+	this->gainLow = pow(10, temp / 20.0);
+	temp = -12.0 + gainMid * 24.0;
+	this->gainMid = pow(10, temp / 20.0);
+	temp = -12.0 + gainHigh * 24.0;
+	this->gainHigh = pow(10, temp / 20.0);
 	compFilterParameters();
 }
 
@@ -412,6 +481,24 @@ WahwahEffect::~WahwahEffect() {
 	return;
 }
 
+float WahwahEffect::getFmin() {
+	return this->f_min;
+}
+
+float WahwahEffect::getFLFO() {
+	return this->f_LFO;
+}
+
+void WahwahEffect::setFmin(float f) {
+	this->f_min = f;
+	return;
+}
+
+void WahwahEffect::setFLFO(float f) {
+	this->f_LFO = f;
+	return;
+}
+
 float WahwahEffect::getFrecuency(unsigned int n) {
 	return (float)(f_min + ((width / 2) * (1 + cos(2 * E_PI * n * f_LFO / (float)samplingRate))));
 }
@@ -449,4 +536,95 @@ wahFilter_t WahwahEffect::getFilterParameters(float K) {
 	filter.a1 = (float)((2 * Q * (pow(K, 2) - 1)) / (pow(K, 2) * Q + K + Q));
 	filter.a2 = (float)((pow(K, 2) * Q - K + Q) / (pow(K, 2) * Q + K + Q));
 	return filter;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//								EQUALIZER 8 BAND EFFECT								  //
+
+
+
+Eq8BandEffect::Eq8BandEffect(eq8bandParams_t* _params) {
+	changeGains(_params);
+	defineFrequencies(_params);
+	defineBandwidth();
+	compFilterParameters();
+	this->x = new float[_params->maxSoundBufferSize];
+	return;
+}
+
+Eq8BandEffect::~Eq8BandEffect() {
+	delete[] this->x;
+}
+
+gains_t Eq8BandEffect::getGains() {
+	gains_t temp;
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		temp.gains[i] = 20 * log10(g[i]);
+	}
+	return temp;
+}
+
+void Eq8BandEffect::setGains(gains_t G) {
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		float temp = -12.0 + G.gains[i] * 24.0;
+		g[i] = pow(10, temp / 20.0);
+	}
+	return;
+}
+
+void Eq8BandEffect::changeGains(eq8bandParams_t* _params) {
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		float temp = -12.0 + _params->gains[i] * 24.0;
+		g[i] = pow(10, temp / 20.0);
+	}
+	return;
+}
+
+void Eq8BandEffect::compFilterParameters() {
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		tf[i].A = (float)(sqrt(g[i]) + tan(B[i] / 2) * g[i]);
+		tf[i].B = (float)(-2 * cos(f[i]) * sqrt(g[i]));
+		tf[i].C = (float)(sqrt(g[i]) - tan(B[i] / 2) * g[i]);
+		tf[i].D = (float)(sqrt(g[i]) + tan(B[i] / 2));
+		tf[i].E = (float)(sqrt(g[i]) - tan(B[i] / 2));
+	}
+	return;
+}
+
+void Eq8BandEffect::defineFrequencies(eq8bandParams_t* _params) {
+	float temp = (log10(freqMax) - log10(freqMin)) / numberOfBands;
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		f[i] = pow(10, 2 + (i * temp)) * 2 * E_PI / (_params->sampleRate);
+	}
+	return;
+}
+
+void Eq8BandEffect::defineBandwidth() {
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		B[i] = f[i] / 3.0;
+	}
+	return;
+}
+
+void Eq8BandEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+	float* y = (float*)soundBuffer;
+	for (unsigned int i = 0; i < numberOfBands; i++) {
+		unsigned int soundBufferSize = copyBuffer2in(y, x, maxSoundBufferSize);
+		for (unsigned int n = 0; n < soundBufferSize; n++) {
+			if (n >= 2) {
+				y[n] = (tf[i].A * x[n] + tf[i].B * x[n - 1] + tf[i].C * x[n - 2] - tf[i].B * y[n - 1] - tf[i].E * y[n - 2]) / tf[i].D;
+			}
+			else if (n == 1) {
+				y[n] = (tf[i].A * x[n] + tf[i].B * x[n - 1] - tf[i].B * y[n - 1]) / tf[i].D;
+			}
+			else {
+				y[n] = (tf[i].A * x[n]) / tf[i].D;
+			}
+		}
+	}
+	return;
 }
