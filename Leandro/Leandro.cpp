@@ -8,8 +8,8 @@
 
 using namespace std;
 
-Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
-{
+Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
+
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->channelCreationCounter = 0;
@@ -19,22 +19,22 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 
 	/* Open an audio I/O stream. */
 	err = Pa_OpenDefaultStream(&(this->stream),
-		0,          /* no input channels */
-		2,          /* stereo output */
-		paFloat32,  /* 32 bit floating point output */
-		SAMPLE_RATE,
-		paFramesPerBufferUnspecified,
-		//5000,
-		  /* frames per buffer, i.e. the number
-						   of sample frames that PortAudio will
-						   request from the callback. Many apps
-						   may want to use
-						   paFramesPerBufferUnspecified, which
-						   tells PortAudio to pick the best,
-						   possibly changing, buffer size.*/
-		this->callback, /* this is your callback function */
-		&(this->callData)); /*This is a pointer that will be passed to
-							your callback*/
+							   0,          /* no input channels */
+							   2,          /* stereo output */
+							   paFloat32,  /* 32 bit floating point output */
+							   SAMPLE_RATE,
+							   paFramesPerBufferUnspecified,
+							   //5000,
+								 /* frames per buffer, i.e. the number
+												  of sample frames that PortAudio will
+												  request from the callback. Many apps
+												  may want to use
+												  paFramesPerBufferUnspecified, which
+												  tells PortAudio to pick the best,
+												  possibly changing, buffer size.*/
+							   this->callback, /* this is your callback function */
+							   &(this->callData)); /*This is a pointer that will be passed to
+												   your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
@@ -47,12 +47,12 @@ Leandro::~Leandro() {
 }
 
 int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers and output results to stream
-	const void* input,
-	void* output,
-	unsigned long frameCount,
-	const PaStreamCallbackTimeInfo* timeInfo,
-	PaStreamCallbackFlags statusFlags,
-	void* userData) {
+					  const void* input,
+					  void* output,
+					  unsigned long frameCount,
+					  const PaStreamCallbackTimeInfo* timeInfo,
+					  PaStreamCallbackFlags statusFlags,
+					  void* userData) {
 	// Void pointer casts
 	float* out = (float*)output;
 	callbackData* data = (callbackData*)userData;
@@ -92,7 +92,7 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		if (!addedFrames) addedFrames = 1.0;
 		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Left channel
 		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Right channel
-		//*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
+		*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
 	}
 	*(data->currentSample) += frameCount;
 	return paContinue;
@@ -117,8 +117,7 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 	// Free used memory and destroy note buffers, up to MAX_SIMULTANEOUS_NOTES_PER_CHANNEL, if there are enough empty ones
 	int k = MAX_SIMULTANEOUS_NOTES_PER_CHANNEL;
 	for (int i = 0; i < this->noteBuffers.size() && k>0; i++)
-		if (this->noteBuffers[i]->buffer[0] == INFINITY)
-		{
+		if (this->noteBuffers[i]->buffer[0] == INFINITY) {
 			free(this->noteBuffers[i]->buffer);
 			this->noteBuffers.erase(noteBuffers.begin() + i);
 		}
@@ -161,7 +160,29 @@ void Leandro::updateCallbackData() {
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
 }
+
 void Leandro::loadData() {
-	//
+	// parseo el json y agarro los instrumentos aditivos
+	Json::Value root;
+	Json::CharReaderBuilder builder;
+	ifstream configFile("config.json");
+	JSONCPP_STRING errs;
+	Json::parseFromStream(builder, configFile, &root, &errs);
+
+	Json::Value additiveData = root["additive"];
+
+	list<string> typesList;
+	for (int i = 0; i < additiveData["types"].size(); i++) {
+		typesList.push_back(additiveData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value instrumentModelData = additiveData[*it];
+		additiveParams_t* instrumentParams = new additiveParams_t(AdditiveInstrument::parseAdditiveJson(instrumentModelData));
+		instrumentModel model;
+		model.type = synthType::additive;
+		model.params = (void*)instrumentParams;
+		model.instrumentName = *it;
+		instrumentModels.push_back(new instrumentModel(model));
+	}
 }
-;
