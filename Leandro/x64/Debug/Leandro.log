@@ -1,8 +1,2 @@
-﻿  Additive.cpp
-  Channel.cpp
-  Effect.cpp
-  Instrument.cpp
-  Leandro.cpp
-  main.cpp
-  moc_Leandro.cpp
-  Leandro.vcxproj -> C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
+﻿  main.cpp
+  Leandro.vcxproj -> C:\Users\Mr_Gigawatt\source\repos\ASSd\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
