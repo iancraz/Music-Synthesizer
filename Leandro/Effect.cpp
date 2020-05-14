@@ -628,3 +628,29 @@ void Eq8BandEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 	}
 	return;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//									TREMOLO EFFECT									  //
+
+TremoloEffect::TremoloEffect(tremoloParams_t* _params) {
+	this->alpha = _params->alpha;
+	this->f_lfo = _params->f_lfo / _params->sampleRate;
+	return;
+}
+
+TremoloEffect::~TremoloEffect() {
+	return;
+}
+
+void TremoloEffect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, const int sampleRate) {
+	float* y = (float*)soundBuffer;
+	unsigned int soundBufferSize = getBufferSize(y);
+	for (unsigned int n = 0; n < soundBufferSize; n++) {
+		float Mn = 1 + alpha * cos(2 * E_PI * f_lfo * n);
+		y[n] = y[n] * Mn;
+	}
+	return;
+}
