@@ -3,7 +3,8 @@
 #include "midifile.h"
 #include "Options.h"
 #include "bufferAssets.h"
-#include <QtWidgets/QFrame>
+#include "Leandro.h"
+#include "Channel.h"
 using namespace std;
 using namespace smf;
 
@@ -17,7 +18,7 @@ typedef int instrumentCallback(
 );
 
 enum class synthType { adsr, additive, fm, karplus, sampling };
-
+enum class waveform { sine, square, sawtooth };
 
 
 class Instrument
@@ -26,7 +27,9 @@ public:
 	synthType type;
 	int instrumentID;
 	string instrumentName;
+	
 	virtual instrumentCallback synthFunction; // Instrument callback function: defined by typedef
+	virtual QFrame* generateGUI(QFrame* instrumentsFrame);
 	QFrame * instrumentFrame;
 };
 
@@ -38,23 +41,48 @@ typedef struct {
 	float sustainLevel;
 	float tRelease;
 	float k;
+	waveform wform1;
+	float level1;
+	waveform wform2;
+	float level2;
 	unsigned int buffLength;
 	unsigned int sampleRate;
 }adsrParams_t;
 
 class ADSRInstrument : public Instrument {
 public:
-	ADSRInstrument(adsrParams_t* _params);
+	ADSRInstrument(adsrParams_t* _params, QFrame* instrumentsFrame);
 	~ADSRInstrument() {}
+
+	// Getters
+	waveform getWF1() { return wform1; }
+	float getWF1Level() { return level1; }
+	waveform getWF2() { return wform2; }
+	float getWF2Level() { return level2; }
+	float getAttack() { return params->tAttack; }
+	float getDecay() { return params->tAttack; }
+	float getSustainRate() { return params->tAttack; }
+	float getSustainLevel() { return params->tAttack; }
+	float getRelease() { return params->tAttack; }
+	float getAttack() { return params->tAttack; }
+
 	void setParams(adsrParams_t* params);
 
 protected:
 	adsrParams_t* params;
 	instrumentCallback synthFunction;
 	int generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength);
-
+	QFrame* generateGUI(QFrame* instrumentsFrame);
 	float* envelope;
 	float* release;
+
+	waveform wform1;
+	float level1;
+	
+	waveform wform2;
+	float level2;
+
+
 };
 
 typedef struct {
@@ -65,7 +93,7 @@ typedef struct {
 
 class AdditiveInstrument : public Instrument {
 public:
-	AdditiveInstrument(additiveParams_t* _params);
+	AdditiveInstrument(additiveParams_t* _params, QFrame* instrumentsFrame);
 private:
 	instrumentCallback synthFunction;
 	float* envelope[7];
@@ -75,12 +103,7 @@ private:
 };
 
 typedef struct {
-	float tAttack;
-	float tDecay;
-	float sustainRate;
-	float sustainLevel;
-	float tRelease;
-	float k;
+
 }karplusParams_t;
 
 
@@ -88,7 +111,7 @@ class KarplusInstrument : public Instrument {
 public:
 	// Parameter declarations for Karplus-Strong algorhythm based instruments here
 
-	KarplusInstrument(karplusParams_t* _params);
+	KarplusInstrument(karplusParams_t* _params, QFrame* instrumentsFrame);
 	~KarplusInstrument();
 };
 
@@ -104,6 +127,6 @@ typedef struct {
 class SamplingInstrument : public Instrument {
 public:
 
-	SamplingInstrument(samplingParams_t* _params);
+	SamplingInstrument(samplingParams_t* _params, QFrame* instrumentsFrame);
 	~SamplingInstrument();
 };

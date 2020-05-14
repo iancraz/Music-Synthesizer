@@ -79,12 +79,12 @@ public:
 
 	// GUI-related, system-triggered functions
 
-	void updateAvailableAssets();
+	void updateAvailableAssetsInGUI();
 	void addToAvailableAssets(instrumentModel* model);
 	void addToAvailableAssets(effectModel* model);
 	void updateGUIMidiLists();
 	void setActiveChannel(Channel* channel);
-	
+	void showInstrument(Instrument* instrument);
 
 	// GUI-triggered functions
 

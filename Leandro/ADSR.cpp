@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <boost/algorithm/string.hpp>
+#include <stdlib.h> 
+#include<time.h> 
 
 
 void ADSRInstrument::setParams(adsrParams_t* _params) {
@@ -24,13 +26,20 @@ void ADSRInstrument::setParams(adsrParams_t* _params) {
 		throw "Error! ADSR parameters are invalid";
 }
 
-ADSRInstrument::ADSRInstrument(adsrParams_t* _params) {
+ADSRInstrument::ADSRInstrument(adsrParams_t* _params, QFrame* instrumentsFrame) {
 	if (_params) setParams(_params);
 
+
+	this->wform1 = _params->wform1;
+	this->level1 = _params->level1;
+	
+	this->wform2 = _params->wform2;
+	this->level2 = _params->level2;
 
 	envelope = new float[_params->buffLength];
 	release = new float[_params->buffLength];
 	generateEnvelope(_params->sampleRate, _params->buffLength);
+	instrumentFrame = generateGUI(instrumentsFrame);
 }
 
 int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength) {
@@ -138,12 +147,59 @@ ADSRInstrument::synthFunction(float* outputBuffer,
 	int nRelease = sampleRate * params->tRelease;
 	float velocityFactor = (float)velocity / 127.0;
 	while (envelope[j] >= 0 && j < outputBufferSize) {
-		if (j < nPressedLength)
-			outputBuffer[j] = envelope[j] * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+		if (j < nPressedLength) {
+			switch (wform1) {
+			case waveform::square:
+				outputBuffer[j] = level1 * envelope[j] * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+				break;
+			case waveform::sine:
+				outputBuffer[j] = level1 * envelope[j] * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j));
+				break;
+			case waveform::sawtooth:
+				outputBuffer[j] = level1 * envelope[j] * velocityFactor * (((float)j / (float)freq) - (int)((float)j / (float)freq));
+				break;
+			}
+			switch (wform2) {
+			case waveform::square:
+				outputBuffer[j] += level2 * envelope[j] * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+				break;
+			case waveform::sine:
+				outputBuffer[j] += level2 * envelope[j] * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j));
+				break;
+			case waveform::sawtooth:
+				outputBuffer[j] += level2 * envelope[j] * velocityFactor * (((float)j / (float)freq) - (int)((float)j / (float)freq));
+				break;
+			}
+			outputBuffer[j] = 0.5 * outputBuffer[j];
+		}
 		else {
 			if (finalSustainValue == 0.0) finalSustainValue = outputBuffer[j - 1];
 			if (j - nPressedLength < nRelease)
-				outputBuffer[j] = (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+			{
+				switch (wform1) {
+				case waveform::square:
+					outputBuffer[j] = level1 * (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+					break;
+				case waveform::sine:
+					outputBuffer[j] = level1 * (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j));
+					break;
+				case waveform::sawtooth:
+					outputBuffer[j] = level1 * (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (((float)j / (float)freq) - (int)((float)j / (float)freq));
+					break;
+				}
+				switch (wform2) {
+				case waveform::square:
+					outputBuffer[j] += level2 * (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j) > 0 ? 1.0 : -1.0);
+					break;
+				case waveform::sine:
+					outputBuffer[j] += level2 * (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (sin(2 * M_PI * (freq / (float)sampleRate) * j));
+					break;
+				case waveform::sawtooth:
+					outputBuffer[j] += level2 * (finalSustainValue * release[j - nPressedLength]) * velocityFactor * (((float)j / (float)freq) - (int)((float)j / (float)freq));
+					break;
+				}
+				outputBuffer[j] = 0.5 * outputBuffer[j];
+			}
 			else break;
 		}
 		j++;
@@ -151,3 +207,4 @@ ADSRInstrument::synthFunction(float* outputBuffer,
 	outputBuffer[j] = INFINITY;
 	return 0;
 }
+

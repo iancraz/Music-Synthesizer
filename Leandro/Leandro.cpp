@@ -5,6 +5,7 @@
 #include "portaudio.h"
 #include "instrument.h"
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -170,19 +171,31 @@ void Leandro::updateCallbackData() {
 
 void Leandro::addToAvailableAssets(instrumentModel* model) {
 	instrumentModels.push_back(model);
-
+	updateAvailableAssetsInGUI();
 }
 
 void Leandro::addToAvailableAssets(effectModel* model) {
 	effectModels.push_back(model);
+	updateAvailableAssetsInGUI();
 }
 
 
 // GUI-related, system-triggered functions
 
-void Leandro::updateAvailableAssets() {
+void Leandro::updateAvailableAssetsInGUI() {
+	QListWidgetItem* ___qlistwidgetitem;
 	ui.instrumentsList->clear();
-
+	for (int i = 0; i < instrumentModels.size(); i++) {
+		___qlistwidgetitem = new QListWidgetItem;
+		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
+		ui.instrumentsList->addItem(___qlistwidgetitem);
+	}
+	ui.effectsList->clear();
+	for (int i = 0; i < effectModels.size(); i++) {
+		___qlistwidgetitem = new QListWidgetItem;
+		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
+		ui.instrumentsList->addItem(___qlistwidgetitem);
+	}
 }
 
 void Leandro::updateGUIMidiLists() {
@@ -203,13 +216,38 @@ void Leandro::setActiveChannel(Channel* channel) {
 	activeChannel->setActiveButtonChannel->setEnabled(true);
 	activeChannel = channel;
 	activeChannel->setActiveButtonChannel->setDisabled(true);
+
 	ui.instrumentLayout->removeItem(ui.instrumentLayout->takeAt(0));
 	ui.instrumentLayout->addItem(channel->instrumentLayout);
+
 	ui.effectsScrollAreaLayout->removeItem(ui.effectsScrollAreaLayout->takeAt(0));
 	ui.effectsScrollAreaLayout->addItem(channel->effectsLayout);
-
 } 
 
+void Leandro::showInstrument(Instrument* instrument) {
+	ui.adsrInstrumentFrame->setHidden(true);
+	ui.additiveInstrumentFrame->setHidden(true);
+	ui.samplingInstrumentFrame->setHidden(true);
+	ui.karplusInstrumentFrame->setHidden(true);
+	switch (instrument->type) {
+		case synthType::adsr:
+			ui.adsrInstrumentFrame->setHidden(false);
+			ui.waveform1ComboBox->setCurrentIndex(instrument->wa);
+			break;
+		case synthType::additive:
+			ui.additiveInstrumentFrame->setHidden(false);
+			
+			break;
+		case synthType::karplus:
+			ui.karplusInstrumentFrame->setHidden(false);
+			
+			break;
+		case synthType::sampling:
+			ui.samplingInstrumentFrame->setHidden(false);
+			
+			break;
+		}
+}
 
 // GUI-triggered functions
 

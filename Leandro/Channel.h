@@ -56,7 +56,7 @@ public:
 	void setVolume();
 	void setKeyboard();
 	void setActive();
-	void setInstFromGUI();
+
 	
 	queue<midiEvent> events; // Queue of events in the midi track the channel's currently playing
 	QFrame* frameChannel;
