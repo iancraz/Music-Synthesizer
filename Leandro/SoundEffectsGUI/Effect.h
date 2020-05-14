@@ -214,7 +214,6 @@ protected:
 	float* x;
 };
 
-
 typedef struct {
 	float gains[8]; //gains[0] = ganancia de la banda mas baja, gains[7]= ganancia de la banda mas aguda
 	float sampleRate;
@@ -245,4 +244,19 @@ protected:
 	unsigned int numberOfBands = 8;
 	float freqMin = 100;
 	float freqMax = 20e3;
+};
+
+typedef struct {
+	float alpha, f_lfo;
+	unsigned int sampleRate;
+}tremoloParams_t;
+
+class TremoloEffect : public Effect {
+public:
+	TremoloEffect(tremoloParams_t* _params);
+	~TremoloEffect();
+	effectCallback callback;
+protected:
+	float alpha;
+	float f_lfo;
 };

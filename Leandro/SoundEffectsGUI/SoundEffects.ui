@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>764</width>
-    <height>509</height>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -425,9 +425,9 @@
    <widget class="QSlider" name="wahFreqLFO">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>380</x>
       <y>300</y>
-      <width>111</width>
+      <width>151</width>
       <height>22</height>
      </rect>
     </property>
@@ -467,7 +467,7 @@
    <widget class="QLabel" name="label_17">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>340</x>
       <y>300</y>
       <width>41</width>
       <height>20</height>
@@ -567,8 +567,8 @@
    <widget class="QPushButton" name="saveButton">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>390</y>
+      <x>300</x>
+      <y>460</y>
       <width>251</width>
       <height>61</height>
      </rect>
@@ -580,8 +580,8 @@
    <widget class="QLineEdit" name="outputFileName">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>360</y>
+      <x>300</x>
+      <y>430</y>
       <width>251</width>
       <height>20</height>
      </rect>
@@ -590,8 +590,8 @@
    <widget class="QLabel" name="label_21">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>340</y>
+      <x>300</x>
+      <y>410</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -758,6 +758,103 @@
     </property>
     <property name="wordWrap">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="tremoloCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>350</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tremolo</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="tremoloAlpha">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>380</y>
+      <width>71</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="sliderPosition">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="tremoloFreq">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>380</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="sliderPosition">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>380</y>
+      <width>47</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Alpha:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_30">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>350</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Freq:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_31">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>390</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>20(Hz)</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_32">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>390</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0.2(Hz)</string>
     </property>
    </widget>
   </widget>
