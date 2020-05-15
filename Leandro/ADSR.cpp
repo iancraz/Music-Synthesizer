@@ -36,8 +36,11 @@ ADSRInstrument::ADSRInstrument(adsrParams_t* _params) {
 	this->wform2 = _params->wform2;
 	this->level2 = _params->level2;
 
-	envelope = new float[_params->buffLength];
+	envelope= new float[_params->buffLength];
+	envBuffer = new float[_params->buffLength];
 	release = new float[_params->buffLength];
+	relBuffer = new float[_params->buffLength];
+
 	generateEnvelope(_params->sampleRate, _params->buffLength);
 
 }
@@ -54,17 +57,17 @@ int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsign
 	bool reachedEnd = false;
 
 	while (i < nAttack) {
-		envelope[i] = 1 - exp(-2 * 3.1415 * i / nAttack);
+		envBuffer[i] = 1 - exp(-2 * 3.1415 * i / nAttack);
 		i++;
 	}
 	while (i < nAttack + nDecay) {
-		envelope[i] = ((1 - sustainLevel) * exp((-2 * 3.1415 / nDecay) * (-nAttack + i)));
+		envBuffer[i] = ((1 - sustainLevel) * exp((-2 * 3.1415 / nDecay) * (-nAttack + i)));
 		i++;
 	}
 	while (sustainLevel > 0.0 && !reachedEnd) {
 		if (i - (nAttack + nDecay) >= 0 || i == buffLength)
 			reachedEnd = true;
-		else envelope[i] = sustainLevel - sustainRate * (i - (nAttack + nDecay));
+		else envBuffer[i] = sustainLevel - sustainRate * (i - (nAttack + nDecay));
 
 		i++;
 	}
@@ -72,9 +75,16 @@ int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsign
 	unsigned long k = 0;
 	reachedEnd = false;
 	while (k < nRelease) {
-		release[k] = exp((-2 * 3.1415 / nRelease) * k);
+		relBuffer[k] = exp((-2 * 3.1415 / nRelease) * k);
 		k++;
 	}
+
+	float* tempEnv = envelope;
+	float* tempRel = release;
+	envelope = envBuffer;
+	release = relBuffer;
+	envBuffer = tempEnv;
+	relBuffer = tempRel;
 
 	return i - 1;
 }

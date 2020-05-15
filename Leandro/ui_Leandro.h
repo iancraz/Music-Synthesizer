@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDial>
 #include <QtWidgets/QFrame>
@@ -214,6 +215,7 @@ public:
     QVBoxLayout *sustainVLayout_2;
     QSlider *karplusBlendSlider;
     QLabel *sustainLabel_2;
+    QCheckBox *karplusResFilterCheckBox;
     QScrollArea *effectsScrollArea;
     QWidget *effectsScrollAreaContents;
     QHBoxLayout *horizontalLayout_9;
@@ -813,7 +815,7 @@ public:
         font4.setWeight(75);
         instrumentNameLabel->setFont(font4);
 
-        nameHLayout->addWidget(instrumentNameLabel);
+        nameHLayout->addWidget(instrumentNameLabel, 0, Qt::AlignBottom);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -822,7 +824,7 @@ public:
         InstrumentNameADSR = new QLabel(adsrInstrumentFrame);
         InstrumentNameADSR->setObjectName(QStringLiteral("InstrumentNameADSR"));
 
-        nameHLayout->addWidget(InstrumentNameADSR, 0, Qt::AlignLeft);
+        nameHLayout->addWidget(InstrumentNameADSR, 0, Qt::AlignLeft|Qt::AlignBottom);
 
 
         gridLayout_3->addLayout(nameHLayout, 0, 0, 1, 1);
@@ -1204,7 +1206,7 @@ public:
         instrumentNameLabel_4->setSizePolicy(sizePolicy10);
         instrumentNameLabel_4->setFont(font4);
 
-        nameHLayout_4->addWidget(instrumentNameLabel_4);
+        nameHLayout_4->addWidget(instrumentNameLabel_4, 0, Qt::AlignBottom);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1213,7 +1215,7 @@ public:
         instrumentNameAdditive = new QLabel(additiveInstrumentFrame);
         instrumentNameAdditive->setObjectName(QStringLiteral("instrumentNameAdditive"));
 
-        nameHLayout_4->addWidget(instrumentNameAdditive);
+        nameHLayout_4->addWidget(instrumentNameAdditive, 0, Qt::AlignBottom);
 
 
         gridLayout_7->addLayout(nameHLayout_4, 0, 0, 1, 1);
@@ -1573,7 +1575,7 @@ public:
         instrumentNameLabel_3->setSizePolicy(sizePolicy10);
         instrumentNameLabel_3->setFont(font4);
 
-        nameHLayout_3->addWidget(instrumentNameLabel_3);
+        nameHLayout_3->addWidget(instrumentNameLabel_3, 0, Qt::AlignBottom);
 
         horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1582,7 +1584,7 @@ public:
         instrumentNameSampling = new QLabel(samplingInstrumentFrame);
         instrumentNameSampling->setObjectName(QStringLiteral("instrumentNameSampling"));
 
-        nameHLayout_3->addWidget(instrumentNameSampling);
+        nameHLayout_3->addWidget(instrumentNameSampling, 0, Qt::AlignBottom);
 
 
         gridLayout_6->addLayout(nameHLayout_3, 0, 0, 1, 1);
@@ -1638,7 +1640,7 @@ public:
         sizePolicy8.setHeightForWidth(samplingLoopStartDial->sizePolicy().hasHeightForWidth());
         samplingLoopStartDial->setSizePolicy(sizePolicy8);
         samplingLoopStartDial->setMaximumSize(QSize(60, 16777215));
-        samplingLoopStartDial->setMaximum(100);
+        samplingLoopStartDial->setMaximum(99);
         samplingLoopStartDial->setNotchesVisible(true);
 
         sustainVLayout_3->addWidget(samplingLoopStartDial, 0, Qt::AlignHCenter);
@@ -1669,6 +1671,7 @@ public:
         sizePolicy8.setHeightForWidth(samplingLoopEndDial->sizePolicy().hasHeightForWidth());
         samplingLoopEndDial->setSizePolicy(sizePolicy8);
         samplingLoopEndDial->setMaximumSize(QSize(60, 16777215));
+        samplingLoopEndDial->setMinimum(1);
         samplingLoopEndDial->setMaximum(100);
         samplingLoopEndDial->setNotchesVisible(true);
 
@@ -1742,7 +1745,7 @@ public:
         instrumentNameLabel_2->setSizePolicy(sizePolicy10);
         instrumentNameLabel_2->setFont(font4);
 
-        nameHLayout_2->addWidget(instrumentNameLabel_2);
+        nameHLayout_2->addWidget(instrumentNameLabel_2, 0, Qt::AlignBottom);
 
         horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1751,7 +1754,7 @@ public:
         instrumentNameKarplus = new QLabel(karplusInstrumentFrame);
         instrumentNameKarplus->setObjectName(QStringLiteral("instrumentNameKarplus"));
 
-        nameHLayout_2->addWidget(instrumentNameKarplus);
+        nameHLayout_2->addWidget(instrumentNameKarplus, 0, Qt::AlignBottom);
 
 
         gridLayout_5->addLayout(nameHLayout_2, 0, 0, 1, 1);
@@ -1788,10 +1791,10 @@ public:
         karplusStretchSlider->setObjectName(QStringLiteral("karplusStretchSlider"));
         karplusStretchSlider->setAutoFillBackground(false);
         karplusStretchSlider->setStyleSheet(QStringLiteral("QSlider::handle:vertical {background-color: rgb(255, 181, 50);}"));
-        karplusStretchSlider->setMinimum(1);
-        karplusStretchSlider->setMaximum(50);
-        karplusStretchSlider->setValue(1);
-        karplusStretchSlider->setSliderPosition(1);
+        karplusStretchSlider->setMinimum(100);
+        karplusStretchSlider->setMaximum(5000);
+        karplusStretchSlider->setValue(100);
+        karplusStretchSlider->setSliderPosition(100);
         karplusStretchSlider->setOrientation(Qt::Vertical);
         karplusStretchSlider->setInvertedAppearance(false);
         karplusStretchSlider->setTickPosition(QSlider::TicksBothSides);
@@ -1865,6 +1868,11 @@ public:
 
 
         verticalLayout_19->addLayout(envelopeParamsHLayout_2);
+
+        karplusResFilterCheckBox = new QCheckBox(envelopeParamsFrame_2);
+        karplusResFilterCheckBox->setObjectName(QStringLiteral("karplusResFilterCheckBox"));
+
+        verticalLayout_19->addWidget(karplusResFilterCheckBox, 0, Qt::AlignHCenter);
 
 
         framesVLayout_2->addWidget(envelopeParamsFrame_2);
@@ -1964,7 +1972,7 @@ public:
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setFont(font4);
 
-        horizontalLayout_4->addWidget(label_5);
+        horizontalLayout_4->addWidget(label_5, 0, Qt::AlignBottom);
 
         horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -2256,7 +2264,7 @@ public:
         label_10->setObjectName(QStringLiteral("label_10"));
         label_10->setFont(font4);
 
-        horizontalLayout_8->addWidget(label_10);
+        horizontalLayout_8->addWidget(label_10, 0, Qt::AlignBottom);
 
         horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -2435,7 +2443,7 @@ public:
         label_17->setObjectName(QStringLiteral("label_17"));
         label_17->setFont(font4);
 
-        horizontalLayout_3->addWidget(label_17);
+        horizontalLayout_3->addWidget(label_17, 0, Qt::AlignBottom);
 
         horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -2628,7 +2636,7 @@ public:
         label->setObjectName(QStringLiteral("label"));
         label->setFont(font4);
 
-        horizontalLayout->addWidget(label);
+        horizontalLayout->addWidget(label, 0, Qt::AlignBottom);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -2801,7 +2809,7 @@ public:
         label_11->setObjectName(QStringLiteral("label_11"));
         label_11->setFont(font4);
 
-        horizontalLayout_7->addWidget(label_11);
+        horizontalLayout_7->addWidget(label_11, 0, Qt::AlignBottom);
 
         horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -3099,6 +3107,7 @@ public:
         decayLabel_2->setText(QApplication::translate("LeandroClass", "Stretch", Q_NULLPTR));
         releaseLabel_2->setText(QApplication::translate("LeandroClass", "Decay Loss", Q_NULLPTR));
         sustainLabel_2->setText(QApplication::translate("LeandroClass", "Blend", Q_NULLPTR));
+        karplusResFilterCheckBox->setText(QApplication::translate("LeandroClass", "Resonance Filter", Q_NULLPTR));
         delete8EqButton->setText(QString());
         label_5->setText(QApplication::translate("LeandroClass", "8-Band Equalizer", Q_NULLPTR));
         eq8MoveLeftButton->setText(QString());

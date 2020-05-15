@@ -21,7 +21,7 @@ typedef int instrumentCallback(
 );
 
 enum class synthType { adsr, additive, fm, karplus, sampling };
-typedef enum { sine, square, sawtooth }waveform;
+enum waveform{ sine, square, sawtooth };
 
 
 class Instrument
@@ -56,9 +56,9 @@ public:
 	~ADSRInstrument() {}
 
 	// Getters
-	waveform getWF1() { return wform1; }
+	short int getWF1() { return wform1; }
 	float getWF1Level() { return level1; }
-	waveform getWF2() { return wform2; }
+	short int getWF2() { return wform2; }
 	float getWF2Level() { return level2; }
 	float getAttack() { return params->tAttack; }
 	float getDecay() { return params->tDecay; }
@@ -66,20 +66,35 @@ public:
 	float getSustainLevel() { return params->sustainLevel; }
 	float getRelease() { return params->tRelease; }
 
+	// Setters
+	void setWF1(int _waveform) { wform1=_waveform; }
+	void setWF1Level(float _level) { level1=_level; }
+	void setWF2(int _waveform) { wform2 = _waveform; }
+	void setWF2Level(float _level) { level2 = _level; }
+	void setAttack(float _seconds) { params->tAttack = _seconds; }
+	void setDecay(float _seconds) { params->tDecay = _seconds; }
+	void setSustainRate(float _rate) { params->sustainRate = _rate; }
+	void setSustainLevel(float _level) { params->sustainLevel = _level; }
+	void setRelease(float _seconds) { params->tRelease = _seconds; }
+
 	void setParams(adsrParams_t* params);
 
 protected:
 	adsrParams_t* params;
 	instrumentCallback synthFunction;
 	int generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength);
-
+	void scheduleEnvelopeUpdate();
 	float* envelope;
 	float* release;
 
-	waveform wform1;
+	float* envBuffer;
+	float* relBuffer;
+
+
+	short int wform1;
 	float level1;
 	
-	waveform wform2;
+	short int wform2;
 	float level2;
 
 
@@ -137,7 +152,11 @@ public:
 	int synthFunction(float* outputBuffer, const unsigned int outputBufferSize, const int keyNumber, const float lengthInMilliseconds, const int velocity, const int sampleRate);
 
 	static samplingParams_t * parseSamplingJson(Json::Value data);
-	
+	int getLoopBegin();
+	int getLoopEnd();
+	void setLoopEnd(int new_repeat_time_end);
+	void setLoopBegin(int new_repeat_time_begin);
+
 private:
 	vector <Sample*>* samples;
 
@@ -151,6 +170,7 @@ private:
 	int get_nearest_peak(Sample* selected_sample, int number);
 	void key_modification(int num_octava, float B, float new_note_pressed_time);
 	void velocityAdjust(int velocity);
+
 };
 
 // Macro enumeration for default instruments
@@ -192,6 +212,7 @@ public:
 	// Body filter mode
 	void activeFilter();
 	void deactiveFilter();
+	bool filterStatus() { return params.bodyFilter; }
 protected:
 	// Instruments parameters defined by macros.
 	int plunkedCordSet();

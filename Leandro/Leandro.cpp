@@ -114,7 +114,8 @@ void Leandro::addChannel(Channel* newChannel) {
 		this->noteBuffers.push_back(tempBuffer);
 	}
 	// Append new channel to channel list
-	this->activeChannel = newChannel;
+	newChannel->addToGUI(&ui);
+	setActiveChannel(newChannel);
 	this->channels.push_back(newChannel);
 	this->updateCallbackData();
 }
@@ -168,6 +169,8 @@ void Leandro::updateCallbackData() {
 	this->callData.debugStream = &this->debugStream;
 };
 
+// Data loading related methods
+
 void Leandro::addToAvailableAssets(instrumentModel* model) {
 	instrumentModels.push_back(model);
 	updateAvailableAssetsInGUI();
@@ -176,288 +179,6 @@ void Leandro::addToAvailableAssets(instrumentModel* model) {
 void Leandro::addToAvailableAssets(effectModel* model) {
 	effectModels.push_back(model);
 	updateAvailableAssetsInGUI();
-}
-
-
-// GUI-related, system-triggered functions
-
-void Leandro::updateAvailableAssetsInGUI() {
-	QListWidgetItem* ___qlistwidgetitem;
-	ui.instrumentsList->clear();
-	for (int i = 0; i < instrumentModels.size(); i++) {
-		___qlistwidgetitem = new QListWidgetItem;
-		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
-		ui.instrumentsList->addItem(___qlistwidgetitem);
-	}
-	ui.effectsList->clear();
-	for (int i = 0; i < effectModels.size(); i++) {
-		___qlistwidgetitem = new QListWidgetItem;
-		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
-		ui.instrumentsList->addItem(___qlistwidgetitem);
-	}
-}
-
-void Leandro::updateGUIMidiLists() {
-	for (int i = 0; i < channels.size(); i++) {
-		channels.at(i)->midiListChannel->clear();
-		for (int j = 0; j < midiTracks.size(); j++) {
-			char* trackName = new char[(midiTracks.at(j)->trackName.size()) + 1];
-			strcpy(trackName, midiTracks.at(j)->trackName.c_str());
-			QListWidgetItem* ___qlistwidgetitem = new QListWidgetItem;
-			___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", trackName, nullptr));
-			channels.at(i)->midiListChannel->addItem(___qlistwidgetitem);
-		}
-	}
-}
-
-void Leandro::setActiveChannel(Channel* channel) {
-	if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
-	activeChannel = channel;
-	activeChannel->setActiveButtonChannel->setDisabled(true);
-
-	updateActiveAssetsBay();
-} 
-
-void Leandro::updateActiveAssetsBay() {
-	ui.adsrInstrumentFrame->setHidden(true);
-	ui.additiveInstrumentFrame->setHidden(true);
-	ui.samplingInstrumentFrame->setHidden(true);
-	ui.karplusInstrumentFrame->setHidden(true);
-	ui.flangerEffectFrame->setHidden(true);
-	ui.reverbEffectFrame->setHidden(true);
-	ui.vibratoEffectFrame->setHidden(true);
-	ui.wahwahEffectFrame->setHidden(true);
-	ui.eq8Frame->setHidden(true);
-	
-	if (activeChannel->instrument) showInstrument(activeChannel->instrument);
-	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
-	{
-		showEffect(activeChannel->effects.at(effIndex)); // TODO PRIORITY add effect order: IDEA: implement function that reorganizes effects using replaceWidget function
-	}
-
-}
-
-void Leandro::showInstrument(Instrument* instrument) {
-	
-
-	ADSRInstrument* adsrinst = (ADSRInstrument*)instrument;
-	AdditiveInstrument* additiveinst = (AdditiveInstrument*)instrument;
-	SamplingInstrument* samplinginst = (SamplingInstrument*)instrument;
-	karplusInstrument* karplusinst = (karplusInstrument*)instrument;
-
-
-
-	switch (instrument->type) {
-		case synthType::adsr:
-			
-			ui.adsrInstrumentFrame->setHidden(false);
-			ui.waveform1ComboBoxADSR->setCurrentIndex(adsrinst->getWF1());
-			ui.waveform2ComboBoxADSR->setCurrentIndex(adsrinst->getWF2());
-			ui.levelWF1DialADSR->setValue((int)(adsrinst->getWF1Level() * 100));
-			ui.levelWF2DialADSR->setValue((int)(adsrinst->getWF2Level() * 100));
-			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
-			ui.decayDialADSR->setValue((int)(adsrinst->getDecay() * 1000));
-			ui.sustainRateDialADSR->setValue((int)(adsrinst->getSustainRate()*1000));
-			ui.sustainLevelDialADSR->setValue((int)(adsrinst->getSustainLevel() * 100));
-			ui.releaseDialADSR->setValue((int)(adsrinst->getRelease() * 1000));
-			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
-			break;
-		case synthType::additive:
-			ui.additiveInstrumentFrame->setHidden(false);
-			
-			break;
-		case synthType::karplus:
-			ui.karplusInstrumentFrame->setHidden(false);
-			
-			break;
-		case synthType::sampling:
-			ui.samplingInstrumentFrame->setHidden(false);
-			
-			break;
-		}
-
-}
-
-void Leandro::showEffect(Effect* effect) {
-	FlangerEffect* flanger = (FlangerEffect*)effect;
-	ReverbEffect* reverb = (ReverbEffect*)effect;
-	VibratoEffect* vibrato = (VibratoEffect*)effect;
-	WahwahEffect* wahwah = (WahwahEffect*)effect;
-	Eq8BandEffect* eq8band= (Eq8BandEffect*)effect;
-
-
-
-	switch (effect->type) {
-	case effectType::flanger:
-		ui.flangerEffectFrame->setHidden(false);
-		ui.flangerF0Slider->setValue((int)(flanger->getFo() * 100));
-		ui.flangerGFBDial->setValue((int)(flanger->getGFB() * 100));
-		ui.flangerGFFDial->setValue((int)(flanger->getGFF() * 100));
-		ui.flangerMwDial->setValue((int)(flanger->getMw() * 100));
-		ui.flangerM0Dial->setValue((int)(flanger->getM0() * 100));
-		break; // TODO SET MAX MIN FLANGER AND NAMES
-	case effectType::reverb:
-		ui.reverbEffectFrame->setHidden(false);
-		ui.reverbTypeComboBox->setCurrentIndex(reverb->getMode());
-		ui.reverbDelayDial->setValue((int)(reverb->getDelay() * 100));
-		ui.reverbAttnDial->setValue((int)(reverb->getAtt() * 100));
-		break;
-	case effectType::vibrato:
-		ui.vibratoEffectFrame->setHidden(false);
-		ui.vibratoF0Slider->setValue((int)(vibrato->getFo() * 100));
-		ui.vibratoMAvgDial->setValue((int)(vibrato->getMavg() * 100));
-		ui.vibratoWidthDial->setValue((int)(vibrato->getWidth() * 100));
-		break;
-	case effectType::wahwah:
-		ui.wahwahEffectFrame->setHidden(false);
-		ui.wahwahFMinSlider->setValue((int)(wahwah->getFmin() * 100));
-		ui.wahwahLFOSlider->setValue((int)(wahwah->getFLFO() * 100));
-		break;
-
-	case effectType::eq8band:
-		ui.eq8Frame->setHidden(false);
-		ui.eqSlider100->setValue((int)(eq8band->getGains().gains[0] * 100));
-		ui.eqSlider200->setValue((int)(eq8band->getGains().gains[1] * 100));
-		ui.eqSlider400->setValue((int)(eq8band->getGains().gains[2] * 100));
-		ui.eqSlider800->setValue((int)(eq8band->getGains().gains[3] * 100));
-		ui.eqSlider1k4->setValue((int)(eq8band->getGains().gains[4] * 100));
-		ui.eqSlider2k7->setValue((int)(eq8band->getGains().gains[5] * 100));
-		ui.eqSlider5k->setValue((int)(eq8band->getGains().gains[6] * 100));
-		ui.eqSlider10k->setValue((int)(eq8band->getGains().gains[7] * 100));
-
-		break;
-	}
-
-
-}
-
-// GUI-triggered functions
-
-void Leandro::addNewChannel() {
-	Channel* newChannel = new Channel(this->channelCreationCounter++, this);
-	addChannel(newChannel);
-
-};
-
-
-void Leandro::setInstrumentForActiveChannel() {
-	Instrument* instrument = nullptr;
-	for(int i=0;i<instrumentModels.size();i++)
-		if (ui.instrumentsList->currentItem()->text().toStdString() == instrumentModels.at(i)->instrumentName) {
-			switch (instrumentModels.at(i)->type) {
-			case synthType::adsr:
-				instrument = new ADSRInstrument((adsrParams_t*)instrumentModels.at(i)->params);
-				break;
-			case synthType::additive:
-				instrument = new AdditiveInstrument((additiveParams_t*)instrumentModels.at(i)->params);
-				break;
-			case synthType::karplus:
-				instrument = new karplusInstrument((karPlusParams_t*)instrumentModels.at(i)->params);
-				break;
-			case synthType::sampling:
-				instrument = new SamplingInstrument((samplingParams_t*)instrumentModels.at(i)->params);
-				break;
-			}
-			break;
-		}
-	activeChannel->setChannelInstrument(instrument);
-}
-
-void Leandro::removeEffectFromActiveChannel() {
-	
-	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
-	{
-		switch (activeChannel->effects.at(effIndex)->type) {
-		case effectType::flanger:
-			if (ui.flangerEffectFrame->isHidden()) {
-				activeChannel->effects.at(effIndex)->~Effect();
-				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
-			}
-			break;
-		case effectType::reverb:
-			if (ui.reverbEffectFrame->isHidden()) {
-				activeChannel->effects.at(effIndex)->~Effect();
-				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
-			}
-			break;
-		case effectType::vibrato:
-			if (ui.vibratoEffectFrame->isHidden()) {
-				activeChannel->effects.at(effIndex)->~Effect();
-				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
-			}
-			break;
-		case effectType::wahwah:
-			if (ui.wahwahEffectFrame->isHidden()) {
-				activeChannel->effects.at(effIndex)->~Effect();
-				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
-			}
-			break;
-		case effectType::eq8band:
-			if (ui.eq8Frame->isHidden()) {
-				activeChannel->effects.at(effIndex)->~Effect();
-				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
-			}
-			break;
-		}
-	}
-	updateActiveAssetsBay();
-}
-
-void Leandro::removeInstrumentFromActiveChannel() {
-	activeChannel->removeChannelInstrument();
-	updateActiveAssetsBay();
-
-}
-
-void Leandro::removeReverbEffect() {
-	ui.reverbEffectFrame->setHidden(true);
-	removeEffectFromActiveChannel();
-}
-
-void Leandro::removeFlangerEffect() {
-	ui.flangerEffectFrame->setHidden(true);
-	removeEffectFromActiveChannel();
-}
-
-void Leandro::removeVibratoEffect() {
-	ui.vibratoEffectFrame->setHidden(true);
-	removeEffectFromActiveChannel();
-}
-
-void Leandro::removeEq8BandEffect() {
-	ui.eq8Frame->setHidden(true);
-	removeEffectFromActiveChannel();
-}
-
-void Leandro::removeWahwahEffect() {
-	ui.wahwahEffectFrame->setHidden(true);
-	removeEffectFromActiveChannel();
-}
-
-void Leandro::addEffectToActiveChannel() {
-	Effect* effect = nullptr;
-	for (int i = 0; i < effectModels.size(); i++)
-		if (ui.effectsList->currentItem()->text().toStdString() == effectModels.at(i)->effectName) {
-			switch (effectModels.at(i)->type) {
-			case effectType::flanger:
-				effect = new FlangerEffect((flangerParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::reverb:
-				effect = new ReverbEffect((reverbParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::vibrato:
-				effect = new VibratoEffect((vibratoParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::wahwah:
-				effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::eq8band:
-				effect = new Eq8BandEffect((eq8bandParams_t*)effectModels.at(i)->params);
-				break;
-			}
-			break;
-		}
-	activeChannel->addEffectToChannel(effect);
 }
 
 void Leandro::loadData() {
@@ -554,7 +275,7 @@ void Leandro::loadSynthData() {
 		model.type = synthType::sampling;
 		instrumentModels.push_back(new instrumentModel(model));
 	}
-	
+
 
 	// Karplus
 	Json::Value karplusData = root["karplus"];
@@ -585,10 +306,432 @@ void Leandro::loadSynthData() {
 }
 
 
+// GUI-related, system-triggered functions
+
+void Leandro::updateAvailableAssetsInGUI() {
+	QListWidgetItem* ___qlistwidgetitem;
+	ui.instrumentsList->clear();
+	for (int i = 0; i < instrumentModels.size(); i++) {
+		___qlistwidgetitem = new QListWidgetItem;
+		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
+		ui.instrumentsList->addItem(___qlistwidgetitem);
+	}
+	ui.effectsList->clear();
+	for (int i = 0; i < effectModels.size(); i++) {
+		___qlistwidgetitem = new QListWidgetItem;
+		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
+		ui.instrumentsList->addItem(___qlistwidgetitem);
+	}
+}
+
+void Leandro::updateGUIMidiLists() {
+	for (int i = 0; i < channels.size(); i++) {
+		channels.at(i)->midiListChannel->clear();
+		for (int j = 0; j < midiTracks.size(); j++) {
+			char* trackName = new char[(midiTracks.at(j)->trackName.size()) + 1];
+			strcpy(trackName, midiTracks.at(j)->trackName.c_str());
+			QListWidgetItem* ___qlistwidgetitem = new QListWidgetItem;
+			___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", trackName, nullptr));
+			channels.at(i)->midiListChannel->addItem(___qlistwidgetitem);
+		}
+	}
+}
+
+void Leandro::updateActiveAssetsBay() {
+	ui.adsrInstrumentFrame->setHidden(true);
+	ui.additiveInstrumentFrame->setHidden(true);
+	ui.samplingInstrumentFrame->setHidden(true);
+	ui.karplusInstrumentFrame->setHidden(true);
+	ui.flangerEffectFrame->setHidden(true);
+	ui.reverbEffectFrame->setHidden(true);
+	ui.vibratoEffectFrame->setHidden(true);
+	ui.wahwahEffectFrame->setHidden(true);
+	ui.eq8Frame->setHidden(true);
+	
+	if (activeChannel->instrument) showInstrument(activeChannel->instrument);
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+	{
+		showEffect(activeChannel->effects.at(effIndex)); // TODO PRIORITY add effect order: IDEA: implement function that reorganizes effects using replaceWidget function
+	}
+
+}
+
+void Leandro::setActiveChannel(Channel* channel) {
+	if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
+	activeChannel = channel;
+	activeChannel->setActiveButtonChannel->setDisabled(true);
+
+	updateActiveAssetsBay();
+} 
+
+void Leandro::showInstrument(Instrument* instrument) {
+	
+
+	ADSRInstrument* adsrinst = (ADSRInstrument*)instrument;
+	AdditiveInstrument* additiveinst = (AdditiveInstrument*)instrument;
+	SamplingInstrument* samplinginst = (SamplingInstrument*)instrument;
+	karplusInstrument* karplusinst = (karplusInstrument*)instrument;
+
+
+
+	switch (instrument->type) {
+		case synthType::adsr:
+			ui.adsrInstrumentFrame->setHidden(false);
+			ui.waveform1ComboBoxADSR->setCurrentIndex(adsrinst->getWF1());
+			ui.waveform2ComboBoxADSR->setCurrentIndex(adsrinst->getWF2());
+			ui.levelWF1DialADSR->setValue((int)(adsrinst->getWF1Level() * 100));
+			ui.levelWF2DialADSR->setValue((int)(adsrinst->getWF2Level() * 100));
+			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
+			ui.decayDialADSR->setValue((int)(adsrinst->getDecay() * 1000));
+			ui.sustainRateDialADSR->setValue((int)(adsrinst->getSustainRate()*1000));
+			ui.sustainLevelDialADSR->setValue((int)(adsrinst->getSustainLevel() * 100));
+			ui.releaseDialADSR->setValue((int)(adsrinst->getRelease() * 1000));
+			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
+			break;
+		case synthType::additive:
+			ui.additiveInstrumentFrame->setHidden(false);
+			ui.sliderH0->setValue((int)(additiveinst->getHarmonicFactor(0) * 100));
+			ui.sliderH1->setValue((int)(additiveinst->getHarmonicFactor(1) * 100));
+			ui.sliderH2->setValue((int)(additiveinst->getHarmonicFactor(2) * 100));
+			ui.sliderH3->setValue((int)(additiveinst->getHarmonicFactor(3) * 100));
+			ui.sliderH4->setValue((int)(additiveinst->getHarmonicFactor(4) * 100));
+			ui.sliderH5->setValue((int)(additiveinst->getHarmonicFactor(5) * 100));
+			ui.sliderH6->setValue((int)(additiveinst->getHarmonicFactor(5) * 100));
+			ui.sliderH7->setValue((int)(additiveinst->getHarmonicFactor(6) * 100));
+			ui.sliderH8->setValue((int)(additiveinst->getHarmonicFactor(7) * 100));
+			ui.sliderH9->setValue((int)(additiveinst->getHarmonicFactor(8) * 100));
+			ui.sliderH10->setValue((int)(additiveinst->getHarmonicFactor(9) * 100));
+			ui.sliderH11->setValue((int)(additiveinst->getHarmonicFactor(10) * 100));
+
+
+			break;
+		case synthType::karplus:
+			ui.karplusInstrumentFrame->setHidden(false);
+			ui.karplusBlendSlider->setValue((int)(karplusinst->getBFactor() * 1000));
+			ui.karplusStretchSlider->setValue((int)(karplusinst->getSFactor() * 100));
+			ui.karplusDecaySlider->setValue((int)(karplusinst->getRlFactor() * 1000));
+			ui.karplusResFilterCheckBox->setChecked(karplusinst->filterStatus());
+			break;
+		case synthType::sampling:
+			ui.samplingInstrumentFrame->setHidden(false);
+			ui.samplingLoopStartDial->setValue(samplinginst->getLoopBegin());
+			ui.samplingLoopStartDial->setValue(samplinginst->getLoopEnd());
+			break;
+		}
+
+}
+
+void Leandro::showEffect(Effect* effect) {
+	FlangerEffect* flanger = (FlangerEffect*)effect;
+	ReverbEffect* reverb = (ReverbEffect*)effect;
+	VibratoEffect* vibrato = (VibratoEffect*)effect;
+	WahwahEffect* wahwah = (WahwahEffect*)effect;
+	Eq8BandEffect* eq8band= (Eq8BandEffect*)effect;
+
+
+
+	switch (effect->type) {
+	case effectType::flanger:
+		ui.flangerEffectFrame->setHidden(false);
+		ui.flangerF0Slider->setValue((int)(flanger->getFo() * 100));
+		ui.flangerGFBDial->setValue((int)(flanger->getGFB() * 100));
+		ui.flangerGFFDial->setValue((int)(flanger->getGFF() * 100));
+		ui.flangerMwDial->setValue((int)(flanger->getMw() * 100));
+		ui.flangerM0Dial->setValue((int)(flanger->getM0() * 100));
+		break; 
+	case effectType::reverb:
+		ui.reverbEffectFrame->setHidden(false);
+		ui.reverbTypeComboBox->setCurrentIndex(reverb->getMode());
+		ui.reverbDelayDial->setValue((int)(reverb->getDelay() * 100));
+		ui.reverbAttnDial->setValue((int)(reverb->getAtt() * 100));
+		break;
+	case effectType::vibrato:
+		ui.vibratoEffectFrame->setHidden(false);
+		ui.vibratoF0Slider->setValue((int)(vibrato->getFo() * 100));
+		ui.vibratoMAvgDial->setValue((int)(vibrato->getMavg() * 100));
+		ui.vibratoWidthDial->setValue((int)(vibrato->getWidth() * 100));
+		break;
+	case effectType::wahwah:
+		ui.wahwahEffectFrame->setHidden(false);
+		ui.wahwahFMinSlider->setValue((int)(wahwah->getFmin() * 100));
+		ui.wahwahLFOSlider->setValue((int)(wahwah->getFLFO() * 100));
+		break;
+
+	case effectType::eq8band:
+		ui.eq8Frame->setHidden(false);
+		ui.eqSlider100->setValue((int)(eq8band->getGains().gains[0] * 100));
+		ui.eqSlider200->setValue((int)(eq8band->getGains().gains[1] * 100));
+		ui.eqSlider400->setValue((int)(eq8band->getGains().gains[2] * 100));
+		ui.eqSlider800->setValue((int)(eq8band->getGains().gains[3] * 100));
+		ui.eqSlider1k4->setValue((int)(eq8band->getGains().gains[4] * 100));
+		ui.eqSlider2k7->setValue((int)(eq8band->getGains().gains[5] * 100));
+		ui.eqSlider5k->setValue((int)(eq8band->getGains().gains[6] * 100));
+		ui.eqSlider10k->setValue((int)(eq8band->getGains().gains[7] * 100));
+
+		break;
+	}
+
+
+}
+
+// GUI-triggered functions
+
+void Leandro::addNewChannel() {
+	Channel* newChannel = new Channel(this->channelCreationCounter++, this);
+	addChannel(newChannel);
+
+};
+
+void Leandro::setInstrumentForActiveChannel() {
+	Instrument* instrument = nullptr;
+	for(int i=0;i<instrumentModels.size();i++)
+		if (ui.instrumentsList->currentItem()->text().toStdString() == instrumentModels.at(i)->instrumentName) {
+			switch (instrumentModels.at(i)->type) {
+			case synthType::adsr:
+				instrument = new ADSRInstrument((adsrParams_t*)instrumentModels.at(i)->params);
+				break;
+			case synthType::additive:
+				instrument = new AdditiveInstrument((additiveParams_t*)instrumentModels.at(i)->params);
+				break;
+			case synthType::karplus:
+				instrument = new karplusInstrument((karPlusParams_t*)instrumentModels.at(i)->params);
+				break;
+			case synthType::sampling:
+				instrument = new SamplingInstrument((samplingParams_t*)instrumentModels.at(i)->params);
+				break;
+			}
+			break;
+		}
+	activeChannel->setChannelInstrument(instrument);
+}
+
+void Leandro::addEffectToActiveChannel() {
+	Effect* effect = nullptr;
+	for (int i = 0; i < effectModels.size(); i++)
+		if (ui.effectsList->currentItem()->text().toStdString() == effectModels.at(i)->effectName) {
+			switch (effectModels.at(i)->type) {
+			case effectType::flanger:
+				effect = new FlangerEffect((flangerParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::reverb:
+				effect = new ReverbEffect((reverbParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::vibrato:
+				effect = new VibratoEffect((vibratoParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::wahwah:
+				effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
+				break;
+			case effectType::eq8band:
+				effect = new Eq8BandEffect((eq8bandParams_t*)effectModels.at(i)->params);
+				break;
+			}
+			break;
+		}
+	activeChannel->addEffectToChannel(effect);
+}
+
+void Leandro::removeInstrumentFromActiveChannel() {
+	activeChannel->removeChannelInstrument();
+	updateActiveAssetsBay();
+
+}
+
+void Leandro::removeReverbEffect() {
+	ui.reverbEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeFlangerEffect() {
+	ui.flangerEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeVibratoEffect() {
+	ui.vibratoEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeEq8BandEffect() {
+	ui.eq8Frame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeWahwahEffect() {
+	ui.wahwahEffectFrame->setHidden(true);
+	removeEffectFromActiveChannel();
+}
+
+void Leandro::removeEffectFromActiveChannel() {
+	
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+	{
+		switch (activeChannel->effects.at(effIndex)->type) {
+		case effectType::flanger:
+			if (ui.flangerEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::reverb:
+			if (ui.reverbEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::vibrato:
+			if (ui.vibratoEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::wahwah:
+			if (ui.wahwahEffectFrame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		case effectType::eq8band:
+			if (ui.eq8Frame->isHidden()) {
+				activeChannel->effects.at(effIndex)->~Effect();
+				activeChannel->effects.erase(activeChannel->effects.begin() + effIndex);
+			}
+			break;
+		}
+	}
+	updateActiveAssetsBay();
+}
+
+
 // GUI triggered setters
 
+void Leandro::instrumentValueChanged() {
+	ADSRInstrument* adsrinst = (ADSRInstrument*)activeChannel->instrument;
+	AdditiveInstrument* additiveinst = (AdditiveInstrument*)activeChannel->instrument;
+	SamplingInstrument* samplinginst = (SamplingInstrument*)activeChannel->instrument;
+	karplusInstrument* karplusinst = (karplusInstrument*)activeChannel->instrument;
 
+	switch (activeChannel->instrument->type) {
+	case synthType::adsr:
+		adsrinst->setAttack(((float)ui.attackDialADSR->value()) / 1000.0);
+		adsrinst->setDecay(((float)ui.decayDialADSR->value()) / 1000.0);
+		adsrinst->setSustainRate(((float)ui.sustainRateDialADSR->value()) / 1000.0);
+		adsrinst->setSustainLevel(((float)ui.sustainLevelDialADSR->value()) / 100.0);
+		adsrinst->setRelease(((float)ui.releaseDialADSR->value()) / 1000.0);
+		adsrinst->setWF1(ui.waveform1ComboBoxADSR->currentIndex());
+		adsrinst->setWF2(ui.waveform2ComboBoxADSR->currentIndex());
+		adsrinst->setWF1Level(((float)ui.levelWF1DialADSR->value()) / 100.0);
+		adsrinst->setWF1Level(((float)ui.levelWF2DialADSR->value()) / 100.0);
+		break;
 
+	case synthType::additive:
+		additiveinst->setHarmonicFactor(0, (float)ui.sliderH0->value() / 100.0);
+		additiveinst->setHarmonicFactor(1, (float)ui.sliderH1->value() / 100.0);
+		additiveinst->setHarmonicFactor(2, (float)ui.sliderH2->value() / 100.0);
+		additiveinst->setHarmonicFactor(3, (float)ui.sliderH3->value() / 100.0);
+		additiveinst->setHarmonicFactor(4, (float)ui.sliderH4->value() / 100.0);
+		additiveinst->setHarmonicFactor(5, (float)ui.sliderH5->value() / 100.0);
+		additiveinst->setHarmonicFactor(6, (float)ui.sliderH6->value() / 100.0);
+		additiveinst->setHarmonicFactor(7, (float)ui.sliderH7->value() / 100.0);
+		additiveinst->setHarmonicFactor(8, (float)ui.sliderH8->value() / 100.0);
+		additiveinst->setHarmonicFactor(9, (float)ui.sliderH9->value() / 100.0);
+		additiveinst->setHarmonicFactor(10, (float)ui.sliderH10->value() / 100.0);
+		additiveinst->setHarmonicFactor(11, (float)ui.sliderH11->value() / 100.0);
+		break;
+
+	case synthType::karplus:
+		karplusinst->setBFactor((float)ui.karplusBlendSlider->value() / 1000.0);
+		karplusinst->setSFactor((float)ui.karplusStretchSlider->value() / 100.0);
+		karplusinst->setRlFactor((float)ui.karplusDecaySlider->value() / 1000.0);
+		if (ui.karplusResFilterCheckBox->isChecked()) karplusinst->activeFilter();
+		else karplusinst->deactiveFilter();
+
+		break;
+
+	case synthType::sampling:
+		
+		if (ui.samplingLoopStartDial->value() < ui.samplingLoopEndDial->value()) {
+			samplinginst->setLoopBegin(ui.samplingLoopStartDial->value());
+			samplinginst->setLoopEnd(ui.samplingLoopEndDial->value());
+		}
+		else {
+			if (samplinginst->getLoopBegin() != ui.samplingLoopStartDial->value())
+			{
+				samplinginst->setLoopBegin(ui.samplingLoopEndDial->value() - 1);
+				ui.samplingLoopStartDial->setValue(samplinginst->getLoopBegin());
+			}
+			else
+			{
+				samplinginst->setLoopEnd(ui.samplingLoopStartDial->value() + 1);
+				ui.samplingLoopEndDial->setValue(samplinginst->getLoopEnd());
+			}
+		}
+		break;
+	}
+}
+
+void Leandro::reverbValueChanged() {
+	ReverbEffect* reverbEffect;
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++) 
+		if (activeChannel->effects.at(effIndex)->type == effectType::reverb)
+			reverbEffect = (ReverbEffect*)activeChannel->effects.at(effIndex);
+	
+	reverbEffect->setAtt((float)ui.reverbAttnDial->value() / 100.0);
+	reverbEffect->setDelay((float)ui.reverbDelayDial->value() / 100.0);	
+}
+
+void Leandro::flangerValueChanged() {
+	FlangerEffect* flangerEffect;
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+		if (activeChannel->effects.at(effIndex)->type == effectType::flanger)
+			flangerEffect = (FlangerEffect*)activeChannel->effects.at(effIndex);
+
+	flangerEffect->setFo((float)ui.flangerF0Slider->value() / 100.0);
+	flangerEffect->setGFB((float)ui.flangerGFBDial->value() / 100.0);
+	flangerEffect->setGFF((float)ui.flangerGFFDial->value() / 100.0);
+	flangerEffect->setM0((float)ui.flangerM0Dial->value() / 10000.0);
+	flangerEffect->setMw((float)ui.flangerMwDial->value() / 10.0);
+}
+
+void Leandro::vibratoValueChanged() {
+	VibratoEffect* vibratoEffect;
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+		if (activeChannel->effects.at(effIndex)->type == effectType::vibrato)
+			vibratoEffect = (VibratoEffect*)activeChannel->effects.at(effIndex);
+
+	vibratoEffect->setFo((float)ui.vibratoF0Slider->value() / 100.0);
+	vibratoEffect->setWidth((float)ui.vibratoWidthDial->value() / 100.0);
+	vibratoEffect->setMavg((float)ui.vibratoMAvgDial->value());
+}
+
+void Leandro::eq8BandValueChanged() {
+	Eq8BandEffect* eq8bandEffect;
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+		if (activeChannel->effects.at(effIndex)->type == effectType::eq8band)
+			eq8bandEffect = (Eq8BandEffect*)activeChannel->effects.at(effIndex);
+
+	gains_t* gains = new gains_t;
+	gains->gains[0] = (float)ui.eqSlider100->value() / 100;
+	gains->gains[1] = (float)ui.eqSlider200->value() / 100;
+	gains->gains[2] = (float)ui.eqSlider400->value() / 100;
+	gains->gains[3] = (float)ui.eqSlider800->value() / 100;
+	gains->gains[4] = (float)ui.eqSlider1k4->value() / 100;
+	gains->gains[5] = (float)ui.eqSlider2k7->value() / 100;
+	gains->gains[6] = (float)ui.eqSlider5k->value() / 100;
+	gains->gains[7] = (float)ui.eqSlider10k->value() / 100;
+	eq8bandEffect->setGains(*gains);
+
+}
+
+void Leandro::wahwahValueChanged() {
+	WahwahEffect* wahwahEffect;
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
+		if (activeChannel->effects.at(effIndex)->type == effectType::wahwah)
+			wahwahEffect = (WahwahEffect*)activeChannel->effects.at(effIndex);
+
+	wahwahEffect->setFmin((float)ui.wahwahFMinSlider->value());
+	wahwahEffect->setFLFO((float)ui.wahwahLFOSlider->value() / 100.0);
+}
 
 
 // GUI init
@@ -597,8 +740,11 @@ void Leandro::initGUI() {
 	ui.setupUi(this);
 	ui.retranslateUi(this);
 	
+	// Button connections
+	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi);
+
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
-	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
 
 	QObject::connect(ui.deleteADSRButton, &QPushButton::clicked, this, &Leandro::removeInstrumentFromActiveChannel);
@@ -611,4 +757,81 @@ void Leandro::initGUI() {
 	QObject::connect(ui.deleteFlangerButton, &QPushButton::clicked, this, &Leandro::removeFlangerEffect);
 	QObject::connect(ui.deleteWahwahButton, &QPushButton::clicked, this, &Leandro::removeWahwahEffect);
 
+	// Instrument parameters change connections
+
+	// ADSR
+	QObject::connect(ui.waveform1ComboBoxADSR, &QComboBox::currentTextChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.waveform2ComboBoxADSR, &QComboBox::currentTextChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.levelWF1DialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.levelWF2DialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.attackDialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.decayDialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sustainRateDialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sustainLevelDialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.releaseDialADSR, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+
+	// Additive
+	QObject::connect(ui.sliderH0, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH1, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH2, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH3, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH4, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH5, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH6, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH7, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH8, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH9, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH10, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.sliderH11, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	
+	// Sampling
+	QObject::connect(ui.samplingLoopEndDial, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.samplingLoopStartDial, &QDial::valueChanged, this, &Leandro::instrumentValueChanged);
+	
+	// Karplus
+	QObject::connect(ui.karplusBlendSlider, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.karplusDecaySlider, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.karplusStretchSlider, &QSlider::valueChanged, this, &Leandro::instrumentValueChanged);
+	QObject::connect(ui.karplusResFilterCheckBox, &QCheckBox::clicked , this, &Leandro::instrumentValueChanged);
+	
+
+	// Effects
+	
+	// Reverb
+	QObject::connect(ui.reverbTypeComboBox, &QComboBox::currentTextChanged, this, &Leandro::reverbValueChanged);
+	QObject::connect(ui.reverbDelayDial, &QDial::valueChanged, this, &Leandro::reverbValueChanged);
+	QObject::connect(ui.reverbAttnDial, &QDial::valueChanged, this, &Leandro::reverbValueChanged);
+	
+	// Flanger
+	QObject::connect(ui.flangerF0Slider, &QSlider::valueChanged, this, &Leandro::flangerValueChanged);
+	QObject::connect(ui.flangerGFBDial, &QDial::valueChanged, this, &Leandro::flangerValueChanged);
+	QObject::connect(ui.flangerGFFDial, &QDial::valueChanged, this, &Leandro::flangerValueChanged);
+	QObject::connect(ui.flangerMwDial, &QDial::valueChanged, this, &Leandro::flangerValueChanged);
+	QObject::connect(ui.flangerM0Dial, &QDial::valueChanged, this, &Leandro::flangerValueChanged);
+
+	// Vibrato
+	QObject::connect(ui.vibratoF0Slider, &QSlider::valueChanged, this, &Leandro::vibratoValueChanged);
+	QObject::connect(ui.vibratoWidthDial, &QDial::valueChanged, this, &Leandro::vibratoValueChanged);
+	QObject::connect(ui.vibratoMAvgDial, &QDial::valueChanged, this, &Leandro::vibratoValueChanged);
+	
+	// Wahwah
+	QObject::connect(ui.wahwahFMinSlider, &QDial::valueChanged, this, &Leandro::wahwahValueChanged);
+	QObject::connect(ui.wahwahLFOSlider, &QDial::valueChanged, this, &Leandro::wahwahValueChanged);
+	
+	// 8 Band Equalizer
+	QObject::connect(ui.eqSlider100, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider200, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider400, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider800, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider1k4, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider2k7, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider5k, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+	QObject::connect(ui.eqSlider10k, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
+
+}
+
+// TEST FUNCTIONS
+
+void Leandro::loadTestMidi() {
+	addMidiFile("", "sm64.mid", true);
 }

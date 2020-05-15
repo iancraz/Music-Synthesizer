@@ -98,6 +98,14 @@ public:
 
 	void addNewChannel();
 
+	void instrumentValueChanged();
+	void reverbValueChanged();
+	void flangerValueChanged();
+	void vibratoValueChanged();
+	void eq8BandValueChanged();
+	void wahwahValueChanged();
+
+
 	void removeReverbEffect();
 	void removeFlangerEffect();
 	void removeVibratoEffect();
@@ -109,7 +117,9 @@ public:
 	void loadEffectsData();
 
 	void loadSynthData();
+	void loadTestMidi();
 
+	
 
 private:
 	Ui::LeandroClass ui;

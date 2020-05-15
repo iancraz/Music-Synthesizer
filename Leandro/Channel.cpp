@@ -25,6 +25,7 @@ Channel::Channel(int channelCreationCounter, Leandro* _program) {
 	this->effects.clear();
 	while (!this->events.empty()) this->events.pop();
 
+
 	// Callback update
 	this->updateCallbackData();
 }
@@ -38,26 +39,7 @@ void Channel::updateCallbackData() { // Function to be called at the end of ever
 }
 
 Channel::~Channel() {
-	delete(frameChannel);
-	delete(verticalLayoutFrameChannel);
-	delete(nameLabelChannel);
-	delete(setActiveButtonChannel);
-	delete(verticalSpacerChannel);
-	delete(inputComboBoxLayoutChannel);
-	delete(InputLabelChannel);
-	delete(inputComboBoxChannel);
-	delete(midiListChannel);
-	delete(levelDialChannel);
-	delete(levelLabelChannel);
-	delete(instrument);
-	for (int i = 0; i < effects.size(); i++)
-		delete(effects.at(i));
-	/*
-	while (!events.empty()) {
-		delete(events.front());
-		events.pop();
-	}
-	*/
+	
 }
 
 bool Channel::operator== (Channel const& channel) {

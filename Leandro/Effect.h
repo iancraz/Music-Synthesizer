@@ -100,6 +100,10 @@ public:
 	float getMw() { return Mw; }
 
 	void setFo(float fo);
+	void setGFB(float GFB) { g_fb = GFB; }
+	void setM0(float M0) { Mo = M0; }
+	void setGFF(float GFF) { g_ff = GFF; }
+	void setMw(float Mw) { this->Mw = Mw; }
 	effectCallback callback;
 protected:
 	float fo;
@@ -133,6 +137,8 @@ public:
 	float getMavg() { return M_avg; }
 	float getWidth() { return W; }
 	void setFo(float fo);
+	void setWidth(float width) { W = width; }
+	void setMavg(float mavg) { M_avg = mavg; }
 	effectCallback callback;
 protected:
 	float W;
