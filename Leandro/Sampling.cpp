@@ -8,7 +8,7 @@ SamplingInstrument::SamplingInstrument(samplingParams_t * params) {
 	lenght_temp_buffer = params->buffLength;
 	min_octave = params->minOctave;
 	max_octave = params->maxOctave;
-	note_pressed_time = params->notePressedTime;
+	
 	samples = new vector<Sample*>(*params->samples);
 
 	samples = new vector<Sample*>;
@@ -33,7 +33,7 @@ SamplingInstrument::SamplingInstrument(samplingParams_t * params) {
 	//		sample = new Sample("./Samples/Piano Electronico Clasico/C" + to_string(i), i);
 	//		samples->push_back(sample);
 	//	}
-	//	note_pressed_time = 0.375;
+	//	selected_sample->note_pressed_time = 0.375;
 	//	break;
 	//case 2:
 	//	cout << "Grand Piano seleccionado" << endl;
@@ -45,7 +45,7 @@ SamplingInstrument::SamplingInstrument(samplingParams_t * params) {
 	//		samples->push_back(sample);
 
 	//	}
-	//	note_pressed_time = 1;
+	//	selected_sample->note_pressed_time = 1;
 	//	break;
 
 	//default:
@@ -89,7 +89,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 	//Constantes de la nueva nota sintetizada
 	int P_1 = (int)((1 / B) * P_0); //Nuevo Pitch period
-	int extra_N = (new_note_pressed_time - note_pressed_time) * fs; //Largo extra que 
+	int extra_N = (new_note_pressed_time - selected_sample->note_pressed_time) * fs; //Largo extra que 
 	int N_1 = int(N_0 + extra_N); // Largo de la nueva se�al
 
 	//Constantes que se requieren para la operacion de modficacion temporal de la nota
@@ -99,7 +99,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 
 	for (int i = 0; i < lenght_peaks; i++) {
-		if (selected_sample->peaks[i] > (int)(note_pressed_time * fs)) {
+		if (selected_sample->peaks[i] > (int)(selected_sample->note_pressed_time * fs)) {
 			peaks_idx_end_pressed = i - 1;
 			break;
 		}
@@ -122,11 +122,11 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 	int idx = 0;
 	int new_peaks_begin = selected_sample->peaks[0];
 	int new_peaks_end = N_1 - (int)(0.10 * N_1);
-	int correction = ((note_pressed_time - new_note_pressed_time) * fs);
+	int correction = ((selected_sample->note_pressed_time - new_note_pressed_time) * fs);
 
 	//CASO 1 - SE DESEA OBTENER UNA NOTA CON MENOR TIEMPO DE PRESIONADO QUE EL SAMPLE
 	//El tiempo de presionado del sample es mas largo de lo que se quiere. Se trunca el sample hasta el valor de nota presionada que se desee y luego que agrega el decay del sample
-	if (new_note_pressed_time <= note_pressed_time) {
+	if (new_note_pressed_time <= selected_sample->note_pressed_time) {
 
 		for (int new_peaks = new_peaks_begin; new_peaks < new_peaks_end; new_peaks = new_peaks + int(P_1)) {
 
@@ -151,7 +151,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 	}
 
 	//CASO 2 - SE DESEA OBTENER UNA NOTA CON MAYOR TIEMPO DE PRESIONADO QUE EL SAMPLE
-	if (new_note_pressed_time > note_pressed_time) {  //Para el caso en que se desee obtener una nota con mayor tiempo de presionado que el sample
+	if (new_note_pressed_time > selected_sample->note_pressed_time) {  //Para el caso en que se desee obtener una nota con mayor tiempo de presionado que el sample
 
 		//PARTE 1 -> DESDE 0 HASTA QUE SE SUELTA LA NOTA
 		idx = 0;
@@ -182,7 +182,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 		int count = 0;
 		idx = 0;
 		new_peaks_begin = (int)((repeat_time_begin * (float)fs));
-		new_peaks_end = (int)(((new_note_pressed_time - abs(note_pressed_time - repeat_time_end)) * (float)fs));
+		new_peaks_end = (int)(((new_note_pressed_time - abs(selected_sample->note_pressed_time - repeat_time_end)) * (float)fs));
 		correction = 0;
 
 		for (int value = (int)((repeat_time_begin * (float)fs)); value < (int)((repeat_time_end * (float)fs)); value = value + (int)P_1) {
@@ -221,9 +221,9 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 		//PARTE 3 -> DESDE NUEVA NOTA PRESIONADA HASTA FINAL
 		idx = 0;
-		new_peaks_begin = (int)(((new_note_pressed_time - abs(note_pressed_time - repeat_time_end)) * (float)fs));
+		new_peaks_begin = (int)(((new_note_pressed_time - abs(selected_sample->note_pressed_time - repeat_time_end)) * (float)fs));
 		new_peaks_end = N_1;
-		correction = -(abs((new_note_pressed_time - abs(note_pressed_time - repeat_time_end)) - repeat_time_end) * fs);
+		correction = -(abs((new_note_pressed_time - abs(selected_sample->note_pressed_time - repeat_time_end)) - repeat_time_end) * fs);
 
 		for (int new_peaks = new_peaks_begin; new_peaks < new_peaks_end; new_peaks = new_peaks + int(P_1)) {
 

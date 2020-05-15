@@ -2,7 +2,7 @@
 
 #include <cstring>
 #include "AudioFile.h" 
-
+#include <vector>
 #include <string>
 #include <iostream>
 #include <sstream>

@@ -47,11 +47,6 @@ typedef struct {
 	ofstream* debugStream;
 }callbackData;
 
-typedef struct {
-	string instrumentName;
-	synthType type;
-	void* params;
-}instrumentModel;
 
 
 class Leandro : public QMainWindow

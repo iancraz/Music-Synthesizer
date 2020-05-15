@@ -162,6 +162,8 @@ public:
 
 	int synthFunction(float* outputBuffer, const unsigned int outputBufferSize, const int keyNumber, const float lengthInMilliseconds, const int velocity, const int sampleRate);
 
+	static samplingParams_t* parseSamplingJson(Json::Value data);
+
 private:
 	vector <Sample*>* samples;
 
