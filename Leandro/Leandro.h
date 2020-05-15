@@ -17,8 +17,8 @@
 #include "json/json.h"
 
 #define SAMPLE_RATE (44100)
-#define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 50
-#define MAX_NOTE_LENGTH_SECONDS 10
+#define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 40
+#define MAX_NOTE_LENGTH_SECONDS 15
 #define	ACTIVE_BUFFER_FRAME_SIZE 44100
 #define MAX_WAV_SIZE (SAMPLE_RATE * 60 * 6)
 
@@ -52,6 +52,7 @@ typedef struct {
 	float* wav;
 	unsigned int * wavCounter;
 	bool recordFlag;
+	bool specgramFlag;
 }callbackData;
 
 
@@ -199,9 +200,12 @@ public:
 
 	void showSpectrogram();
 
+	void calcSpecgram();
+
 private:
 	Ui::LeandroClass ui;
 	bool recordFlag;
+	bool specgramFlag;
 	void record2Wav();
 	void restarWavRecording();
 	float* wav;
