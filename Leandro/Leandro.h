@@ -52,6 +52,7 @@ typedef struct {
 	float* wav;
 	unsigned int * wavCounter;
 	bool recordFlag;
+	bool specgramFlag;
 }callbackData;
 
 
@@ -198,9 +199,12 @@ public:
 
 
 
+	void calcSpecgram();
+
 private:
 	Ui::LeandroClass ui;
 	bool recordFlag;
+	bool specgramFlag;
 	void record2Wav();
 	void restarWavRecording();
 	float* wav;

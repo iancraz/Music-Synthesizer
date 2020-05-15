@@ -10,11 +10,13 @@
 #include "AudioFile.h"
 #include <qfiledialog.h>
 #include <QSplashScreen>
+#include "Spectrogram/Spectrogram.h"
 
 using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	recordFlag = false;
+	specgramFlag = false;
 	QPixmap pixmap("images/splash.png");
 	QSplashScreen* splash = new QSplashScreen(pixmap);
 	splash->show();
@@ -116,7 +118,7 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 
 
 	//// LO QUE AGREGO IAN ES ESTO/////////////////
-	if (data->recordFlag) {
+	if (data->recordFlag || data->specgramFlag) {
 		for (unsigned int i = 0; i < (unsigned int)(frameCount / 2); i++) {
 			data->wav[*(data->wavCounter) + i] = out[2 * i];
 		}
@@ -1776,4 +1778,14 @@ void Leandro::loadMidiFile() {
 													tr("Load Midi File"), "",
 													tr("Midi Files (*.mid);;All Files (*)"));
 	addMidiFile(fileName.toStdString());
+}
+
+
+void Leandro::calcSpecgram() {
+	Spectrogram temp(wav,wavCounter);
+	unsigned int nfft = 1024;
+	unsigned int overlap = 128;
+	bool show = true;
+	temp.calcSpectrogram(SAMPLE_RATE, nfft, WINDOW_NONE, overlap, show, true, "specgram.png");
+	return;
 }
