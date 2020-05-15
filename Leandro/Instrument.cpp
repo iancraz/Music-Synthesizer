@@ -1,5 +1,10 @@
 #include "Instrument.h"
 
+#define MAX_LOOP_TIME (0.370)
+#define MIN_LOOP_TIME (0.)
+
+
+
 int Instrument::synthFunction(
 	float* outputBuffer,
 	const unsigned int outputBufferSize,
@@ -31,8 +36,8 @@ KarplusInstrument::~KarplusInstrument() {
 
 SamplingInstrument::SamplingInstrument(int num_instrument, const unsigned int buffLength) {
 
-	repeat_time_begin = 0.05;
-	repeat_time_end = 0.1;
+	repeat_time_begin = MIN_LOOP_TIME;
+	repeat_time_end = MAX_LOOP_TIME;
 
 	lenght_temp_buffer = buffLength;
 
@@ -63,25 +68,51 @@ SamplingInstrument::SamplingInstrument(int num_instrument, const unsigned int bu
 
 		}
 
-		note_pressed_time = 0.375;
+		//selected_sample->note_pressed_time = 0.375;
 		break;
 
 
 	case 2:
-		cout << "Grand Piano seleccionado" << endl;
 
 		min_octave = 2;
 		max_octave = 6;
 
 		for (int i = min_octave; i <= max_octave; i++) {
 			cout << "Cargando C" + to_string(i) << endl;
-			sample = new Sample("./Samples/Grand Piano/C" + to_string(i), i);
+			sample = new Sample("./Samples/Steinway Grand Piano/C" + to_string(i), i);
 			samples->push_back(sample);
 
 		}
 
-		note_pressed_time = 1;
+		//selected_sample->note_pressed_time = 1;
 		break;
+
+
+	case 3:
+
+		min_octave = 2;
+		max_octave = 6;
+
+		for (int i = min_octave; i <= max_octave; i++) {
+			cout << "Cargando C" + to_string(i) << endl;
+			sample = new Sample("./Samples/Flying Clav/C" + to_string(i), i);
+			samples->push_back(sample);
+
+		}
+
+
+		break;
+
+
+
+
+
+
+
+
+
+
+
 
 	default:
 
@@ -129,10 +160,13 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 	int lenght_peaks = selected_sample->lenght_peaks; //se guarda el largo del arreglo de peaks
 	int T = selected_sample->T; //Se guarda el ancho de la ventana que se usa para descomponer al Sample
 
+
+
 	//Constantes de la nueva nota sintetizada
 	int P_1 = (int)((1 / B) * P_0); //Nuevo Pitch period
-	int extra_N = (new_note_pressed_time - note_pressed_time) * fs; //Largo extra que 
-	int N_1 = int(N_0 + extra_N); // Largo de la nueva señal
+	int N_1 = N_0;
+	int extra_N = 0;
+
 
 	//Constantes que se requieren para la operacion de modficacion temporal de la nota
 	int peaks_idx_end_pressed = 0; //Indice de peak donde termina note pressed
@@ -142,7 +176,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 	for (int i = 0; i < lenght_peaks; i++)
 	{
-		if (selected_sample->peaks[i] > (int)(note_pressed_time * fs)) {
+		if (selected_sample->peaks[i] > (int)(selected_sample->note_pressed_time * fs)) {
 			peaks_idx_end_pressed = i - 1;
 			break;
 		}
@@ -164,15 +198,26 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 		}
 	}
 	
+
+
 	int idx = 0;
-	int new_peaks_begin = selected_sample->peaks[0];
-	int new_peaks_end = N_1 - (int)(0.10 * N_1);
-	int correction = ((note_pressed_time - new_note_pressed_time) * fs);
+	int new_peaks_begin = 0;
+	int new_peaks_end = 0;
+	int correction = 0;
 
 	//CASO 1 - SE DESEA OBTENER UNA NOTA CON MENOR TIEMPO DE PRESIONADO QUE EL SAMPLE
 	//El tiempo de presionado del sample es mas largo de lo que se quiere. Se trunca el sample hasta el valor de nota presionada que se desee y luego que agrega el decay del sample
-	if (new_note_pressed_time <= note_pressed_time) {
-		
+	if (new_note_pressed_time <= selected_sample->note_pressed_time) {
+
+		/*
+		extra_N = (new_note_pressed_time - selected_sample->note_pressed_time) * fs; //Largo extra que
+		N_1 = int(N_0 + extra_N); // Largo de la nueva señal
+
+		idx = 0;
+		new_peaks_begin = cpeaks[0];
+		new_peaks_end = N_1 - (int)(0.10 * N_1);
+		correction = ((selected_sample->note_pressed_time - new_note_pressed_time) * fs);
+
 		for (int new_peaks = new_peaks_begin; new_peaks < new_peaks_end; new_peaks = new_peaks + int(P_1)) {
 
 			idx = get_nearest_peak(selected_sample, new_peaks + correction);
@@ -192,15 +237,82 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			}
 		}
 
+		*/
+
+		//ALTERNATIVA
+
+		extra_N = (new_note_pressed_time - selected_sample->note_pressed_time) * fs; //Largo extra que 	
+		N_1 = int(N_0 + extra_N); // Largo de la nueva señal
+
+		idx = 0;
+		new_peaks_begin = selected_sample->peaks[1];
+		new_peaks_end = N_0 - (int)(0.2 * N_0);
+		correction = 0;
+
+
+		for (int new_peaks = new_peaks_begin; new_peaks < new_peaks_end; new_peaks = new_peaks + int(P_1)) {
+
+			idx = get_nearest_peak(selected_sample, new_peaks + correction);
+
+			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
+				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)selected_sample->peaks[idx] + right_i) > N_0))
+					continue;
+				else
+					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
+			}
+
+			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
+				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > N_0))
+					continue;
+				else
+					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] - (int)(T / 2) + left_i];
+			}
+		}
+
+		/*
+		float delta = -1. / (2 * N_0);
+		for ( int i = 0 ; i < lenght_temp_buffer; i++)
+		{
+			temp_buffer_2[i] = temp_buffer[(int)((new_note_pressed_time * (float)fs))] * exp(float(i * delta));
+		}
+
+		int count_2 = 0;
+	*/
+
+		for (int i = 0; i < lenght_temp_buffer; i++)
+			temp_buffer_2[i] = 0;
+
+
+		int T_2 = (int)(N_1 / 8);
+		//int T_2 = ((int)((new_note_pressed_time * (float)fs))) * 2;
+		selected_sample->hanning(temp_buffer_2, T_2, 0);
+		int count_2 = (int)(T_2 / 2);
+
+
+		for (int new_peaks = (int)((new_note_pressed_time * (float)fs)); new_peaks < N_0; new_peaks++)
+		{
+			temp_buffer[new_peaks] = temp_buffer[new_peaks] * temp_buffer_2[count_2];
+			count_2++;
+
+		}
+
+		for (int i = 0; i < lenght_temp_buffer; i++)
+			temp_buffer_2[i] = 0;
+
 		temp_buffer[N_1] = INFINITY;
 	}
 
 	//CASO 2 - SE DESEA OBTENER UNA NOTA CON MAYOR TIEMPO DE PRESIONADO QUE EL SAMPLE
-	if (new_note_pressed_time > note_pressed_time) {  //Para el caso en que se desee obtener una nota con mayor tiempo de presionado que el sample
+	if (new_note_pressed_time > selected_sample->note_pressed_time) {  //Para el caso en que se desee obtener una nota con mayor tiempo de presionado que el sample
+
+		//ALTERNATIVA I
+
+		extra_N = (new_note_pressed_time - selected_sample->note_pressed_time) * fs; //Largo extra que 	
+		N_1 = int(N_0 + extra_N); // Largo de la nueva señal
 
 		//PARTE 1 -> DESDE 0 HASTA QUE SE SUELTA LA NOTA
 		idx = 0;
-		new_peaks_begin = selected_sample->peaks[0];
+		new_peaks_begin = selected_sample->peaks[1];
 		new_peaks_end = selected_sample->peaks[peaks_idx_begin_repeat];
 		correction = 0;
 
@@ -223,16 +335,14 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			}
 		}
 
-
 		int count = 0;
 		idx = 0;
 		new_peaks_begin = (int)((repeat_time_begin * (float)fs));
-		new_peaks_end = (int)(((new_note_pressed_time - abs(note_pressed_time - repeat_time_end)) * (float)fs));
+		new_peaks_end = (int)(((new_note_pressed_time - abs(selected_sample->note_pressed_time - repeat_time_end)) * (float)fs));
 		correction = 0;
 
 		for (int value = (int)((repeat_time_begin * (float)fs)); value < (int)((repeat_time_end * (float)fs)); value = value + (int)P_1)
 		{
-			cout << "entre" << endl;
 			temp_buffer_2[count] = value;
 			count++;
 		}
@@ -243,7 +353,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			idx = get_nearest_peak(selected_sample, temp_buffer_2[count]);
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
-				if (idx > lenght_peaks)
+				if (idx > lenght_peaks || idx < 0 || (new_peaks + right_i) > lenght_temp_buffer || (new_peaks + right_i) < 0 || ((int)selected_sample->peaks[idx] + right_i) > selected_sample->lenght_sample || ((int)selected_sample->peaks[idx] + right_i) < 0)
 					continue;
 				else
 					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
@@ -251,14 +361,13 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
 
-				if (idx > lenght_peaks)
+				if (idx > lenght_peaks || idx < 0 ||  (new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer || (new_peaks - (int)(T / 2) + left_i) < 0 || ((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > selected_sample->lenght_sample || ((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0)
 					continue;
 				else
 					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] - (int)(T / 2) + left_i];
 			}
 
 			if (idx > peaks_idx_end_repeat - 1) {
-				cout << "count rest" << endl;
 				count = 0;
 			}
 			else
@@ -267,16 +376,18 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 		//PARTE 3 -> DESDE NUEVA NOTA PRESIONADA HASTA FINAL
 		idx = 0;
-		new_peaks_begin = (int)(((new_note_pressed_time - abs(note_pressed_time - repeat_time_end)) * (float)fs));
-		new_peaks_end = N_1;
-		correction = -(abs((new_note_pressed_time - abs(note_pressed_time - repeat_time_end)) - repeat_time_end) * fs));
+		new_peaks_begin = (int)(((new_note_pressed_time - abs(selected_sample->note_pressed_time - repeat_time_end)) * (float)fs));
+		new_peaks_end = N_1 - (int)(0.01 * N_1);
+
+		//new_peaks_end = N_1;
+		correction = -(abs((new_note_pressed_time - abs(selected_sample->note_pressed_time - repeat_time_end)) - repeat_time_end) * fs);
 
 		for (int new_peaks = new_peaks_begin; new_peaks < new_peaks_end; new_peaks = new_peaks + int(P_1)) {
 
-			idx = get_nearest_peak(selected_sample, new_peaks + correction );
+			idx = get_nearest_peak(selected_sample, new_peaks + correction);
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
-				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)selected_sample->peaks[idx] + right_i) > N_0))
+				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)selected_sample->peaks[idx] + right_i) > N_0) || (new_peaks + right_i) < 0)
 					continue;
 				else
 					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
@@ -292,6 +403,9 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 		temp_buffer[N_1] = INFINITY;
 	}
+
+
+	
 }
 
 
@@ -322,15 +436,19 @@ int SamplingInstrument::get_nearest_peak(Sample* selected_sample, int number)
 int SamplingInstrument::synthFunction(float* outputBuffer, const unsigned int outputBufferSize, const int keyNumber, const float lengthInMilliseconds, const int velocity, const int sampleRate)
 {
 	float velocitymulti = (float)velocity / 127.0;
-	int first_keyNumber = 4;
+	int first_keyNumber = 24;
 	int keys_per_octave = 12;
 	int num_octave = 0;
 	int key_dif;
 	int key_num_octave;
 
+	int keyNumber2 = keyNumber;
+
+
 	for (int i = min_octave; i <= max_octave; i++)
 	{
-		if ((keyNumber >= first_keyNumber + (i * keys_per_octave) && keyNumber < (first_keyNumber + keys_per_octave) + (i * keys_per_octave))) {
+
+		if ((keyNumber2 >= first_keyNumber + (i * keys_per_octave) && keyNumber2 < (first_keyNumber + keys_per_octave) + (i * keys_per_octave))) {
 			num_octave = i + 1;
 			break;
 		}
@@ -339,16 +457,19 @@ int SamplingInstrument::synthFunction(float* outputBuffer, const unsigned int ou
 	if (num_octave > max_octave || num_octave < min_octave) {
 		cout << "Nota pedida se sale del rango" << endl;
 
-		if (keyNumber > (first_keyNumber + (12 * (max_octave - 1))))
+		if (keyNumber2 > (keyNumber2 + (12 * (max_octave - 1))))
 			num_octave = max_octave;
 
-		if (keyNumber < (first_keyNumber + (12 * (min_octave - 1))))
+		if (keyNumber2 < (keyNumber2 + (12 * (min_octave - 1))))
 			num_octave = min_octave;
 	}
 
 	key_num_octave = first_keyNumber + (12 * (num_octave - 1)); //Numero de nota de la mustra a utilizar
-	key_dif = keyNumber  - key_num_octave;
+	key_dif = keyNumber2  - key_num_octave;
 	float B = pow(2, (key_dif / 12.));
+
+
+
 
 	key_modification(num_octave, B, lengthInMilliseconds);
 
@@ -363,4 +484,8 @@ int SamplingInstrument::synthFunction(float* outputBuffer, const unsigned int ou
 	return 0;
 
 }
+
+
+
+
 

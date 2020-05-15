@@ -70,10 +70,10 @@ Sample::Sample(string file_path, int octave_) {
 			peaks[cnt++] = peak;
 
 		file.close();
-		/*
+		
 		//Claculo tiempo de nota presionada
 		float max_value;
-		float percentage = 0.3; //porcentaje que se define para obtener el tiempo de presionado de la nota 
+		float percentage = 0.10; //porcentaje que se define para obtener el tiempo de presionado de la nota 
 		max_value = *std::max_element(sample, sample + lenght_sample);
 		int count = 0;
 
@@ -83,9 +83,11 @@ Sample::Sample(string file_path, int octave_) {
 		}
 
 		note_pressed_time = ((float)peaks[count] / (float)fs);
-		//note_pressed_time = 0.348;
 
-		*/
+
+		//note_pressed_time = 0.5;
+
+		
 		//DESCOMPOSICION DEL SAMPLE
 		float* sample_x = nullptr;
 

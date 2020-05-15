@@ -27,7 +27,7 @@ public:
 	string file_path;
 	int num_octave;
 
-	//float note_pressed_time;
+	float note_pressed_time;
 
 	void hanning(float* w, int N, short itype);
 
