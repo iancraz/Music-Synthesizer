@@ -579,6 +579,7 @@ void Eq8BandEffect::setGains(gains_t G) {
 		float temp = -12.0 + G.gains[i] * 24.0;
 		g[i] = pow(10, temp / 20.0);
 	}
+	compFilterParameters();
 	return;
 }
 
