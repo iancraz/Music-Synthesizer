@@ -328,8 +328,6 @@ public:
     QPushButton *delete8EqButton;
     QLabel *label_5;
     QSpacerItem *horizontalSpacer_6;
-    QPushButton *eq8MoveLeftButton;
-    QPushButton *eq8MoveRightButton;
     QFrame *line_10;
     QFrame *oscillator2Frame_6;
     QVBoxLayout *verticalLayout_27;
@@ -366,8 +364,6 @@ public:
     QPushButton *deleteReverbButton;
     QLabel *label_10;
     QSpacerItem *horizontalSpacer_7;
-    QPushButton *reverbMoveLeftButton;
-    QPushButton *reverbMoveRightButton;
     QFrame *line_11;
     QFrame *frame_4;
     QVBoxLayout *verticalLayout_12;
@@ -390,8 +386,6 @@ public:
     QPushButton *deleteFlangerButton;
     QLabel *label_17;
     QSpacerItem *horizontalSpacer_8;
-    QPushButton *flangerMoveLeftButton;
-    QPushButton *flangerMoveRightButton;
     QFrame *line_12;
     QFrame *oscillator2Frame_8;
     QVBoxLayout *verticalLayout_32;
@@ -417,8 +411,6 @@ public:
     QPushButton *deleteVibratoButton;
     QLabel *label;
     QSpacerItem *horizontalSpacer;
-    QPushButton *vibratoMoveLeftButton;
-    QPushButton *vibratoMoveRightButton;
     QFrame *line_3;
     QFrame *oscillator2Frame_5;
     QVBoxLayout *verticalLayout_26;
@@ -442,8 +434,6 @@ public:
     QPushButton *deleteWahwahButton;
     QLabel *label_11;
     QSpacerItem *horizontalSpacer_9;
-    QPushButton *wahwahMoveLeftButton;
-    QPushButton *wahwahMoveRightButton;
     QFrame *line_13;
     QFrame *oscillator2Frame_9;
     QVBoxLayout *verticalLayout_30;
@@ -749,7 +739,7 @@ public:
         sizePolicy6.setHeightForWidth(closeButtonChannel1->sizePolicy().hasHeightForWidth());
         closeButtonChannel1->setSizePolicy(sizePolicy6);
         QIcon icon;
-        icon.addFile(QStringLiteral(":/icons/icons/037-minus.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/iconspng/iconspng/037-minus.png"), QSize(), QIcon::Normal, QIcon::Off);
         closeButtonChannel1->setIcon(icon);
         closeButtonChannel1->setIconSize(QSize(12, 12));
         closeButtonChannel1->setFlat(true);
@@ -3010,30 +3000,6 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer_6);
 
-        eq8MoveLeftButton = new QPushButton(eq8Frame);
-        eq8MoveLeftButton->setObjectName(QStringLiteral("eq8MoveLeftButton"));
-        sizePolicy9.setHeightForWidth(eq8MoveLeftButton->sizePolicy().hasHeightForWidth());
-        eq8MoveLeftButton->setSizePolicy(sizePolicy9);
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/icons/icons/006-chevron.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        eq8MoveLeftButton->setIcon(icon1);
-        eq8MoveLeftButton->setIconSize(QSize(15, 15));
-        eq8MoveLeftButton->setFlat(true);
-
-        horizontalLayout_4->addWidget(eq8MoveLeftButton);
-
-        eq8MoveRightButton = new QPushButton(eq8Frame);
-        eq8MoveRightButton->setObjectName(QStringLiteral("eq8MoveRightButton"));
-        sizePolicy9.setHeightForWidth(eq8MoveRightButton->sizePolicy().hasHeightForWidth());
-        eq8MoveRightButton->setSizePolicy(sizePolicy9);
-        QIcon icon2;
-        icon2.addFile(QStringLiteral(":/icons/icons/033-chevron.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        eq8MoveRightButton->setIcon(icon2);
-        eq8MoveRightButton->setIconSize(QSize(15, 15));
-        eq8MoveRightButton->setFlat(true);
-
-        horizontalLayout_4->addWidget(eq8MoveRightButton);
-
 
         verticalLayout_4->addLayout(horizontalLayout_4);
 
@@ -3302,26 +3268,6 @@ public:
 
         horizontalLayout_8->addItem(horizontalSpacer_7);
 
-        reverbMoveLeftButton = new QPushButton(reverbEffectFrame);
-        reverbMoveLeftButton->setObjectName(QStringLiteral("reverbMoveLeftButton"));
-        sizePolicy9.setHeightForWidth(reverbMoveLeftButton->sizePolicy().hasHeightForWidth());
-        reverbMoveLeftButton->setSizePolicy(sizePolicy9);
-        reverbMoveLeftButton->setIcon(icon1);
-        reverbMoveLeftButton->setIconSize(QSize(15, 15));
-        reverbMoveLeftButton->setFlat(true);
-
-        horizontalLayout_8->addWidget(reverbMoveLeftButton);
-
-        reverbMoveRightButton = new QPushButton(reverbEffectFrame);
-        reverbMoveRightButton->setObjectName(QStringLiteral("reverbMoveRightButton"));
-        sizePolicy9.setHeightForWidth(reverbMoveRightButton->sizePolicy().hasHeightForWidth());
-        reverbMoveRightButton->setSizePolicy(sizePolicy9);
-        reverbMoveRightButton->setIcon(icon2);
-        reverbMoveRightButton->setIconSize(QSize(15, 15));
-        reverbMoveRightButton->setFlat(true);
-
-        horizontalLayout_8->addWidget(reverbMoveRightButton);
-
 
         verticalLayout_11->addLayout(horizontalLayout_8);
 
@@ -3480,26 +3426,6 @@ public:
         horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_8);
-
-        flangerMoveLeftButton = new QPushButton(flangerEffectFrame);
-        flangerMoveLeftButton->setObjectName(QStringLiteral("flangerMoveLeftButton"));
-        sizePolicy9.setHeightForWidth(flangerMoveLeftButton->sizePolicy().hasHeightForWidth());
-        flangerMoveLeftButton->setSizePolicy(sizePolicy9);
-        flangerMoveLeftButton->setIcon(icon1);
-        flangerMoveLeftButton->setIconSize(QSize(15, 15));
-        flangerMoveLeftButton->setFlat(true);
-
-        horizontalLayout_3->addWidget(flangerMoveLeftButton);
-
-        flangerMoveRightButton = new QPushButton(flangerEffectFrame);
-        flangerMoveRightButton->setObjectName(QStringLiteral("flangerMoveRightButton"));
-        sizePolicy9.setHeightForWidth(flangerMoveRightButton->sizePolicy().hasHeightForWidth());
-        flangerMoveRightButton->setSizePolicy(sizePolicy9);
-        flangerMoveRightButton->setIcon(icon2);
-        flangerMoveRightButton->setIconSize(QSize(15, 15));
-        flangerMoveRightButton->setFlat(true);
-
-        horizontalLayout_3->addWidget(flangerMoveRightButton);
 
 
         verticalLayout_31->addLayout(horizontalLayout_3);
@@ -3686,26 +3612,6 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        vibratoMoveLeftButton = new QPushButton(vibratoEffectFrame);
-        vibratoMoveLeftButton->setObjectName(QStringLiteral("vibratoMoveLeftButton"));
-        sizePolicy9.setHeightForWidth(vibratoMoveLeftButton->sizePolicy().hasHeightForWidth());
-        vibratoMoveLeftButton->setSizePolicy(sizePolicy9);
-        vibratoMoveLeftButton->setIcon(icon1);
-        vibratoMoveLeftButton->setIconSize(QSize(15, 15));
-        vibratoMoveLeftButton->setFlat(true);
-
-        horizontalLayout->addWidget(vibratoMoveLeftButton);
-
-        vibratoMoveRightButton = new QPushButton(vibratoEffectFrame);
-        vibratoMoveRightButton->setObjectName(QStringLiteral("vibratoMoveRightButton"));
-        sizePolicy9.setHeightForWidth(vibratoMoveRightButton->sizePolicy().hasHeightForWidth());
-        vibratoMoveRightButton->setSizePolicy(sizePolicy9);
-        vibratoMoveRightButton->setIcon(icon2);
-        vibratoMoveRightButton->setIconSize(QSize(15, 15));
-        vibratoMoveRightButton->setFlat(true);
-
-        horizontalLayout->addWidget(vibratoMoveRightButton);
-
 
         verticalLayout->addLayout(horizontalLayout);
 
@@ -3867,26 +3773,6 @@ public:
 
         horizontalLayout_7->addItem(horizontalSpacer_9);
 
-        wahwahMoveLeftButton = new QPushButton(wahwahEffectFrame);
-        wahwahMoveLeftButton->setObjectName(QStringLiteral("wahwahMoveLeftButton"));
-        sizePolicy9.setHeightForWidth(wahwahMoveLeftButton->sizePolicy().hasHeightForWidth());
-        wahwahMoveLeftButton->setSizePolicy(sizePolicy9);
-        wahwahMoveLeftButton->setIcon(icon1);
-        wahwahMoveLeftButton->setIconSize(QSize(15, 15));
-        wahwahMoveLeftButton->setFlat(true);
-
-        horizontalLayout_7->addWidget(wahwahMoveLeftButton);
-
-        wahwahMoveRightButton = new QPushButton(wahwahEffectFrame);
-        wahwahMoveRightButton->setObjectName(QStringLiteral("wahwahMoveRightButton"));
-        sizePolicy9.setHeightForWidth(wahwahMoveRightButton->sizePolicy().hasHeightForWidth());
-        wahwahMoveRightButton->setSizePolicy(sizePolicy9);
-        wahwahMoveRightButton->setIcon(icon2);
-        wahwahMoveRightButton->setIconSize(QSize(15, 15));
-        wahwahMoveRightButton->setFlat(true);
-
-        horizontalLayout_7->addWidget(wahwahMoveRightButton);
-
 
         verticalLayout_29->addLayout(horizontalLayout_7);
 
@@ -3999,9 +3885,9 @@ public:
         font6.setWeight(75);
         newChannelButton->setFont(font6);
         newChannelButton->setAutoFillBackground(true);
-        QIcon icon3;
-        icon3.addFile(QStringLiteral(":/icons/icons/003-plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        newChannelButton->setIcon(icon3);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/iconspng/iconspng/003-plus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        newChannelButton->setIcon(icon1);
         newChannelButton->setIconSize(QSize(18, 18));
         newChannelButton->setFlat(true);
 
@@ -4011,9 +3897,9 @@ public:
         importMidiButton->setObjectName(QStringLiteral("importMidiButton"));
         importMidiButton->setFont(font1);
         importMidiButton->setAutoFillBackground(true);
-        QIcon icon4;
-        icon4.addFile(QStringLiteral(":/icons/icons/043-add folder.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        importMidiButton->setIcon(icon4);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/iconspng/iconspng/043-add folder.png"), QSize(), QIcon::Normal, QIcon::Off);
+        importMidiButton->setIcon(icon2);
         importMidiButton->setFlat(true);
 
         horizontalLayout_10->addWidget(importMidiButton);
@@ -4026,18 +3912,18 @@ public:
         playButton->setObjectName(QStringLiteral("playButton"));
         sizePolicy9.setHeightForWidth(playButton->sizePolicy().hasHeightForWidth());
         playButton->setSizePolicy(sizePolicy9);
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/icons/icons/play.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        playButton->setIcon(icon5);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/iconspng/iconspng/play.png"), QSize(), QIcon::Normal, QIcon::Off);
+        playButton->setIcon(icon3);
         playButton->setFlat(true);
 
         horizontalLayout_10->addWidget(playButton);
 
         pauseButton = new QPushButton(centralWidget);
         pauseButton->setObjectName(QStringLiteral("pauseButton"));
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/icons/icons/pause.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pauseButton->setIcon(icon6);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/iconspng/iconspng/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pauseButton->setIcon(icon4);
         pauseButton->setAutoDefault(false);
         pauseButton->setFlat(true);
 
@@ -4047,18 +3933,18 @@ public:
         stopButton->setObjectName(QStringLiteral("stopButton"));
         sizePolicy9.setHeightForWidth(stopButton->sizePolicy().hasHeightForWidth());
         stopButton->setSizePolicy(sizePolicy9);
-        QIcon icon7;
-        icon7.addFile(QStringLiteral(":/icons/icons/stop.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        stopButton->setIcon(icon7);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/iconspng/iconspng/stop.png"), QSize(), QIcon::Normal, QIcon::Off);
+        stopButton->setIcon(icon5);
         stopButton->setFlat(true);
 
         horizontalLayout_10->addWidget(stopButton);
 
         recordButton = new QPushButton(centralWidget);
         recordButton->setObjectName(QStringLiteral("recordButton"));
-        QIcon icon8;
-        icon8.addFile(QStringLiteral(":/icons/icons/rec.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        recordButton->setIcon(icon8);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/iconspng/iconspng/rec.png"), QSize(), QIcon::Normal, QIcon::Off);
+        recordButton->setIcon(icon6);
         recordButton->setFlat(true);
 
         horizontalLayout_10->addWidget(recordButton);
@@ -4076,13 +3962,6 @@ public:
         LeandroClass->setStatusBar(statusBar);
 
         retranslateUi(LeandroClass);
-
-        eq8MoveLeftButton->setDefault(false);
-        reverbMoveLeftButton->setDefault(false);
-        flangerMoveLeftButton->setDefault(false);
-        vibratoMoveLeftButton->setDefault(false);
-        wahwahMoveLeftButton->setDefault(false);
-
 
         QMetaObject::connectSlotsByName(LeandroClass);
     } // setupUi
@@ -4312,8 +4191,6 @@ public:
         karplusResFilterCheckBox->setText(QApplication::translate("LeandroClass", "Resonance Filter", Q_NULLPTR));
         delete8EqButton->setText(QString());
         label_5->setText(QApplication::translate("LeandroClass", "8-Band Equalizer", Q_NULLPTR));
-        eq8MoveLeftButton->setText(QString());
-        eq8MoveRightButton->setText(QString());
         oscillator2Label_6->setText(QApplication::translate("LeandroClass", "Gain Control", Q_NULLPTR));
         sliderLabelH0_3->setText(QApplication::translate("LeandroClass", "100", Q_NULLPTR));
         label_35->setText(QApplication::translate("LeandroClass", "200", Q_NULLPTR));
@@ -4325,8 +4202,6 @@ public:
         label_40->setText(QApplication::translate("LeandroClass", "10k", Q_NULLPTR));
         deleteReverbButton->setText(QString());
         label_10->setText(QApplication::translate("LeandroClass", "Reverb", Q_NULLPTR));
-        reverbMoveLeftButton->setText(QString());
-        reverbMoveRightButton->setText(QString());
         label_12->setText(QApplication::translate("LeandroClass", "Reverb Type", Q_NULLPTR));
         reverbTypeComboBox->clear();
         reverbTypeComboBox->insertItems(0, QStringList()
@@ -4339,8 +4214,6 @@ public:
         label_14->setText(QApplication::translate("LeandroClass", "Attenuation", Q_NULLPTR));
         deleteFlangerButton->setText(QString());
         label_17->setText(QApplication::translate("LeandroClass", "Flanger", Q_NULLPTR));
-        flangerMoveLeftButton->setText(QString());
-        flangerMoveRightButton->setText(QString());
         label_18->setText(QApplication::translate("LeandroClass", "Feedback Gain", Q_NULLPTR));
         label_19->setText(QApplication::translate("LeandroClass", "Width", Q_NULLPTR));
         label_26->setText(QApplication::translate("LeandroClass", "Delay", Q_NULLPTR));
@@ -4348,15 +4221,11 @@ public:
         label_31->setText(QApplication::translate("LeandroClass", "LFO Frequency", Q_NULLPTR));
         deleteVibratoButton->setText(QString());
         label->setText(QApplication::translate("LeandroClass", "Vibrato", Q_NULLPTR));
-        vibratoMoveLeftButton->setText(QString());
-        vibratoMoveRightButton->setText(QString());
         label_16->setText(QApplication::translate("LeandroClass", "LFO Frequency", Q_NULLPTR));
         label_4->setText(QApplication::translate("LeandroClass", "Delay", Q_NULLPTR));
         label_9->setText(QApplication::translate("LeandroClass", "Width", Q_NULLPTR));
         deleteWahwahButton->setText(QString());
         label_11->setText(QApplication::translate("LeandroClass", "Wah-Wah", Q_NULLPTR));
-        wahwahMoveLeftButton->setText(QString());
-        wahwahMoveRightButton->setText(QString());
         label_32->setText(QApplication::translate("LeandroClass", "Minimum Frequency", Q_NULLPTR));
         label_33->setText(QApplication::translate("LeandroClass", "LFO Frequency", Q_NULLPTR));
         newChannelButton->setText(QApplication::translate("LeandroClass", "Add Channel", Q_NULLPTR));

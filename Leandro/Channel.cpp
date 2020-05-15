@@ -164,6 +164,11 @@ void Channel::removeChannelInstrument() {
 }
 
 void Channel::addEffectToChannel(Effect* effect) {
+	for (int i = 0; i < effects.size(); i++) {
+		if (effects.at(i)->type == effect->type)
+			effects.erase(effects.begin() + i);
+	}
+	
 	this->effects.push_back(effect);
 	this->updateCallbackData();
 }

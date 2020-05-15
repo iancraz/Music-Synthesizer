@@ -1001,8 +1001,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -1296,8 +1296,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -1591,8 +1591,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -1886,8 +1886,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -2181,8 +2181,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -2476,8 +2476,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -2771,8 +2771,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -3066,8 +3066,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -3361,8 +3361,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -3656,8 +3656,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -4066,8 +4066,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -4882,8 +4882,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -5505,8 +5505,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -5890,8 +5890,8 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                       <iconset resource="Leandro.qrc">
+                        <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -6414,8 +6414,8 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                        <iconset resource="Leandro.qrc">
+                         <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -6456,61 +6456,6 @@
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="eq8MoveLeftButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="eq8MoveRightButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -6975,8 +6920,8 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                        <iconset resource="Leandro.qrc">
+                         <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -7017,61 +6962,6 @@
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="reverbMoveLeftButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="reverbMoveRightButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -7396,8 +7286,8 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                        <iconset resource="Leandro.qrc">
+                         <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -7438,61 +7328,6 @@
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="flangerMoveLeftButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="flangerMoveRightButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -7838,8 +7673,8 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                        <iconset resource="Leandro.qrc">
+                         <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -7880,61 +7715,6 @@
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="vibratoMoveLeftButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="vibratoMoveRightButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -8260,8 +8040,8 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
+                        <iconset resource="Leandro.qrc">
+                         <normaloff>:/iconspng/iconspng/037-minus.png</normaloff>:/iconspng/iconspng/037-minus.png</iconset>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -8302,61 +8082,6 @@
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="wahwahMoveLeftButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="wahwahMoveRightButton">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="icons.qrc">
-                         <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
-                       </property>
-                       <property name="iconSize">
-                        <size>
-                         <width>15</width>
-                         <height>15</height>
-                        </size>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -8521,8 +8246,8 @@
          <string>Add Channel</string>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/003-plus.svg</normaloff>:/icons/icons/003-plus.svg</iconset>
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/003-plus.png</normaloff>:/iconspng/iconspng/003-plus.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -8550,8 +8275,8 @@
          <string> Import MIDI File...</string>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/043-add folder.svg</normaloff>:/icons/icons/043-add folder.svg</iconset>
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/043-add folder.png</normaloff>:/iconspng/iconspng/043-add folder.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -8583,8 +8308,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/play.svg</normaloff>:/icons/icons/play.svg</iconset>
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/play.png</normaloff>:/iconspng/iconspng/play.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -8597,8 +8322,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/pause.svg</normaloff>:/icons/icons/pause.svg</iconset>
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/pause.png</normaloff>:/iconspng/iconspng/pause.png</iconset>
         </property>
         <property name="autoDefault">
          <bool>false</bool>
@@ -8620,8 +8345,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/stop.svg</normaloff>:/icons/icons/stop.svg</iconset>
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/stop.png</normaloff>:/iconspng/iconspng/stop.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -8634,8 +8359,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/rec.svg</normaloff>:/icons/icons/rec.svg</iconset>
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/rec.png</normaloff>:/iconspng/iconspng/rec.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
