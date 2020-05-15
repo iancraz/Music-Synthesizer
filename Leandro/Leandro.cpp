@@ -40,9 +40,9 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
-
+	initGUI();
 	// GUI function connections
-
+	
 }
 
 Leandro::~Leandro() {
@@ -707,6 +707,19 @@ void Leandro::removeEffectFromActiveChannel() {
 	updateActiveAssetsBay();
 }
 
+void Leandro::startStreaming() {
+	PaError err = Pa_StartStream(stream);
+	if (err != paNoError) throw "Error! PortAudio couldnt start stream";
+
+}
+
+void Leandro::stopStreaming() {
+	PaError err = Pa_StopStream(stream);
+	if (err != paNoError) throw "Error! PortAudio couldnt stop stream";
+
+}
+
+
 
 // GUI triggered setters
 
@@ -839,8 +852,6 @@ void Leandro::wahwahValueChanged() {
 }
 
 
-// GUI triggered setters
-
 
 
 
@@ -853,7 +864,13 @@ void Leandro::initGUI() {
 	
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
-	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi);
+	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
+	QObject::connect(ui.stopButton, &QPushButton::clicked, this, &Leandro::stopStreaming);
+	
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); // TEST
+
+	
+
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);

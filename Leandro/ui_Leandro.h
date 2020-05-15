@@ -357,10 +357,10 @@ public:
     QPushButton *newChannelButton;
     QPushButton *importMidiButton;
     QSpacerItem *horizontalSpacer_2;
-    QPushButton *playButton_2;
+    QPushButton *playButton;
     QPushButton *pauseButton;
-    QPushButton *stopButton_2;
-    QPushButton *recordButton_2;
+    QPushButton *stopButton;
+    QPushButton *recordButton;
     QSpacerItem *horizontalSpacer_4;
     QStatusBar *statusBar;
 
@@ -2986,16 +2986,16 @@ public:
 
         horizontalLayout_10->addItem(horizontalSpacer_2);
 
-        playButton_2 = new QPushButton(centralWidget);
-        playButton_2->setObjectName(QStringLiteral("playButton_2"));
-        sizePolicy9.setHeightForWidth(playButton_2->sizePolicy().hasHeightForWidth());
-        playButton_2->setSizePolicy(sizePolicy9);
+        playButton = new QPushButton(centralWidget);
+        playButton->setObjectName(QStringLiteral("playButton"));
+        sizePolicy9.setHeightForWidth(playButton->sizePolicy().hasHeightForWidth());
+        playButton->setSizePolicy(sizePolicy9);
         QIcon icon5;
         icon5.addFile(QStringLiteral(":/icons/icons/play.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        playButton_2->setIcon(icon5);
-        playButton_2->setFlat(true);
+        playButton->setIcon(icon5);
+        playButton->setFlat(true);
 
-        horizontalLayout_10->addWidget(playButton_2);
+        horizontalLayout_10->addWidget(playButton);
 
         pauseButton = new QPushButton(centralWidget);
         pauseButton->setObjectName(QStringLiteral("pauseButton"));
@@ -3007,25 +3007,25 @@ public:
 
         horizontalLayout_10->addWidget(pauseButton);
 
-        stopButton_2 = new QPushButton(centralWidget);
-        stopButton_2->setObjectName(QStringLiteral("stopButton_2"));
-        sizePolicy9.setHeightForWidth(stopButton_2->sizePolicy().hasHeightForWidth());
-        stopButton_2->setSizePolicy(sizePolicy9);
+        stopButton = new QPushButton(centralWidget);
+        stopButton->setObjectName(QStringLiteral("stopButton"));
+        sizePolicy9.setHeightForWidth(stopButton->sizePolicy().hasHeightForWidth());
+        stopButton->setSizePolicy(sizePolicy9);
         QIcon icon7;
         icon7.addFile(QStringLiteral(":/icons/icons/stop.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        stopButton_2->setIcon(icon7);
-        stopButton_2->setFlat(true);
+        stopButton->setIcon(icon7);
+        stopButton->setFlat(true);
 
-        horizontalLayout_10->addWidget(stopButton_2);
+        horizontalLayout_10->addWidget(stopButton);
 
-        recordButton_2 = new QPushButton(centralWidget);
-        recordButton_2->setObjectName(QStringLiteral("recordButton_2"));
+        recordButton = new QPushButton(centralWidget);
+        recordButton->setObjectName(QStringLiteral("recordButton"));
         QIcon icon8;
         icon8.addFile(QStringLiteral(":/icons/icons/rec.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        recordButton_2->setIcon(icon8);
-        recordButton_2->setFlat(true);
+        recordButton->setIcon(icon8);
+        recordButton->setFlat(true);
 
-        horizontalLayout_10->addWidget(recordButton_2);
+        horizontalLayout_10->addWidget(recordButton);
 
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -3181,10 +3181,10 @@ public:
         label_33->setText(QApplication::translate("LeandroClass", "LFO Frequency", Q_NULLPTR));
         newChannelButton->setText(QApplication::translate("LeandroClass", "Add Channel", Q_NULLPTR));
         importMidiButton->setText(QApplication::translate("LeandroClass", " Import MIDI File...", Q_NULLPTR));
-        playButton_2->setText(QString());
+        playButton->setText(QString());
         pauseButton->setText(QString());
-        stopButton_2->setText(QString());
-        recordButton_2->setText(QString());
+        stopButton->setText(QString());
+        recordButton->setText(QString());
     } // retranslateUi
 
 };
