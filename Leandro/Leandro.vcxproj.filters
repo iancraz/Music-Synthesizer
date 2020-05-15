@@ -142,7 +142,6 @@
     </None>
     <None Include="sm64.mid" />
     <None Include="mario_midi.mid" />
-    <None Include="packages.config" />
     <None Include="config.json" />
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
