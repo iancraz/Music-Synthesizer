@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
 	additiveParams_t* pianoParams = (additiveParams_t*)pianoModel->params;
 	additiveParams_t* clarinetParams = (additiveParams_t*)clarinetModel->params;
 
-	Instrument* clarinet = new AdditiveInstrument(*clarinetParams, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE);
-	Instrument* piano = new AdditiveInstrument(*pianoParams, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE);
+	Instrument* clarinet = new AdditiveInstrument(clarinetParams);
+	Instrument* piano = new AdditiveInstrument(pianoParams);
 
 	Instrument* instrumentList[] = { clarinet, piano };
 

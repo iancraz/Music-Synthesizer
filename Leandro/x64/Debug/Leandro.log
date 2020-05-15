@@ -1,35 +1,97 @@
-﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
-  uic Leandro.ui
-  rcc Leandro.qrc
-  moc Leandro.h
-   RCC: Warning: No resources in 'C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.qrc'.
-  Additive.cpp
+﻿  Additive.cpp
   ADSR.cpp
-  Binasc.cpp
   Channel.cpp
   Effect.cpp
   Instrument.cpp
   Karplus.cpp
   Leandro.cpp
   main.cpp
-  MidiEvent.cpp
-  MidiEventList.cpp
-  MidiFile.cpp
-  MidiMessage.cpp
-  Options.cpp
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(641,29): error C2653: 'TremoloEffect': no es un nombre de clase o espacio de nombres
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(641,30): error C2065: 'tremoloParams_t': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(641,47): error C2065: '_params': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(641,54): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(641,56): error C2448: 'TremoloEffect': el inicializador de estilo de función parece ser una definición de función
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(647,30): error C2825: 'TremoloEffect': debe ser una clase o un espacio de nombres cuando vaya seguido de '::'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(647,17): error C2510: 'TremoloEffect': el operando izquierdo de '::' debe ser class/struct/union
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(647,33): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(648,8): warning C4508: '{dtor}': la función debe devolver un valor; se supone que el tipo de valor devuelto es 'void'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(649,1): error C2617: '{dtor}': instrucción return incoherente
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(647): message : vea la declaración de '{dtor}'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(651,29): error C2825: 'TremoloEffect': debe ser una clase o un espacio de nombres cuando vaya seguido de '::'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(651,21): error C2510: 'TremoloEffect': el operando izquierdo de '::' debe ser class/struct/union
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(653,33): error C3861: 'getBufferSize': no se encontró el identificador
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(655,18): error C2065: 'alpha': identificador no declarado
   Sample.cpp
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Effect.cpp(655,41): error C2065: 'f_lfo': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen ADSR.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen ADSR.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Sample.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Sample.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Sample.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(22,9): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Sample.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen main.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(22,9): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Sample.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen main.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(22,26): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Sample.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen main.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen Instrument.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen Instrument.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Leandro.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen Karplus.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Leandro.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen Karplus.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Leandro.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Channel.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Channel.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Channel.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(17,2): error C2065: 'audioFile': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(20,18): error C2065: 'audioFile': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(21,7): error C2065: 'audioFile': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(33,15): error C2065: 'audioFile': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(77,21): error C2039: 'max_element': no es un miembro de 'std'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen ADSR.cpp)
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\fstream(22): message : vea la declaración de 'std'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen ADSR.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(77,32): error C3861: 'max_element': no se encontró el identificador
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen ADSR.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(96,4): error C2065: 'sample_s': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(101,5): error C2065: 'sample_s': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(117,6): error C2065: 'sample_s': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.cpp(127,6): error C2065: 'sample_s': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Instrument.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Instrument.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Instrument.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen Channel.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen Channel.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Karplus.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Karplus.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Karplus.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen main.cpp)
   Sampling.cpp
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(182,16): error C2660: 'Leandro::loadSynthData': function does not take 0 arguments
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(119,7): message : see declaration of 'Leandro::loadSynthData' (compiling source file Leandro.cpp)
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(183,18): error C2660: 'Leandro::loadEffectsData': function does not take 0 arguments
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(117,7): message : see declaration of 'Leandro::loadEffectsData' (compiling source file Leandro.cpp)
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(186,33): error C2511: 'void Leandro::loadEffectsData(void)': overloaded member function not found in 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(190,31): error C2511: 'void Leandro::loadSynthData(void)': overloaded member function not found in 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(747,79): error C2039: 'loadTestMidi': is not a member of 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(747,91): error C2065: 'loadTestMidi': undeclared identifier
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(837,15): error C2039: 'loadTestMidi': is not a member of 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
-C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(838,2): error C3861: 'addMidiFile': identifier not found
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen main.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen Additive.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen Additive.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen Leandro.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen Leandro.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Additive.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Additive.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Additive.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(378,50): error C2039: 'parseSamplingJson': no es un miembro de 'SamplingInstrument'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(140): message : vea la declaración de 'SamplingInstrument'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.cpp(378,67): error C3861: 'parseSamplingJson': no se encontró el identificador
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(54,2): error C2371: 'instrumentModel': nueva definición; tipos básicos distintos (compilando archivo de origen Sampling.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Leandro.h(31): message : vea la declaración de 'instrumentModel' (compilando archivo de origen Sampling.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C2143: error de sintaxis: falta ';' delante de '<' (compilando archivo de origen Sampling.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int (compilando archivo de origen Sampling.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sample.h(16,29): error C2238: símbolos (token) inesperados delante de ';' (compilando archivo de origen Sampling.cpp)
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(11,2): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(92,41): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(102,41): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(125,21): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(129,31): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(154,30): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(185,55): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(224,57): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(226,51): error C2065: 'note_pressed_time': identificador no declarado
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Sampling.cpp(313,40): error C2039: 'parseSamplingJson': no es un miembro de 'SamplingInstrument'
+C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\Instrument.h(140): message : vea la declaración de 'SamplingInstrument'
