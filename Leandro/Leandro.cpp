@@ -178,16 +178,8 @@ void Leandro::addToAvailableAssets(effectModel* model) {
 	updateAvailableAssetsInGUI();
 }
 
+
 void Leandro::loadData() {
-	loadSynthData();
-	loadEffectsData();
-}
-
-void Leandro::loadEffectsData() {
-
-}
-
-void Leandro::loadSynthData() {
 	// parseo el json
 	Json::Value root;
 	Json::CharReaderBuilder builder;
@@ -195,8 +187,127 @@ void Leandro::loadSynthData() {
 	JSONCPP_STRING errs;
 	Json::parseFromStream(builder, configFile, &root, &errs);
 
+	loadSynthData(root["synth"]);
+	loadEffectsData(root["effects"]);
+}
+
+void Leandro::loadEffectsData(Json::Value effectsData) {
+	// reverb
+	Json::Value reverbData = effectsData["reverb"];
+	list<string> typesList;
+
+	for (int i = 0; i < reverbData["types"].size(); i++) {
+		typesList.push_back(reverbData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = reverbData[*it];
+		reverbParams_t* params = new reverbParams_t;
+		params->att = effectModelData["att"].asFloat();
+		params->delay = effectModelData["delay"].asFloat();
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::reverb;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+
+	// Vibrato
+	Json::Value vibratoData = effectsData["vibrato"];
+	typesList.clear();
+	for (int i = 0; i < vibratoData["types"].size(); i++) {
+		typesList.push_back(vibratoData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = vibratoData[*it];
+		vibratoParams_t* params = new vibratoParams_t;
+		params->fo = vibratoData["f0"].asFloat();
+		params->W = vibratoData["width"].asFloat();
+		params->M_avg = vibratoData["m-avg"].asFloat();
+		params->sampleRate = SAMPLE_RATE;
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::vibrato;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+	// Flanger
+	Json::Value flangerData = effectsData["flanger"];
+	typesList.clear();
+	for (int i = 0; i < flangerData["types"].size(); i++) {
+		typesList.push_back(flangerData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = flangerData[*it];
+		flangerParams_t* params = new flangerParams_t;
+		params->sampleRate = SAMPLE_RATE;
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		params->fo = effectModelData["f0"].asFloat();
+		params->Mo = effectModelData["m0"].asFloat();
+		params->Mw = effectModelData["mw"].asFloat();
+		params->g_fb = effectModelData["g-fb"].asFloat();
+		params->g_ff = effectModelData["g-ff"].asFloat();
+
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::vibrato;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+	// Wah-wah
+	Json::Value wahData = effectsData["wah-wah"];
+	typesList.clear();
+	for (int i = 0; i < wahData["types"].size(); i++) {
+		typesList.push_back(wahData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = wahData[*it];
+		wahwahParams_t* params = new wahwahParams_t;
+		params->f_LFO = effectModelData["f-lfo"].asFloat();
+		params->f_min = effectModelData["f-min"].asFloat();
+		params->samplingRate = SAMPLE_RATE;
+		params->maxBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::wahwah;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+	// Equalizer
+	Json::Value equalizerData = effectsData["equalizer"];
+	typesList.clear();
+	for (int i = 0; i < equalizerData["types"].size(); i++) {
+		typesList.push_back(equalizerData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = equalizerData[*it];
+		eq8bandParams_t* params = new eq8bandParams_t;
+		for (int i = 0; i < effectModelData.size(); i++) {
+			params->gains[i] = effectModelData[i].asFloat();
+		}
+		params->sampleRate = SAMPLE_RATE;
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::eq8band;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+}
+
+void Leandro::loadSynthData(Json::Value synthData) {
 	//agarro los instrumentos aditivos
-	Json::Value additiveData = root["additive"];
+	Json::Value additiveData = synthData["additive"];
 
 	list<string> typesList;
 	for (int i = 0; i < additiveData["types"].size(); i++) {
@@ -214,38 +325,38 @@ void Leandro::loadSynthData() {
 	}
 
 	// adsr
-	Json::Value adsrData = root["adsr"];
+	Json::Value adsrData = synthData["adsr"];
 
 	typesList.clear();
-	for (int i = 0; i < additiveData["types"].size(); i++) {
-		typesList.push_back(additiveData["types"][i].asCString());
+	for (int i = 0; i < adsrData["types"].size(); i++) {
+		typesList.push_back(adsrData["types"][i].asCString());
 	}
 
 	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
-		Json::Value instrumentModelData = additiveData[*it];
+		Json::Value instrumentModelData = adsrData[*it];
 		adsrParams_t params;
 		params.buffLength = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
 		params.sampleRate = SAMPLE_RATE;
-		params.tAttack = adsrData["t-attack"].asFloat();
-		params.tDecay = adsrData["t-decay"].asFloat();
-		params.sustainRate = adsrData["sustain-rate"].asFloat();
-		params.sustainLevel = adsrData["sustain-level"].asFloat();
-		params.tRelease = adsrData["t-release"].asFloat();
-		params.k = adsrData["k"].asFloat();
-		string wf1 = adsrData["waveform"][0].asCString();
-		string wf2 = adsrData["waveform"][1].asCString();
+		params.tAttack = instrumentModelData["t-attack"].asFloat();
+		params.tDecay = instrumentModelData["t-decay"].asFloat();
+		params.sustainRate = instrumentModelData["sustain-rate"].asFloat();
+		params.sustainLevel = instrumentModelData["sustain-level"].asFloat();
+		params.tRelease = instrumentModelData["t-release"].asFloat();
+		params.k = instrumentModelData["k"].asFloat();
+		string wf1 = instrumentModelData["waveform"][0].asCString();
+		string wf2 = instrumentModelData["waveform"][1].asCString();
 
 		if (wf1 == "sine")
 			params.wform1 = sine;
 		else if (wf1 == "square")
 			params.wform1 = square;
-		params.level1 = adsrData["levels"][0].asFloat();
+		params.level1 = instrumentModelData["levels"][0].asFloat();
 
 		if (wf2 == "sine")
 			params.wform2 = sine;
 		else if (wf2 == "square")
 			params.wform2 = square;
-		params.level2 = adsrData["levels"][1].asFloat();
+		params.level2 = instrumentModelData["levels"][1].asFloat();
 
 		instrumentModel model;
 		model.instrumentName = *it;
@@ -255,7 +366,7 @@ void Leandro::loadSynthData() {
 	}
 
 	// Sampling
-	Json::Value samplingData = root["sampling"];
+	Json::Value samplingData = synthData["sampling"];
 
 	typesList.clear();
 	for (int i = 0; i < samplingData["types"].size(); i++) {
@@ -273,9 +384,8 @@ void Leandro::loadSynthData() {
 		instrumentModels.push_back(new instrumentModel(model));
 	}
 
-
 	// Karplus
-	Json::Value karplusData = root["karplus"];
+	Json::Value karplusData = synthData["karplus"];
 	typesList.clear();
 	for (int i = 0; i < karplusData["types"].size(); i++) {
 		typesList.push_back(karplusData["types"][i].asCString());
@@ -284,11 +394,11 @@ void Leandro::loadSynthData() {
 	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
 		Json::Value instrumentModelData = karplusData[*it];
 		karPlusParams_t* params = new karPlusParams_t;
-		params->BFactor = karplusData["b-factor"].asFloat();
-		params->SFactor = karplusData["s-factor"].asFloat();
-		params->Grl = karplusData["grl"].asFloat();
-		params->bodyFilter = karplusData["body-filter"].asBool();
-		string noiseType = karplusData["noise-type"].asCString();
+		params->BFactor = instrumentModelData["b-factor"].asFloat();
+		params->SFactor = instrumentModelData["s-factor"].asFloat();
+		params->Grl = instrumentModelData["grl"].asFloat();
+		params->bodyFilter = instrumentModelData["body-filter"].asBool();
+		string noiseType = instrumentModelData["noise-type"].asCString();
 		if (noiseType == "normal")
 			params->noiseType = NORMAL_RANDOM;
 		else if (noiseType == "uniform")
@@ -299,7 +409,6 @@ void Leandro::loadSynthData() {
 		model.type = synthType::karplus;
 		instrumentModels.push_back(new instrumentModel(model));
 	}
-
 }
 
 

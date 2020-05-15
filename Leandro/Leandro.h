@@ -117,7 +117,7 @@ public:
 	void loadEffectsData(Json::Value effectsRoot);
 
 	void loadSynthData(Json::Value synthRoot);
-
+	void loadTestMidi();
 
 private:
 	Ui::LeandroClass ui;
