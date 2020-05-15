@@ -66,7 +66,7 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 					  PaStreamCallbackFlags statusFlags,
 					  void* userData) {
 	// Void pointer casts
-	float* out = (float*)output;
+	//float* out = (float*)output;
 	callbackData* data = (callbackData*)userData;
 	vector<timedBuffer*>* buffers = data->buffers;
 
@@ -966,6 +966,8 @@ void Leandro::initGUI() {
 
 	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
 
+	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
+	QObject::connect(ui.stopButton, &QPushButton::clicked, this, &Leandro::stopStreaming);
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
@@ -1116,6 +1118,19 @@ void Leandro::initGUI() {
 	
 
 	
+}
+
+void Leandro::startStreaming() {
+	PaError err = Pa_StartStream(stream);
+	if (err != paNoError) 
+		int pepa=0;
+
+}
+void Leandro::stopStreaming() {
+	PaError err = Pa_StopStream(stream);
+	if (err != paNoError)
+		int pepa = 0;
+
 }
 
 void Leandro::channel1Closed() {
