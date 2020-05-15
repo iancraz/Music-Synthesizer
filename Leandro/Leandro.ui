@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2989</width>
+    <width>2638</width>
     <height>783</height>
    </rect>
   </property>
@@ -851,7 +851,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>2831</width>
+             <width>2480</width>
              <height>283</height>
             </rect>
            </property>
@@ -3594,7 +3594,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1603</width>
+             <width>1252</width>
              <height>401</height>
             </rect>
            </property>
@@ -4848,6 +4848,12 @@
                          <layout class="QVBoxLayout" name="verticalLayout_43">
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QDial" name="flangerGFBDial">
+                            <property name="minimumSize">
+                             <size>
+                              <width>60</width>
+                              <height>0</height>
+                             </size>
+                            </property>
                             <property name="maximumSize">
                              <size>
                               <width>60</width>
@@ -4862,7 +4868,13 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_18">
                             <property name="text">
-                             <string>GFB</string>
+                             <string>Feedback Gain</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
                             </property>
                            </widget>
                           </item>
@@ -4872,11 +4884,23 @@
                          <layout class="QVBoxLayout" name="verticalLayout_44">
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QDial" name="flangerMwDial">
+                            <property name="minimumSize">
+                             <size>
+                              <width>60</width>
+                              <height>0</height>
+                             </size>
+                            </property>
                             <property name="maximumSize">
                              <size>
                               <width>60</width>
                               <height>16777215</height>
                              </size>
+                            </property>
+                            <property name="minimum">
+                             <number>10</number>
+                            </property>
+                            <property name="maximum">
+                             <number>100</number>
                             </property>
                             <property name="notchesVisible">
                              <bool>true</bool>
@@ -4886,7 +4910,7 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_19">
                             <property name="text">
-                             <string>Mw</string>
+                             <string>Width</string>
                             </property>
                            </widget>
                           </item>
@@ -4896,11 +4920,23 @@
                          <layout class="QVBoxLayout" name="verticalLayout_45">
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QDial" name="flangerM0Dial">
+                            <property name="minimumSize">
+                             <size>
+                              <width>60</width>
+                              <height>0</height>
+                             </size>
+                            </property>
                             <property name="maximumSize">
                              <size>
                               <width>60</width>
                               <height>16777215</height>
                              </size>
+                            </property>
+                            <property name="minimum">
+                             <number>10</number>
+                            </property>
+                            <property name="maximum">
+                             <number>100</number>
                             </property>
                             <property name="notchesVisible">
                              <bool>true</bool>
@@ -4910,7 +4946,7 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_26">
                             <property name="text">
-                             <string>M0</string>
+                             <string>Delay</string>
                             </property>
                            </widget>
                           </item>
@@ -4920,6 +4956,12 @@
                          <layout class="QVBoxLayout" name="verticalLayout_46">
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QDial" name="flangerGFFDial">
+                            <property name="minimumSize">
+                             <size>
+                              <width>60</width>
+                              <height>0</height>
+                             </size>
+                            </property>
                             <property name="maximumSize">
                              <size>
                               <width>60</width>
@@ -4934,7 +4976,13 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_30">
                             <property name="text">
-                             <string>GFF</string>
+                             <string>Feedforward Gain</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
                             </property>
                            </widget>
                           </item>
@@ -4965,7 +5013,7 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_31">
                             <property name="text">
-                             <string>F0</string>
+                             <string>LFO Frequency</string>
                             </property>
                            </widget>
                           </item>
@@ -5263,7 +5311,7 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_16">
                             <property name="text">
-                             <string>F0</string>
+                             <string>LFO Frequency</string>
                             </property>
                            </widget>
                           </item>
@@ -5292,15 +5340,30 @@
                               <height>16777215</height>
                              </size>
                             </property>
+                            <property name="minimum">
+                             <number>500</number>
+                            </property>
+                            <property name="maximum">
+                             <number>1500</number>
+                            </property>
+                            <property name="singleStep">
+                             <number>1</number>
+                            </property>
+                            <property name="value">
+                             <number>500</number>
+                            </property>
+                            <property name="notchTarget">
+                             <double>21.699999999999999</double>
+                            </property>
                             <property name="notchesVisible">
                              <bool>true</bool>
                             </property>
                            </widget>
                           </item>
-                          <item alignment="Qt::AlignHCenter">
+                          <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
                            <widget class="QLabel" name="label_4">
                             <property name="text">
-                             <string>Mavg</string>
+                             <string>Delay</string>
                             </property>
                            </widget>
                           </item>
@@ -5341,6 +5404,15 @@
                               <width>60</width>
                               <height>16777215</height>
                              </size>
+                            </property>
+                            <property name="minimum">
+                             <number>500</number>
+                            </property>
+                            <property name="maximum">
+                             <number>1500</number>
+                            </property>
+                            <property name="notchTarget">
+                             <double>20.699999999999999</double>
                             </property>
                             <property name="notchesVisible">
                              <bool>true</bool>
@@ -5661,7 +5733,13 @@
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QLabel" name="label_32">
                             <property name="text">
-                             <string>Fmin</string>
+                             <string>Minimum Frequency</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
                             </property>
                            </widget>
                           </item>
