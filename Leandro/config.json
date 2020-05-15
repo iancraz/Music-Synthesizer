@@ -48,6 +48,7 @@
 					"1": "additive/trombon/trombon_envelopes_2.csv",
 					"2": "additive/trombon/trombon_envelopes_3.csv",
 					"3": "additive/trombon/trombon_envelopes_4.csv"
+				}
 			}
 		},
 		"adsr": {
