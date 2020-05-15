@@ -84,7 +84,7 @@ public:
 
 	void addChannel(Channel* newChannel);
 	void destroyChannel(Channel* channel);
-	void addMidiFile(string directory, string filename, bool autoSet);
+	void addMidiFile(string filename, bool autoSet = true);
 	
 
 	// GUI-related, system-triggered functions
@@ -128,7 +128,7 @@ public:
 
 	void loadSynthData(Json::Value synthRoot);
 	void loadTestMidi();
-
+	void loadMidiFile();
 private:
 	Ui::LeandroClass ui;
 	bool recordFlag;

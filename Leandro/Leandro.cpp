@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include "AudioFile.h"
+#include <qfiledialog.h>
 
 using namespace std;
 
@@ -148,9 +149,10 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
 }
 
-void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
+
+void Leandro::addMidiFile(string filename, bool autoSet) {
 	MidiFile* midifile = new MidiFile;
-	midifile->read(directory + filename);
+	midifile->read(filename);
 	midifile->doTimeAnalysis();
 	midifile->linkNotePairs();
 	midiTrack* tempTrack;
@@ -723,19 +725,6 @@ void Leandro::removeEffectFromActiveChannel() {
 	updateActiveAssetsBay();
 }
 
-void Leandro::startStreaming() {
-	PaError err = Pa_StartStream(stream);
-	if (err != paNoError) throw "Error! PortAudio couldnt start stream";
-
-}
-
-void Leandro::stopStreaming() {
-	PaError err = Pa_StopStream(stream);
-	if (err != paNoError) throw "Error! PortAudio couldnt stop stream";
-
-}
-
-
 
 // GUI triggered setters
 
@@ -868,6 +857,8 @@ void Leandro::wahwahValueChanged() {
 }
 
 
+// GUI triggered setters
+
 
 
 
@@ -905,13 +896,7 @@ void Leandro::initGUI() {
 	
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
-	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
-	QObject::connect(ui.stopButton, &QPushButton::clicked, this, &Leandro::stopStreaming);
-	
-	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); // TEST
-
-	
-
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
@@ -1002,5 +987,12 @@ void Leandro::initGUI() {
 // TEST FUNCTIONS
 
 void Leandro::loadTestMidi() {
-	addMidiFile("", "sm64.mid", true);
+	addMidiFile("sm64.mid");
+}
+
+void Leandro::loadMidiFile() {
+	QString fileName = QFileDialog::getOpenFileName(this,
+													tr("Load Midi File"), "",
+													tr("Midi Files (*.mid);;All Files (*)"));
+	addMidiFile(fileName.toStdString());
 }
