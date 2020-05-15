@@ -14,6 +14,7 @@
 using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
+	recordFlag = false;
 	QPixmap pixmap("images/splash.png");
 	QSplashScreen* splash = new QSplashScreen(pixmap);
 	splash->show();
@@ -192,6 +193,10 @@ void Leandro::updateCallbackData() {
 	this->callData.currentSample = &(this->currentSample);
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
+	this->callData.recordFlag = recordFlag;
+	this->callData.wav = wav;
+	this->callData.wavCounter = &wavCounter;
+
 };
 
 int Leandro::getFirstFreeChannelFrame() {
@@ -780,7 +785,7 @@ void Leandro::instrumentValueChanged() {
 		adsrinst->setWF1(ui.waveform1ComboBoxADSR->currentIndex());
 		adsrinst->setWF2(ui.waveform2ComboBoxADSR->currentIndex());
 		adsrinst->setWF1Level(((float)ui.levelWF1DialADSR->value()) / 100.0);
-		adsrinst->setWF1Level(((float)ui.levelWF2DialADSR->value()) / 100.0);
+		adsrinst->setWF2Level(((float)ui.levelWF2DialADSR->value()) / 100.0);
 		
 		break;
 

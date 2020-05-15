@@ -613,7 +613,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(instrumentsList->sizePolicy().hasHeightForWidth());
         instrumentsList->setSizePolicy(sizePolicy1);
-        instrumentsList->setMaximumSize(QSize(100, 16777215));
+        instrumentsList->setMaximumSize(QSize(400, 16777215));
         instrumentsList->setDragEnabled(false);
         instrumentsList->setDragDropMode(QAbstractItemView::DragOnly);
 
@@ -647,7 +647,7 @@ public:
         sizePolicy1.setHeightForWidth(effectsList->sizePolicy().hasHeightForWidth());
         effectsList->setSizePolicy(sizePolicy1);
         effectsList->setMinimumSize(QSize(0, 0));
-        effectsList->setMaximumSize(QSize(100, 16777215));
+        effectsList->setMaximumSize(QSize(400, 16777215));
 
         verticalLayout_2->addWidget(effectsList);
 
@@ -688,7 +688,7 @@ public:
         scrollAreaChannels_2->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2480, 294));
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2324, 294));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
