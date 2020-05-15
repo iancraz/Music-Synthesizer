@@ -569,6 +569,7 @@ gains_t Eq8BandEffect::getGains() {
 	gains_t temp;
 	for (unsigned int i = 0; i < numberOfBands; i++) {
 		temp.gains[i] = 20 * log10(g[i]);
+		temp.gains[i] = (temp.gains[i] + 12.0) / 24.0;
 	}
 	return temp;
 }
