@@ -959,10 +959,13 @@ void Leandro::initGUI() {
 	ui.vibratoEffectFrame->setHidden(true);
 	ui.wahwahEffectFrame->setHidden(true);
 	ui.eq8Frame->setHidden(true);
-
+	
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
-	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
+	//QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
+
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
+
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
@@ -1118,7 +1121,7 @@ void Leandro::initGUI() {
 void Leandro::channel1Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel1)
 			channel = channels.at(i);
@@ -1139,7 +1142,7 @@ void Leandro::channel1setActive() {
 void Leandro::channel1InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel1)
 			channel = channels.at(i);
@@ -1152,7 +1155,7 @@ void Leandro::channel1InputChanged() {
 void Leandro::channel1VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel1)
 			channel = channels.at(i);
@@ -1163,7 +1166,7 @@ void Leandro::channel1VolChanged() {
 void Leandro::channel1TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel1)
 			channel = channels.at(i);
@@ -1178,7 +1181,7 @@ void Leandro::channel1TrackChanged() {
 void Leandro::channel2Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel2)
 			channel = channels.at(i);
@@ -1188,7 +1191,7 @@ void Leandro::channel2Closed() {
 void Leandro::channel2setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel2)
 			channel = channels.at(i);
@@ -1199,7 +1202,7 @@ void Leandro::channel2setActive() {
 void Leandro::channel2InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel2)
 			channel = channels.at(i);
@@ -1212,7 +1215,7 @@ void Leandro::channel2InputChanged() {
 void Leandro::channel2VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel2)
 			channel = channels.at(i);
@@ -1223,7 +1226,7 @@ void Leandro::channel2VolChanged() {
 void Leandro::channel2TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel2)
 			channel = channels.at(i);
@@ -1238,7 +1241,7 @@ void Leandro::channel2TrackChanged() {
 void Leandro::channel3Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel3)
 			channel = channels.at(i);
@@ -1248,7 +1251,7 @@ void Leandro::channel3Closed() {
 void Leandro::channel3setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel3)
 			channel = channels.at(i);
@@ -1259,7 +1262,7 @@ void Leandro::channel3setActive() {
 void Leandro::channel3InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel3)
 			channel = channels.at(i);
@@ -1272,7 +1275,7 @@ void Leandro::channel3InputChanged() {
 void Leandro::channel3VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel3)
 			channel = channels.at(i);
@@ -1283,7 +1286,7 @@ void Leandro::channel3VolChanged() {
 void Leandro::channel3TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel3)
 			channel = channels.at(i);
@@ -1298,7 +1301,7 @@ void Leandro::channel3TrackChanged() {
 void Leandro::channel4Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel4)
 			channel = channels.at(i);
@@ -1308,7 +1311,7 @@ void Leandro::channel4Closed() {
 void Leandro::channel4setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel4)
 			channel = channels.at(i);
@@ -1319,7 +1322,7 @@ void Leandro::channel4setActive() {
 void Leandro::channel4InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel4)
 			channel = channels.at(i);
@@ -1332,7 +1335,7 @@ void Leandro::channel4InputChanged() {
 void Leandro::channel4VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel4)
 			channel = channels.at(i);
@@ -1343,7 +1346,7 @@ void Leandro::channel4VolChanged() {
 void Leandro::channel4TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel4)
 			channel = channels.at(i);
@@ -1358,7 +1361,7 @@ void Leandro::channel4TrackChanged() {
 void Leandro::channel5Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel5)
 			channel = channels.at(i);
@@ -1368,7 +1371,7 @@ void Leandro::channel5Closed() {
 void Leandro::channel5setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel5)
 			channel = channels.at(i);
@@ -1379,7 +1382,7 @@ void Leandro::channel5setActive() {
 void Leandro::channel5InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel5)
 			channel = channels.at(i);
@@ -1392,7 +1395,7 @@ void Leandro::channel5InputChanged() {
 void Leandro::channel5VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel5)
 			channel = channels.at(i);
@@ -1403,7 +1406,7 @@ void Leandro::channel5VolChanged() {
 void Leandro::channel5TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel5)
 			channel = channels.at(i);
@@ -1418,7 +1421,7 @@ void Leandro::channel5TrackChanged() {
 void Leandro::channel6Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel6)
 			channel = channels.at(i);
@@ -1428,7 +1431,7 @@ void Leandro::channel6Closed() {
 void Leandro::channel6setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel6)
 			channel = channels.at(i);
@@ -1439,7 +1442,7 @@ void Leandro::channel6setActive() {
 void Leandro::channel6InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel6)
 			channel = channels.at(i);
@@ -1452,7 +1455,7 @@ void Leandro::channel6InputChanged() {
 void Leandro::channel6VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel6)
 			channel = channels.at(i);
@@ -1463,7 +1466,7 @@ void Leandro::channel6VolChanged() {
 void Leandro::channel6TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel6)
 			channel = channels.at(i);
@@ -1478,7 +1481,7 @@ void Leandro::channel6TrackChanged() {
 void Leandro::channel7Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel7)
 			channel = channels.at(i);
@@ -1488,7 +1491,7 @@ void Leandro::channel7Closed() {
 void Leandro::channel7setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel7)
 			channel = channels.at(i);
@@ -1499,7 +1502,7 @@ void Leandro::channel7setActive() {
 void Leandro::channel7InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel7)
 			channel = channels.at(i);
@@ -1512,7 +1515,7 @@ void Leandro::channel7InputChanged() {
 void Leandro::channel7VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel7)
 			channel = channels.at(i);
@@ -1523,7 +1526,7 @@ void Leandro::channel7VolChanged() {
 void Leandro::channel7TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel7)
 			channel = channels.at(i);
@@ -1538,7 +1541,7 @@ void Leandro::channel7TrackChanged() {
 void Leandro::channel8Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel8)
 			channel = channels.at(i);
@@ -1548,7 +1551,7 @@ void Leandro::channel8Closed() {
 void Leandro::channel8setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel8)
 			channel = channels.at(i);
@@ -1559,7 +1562,7 @@ void Leandro::channel8setActive() {
 void Leandro::channel8InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel8)
 			channel = channels.at(i);
@@ -1572,7 +1575,7 @@ void Leandro::channel8InputChanged() {
 void Leandro::channel8VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel8)
 			channel = channels.at(i);
@@ -1583,7 +1586,7 @@ void Leandro::channel8VolChanged() {
 void Leandro::channel8TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel8)
 			channel = channels.at(i);
@@ -1598,7 +1601,7 @@ void Leandro::channel8TrackChanged() {
 void Leandro::channel9Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel9)
 			channel = channels.at(i);
@@ -1608,7 +1611,7 @@ void Leandro::channel9Closed() {
 void Leandro::channel9setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel9)
 			channel = channels.at(i);
@@ -1619,7 +1622,7 @@ void Leandro::channel9setActive() {
 void Leandro::channel9InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel9)
 			channel = channels.at(i);
@@ -1632,7 +1635,7 @@ void Leandro::channel9InputChanged() {
 void Leandro::channel9VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel9)
 			channel = channels.at(i);
@@ -1643,7 +1646,7 @@ void Leandro::channel9VolChanged() {
 void Leandro::channel9TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel9)
 			channel = channels.at(i);
@@ -1658,7 +1661,7 @@ void Leandro::channel9TrackChanged() {
 void Leandro::channel10Closed() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel10)
 			channel = channels.at(i);
@@ -1668,7 +1671,7 @@ void Leandro::channel10Closed() {
 void Leandro::channel10setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel10)
 			channel = channels.at(i);
@@ -1679,7 +1682,7 @@ void Leandro::channel10setActive() {
 void Leandro::channel10InputChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel10)
 			channel = channels.at(i);
@@ -1692,7 +1695,7 @@ void Leandro::channel10InputChanged() {
 void Leandro::channel10VolChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel10)
 			channel = channels.at(i);
@@ -1703,7 +1706,7 @@ void Leandro::channel10VolChanged() {
 void Leandro::channel10TrackChanged() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size(); i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel10)
 			channel = channels.at(i);
