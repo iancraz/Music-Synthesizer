@@ -46,13 +46,6 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 
 	int firstOctave = (int)(firstKey / 12) - 1;
 
-	while (keyNumber < firstKey)
-		keyNumber += 12;
-
-	while (keyNumber > lastKey) {
-		keyNumber -= 12;
-	}
-
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 	float maxValue = 1;
 	// determinar la cotava a utilizar 
@@ -66,10 +59,9 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 
 	for (int k = 0; k < harmonicsCount; k++) {
 		float r = harmonicFactors[k];
-		float r3 = -0.1 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.1 - (-0.1))));
 		int i = 0;
 		while (i < noteDuration_n && i < outputBufferSize && i < envelopeLengths[octave]) {
-			outputBuffer[i] += envelopes[octave][k][i] * r *(float)sin(2.0 * M_PI * freq * (1.0 + r3) * (float)(k + 1) / (float)sampleRate * (float)i);
+			outputBuffer[i] += envelopes[octave][k][i] * r *(float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
 			maxValue = abs(outputBuffer[i]) > maxValue && outputBuffer[i] != 0.0 ? abs(outputBuffer[i]) : maxValue;
 			i++;
 		}
