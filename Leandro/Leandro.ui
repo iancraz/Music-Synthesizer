@@ -187,6 +187,15 @@
        </color>
       </brush>
      </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -345,6 +354,15 @@
      <colorrole role="ToolTipText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
@@ -515,6 +533,15 @@
        </color>
       </brush>
      </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
     </disabled>
    </palette>
   </property>
@@ -531,7 +558,171 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
+    <item row="0" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_14">
+      <item>
+       <widget class="QPushButton" name="importMidiButton">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string> Import MIDI File...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/icons/icons/043-add folder.svg</normaloff>:/icons/icons/043-add folder.svg</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="newChannelButton">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Add Channel</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/icons/icons/003-plus.svg</normaloff>:/icons/icons/003-plus.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>18</width>
+          <height>18</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="spectrogramButton">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Spectrogram</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/icons/icons/043-add folder.svg</normaloff>:/icons/icons/043-add folder.svg</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>1104</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="7">
+     <widget class="QPushButton" name="pauseButton">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>:/icons/icons/pause.svg</normaloff>:/icons/icons/pause.svg</iconset>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="8">
+     <widget class="QPushButton" name="stopButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>:/icons/icons/stop.svg</normaloff>:/icons/icons/stop.svg</iconset>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="9">
+     <widget class="QPushButton" name="recordButton">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>:/icons/icons/rec.svg</normaloff>:/icons/icons/rec.svg</iconset>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="6">
+     <widget class="QPushButton" name="playButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>:/icons/icons/play.svg</normaloff>:/icons/icons/play.svg</iconset>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="11">
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -858,7 +1049,7 @@
              <x>0</x>
              <y>0</y>
              <width>2324</width>
-             <height>294</height>
+             <height>271</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -1001,7 +1192,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1296,7 +1487,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1591,7 +1782,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1886,7 +2077,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -2181,7 +2372,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -2476,7 +2667,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -2771,7 +2962,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -3066,7 +3257,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -3361,7 +3552,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -3656,7 +3847,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -4066,7 +4257,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -4882,7 +5073,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -5505,7 +5696,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -5890,7 +6081,7 @@
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="icons.qrc">
+                       <iconset>
                         <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -6285,8 +6476,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1252</width>
-             <height>401</height>
+             <width>1255</width>
+             <height>392</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -6414,7 +6605,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -6469,7 +6660,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -6498,7 +6689,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -6975,7 +7166,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7030,7 +7221,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7059,7 +7250,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7396,7 +7587,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7451,7 +7642,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7480,7 +7671,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7838,7 +8029,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7893,7 +8084,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -7922,7 +8113,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -8260,7 +8451,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/037-minus.svg</normaloff>:/icons/icons/037-minus.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -8315,7 +8506,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/006-chevron.svg</normaloff>:/icons/icons/006-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -8344,7 +8535,7 @@
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="icons.qrc">
+                        <iconset>
                          <normaloff>:/icons/icons/033-chevron.svg</normaloff>:/icons/icons/033-chevron.svg</iconset>
                        </property>
                        <property name="iconSize">
@@ -8500,160 +8691,6 @@
          </widget>
         </item>
        </layout>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_10">
-      <item>
-       <widget class="QPushButton" name="newChannelButton">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Add Channel</string>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/003-plus.svg</normaloff>:/icons/icons/003-plus.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>18</width>
-          <height>18</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="importMidiButton">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string> Import MIDI File...</string>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/043-add folder.svg</normaloff>:/icons/icons/043-add folder.svg</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="playButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/play.svg</normaloff>:/icons/icons/play.svg</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pauseButton">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/pause.svg</normaloff>:/icons/icons/pause.svg</iconset>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="stopButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/stop.svg</normaloff>:/icons/icons/stop.svg</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="recordButton">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/icons/rec.svg</normaloff>:/icons/icons/rec.svg</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </item>

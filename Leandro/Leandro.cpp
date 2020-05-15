@@ -993,6 +993,7 @@ void Leandro::initGUI() {
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
 	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
+	QObject::connect(ui.spectrogramButton, &QPushButton::clicked, this, &Leandro::showSpectrogram);
 
 	//QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
 
@@ -1768,6 +1769,11 @@ void Leandro::channel10TrackChanged() {
 			channel->setChannelTrack(midiTracks.at(i));
 			break;
 		}
+}
+
+void Leandro::showSpectrogram() {
+	QDialog popup(this);
+	popup.show();
 }
 
 

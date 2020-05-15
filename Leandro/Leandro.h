@@ -197,7 +197,7 @@ public:
 	void channel10VolChanged();
 	void channel10TrackChanged();
 
-
+	void showSpectrogram();
 
 private:
 	Ui::LeandroClass ui;
