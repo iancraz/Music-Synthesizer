@@ -1,4 +1,12 @@
-﻿  Leandro.cpp
+﻿  moc Leandro.h
+  Additive.cpp
+  ADSR.cpp
+  Channel.cpp
+  Instrument.cpp
+  Karplus.cpp
+  Leandro.cpp
+  main.cpp
+  Sampling.cpp
   moc_Leandro.cpp
 Leandro.obj : error LNK2019: símbolo externo "public: int __cdecl SamplingInstrument::getLoopBegin(void)" (?getLoopBegin@SamplingInstrument@@QEAAHXZ) sin resolver al que se hace referencia en la función "public: void __cdecl Leandro::showInstrument(class Instrument *)" (?showInstrument@Leandro@@QEAAXPEAVInstrument@@@Z)
 Leandro.obj : error LNK2019: símbolo externo "public: int __cdecl SamplingInstrument::getLoopEnd(void)" (?getLoopEnd@SamplingInstrument@@QEAAHXZ) sin resolver al que se hace referencia en la función "public: void __cdecl Leandro::showInstrument(class Instrument *)" (?showInstrument@Leandro@@QEAAXPEAVInstrument@@@Z)
