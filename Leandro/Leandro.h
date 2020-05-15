@@ -99,6 +99,8 @@ public:
 	void removeInstrumentFromActiveChannel();
 
 	void addNewChannel();
+	void startStreaming();
+	void stopStreaming();
 
 	void instrumentValueChanged();
 	void reverbValueChanged();
