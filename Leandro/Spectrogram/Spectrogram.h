@@ -13,7 +13,7 @@ class Spectrogram {
 public:
 	Spectrogram(float * signal, unsigned int signalSize);
 	~Spectrogram();
-	void calcSpectrogram(unsigned int samplingRate = 44000, unsigned int nfft = 1024, window_t window = WINDOW_NONE,bool showTime = true , bool save = true, string name = "sepcgram.png");
+	void calcSpectrogram(unsigned int samplingRate = 44000, unsigned int nfft = 1024, window_t window = WINDOW_NONE, unsigned int overlap = 0,bool showTime = false , bool save = true, string name = "sepcgram.png");
 	//void fft(std::complex<float>* in, std::complex<float>* out, size_t n);
 protected:
 	//std::vector<complex<double>> Cooley_Tukey(std::vector<complex<double>>& samples);

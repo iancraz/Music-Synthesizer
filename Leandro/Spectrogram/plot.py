@@ -15,8 +15,9 @@ timevec = []
 y = f1.split(',')
 fs = int(y[0])
 nfft = int(y[1])
-save = int(y[3])
-showTime = int(y[4])
+overlap = int(y[3])
+save = int(y[4])
+showTime = int(y[5])
 
 if int(y[2]) == 0:
     window = None
@@ -55,13 +56,13 @@ else:
 #ax1.grid(b=True,which='major')
 
 if window == None:
-    ax2.specgram(time,Fs=fs,NFFT=nfft,cmap='Greys')
+    ax2.specgram(time,Fs=fs,NFFT=nfft,cmap='Greys',noverlap= overlap)
 if window == 'BALCKMAN':
-    ax2.specgram(time,Fs=fs,NFFT=nfft,window= np.blackman(nfft),cmap='Greys')
+    ax2.specgram(time,Fs=fs,NFFT=nfft,window= np.blackman(nfft),cmap='Greys',noverlap= overlap)
 elif window == 'HAMMING':
-    ax2.specgram(time,Fs=fs,NFFT=nfft, window= np.hamming(nfft),cmap='Greys')
+    ax2.specgram(time,Fs=fs,NFFT=nfft, window= np.hamming(nfft),cmap='Greys',noverlap= overlap)
 elif window == 'BARTLETT':
-    ax2.specgram(time,Fs=fs,NFFT=nfft, window= np.bartlett(nfft),cmap='Greys')
+    ax2.specgram(time,Fs=fs,NFFT=nfft, window= np.bartlett(nfft),cmap='Greys',noverlap= overlap)
 
 ax2.set_ylabel("Frecuencias")
 ax2.set_xlabel("tiempo")

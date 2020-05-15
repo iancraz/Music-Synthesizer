@@ -3,7 +3,7 @@
 
 int main(void) {
     AudioFile<double> audioFile;
-    audioFile.load("./tst.wav");
+    audioFile.load("./out.wav");
     int channel = 0;
     int numSamples = audioFile.getNumSamplesPerChannel();
     float* signal = new float[numSamples];
@@ -15,8 +15,9 @@ int main(void) {
     }
     unsigned int samplingRate = 44000;
     unsigned int nfft = 1024;
+    unsigned int overlap = 128;
     Spectrogram test(signal, numSamples);
-    test.calcSpectrogram(samplingRate, nfft, WINDOW_BLACKMAN, true,false, "hola.png");
+    test.calcSpectrogram(samplingRate, nfft, WINDOW_BLACKMAN, overlap,true,false, "hola.png");
     return 0;
 }
 
