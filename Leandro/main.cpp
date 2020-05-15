@@ -9,13 +9,7 @@
 int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
-
-	QPixmap pixmap("images/splash.png");
-	QSplashScreen splash(pixmap);
-	splash.show();
 	Leandro program;
-	program.loadData();
 	program.show();
-	splash.finish(&program);
 	return a.exec();
 }

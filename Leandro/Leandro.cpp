@@ -10,10 +10,12 @@
 #include "AudioFile.h"
 #include <qfiledialog.h>
 
+
 using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
-	//loadData();
+
+	loadData();
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->channelCreationCounter = 0;
