@@ -92,7 +92,12 @@ void Channel::callback(	// Take midi file, select events in timeframe, synthesiz
 				data->instrument->synthFunction(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, currentEvent.note, currentEvent.durSeconds, currentEvent.velocity, SAMPLE_RATE);
 				for (int i = 0; i < (data->effects->size()); i++)
 					data->effects->at(i)->callback(buffer, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
-			}
+				//int anto = 0;
+				//while (buffer[anto] != INFINITY) {
+				//	buffer[anto] = this->volume * buffer[anto];
+				//	anto++;
+				//}
+				}
 			
 			/*
 			int s = 0;

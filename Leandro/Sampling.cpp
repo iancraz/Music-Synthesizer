@@ -16,7 +16,6 @@ SamplingInstrument::SamplingInstrument(samplingParams_t * params) {
 	
 	samples = new vector<Sample*>(*params->samples);
 
-	samples = new vector<Sample*>;
 	Sample* sample = nullptr;
 	temp_buffer = new float[lenght_temp_buffer];
 	temp_buffer_2 = new float[lenght_temp_buffer];
@@ -329,9 +328,6 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 
 		temp_buffer[N_1] = INFINITY;
 	}
-
-
-
 }
 int SamplingInstrument::get_nearest_peak(Sample* selected_sample, int number) {
 	int peaks_lenght = selected_sample->lenght_peaks;

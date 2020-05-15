@@ -163,6 +163,7 @@ public:
     QListWidget *midiListChannel10;
     QDial *levelDialChannel10;
     QLabel *levelLabelChannel1_11;
+    QSpacerItem *horizontalSpacer_12;
     QHBoxLayout *activeChannelAssetsPanel;
     QFrame *instrumentFrameFrame;
     QGridLayout *gridLayout_2;
@@ -453,6 +454,7 @@ public:
     QVBoxLayout *verticalLayout_49;
     QSlider *wahwahLFOSlider;
     QLabel *label_33;
+    QSpacerItem *horizontalSpacer_13;
     QHBoxLayout *horizontalLayout_10;
     QPushButton *newChannelButton;
     QPushButton *importMidiButton;
@@ -469,6 +471,11 @@ public:
         if (LeandroClass->objectName().isEmpty())
             LeandroClass->setObjectName(QStringLiteral("LeandroClass"));
         LeandroClass->resize(2638, 783);
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(LeandroClass->sizePolicy().hasHeightForWidth());
+        LeandroClass->setSizePolicy(sizePolicy);
         LeandroClass->setMinimumSize(QSize(800, 0));
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
@@ -601,12 +608,12 @@ public:
 
         instrumentsList = new QListWidget(frame_3);
         instrumentsList->setObjectName(QStringLiteral("instrumentsList"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(instrumentsList->sizePolicy().hasHeightForWidth());
-        instrumentsList->setSizePolicy(sizePolicy);
-        instrumentsList->setMaximumSize(QSize(100, 16777215));
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(instrumentsList->sizePolicy().hasHeightForWidth());
+        instrumentsList->setSizePolicy(sizePolicy1);
+        instrumentsList->setMaximumSize(QSize(400, 16777215));
         instrumentsList->setDragEnabled(false);
         instrumentsList->setDragDropMode(QAbstractItemView::DragOnly);
 
@@ -614,11 +621,11 @@ public:
 
         setInstrumentButton = new QPushButton(frame_3);
         setInstrumentButton->setObjectName(QStringLiteral("setInstrumentButton"));
-        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(setInstrumentButton->sizePolicy().hasHeightForWidth());
-        setInstrumentButton->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(setInstrumentButton->sizePolicy().hasHeightForWidth());
+        setInstrumentButton->setSizePolicy(sizePolicy2);
         setInstrumentButton->setMaximumSize(QSize(16777215, 15));
         setInstrumentButton->setBaseSize(QSize(0, 0));
         QFont font2;
@@ -637,17 +644,17 @@ public:
 
         effectsList = new QListWidget(frame_3);
         effectsList->setObjectName(QStringLiteral("effectsList"));
-        sizePolicy.setHeightForWidth(effectsList->sizePolicy().hasHeightForWidth());
-        effectsList->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(effectsList->sizePolicy().hasHeightForWidth());
+        effectsList->setSizePolicy(sizePolicy1);
         effectsList->setMinimumSize(QSize(0, 0));
-        effectsList->setMaximumSize(QSize(100, 16777215));
+        effectsList->setMaximumSize(QSize(400, 16777215));
 
         verticalLayout_2->addWidget(effectsList);
 
         addEffectButton = new QPushButton(frame_3);
         addEffectButton->setObjectName(QStringLiteral("addEffectButton"));
-        sizePolicy1.setHeightForWidth(addEffectButton->sizePolicy().hasHeightForWidth());
-        addEffectButton->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(addEffectButton->sizePolicy().hasHeightForWidth());
+        addEffectButton->setSizePolicy(sizePolicy2);
         addEffectButton->setMaximumSize(QSize(16777215, 15));
         addEffectButton->setFont(font2);
         addEffectButton->setAutoFillBackground(true);
@@ -660,11 +667,11 @@ public:
 
         scrollAreaChannels_2 = new QScrollArea(centralWidget);
         scrollAreaChannels_2->setObjectName(QStringLiteral("scrollAreaChannels_2"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(scrollAreaChannels_2->sizePolicy().hasHeightForWidth());
-        scrollAreaChannels_2->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(scrollAreaChannels_2->sizePolicy().hasHeightForWidth());
+        scrollAreaChannels_2->setSizePolicy(sizePolicy3);
         QPalette palette2;
         palette2.setBrush(QPalette::Active, QPalette::Base, brush3);
         palette2.setBrush(QPalette::Active, QPalette::Window, brush13);
@@ -681,12 +688,12 @@ public:
         scrollAreaChannels_2->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2480, 294));
-        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(scrollAreaChannelsWidgetContents_2->sizePolicy().hasHeightForWidth());
-        scrollAreaChannelsWidgetContents_2->setSizePolicy(sizePolicy3);
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2324, 294));
+        QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(scrollAreaChannelsWidgetContents_2->sizePolicy().hasHeightForWidth());
+        scrollAreaChannelsWidgetContents_2->setSizePolicy(sizePolicy4);
         channelsContainerLayout = new QHBoxLayout(scrollAreaChannelsWidgetContents_2);
         channelsContainerLayout->setSpacing(6);
         channelsContainerLayout->setContentsMargins(11, 11, 11, 11);
@@ -702,11 +709,11 @@ public:
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         frameChannel1 = new QFrame(frame_2);
         frameChannel1->setObjectName(QStringLiteral("frameChannel1"));
-        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(frameChannel1->sizePolicy().hasHeightForWidth());
-        frameChannel1->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(frameChannel1->sizePolicy().hasHeightForWidth());
+        frameChannel1->setSizePolicy(sizePolicy5);
         frameChannel1->setMaximumSize(QSize(125, 16777215));
         QPalette palette3;
         palette3.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -736,11 +743,11 @@ public:
 
         closeButtonChannel1 = new QPushButton(frameChannel1);
         closeButtonChannel1->setObjectName(QStringLiteral("closeButtonChannel1"));
-        QSizePolicy sizePolicy5(QSizePolicy::Maximum, QSizePolicy::Fixed);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(closeButtonChannel1->sizePolicy().hasHeightForWidth());
-        closeButtonChannel1->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy6(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(closeButtonChannel1->sizePolicy().hasHeightForWidth());
+        closeButtonChannel1->setSizePolicy(sizePolicy6);
         QIcon icon;
         icon.addFile(QStringLiteral(":/icons/icons/037-minus.svg"), QSize(), QIcon::Normal, QIcon::Off);
         closeButtonChannel1->setIcon(icon);
@@ -754,11 +761,11 @@ public:
 
         setActiveButtonChannel1 = new QPushButton(frameChannel1);
         setActiveButtonChannel1->setObjectName(QStringLiteral("setActiveButtonChannel1"));
-        QSizePolicy sizePolicy6(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel1->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel1->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy7(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel1->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel1->setSizePolicy(sizePolicy7);
         setActiveButtonChannel1->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel1->setFont(font2);
         setActiveButtonChannel1->setAutoFillBackground(true);
@@ -772,11 +779,11 @@ public:
 
         inputComboBoxChannel1 = new QComboBox(frameChannel1);
         inputComboBoxChannel1->setObjectName(QStringLiteral("inputComboBoxChannel1"));
-        QSizePolicy sizePolicy7(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel1->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel1->setSizePolicy(sizePolicy7);
+        QSizePolicy sizePolicy8(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(0);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel1->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel1->setSizePolicy(sizePolicy8);
         inputComboBoxChannel1->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel1->setFont(font2);
         inputComboBoxChannel1->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -790,8 +797,8 @@ public:
         midiListChannel1 = new QListWidget(frameChannel1);
         new QListWidgetItem(midiListChannel1);
         midiListChannel1->setObjectName(QStringLiteral("midiListChannel1"));
-        sizePolicy4.setHeightForWidth(midiListChannel1->sizePolicy().hasHeightForWidth());
-        midiListChannel1->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel1->sizePolicy().hasHeightForWidth());
+        midiListChannel1->setSizePolicy(sizePolicy5);
         midiListChannel1->setMaximumSize(QSize(100, 16777215));
         midiListChannel1->setFont(font);
         midiListChannel1->setFrameShape(QFrame::Panel);
@@ -801,8 +808,8 @@ public:
 
         levelDialChannel1 = new QDial(frameChannel1);
         levelDialChannel1->setObjectName(QStringLiteral("levelDialChannel1"));
-        sizePolicy4.setHeightForWidth(levelDialChannel1->sizePolicy().hasHeightForWidth());
-        levelDialChannel1->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel1->sizePolicy().hasHeightForWidth());
+        levelDialChannel1->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1->addWidget(levelDialChannel1);
 
@@ -826,8 +833,8 @@ public:
 
         frameChannel2 = new QFrame(frame_2);
         frameChannel2->setObjectName(QStringLiteral("frameChannel2"));
-        sizePolicy4.setHeightForWidth(frameChannel2->sizePolicy().hasHeightForWidth());
-        frameChannel2->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel2->sizePolicy().hasHeightForWidth());
+        frameChannel2->setSizePolicy(sizePolicy5);
         frameChannel2->setMaximumSize(QSize(125, 16777215));
         QPalette palette4;
         palette4.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -857,8 +864,8 @@ public:
 
         closeButtonChannel2 = new QPushButton(frameChannel2);
         closeButtonChannel2->setObjectName(QStringLiteral("closeButtonChannel2"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel2->sizePolicy().hasHeightForWidth());
-        closeButtonChannel2->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel2->sizePolicy().hasHeightForWidth());
+        closeButtonChannel2->setSizePolicy(sizePolicy6);
         closeButtonChannel2->setIcon(icon);
         closeButtonChannel2->setIconSize(QSize(12, 12));
         closeButtonChannel2->setFlat(true);
@@ -870,8 +877,8 @@ public:
 
         setActiveButtonChannel2 = new QPushButton(frameChannel2);
         setActiveButtonChannel2->setObjectName(QStringLiteral("setActiveButtonChannel2"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel2->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel2->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel2->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel2->setSizePolicy(sizePolicy7);
         setActiveButtonChannel2->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel2->setFont(font2);
         setActiveButtonChannel2->setAutoFillBackground(true);
@@ -885,8 +892,8 @@ public:
 
         inputComboBoxChannel2 = new QComboBox(frameChannel2);
         inputComboBoxChannel2->setObjectName(QStringLiteral("inputComboBoxChannel2"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel2->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel2->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel2->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel2->setSizePolicy(sizePolicy8);
         inputComboBoxChannel2->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel2->setFont(font2);
         inputComboBoxChannel2->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -900,8 +907,8 @@ public:
         midiListChannel2 = new QListWidget(frameChannel2);
         new QListWidgetItem(midiListChannel2);
         midiListChannel2->setObjectName(QStringLiteral("midiListChannel2"));
-        sizePolicy4.setHeightForWidth(midiListChannel2->sizePolicy().hasHeightForWidth());
-        midiListChannel2->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel2->sizePolicy().hasHeightForWidth());
+        midiListChannel2->setSizePolicy(sizePolicy5);
         midiListChannel2->setMaximumSize(QSize(100, 16777215));
         midiListChannel2->setFont(font);
         midiListChannel2->setFrameShape(QFrame::Panel);
@@ -911,8 +918,8 @@ public:
 
         levelDialChannel2 = new QDial(frameChannel2);
         levelDialChannel2->setObjectName(QStringLiteral("levelDialChannel2"));
-        sizePolicy4.setHeightForWidth(levelDialChannel2->sizePolicy().hasHeightForWidth());
-        levelDialChannel2->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel2->sizePolicy().hasHeightForWidth());
+        levelDialChannel2->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_2->addWidget(levelDialChannel2);
 
@@ -928,8 +935,8 @@ public:
 
         frameChannel3 = new QFrame(frame_2);
         frameChannel3->setObjectName(QStringLiteral("frameChannel3"));
-        sizePolicy4.setHeightForWidth(frameChannel3->sizePolicy().hasHeightForWidth());
-        frameChannel3->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel3->sizePolicy().hasHeightForWidth());
+        frameChannel3->setSizePolicy(sizePolicy5);
         frameChannel3->setMaximumSize(QSize(125, 16777215));
         QPalette palette5;
         palette5.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -959,8 +966,8 @@ public:
 
         closeButtonChannel3 = new QPushButton(frameChannel3);
         closeButtonChannel3->setObjectName(QStringLiteral("closeButtonChannel3"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel3->sizePolicy().hasHeightForWidth());
-        closeButtonChannel3->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel3->sizePolicy().hasHeightForWidth());
+        closeButtonChannel3->setSizePolicy(sizePolicy6);
         closeButtonChannel3->setIcon(icon);
         closeButtonChannel3->setIconSize(QSize(12, 12));
         closeButtonChannel3->setFlat(true);
@@ -972,8 +979,8 @@ public:
 
         setActiveButtonChannel3 = new QPushButton(frameChannel3);
         setActiveButtonChannel3->setObjectName(QStringLiteral("setActiveButtonChannel3"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel3->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel3->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel3->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel3->setSizePolicy(sizePolicy7);
         setActiveButtonChannel3->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel3->setFont(font2);
         setActiveButtonChannel3->setAutoFillBackground(true);
@@ -987,8 +994,8 @@ public:
 
         inputComboBoxChannel3 = new QComboBox(frameChannel3);
         inputComboBoxChannel3->setObjectName(QStringLiteral("inputComboBoxChannel3"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel3->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel3->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel3->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel3->setSizePolicy(sizePolicy8);
         inputComboBoxChannel3->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel3->setFont(font2);
         inputComboBoxChannel3->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1002,8 +1009,8 @@ public:
         midiListChannel3 = new QListWidget(frameChannel3);
         new QListWidgetItem(midiListChannel3);
         midiListChannel3->setObjectName(QStringLiteral("midiListChannel3"));
-        sizePolicy4.setHeightForWidth(midiListChannel3->sizePolicy().hasHeightForWidth());
-        midiListChannel3->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel3->sizePolicy().hasHeightForWidth());
+        midiListChannel3->setSizePolicy(sizePolicy5);
         midiListChannel3->setMaximumSize(QSize(100, 16777215));
         midiListChannel3->setFont(font);
         midiListChannel3->setFrameShape(QFrame::Panel);
@@ -1013,8 +1020,8 @@ public:
 
         levelDialChannel3 = new QDial(frameChannel3);
         levelDialChannel3->setObjectName(QStringLiteral("levelDialChannel3"));
-        sizePolicy4.setHeightForWidth(levelDialChannel3->sizePolicy().hasHeightForWidth());
-        levelDialChannel3->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel3->sizePolicy().hasHeightForWidth());
+        levelDialChannel3->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_3->addWidget(levelDialChannel3);
 
@@ -1030,8 +1037,8 @@ public:
 
         frameChannel4 = new QFrame(frame_2);
         frameChannel4->setObjectName(QStringLiteral("frameChannel4"));
-        sizePolicy4.setHeightForWidth(frameChannel4->sizePolicy().hasHeightForWidth());
-        frameChannel4->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel4->sizePolicy().hasHeightForWidth());
+        frameChannel4->setSizePolicy(sizePolicy5);
         frameChannel4->setMaximumSize(QSize(125, 16777215));
         QPalette palette6;
         palette6.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1061,8 +1068,8 @@ public:
 
         closeButtonChannel4 = new QPushButton(frameChannel4);
         closeButtonChannel4->setObjectName(QStringLiteral("closeButtonChannel4"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel4->sizePolicy().hasHeightForWidth());
-        closeButtonChannel4->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel4->sizePolicy().hasHeightForWidth());
+        closeButtonChannel4->setSizePolicy(sizePolicy6);
         closeButtonChannel4->setIcon(icon);
         closeButtonChannel4->setIconSize(QSize(12, 12));
         closeButtonChannel4->setFlat(true);
@@ -1074,8 +1081,8 @@ public:
 
         setActiveButtonChannel4 = new QPushButton(frameChannel4);
         setActiveButtonChannel4->setObjectName(QStringLiteral("setActiveButtonChannel4"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel4->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel4->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel4->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel4->setSizePolicy(sizePolicy7);
         setActiveButtonChannel4->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel4->setFont(font2);
         setActiveButtonChannel4->setAutoFillBackground(true);
@@ -1089,8 +1096,8 @@ public:
 
         inputComboBoxChannel4 = new QComboBox(frameChannel4);
         inputComboBoxChannel4->setObjectName(QStringLiteral("inputComboBoxChannel4"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel4->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel4->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel4->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel4->setSizePolicy(sizePolicy8);
         inputComboBoxChannel4->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel4->setFont(font2);
         inputComboBoxChannel4->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1104,8 +1111,8 @@ public:
         midiListChannel4 = new QListWidget(frameChannel4);
         new QListWidgetItem(midiListChannel4);
         midiListChannel4->setObjectName(QStringLiteral("midiListChannel4"));
-        sizePolicy4.setHeightForWidth(midiListChannel4->sizePolicy().hasHeightForWidth());
-        midiListChannel4->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel4->sizePolicy().hasHeightForWidth());
+        midiListChannel4->setSizePolicy(sizePolicy5);
         midiListChannel4->setMaximumSize(QSize(100, 16777215));
         midiListChannel4->setFont(font);
         midiListChannel4->setFrameShape(QFrame::Panel);
@@ -1115,8 +1122,8 @@ public:
 
         levelDialChannel4 = new QDial(frameChannel4);
         levelDialChannel4->setObjectName(QStringLiteral("levelDialChannel4"));
-        sizePolicy4.setHeightForWidth(levelDialChannel4->sizePolicy().hasHeightForWidth());
-        levelDialChannel4->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel4->sizePolicy().hasHeightForWidth());
+        levelDialChannel4->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_4->addWidget(levelDialChannel4);
 
@@ -1132,8 +1139,8 @@ public:
 
         frameChannel5 = new QFrame(frame_2);
         frameChannel5->setObjectName(QStringLiteral("frameChannel5"));
-        sizePolicy4.setHeightForWidth(frameChannel5->sizePolicy().hasHeightForWidth());
-        frameChannel5->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel5->sizePolicy().hasHeightForWidth());
+        frameChannel5->setSizePolicy(sizePolicy5);
         frameChannel5->setMaximumSize(QSize(125, 16777215));
         QPalette palette7;
         palette7.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1163,8 +1170,8 @@ public:
 
         closeButtonChannel5 = new QPushButton(frameChannel5);
         closeButtonChannel5->setObjectName(QStringLiteral("closeButtonChannel5"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel5->sizePolicy().hasHeightForWidth());
-        closeButtonChannel5->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel5->sizePolicy().hasHeightForWidth());
+        closeButtonChannel5->setSizePolicy(sizePolicy6);
         closeButtonChannel5->setIcon(icon);
         closeButtonChannel5->setIconSize(QSize(12, 12));
         closeButtonChannel5->setFlat(true);
@@ -1176,8 +1183,8 @@ public:
 
         setActiveButtonChannel5 = new QPushButton(frameChannel5);
         setActiveButtonChannel5->setObjectName(QStringLiteral("setActiveButtonChannel5"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel5->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel5->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel5->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel5->setSizePolicy(sizePolicy7);
         setActiveButtonChannel5->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel5->setFont(font2);
         setActiveButtonChannel5->setAutoFillBackground(true);
@@ -1191,8 +1198,8 @@ public:
 
         inputComboBoxChannel5 = new QComboBox(frameChannel5);
         inputComboBoxChannel5->setObjectName(QStringLiteral("inputComboBoxChannel5"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel5->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel5->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel5->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel5->setSizePolicy(sizePolicy8);
         inputComboBoxChannel5->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel5->setFont(font2);
         inputComboBoxChannel5->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1206,8 +1213,8 @@ public:
         midiListChannel5 = new QListWidget(frameChannel5);
         new QListWidgetItem(midiListChannel5);
         midiListChannel5->setObjectName(QStringLiteral("midiListChannel5"));
-        sizePolicy4.setHeightForWidth(midiListChannel5->sizePolicy().hasHeightForWidth());
-        midiListChannel5->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel5->sizePolicy().hasHeightForWidth());
+        midiListChannel5->setSizePolicy(sizePolicy5);
         midiListChannel5->setMaximumSize(QSize(100, 16777215));
         midiListChannel5->setFont(font);
         midiListChannel5->setFrameShape(QFrame::Panel);
@@ -1217,8 +1224,8 @@ public:
 
         levelDialChannel5 = new QDial(frameChannel5);
         levelDialChannel5->setObjectName(QStringLiteral("levelDialChannel5"));
-        sizePolicy4.setHeightForWidth(levelDialChannel5->sizePolicy().hasHeightForWidth());
-        levelDialChannel5->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel5->sizePolicy().hasHeightForWidth());
+        levelDialChannel5->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_5->addWidget(levelDialChannel5);
 
@@ -1234,8 +1241,8 @@ public:
 
         frameChannel6 = new QFrame(frame_2);
         frameChannel6->setObjectName(QStringLiteral("frameChannel6"));
-        sizePolicy4.setHeightForWidth(frameChannel6->sizePolicy().hasHeightForWidth());
-        frameChannel6->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel6->sizePolicy().hasHeightForWidth());
+        frameChannel6->setSizePolicy(sizePolicy5);
         frameChannel6->setMaximumSize(QSize(125, 16777215));
         QPalette palette8;
         palette8.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1265,8 +1272,8 @@ public:
 
         closeButtonChannel6 = new QPushButton(frameChannel6);
         closeButtonChannel6->setObjectName(QStringLiteral("closeButtonChannel6"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel6->sizePolicy().hasHeightForWidth());
-        closeButtonChannel6->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel6->sizePolicy().hasHeightForWidth());
+        closeButtonChannel6->setSizePolicy(sizePolicy6);
         closeButtonChannel6->setIcon(icon);
         closeButtonChannel6->setIconSize(QSize(12, 12));
         closeButtonChannel6->setFlat(true);
@@ -1278,8 +1285,8 @@ public:
 
         setActiveButtonChannel6 = new QPushButton(frameChannel6);
         setActiveButtonChannel6->setObjectName(QStringLiteral("setActiveButtonChannel6"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel6->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel6->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel6->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel6->setSizePolicy(sizePolicy7);
         setActiveButtonChannel6->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel6->setFont(font2);
         setActiveButtonChannel6->setAutoFillBackground(true);
@@ -1293,8 +1300,8 @@ public:
 
         inputComboBoxChannel6 = new QComboBox(frameChannel6);
         inputComboBoxChannel6->setObjectName(QStringLiteral("inputComboBoxChannel6"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel6->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel6->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel6->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel6->setSizePolicy(sizePolicy8);
         inputComboBoxChannel6->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel6->setFont(font2);
         inputComboBoxChannel6->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1308,8 +1315,8 @@ public:
         midiListChannel6 = new QListWidget(frameChannel6);
         new QListWidgetItem(midiListChannel6);
         midiListChannel6->setObjectName(QStringLiteral("midiListChannel6"));
-        sizePolicy4.setHeightForWidth(midiListChannel6->sizePolicy().hasHeightForWidth());
-        midiListChannel6->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel6->sizePolicy().hasHeightForWidth());
+        midiListChannel6->setSizePolicy(sizePolicy5);
         midiListChannel6->setMaximumSize(QSize(100, 16777215));
         midiListChannel6->setFont(font);
         midiListChannel6->setFrameShape(QFrame::Panel);
@@ -1319,8 +1326,8 @@ public:
 
         levelDialChannel6 = new QDial(frameChannel6);
         levelDialChannel6->setObjectName(QStringLiteral("levelDialChannel6"));
-        sizePolicy4.setHeightForWidth(levelDialChannel6->sizePolicy().hasHeightForWidth());
-        levelDialChannel6->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel6->sizePolicy().hasHeightForWidth());
+        levelDialChannel6->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_6->addWidget(levelDialChannel6);
 
@@ -1336,8 +1343,8 @@ public:
 
         frameChannel7 = new QFrame(frame_2);
         frameChannel7->setObjectName(QStringLiteral("frameChannel7"));
-        sizePolicy4.setHeightForWidth(frameChannel7->sizePolicy().hasHeightForWidth());
-        frameChannel7->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel7->sizePolicy().hasHeightForWidth());
+        frameChannel7->setSizePolicy(sizePolicy5);
         frameChannel7->setMaximumSize(QSize(125, 16777215));
         QPalette palette9;
         palette9.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1367,8 +1374,8 @@ public:
 
         closeButtonChannel7 = new QPushButton(frameChannel7);
         closeButtonChannel7->setObjectName(QStringLiteral("closeButtonChannel7"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel7->sizePolicy().hasHeightForWidth());
-        closeButtonChannel7->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel7->sizePolicy().hasHeightForWidth());
+        closeButtonChannel7->setSizePolicy(sizePolicy6);
         closeButtonChannel7->setIcon(icon);
         closeButtonChannel7->setIconSize(QSize(12, 12));
         closeButtonChannel7->setFlat(true);
@@ -1380,8 +1387,8 @@ public:
 
         setActiveButtonChannel7 = new QPushButton(frameChannel7);
         setActiveButtonChannel7->setObjectName(QStringLiteral("setActiveButtonChannel7"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel7->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel7->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel7->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel7->setSizePolicy(sizePolicy7);
         setActiveButtonChannel7->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel7->setFont(font2);
         setActiveButtonChannel7->setAutoFillBackground(true);
@@ -1395,8 +1402,8 @@ public:
 
         inputComboBoxChannel7 = new QComboBox(frameChannel7);
         inputComboBoxChannel7->setObjectName(QStringLiteral("inputComboBoxChannel7"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel7->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel7->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel7->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel7->setSizePolicy(sizePolicy8);
         inputComboBoxChannel7->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel7->setFont(font2);
         inputComboBoxChannel7->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1410,8 +1417,8 @@ public:
         midiListChannel7 = new QListWidget(frameChannel7);
         new QListWidgetItem(midiListChannel7);
         midiListChannel7->setObjectName(QStringLiteral("midiListChannel7"));
-        sizePolicy4.setHeightForWidth(midiListChannel7->sizePolicy().hasHeightForWidth());
-        midiListChannel7->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel7->sizePolicy().hasHeightForWidth());
+        midiListChannel7->setSizePolicy(sizePolicy5);
         midiListChannel7->setMaximumSize(QSize(100, 16777215));
         midiListChannel7->setFont(font);
         midiListChannel7->setFrameShape(QFrame::Panel);
@@ -1421,8 +1428,8 @@ public:
 
         levelDialChannel7 = new QDial(frameChannel7);
         levelDialChannel7->setObjectName(QStringLiteral("levelDialChannel7"));
-        sizePolicy4.setHeightForWidth(levelDialChannel7->sizePolicy().hasHeightForWidth());
-        levelDialChannel7->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel7->sizePolicy().hasHeightForWidth());
+        levelDialChannel7->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_7->addWidget(levelDialChannel7);
 
@@ -1438,8 +1445,8 @@ public:
 
         frameChannel8 = new QFrame(frame_2);
         frameChannel8->setObjectName(QStringLiteral("frameChannel8"));
-        sizePolicy4.setHeightForWidth(frameChannel8->sizePolicy().hasHeightForWidth());
-        frameChannel8->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel8->sizePolicy().hasHeightForWidth());
+        frameChannel8->setSizePolicy(sizePolicy5);
         frameChannel8->setMaximumSize(QSize(125, 16777215));
         QPalette palette10;
         palette10.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1469,8 +1476,8 @@ public:
 
         closeButtonChannel8 = new QPushButton(frameChannel8);
         closeButtonChannel8->setObjectName(QStringLiteral("closeButtonChannel8"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel8->sizePolicy().hasHeightForWidth());
-        closeButtonChannel8->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel8->sizePolicy().hasHeightForWidth());
+        closeButtonChannel8->setSizePolicy(sizePolicy6);
         closeButtonChannel8->setIcon(icon);
         closeButtonChannel8->setIconSize(QSize(12, 12));
         closeButtonChannel8->setFlat(true);
@@ -1482,8 +1489,8 @@ public:
 
         setActiveButtonChannel8 = new QPushButton(frameChannel8);
         setActiveButtonChannel8->setObjectName(QStringLiteral("setActiveButtonChannel8"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel8->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel8->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel8->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel8->setSizePolicy(sizePolicy7);
         setActiveButtonChannel8->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel8->setFont(font2);
         setActiveButtonChannel8->setAutoFillBackground(true);
@@ -1497,8 +1504,8 @@ public:
 
         inputComboBoxChannel8 = new QComboBox(frameChannel8);
         inputComboBoxChannel8->setObjectName(QStringLiteral("inputComboBoxChannel8"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel8->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel8->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel8->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel8->setSizePolicy(sizePolicy8);
         inputComboBoxChannel8->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel8->setFont(font2);
         inputComboBoxChannel8->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1512,8 +1519,8 @@ public:
         midiListChannel8 = new QListWidget(frameChannel8);
         new QListWidgetItem(midiListChannel8);
         midiListChannel8->setObjectName(QStringLiteral("midiListChannel8"));
-        sizePolicy4.setHeightForWidth(midiListChannel8->sizePolicy().hasHeightForWidth());
-        midiListChannel8->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel8->sizePolicy().hasHeightForWidth());
+        midiListChannel8->setSizePolicy(sizePolicy5);
         midiListChannel8->setMaximumSize(QSize(100, 16777215));
         midiListChannel8->setFont(font);
         midiListChannel8->setFrameShape(QFrame::Panel);
@@ -1523,8 +1530,8 @@ public:
 
         levelDialChannel8 = new QDial(frameChannel8);
         levelDialChannel8->setObjectName(QStringLiteral("levelDialChannel8"));
-        sizePolicy4.setHeightForWidth(levelDialChannel8->sizePolicy().hasHeightForWidth());
-        levelDialChannel8->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel8->sizePolicy().hasHeightForWidth());
+        levelDialChannel8->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_8->addWidget(levelDialChannel8);
 
@@ -1540,8 +1547,8 @@ public:
 
         frameChannel9 = new QFrame(frame_2);
         frameChannel9->setObjectName(QStringLiteral("frameChannel9"));
-        sizePolicy4.setHeightForWidth(frameChannel9->sizePolicy().hasHeightForWidth());
-        frameChannel9->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel9->sizePolicy().hasHeightForWidth());
+        frameChannel9->setSizePolicy(sizePolicy5);
         frameChannel9->setMaximumSize(QSize(125, 16777215));
         QPalette palette11;
         palette11.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1571,8 +1578,8 @@ public:
 
         closeButtonChannel9 = new QPushButton(frameChannel9);
         closeButtonChannel9->setObjectName(QStringLiteral("closeButtonChannel9"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel9->sizePolicy().hasHeightForWidth());
-        closeButtonChannel9->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel9->sizePolicy().hasHeightForWidth());
+        closeButtonChannel9->setSizePolicy(sizePolicy6);
         closeButtonChannel9->setIcon(icon);
         closeButtonChannel9->setIconSize(QSize(12, 12));
         closeButtonChannel9->setFlat(true);
@@ -1584,8 +1591,8 @@ public:
 
         setActiveButtonChannel9 = new QPushButton(frameChannel9);
         setActiveButtonChannel9->setObjectName(QStringLiteral("setActiveButtonChannel9"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel9->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel9->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel9->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel9->setSizePolicy(sizePolicy7);
         setActiveButtonChannel9->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel9->setFont(font2);
         setActiveButtonChannel9->setAutoFillBackground(true);
@@ -1599,8 +1606,8 @@ public:
 
         inputComboBoxChannel9 = new QComboBox(frameChannel9);
         inputComboBoxChannel9->setObjectName(QStringLiteral("inputComboBoxChannel9"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel9->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel9->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel9->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel9->setSizePolicy(sizePolicy8);
         inputComboBoxChannel9->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel9->setFont(font2);
         inputComboBoxChannel9->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1614,8 +1621,8 @@ public:
         midiListChannel9 = new QListWidget(frameChannel9);
         new QListWidgetItem(midiListChannel9);
         midiListChannel9->setObjectName(QStringLiteral("midiListChannel9"));
-        sizePolicy4.setHeightForWidth(midiListChannel9->sizePolicy().hasHeightForWidth());
-        midiListChannel9->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel9->sizePolicy().hasHeightForWidth());
+        midiListChannel9->setSizePolicy(sizePolicy5);
         midiListChannel9->setMaximumSize(QSize(100, 16777215));
         midiListChannel9->setFont(font);
         midiListChannel9->setFrameShape(QFrame::Panel);
@@ -1625,8 +1632,8 @@ public:
 
         levelDialChannel9 = new QDial(frameChannel9);
         levelDialChannel9->setObjectName(QStringLiteral("levelDialChannel9"));
-        sizePolicy4.setHeightForWidth(levelDialChannel9->sizePolicy().hasHeightForWidth());
-        levelDialChannel9->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel9->sizePolicy().hasHeightForWidth());
+        levelDialChannel9->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_9->addWidget(levelDialChannel9);
 
@@ -1642,8 +1649,8 @@ public:
 
         frameChannel10 = new QFrame(frame_2);
         frameChannel10->setObjectName(QStringLiteral("frameChannel10"));
-        sizePolicy4.setHeightForWidth(frameChannel10->sizePolicy().hasHeightForWidth());
-        frameChannel10->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(frameChannel10->sizePolicy().hasHeightForWidth());
+        frameChannel10->setSizePolicy(sizePolicy5);
         frameChannel10->setMaximumSize(QSize(125, 16777215));
         QPalette palette12;
         palette12.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1673,8 +1680,8 @@ public:
 
         closeButtonChannel10 = new QPushButton(frameChannel10);
         closeButtonChannel10->setObjectName(QStringLiteral("closeButtonChannel10"));
-        sizePolicy5.setHeightForWidth(closeButtonChannel10->sizePolicy().hasHeightForWidth());
-        closeButtonChannel10->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(closeButtonChannel10->sizePolicy().hasHeightForWidth());
+        closeButtonChannel10->setSizePolicy(sizePolicy6);
         closeButtonChannel10->setIcon(icon);
         closeButtonChannel10->setIconSize(QSize(12, 12));
         closeButtonChannel10->setFlat(true);
@@ -1686,8 +1693,8 @@ public:
 
         setActiveButtonChannel10 = new QPushButton(frameChannel10);
         setActiveButtonChannel10->setObjectName(QStringLiteral("setActiveButtonChannel10"));
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel10->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel10->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(setActiveButtonChannel10->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel10->setSizePolicy(sizePolicy7);
         setActiveButtonChannel10->setMinimumSize(QSize(0, 17));
         setActiveButtonChannel10->setFont(font2);
         setActiveButtonChannel10->setAutoFillBackground(true);
@@ -1701,8 +1708,8 @@ public:
 
         inputComboBoxChannel10 = new QComboBox(frameChannel10);
         inputComboBoxChannel10->setObjectName(QStringLiteral("inputComboBoxChannel10"));
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel10->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel10->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(inputComboBoxChannel10->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel10->setSizePolicy(sizePolicy8);
         inputComboBoxChannel10->setMinimumSize(QSize(0, 17));
         inputComboBoxChannel10->setFont(font2);
         inputComboBoxChannel10->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -1716,8 +1723,8 @@ public:
         midiListChannel10 = new QListWidget(frameChannel10);
         new QListWidgetItem(midiListChannel10);
         midiListChannel10->setObjectName(QStringLiteral("midiListChannel10"));
-        sizePolicy4.setHeightForWidth(midiListChannel10->sizePolicy().hasHeightForWidth());
-        midiListChannel10->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(midiListChannel10->sizePolicy().hasHeightForWidth());
+        midiListChannel10->setSizePolicy(sizePolicy5);
         midiListChannel10->setMaximumSize(QSize(100, 16777215));
         midiListChannel10->setFont(font);
         midiListChannel10->setFrameShape(QFrame::Panel);
@@ -1727,8 +1734,8 @@ public:
 
         levelDialChannel10 = new QDial(frameChannel10);
         levelDialChannel10->setObjectName(QStringLiteral("levelDialChannel10"));
-        sizePolicy4.setHeightForWidth(levelDialChannel10->sizePolicy().hasHeightForWidth());
-        levelDialChannel10->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(levelDialChannel10->sizePolicy().hasHeightForWidth());
+        levelDialChannel10->setSizePolicy(sizePolicy5);
 
         verticalLayoutFrameChannel1_10->addWidget(levelDialChannel10);
 
@@ -1741,6 +1748,10 @@ public:
 
 
         horizontalLayout_13->addWidget(frameChannel10);
+
+        horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_13->addItem(horizontalSpacer_12);
 
 
         channelsContainerLayout->addWidget(frame_2);
@@ -1782,11 +1793,8 @@ public:
         instrumentLayout->setObjectName(QStringLiteral("instrumentLayout"));
         adsrInstrumentFrame = new QFrame(instrumentFrameFrame);
         adsrInstrumentFrame->setObjectName(QStringLiteral("adsrInstrumentFrame"));
-        QSizePolicy sizePolicy8(QSizePolicy::Maximum, QSizePolicy::Preferred);
-        sizePolicy8.setHorizontalStretch(0);
-        sizePolicy8.setVerticalStretch(0);
-        sizePolicy8.setHeightForWidth(adsrInstrumentFrame->sizePolicy().hasHeightForWidth());
-        adsrInstrumentFrame->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(adsrInstrumentFrame->sizePolicy().hasHeightForWidth());
+        adsrInstrumentFrame->setSizePolicy(sizePolicy);
         adsrInstrumentFrame->setMinimumSize(QSize(10, 0));
         QPalette palette14;
         palette14.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -1894,8 +1902,8 @@ public:
 
         waveform1ComboBoxADSR = new QComboBox(oscillator1Frame);
         waveform1ComboBoxADSR->setObjectName(QStringLiteral("waveform1ComboBoxADSR"));
-        sizePolicy1.setHeightForWidth(waveform1ComboBoxADSR->sizePolicy().hasHeightForWidth());
-        waveform1ComboBoxADSR->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(waveform1ComboBoxADSR->sizePolicy().hasHeightForWidth());
+        waveform1ComboBoxADSR->setSizePolicy(sizePolicy2);
         waveform1ComboBoxADSR->setMaximumSize(QSize(16777215, 15));
         waveform1ComboBoxADSR->setAutoFillBackground(true);
         waveform1ComboBoxADSR->setFrame(false);
@@ -1910,16 +1918,16 @@ public:
         oscillator1LevelHLayout->setObjectName(QStringLiteral("oscillator1LevelHLayout"));
         level1Label = new QLabel(oscillator1Frame);
         level1Label->setObjectName(QStringLiteral("level1Label"));
-        sizePolicy1.setHeightForWidth(level1Label->sizePolicy().hasHeightForWidth());
-        level1Label->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(level1Label->sizePolicy().hasHeightForWidth());
+        level1Label->setSizePolicy(sizePolicy2);
         level1Label->setMaximumSize(QSize(16777215, 11));
 
         oscillator1LevelHLayout->addWidget(level1Label);
 
         levelWF1DialADSR = new QDial(oscillator1Frame);
         levelWF1DialADSR->setObjectName(QStringLiteral("levelWF1DialADSR"));
-        sizePolicy1.setHeightForWidth(levelWF1DialADSR->sizePolicy().hasHeightForWidth());
-        levelWF1DialADSR->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(levelWF1DialADSR->sizePolicy().hasHeightForWidth());
+        levelWF1DialADSR->setSizePolicy(sizePolicy2);
         levelWF1DialADSR->setMaximumSize(QSize(57, 16777215));
         levelWF1DialADSR->setMaximum(100);
         levelWF1DialADSR->setValue(1);
@@ -1972,8 +1980,8 @@ public:
 
         waveform2ComboBoxADSR = new QComboBox(oscillator2Frame);
         waveform2ComboBoxADSR->setObjectName(QStringLiteral("waveform2ComboBoxADSR"));
-        sizePolicy1.setHeightForWidth(waveform2ComboBoxADSR->sizePolicy().hasHeightForWidth());
-        waveform2ComboBoxADSR->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(waveform2ComboBoxADSR->sizePolicy().hasHeightForWidth());
+        waveform2ComboBoxADSR->setSizePolicy(sizePolicy2);
         waveform2ComboBoxADSR->setMaximumSize(QSize(16777215, 15));
         waveform2ComboBoxADSR->setAutoFillBackground(true);
         waveform2ComboBoxADSR->setFrame(false);
@@ -1988,16 +1996,16 @@ public:
         oscillator2LevelHLayout->setObjectName(QStringLiteral("oscillator2LevelHLayout"));
         level2Label = new QLabel(oscillator2Frame);
         level2Label->setObjectName(QStringLiteral("level2Label"));
-        sizePolicy1.setHeightForWidth(level2Label->sizePolicy().hasHeightForWidth());
-        level2Label->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(level2Label->sizePolicy().hasHeightForWidth());
+        level2Label->setSizePolicy(sizePolicy2);
         level2Label->setMaximumSize(QSize(16777215, 11));
 
         oscillator2LevelHLayout->addWidget(level2Label);
 
         levelWF2DialADSR = new QDial(oscillator2Frame);
         levelWF2DialADSR->setObjectName(QStringLiteral("levelWF2DialADSR"));
-        sizePolicy1.setHeightForWidth(levelWF2DialADSR->sizePolicy().hasHeightForWidth());
-        levelWF2DialADSR->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(levelWF2DialADSR->sizePolicy().hasHeightForWidth());
+        levelWF2DialADSR->setSizePolicy(sizePolicy2);
         levelWF2DialADSR->setMaximumSize(QSize(57, 16777215));
         levelWF2DialADSR->setMaximum(100);
         levelWF2DialADSR->setWrapping(false);
@@ -2024,11 +2032,8 @@ public:
 
         envelopeParamsFrame = new QFrame(adsrInstrumentFrame);
         envelopeParamsFrame->setObjectName(QStringLiteral("envelopeParamsFrame"));
-        QSizePolicy sizePolicy11(QSizePolicy::Maximum, QSizePolicy::Expanding);
-        sizePolicy11.setHorizontalStretch(0);
-        sizePolicy11.setVerticalStretch(0);
-        sizePolicy11.setHeightForWidth(envelopeParamsFrame->sizePolicy().hasHeightForWidth());
-        envelopeParamsFrame->setSizePolicy(sizePolicy11);
+        sizePolicy1.setHeightForWidth(envelopeParamsFrame->sizePolicy().hasHeightForWidth());
+        envelopeParamsFrame->setSizePolicy(sizePolicy1);
         envelopeParamsFrame->setFrameShape(QFrame::Panel);
         envelopeParamsFrame->setFrameShadow(QFrame::Sunken);
         envelopeParamsFrame->setLineWidth(2);
@@ -2057,20 +2062,21 @@ public:
         attackVLayout->setObjectName(QStringLiteral("attackVLayout"));
         attackDialADSR = new QDial(envelopeParamsFrame);
         attackDialADSR->setObjectName(QStringLiteral("attackDialADSR"));
-        sizePolicy8.setHeightForWidth(attackDialADSR->sizePolicy().hasHeightForWidth());
-        attackDialADSR->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(attackDialADSR->sizePolicy().hasHeightForWidth());
+        attackDialADSR->setSizePolicy(sizePolicy);
         attackDialADSR->setMaximumSize(QSize(60, 175885));
-        attackDialADSR->setMinimum(5);
-        attackDialADSR->setMaximum(15000);
+        attackDialADSR->setMinimum(50);
+        attackDialADSR->setMaximum(5000);
         attackDialADSR->setSingleStep(1);
+        attackDialADSR->setNotchTarget(20.7);
         attackDialADSR->setNotchesVisible(true);
 
         attackVLayout->addWidget(attackDialADSR);
 
         attackLabel = new QLabel(envelopeParamsFrame);
         attackLabel->setObjectName(QStringLiteral("attackLabel"));
-        sizePolicy8.setHeightForWidth(attackLabel->sizePolicy().hasHeightForWidth());
-        attackLabel->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(attackLabel->sizePolicy().hasHeightForWidth());
+        attackLabel->setSizePolicy(sizePolicy);
 
         attackVLayout->addWidget(attackLabel, 0, Qt::AlignHCenter);
 
@@ -2082,19 +2088,20 @@ public:
         decayVLayout->setObjectName(QStringLiteral("decayVLayout"));
         decayDialADSR = new QDial(envelopeParamsFrame);
         decayDialADSR->setObjectName(QStringLiteral("decayDialADSR"));
-        sizePolicy8.setHeightForWidth(decayDialADSR->sizePolicy().hasHeightForWidth());
-        decayDialADSR->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(decayDialADSR->sizePolicy().hasHeightForWidth());
+        decayDialADSR->setSizePolicy(sizePolicy);
         decayDialADSR->setMaximumSize(QSize(60, 16777215));
-        decayDialADSR->setMinimum(5);
-        decayDialADSR->setMaximum(15000);
+        decayDialADSR->setMinimum(50);
+        decayDialADSR->setMaximum(5000);
+        decayDialADSR->setNotchTarget(20.7);
         decayDialADSR->setNotchesVisible(true);
 
         decayVLayout->addWidget(decayDialADSR);
 
         decayLabel = new QLabel(envelopeParamsFrame);
         decayLabel->setObjectName(QStringLiteral("decayLabel"));
-        sizePolicy8.setHeightForWidth(decayLabel->sizePolicy().hasHeightForWidth());
-        decayLabel->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(decayLabel->sizePolicy().hasHeightForWidth());
+        decayLabel->setSizePolicy(sizePolicy);
 
         decayVLayout->addWidget(decayLabel, 0, Qt::AlignHCenter);
 
@@ -2106,8 +2113,8 @@ public:
         sustainVLayout->setObjectName(QStringLiteral("sustainVLayout"));
         sustainLevelDialADSR = new QDial(envelopeParamsFrame);
         sustainLevelDialADSR->setObjectName(QStringLiteral("sustainLevelDialADSR"));
-        sizePolicy8.setHeightForWidth(sustainLevelDialADSR->sizePolicy().hasHeightForWidth());
-        sustainLevelDialADSR->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(sustainLevelDialADSR->sizePolicy().hasHeightForWidth());
+        sustainLevelDialADSR->setSizePolicy(sizePolicy);
         sustainLevelDialADSR->setMaximumSize(QSize(60, 16777215));
         sustainLevelDialADSR->setNotchesVisible(true);
 
@@ -2115,8 +2122,8 @@ public:
 
         sustainLevelLabel = new QLabel(envelopeParamsFrame);
         sustainLevelLabel->setObjectName(QStringLiteral("sustainLevelLabel"));
-        sizePolicy8.setHeightForWidth(sustainLevelLabel->sizePolicy().hasHeightForWidth());
-        sustainLevelLabel->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(sustainLevelLabel->sizePolicy().hasHeightForWidth());
+        sustainLevelLabel->setSizePolicy(sizePolicy);
 
         sustainVLayout->addWidget(sustainLevelLabel, 0, Qt::AlignHCenter);
 
@@ -2128,18 +2135,20 @@ public:
         releaseVLayout_5->setObjectName(QStringLiteral("releaseVLayout_5"));
         sustainRateDialADSR = new QDial(envelopeParamsFrame);
         sustainRateDialADSR->setObjectName(QStringLiteral("sustainRateDialADSR"));
-        sizePolicy8.setHeightForWidth(sustainRateDialADSR->sizePolicy().hasHeightForWidth());
-        sustainRateDialADSR->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(sustainRateDialADSR->sizePolicy().hasHeightForWidth());
+        sustainRateDialADSR->setSizePolicy(sizePolicy);
         sustainRateDialADSR->setMaximumSize(QSize(60, 16777215));
-        sustainRateDialADSR->setMaximum(1000);
+        sustainRateDialADSR->setMinimum(50);
+        sustainRateDialADSR->setMaximum(999);
+        sustainRateDialADSR->setNotchTarget(26.7);
         sustainRateDialADSR->setNotchesVisible(true);
 
         releaseVLayout_5->addWidget(sustainRateDialADSR);
 
         sustainRateLabel = new QLabel(envelopeParamsFrame);
         sustainRateLabel->setObjectName(QStringLiteral("sustainRateLabel"));
-        sizePolicy8.setHeightForWidth(sustainRateLabel->sizePolicy().hasHeightForWidth());
-        sustainRateLabel->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(sustainRateLabel->sizePolicy().hasHeightForWidth());
+        sustainRateLabel->setSizePolicy(sizePolicy);
 
         releaseVLayout_5->addWidget(sustainRateLabel, 0, Qt::AlignHCenter);
 
@@ -2151,19 +2160,20 @@ public:
         releaseVLayout->setObjectName(QStringLiteral("releaseVLayout"));
         releaseDialADSR = new QDial(envelopeParamsFrame);
         releaseDialADSR->setObjectName(QStringLiteral("releaseDialADSR"));
-        sizePolicy8.setHeightForWidth(releaseDialADSR->sizePolicy().hasHeightForWidth());
-        releaseDialADSR->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(releaseDialADSR->sizePolicy().hasHeightForWidth());
+        releaseDialADSR->setSizePolicy(sizePolicy);
         releaseDialADSR->setMaximumSize(QSize(60, 16777215));
-        releaseDialADSR->setMinimum(1);
-        releaseDialADSR->setMaximum(15000);
+        releaseDialADSR->setMinimum(50);
+        releaseDialADSR->setMaximum(5000);
+        releaseDialADSR->setNotchTarget(23.7);
         releaseDialADSR->setNotchesVisible(true);
 
         releaseVLayout->addWidget(releaseDialADSR);
 
         releaseLabel = new QLabel(envelopeParamsFrame);
         releaseLabel->setObjectName(QStringLiteral("releaseLabel"));
-        sizePolicy8.setHeightForWidth(releaseLabel->sizePolicy().hasHeightForWidth());
-        releaseLabel->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(releaseLabel->sizePolicy().hasHeightForWidth());
+        releaseLabel->setSizePolicy(sizePolicy);
 
         releaseVLayout->addWidget(releaseLabel, 0, Qt::AlignHCenter);
 
@@ -2188,8 +2198,8 @@ public:
 
         additiveInstrumentFrame = new QFrame(instrumentFrameFrame);
         additiveInstrumentFrame->setObjectName(QStringLiteral("additiveInstrumentFrame"));
-        sizePolicy8.setHeightForWidth(additiveInstrumentFrame->sizePolicy().hasHeightForWidth());
-        additiveInstrumentFrame->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(additiveInstrumentFrame->sizePolicy().hasHeightForWidth());
+        additiveInstrumentFrame->setSizePolicy(sizePolicy);
         additiveInstrumentFrame->setMinimumSize(QSize(10, 0));
         QPalette palette15;
         palette15.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -2254,11 +2264,11 @@ public:
         framesVLayout_4->setObjectName(QStringLiteral("framesVLayout_4"));
         oscillator2Frame_4 = new QFrame(additiveInstrumentFrame);
         oscillator2Frame_4->setObjectName(QStringLiteral("oscillator2Frame_4"));
-        QSizePolicy sizePolicy12(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy12.setHorizontalStretch(0);
-        sizePolicy12.setVerticalStretch(0);
-        sizePolicy12.setHeightForWidth(oscillator2Frame_4->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_4->setSizePolicy(sizePolicy12);
+        QSizePolicy sizePolicy11(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy11.setHorizontalStretch(0);
+        sizePolicy11.setVerticalStretch(0);
+        sizePolicy11.setHeightForWidth(oscillator2Frame_4->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_4->setSizePolicy(sizePolicy11);
         oscillator2Frame_4->setFrameShape(QFrame::Panel);
         oscillator2Frame_4->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_4->setLineWidth(2);
@@ -2276,11 +2286,11 @@ public:
 
         slidersFrame = new QFrame(oscillator2Frame_4);
         slidersFrame->setObjectName(QStringLiteral("slidersFrame"));
-        QSizePolicy sizePolicy13(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy13.setHorizontalStretch(0);
-        sizePolicy13.setVerticalStretch(0);
-        sizePolicy13.setHeightForWidth(slidersFrame->sizePolicy().hasHeightForWidth());
-        slidersFrame->setSizePolicy(sizePolicy13);
+        QSizePolicy sizePolicy12(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy12.setHorizontalStretch(0);
+        sizePolicy12.setVerticalStretch(0);
+        sizePolicy12.setHeightForWidth(slidersFrame->sizePolicy().hasHeightForWidth());
+        slidersFrame->setSizePolicy(sizePolicy12);
         slidersFrame->setFrameShape(QFrame::StyledPanel);
         slidersFrame->setFrameShadow(QFrame::Raised);
         horizontalLayout_2 = new QHBoxLayout(slidersFrame);
@@ -2525,11 +2535,11 @@ public:
 
         label_2 = new QLabel(slidersFrame);
         label_2->setObjectName(QStringLiteral("label_2"));
-        QSizePolicy sizePolicy14(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy14.setHorizontalStretch(0);
-        sizePolicy14.setVerticalStretch(0);
-        sizePolicy14.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy14);
+        QSizePolicy sizePolicy13(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy13.setHorizontalStretch(0);
+        sizePolicy13.setVerticalStretch(0);
+        sizePolicy13.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy13);
 
         verticalLayout_3->addWidget(label_2, 0, Qt::AlignHCenter);
 
@@ -2557,8 +2567,8 @@ public:
 
         samplingInstrumentFrame = new QFrame(instrumentFrameFrame);
         samplingInstrumentFrame->setObjectName(QStringLiteral("samplingInstrumentFrame"));
-        sizePolicy8.setHeightForWidth(samplingInstrumentFrame->sizePolicy().hasHeightForWidth());
-        samplingInstrumentFrame->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(samplingInstrumentFrame->sizePolicy().hasHeightForWidth());
+        samplingInstrumentFrame->setSizePolicy(sizePolicy);
         samplingInstrumentFrame->setMinimumSize(QSize(10, 0));
         QPalette palette16;
         palette16.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -2630,8 +2640,8 @@ public:
 
         envelopeParamsFrame_3 = new QFrame(samplingInstrumentFrame);
         envelopeParamsFrame_3->setObjectName(QStringLiteral("envelopeParamsFrame_3"));
-        sizePolicy2.setHeightForWidth(envelopeParamsFrame_3->sizePolicy().hasHeightForWidth());
-        envelopeParamsFrame_3->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(envelopeParamsFrame_3->sizePolicy().hasHeightForWidth());
+        envelopeParamsFrame_3->setSizePolicy(sizePolicy3);
         envelopeParamsFrame_3->setFrameShape(QFrame::Panel);
         envelopeParamsFrame_3->setFrameShadow(QFrame::Sunken);
         envelopeParamsFrame_3->setLineWidth(2);
@@ -2659,8 +2669,8 @@ public:
 
         samplingLoopStartDial = new QDial(envelopeParamsFrame_3);
         samplingLoopStartDial->setObjectName(QStringLiteral("samplingLoopStartDial"));
-        sizePolicy8.setHeightForWidth(samplingLoopStartDial->sizePolicy().hasHeightForWidth());
-        samplingLoopStartDial->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(samplingLoopStartDial->sizePolicy().hasHeightForWidth());
+        samplingLoopStartDial->setSizePolicy(sizePolicy);
         samplingLoopStartDial->setMaximumSize(QSize(60, 16777215));
         samplingLoopStartDial->setMaximum(99);
         samplingLoopStartDial->setNotchesVisible(true);
@@ -2669,8 +2679,8 @@ public:
 
         sustainLabel_3 = new QLabel(envelopeParamsFrame_3);
         sustainLabel_3->setObjectName(QStringLiteral("sustainLabel_3"));
-        sizePolicy8.setHeightForWidth(sustainLabel_3->sizePolicy().hasHeightForWidth());
-        sustainLabel_3->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(sustainLabel_3->sizePolicy().hasHeightForWidth());
+        sustainLabel_3->setSizePolicy(sizePolicy);
 
         sustainVLayout_3->addWidget(sustainLabel_3, 0, Qt::AlignHCenter);
 
@@ -2690,8 +2700,8 @@ public:
 
         samplingLoopEndDial = new QDial(envelopeParamsFrame_3);
         samplingLoopEndDial->setObjectName(QStringLiteral("samplingLoopEndDial"));
-        sizePolicy8.setHeightForWidth(samplingLoopEndDial->sizePolicy().hasHeightForWidth());
-        samplingLoopEndDial->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(samplingLoopEndDial->sizePolicy().hasHeightForWidth());
+        samplingLoopEndDial->setSizePolicy(sizePolicy);
         samplingLoopEndDial->setMaximumSize(QSize(60, 16777215));
         samplingLoopEndDial->setMinimum(1);
         samplingLoopEndDial->setMaximum(100);
@@ -2701,8 +2711,8 @@ public:
 
         releaseLabel_3 = new QLabel(envelopeParamsFrame_3);
         releaseLabel_3->setObjectName(QStringLiteral("releaseLabel_3"));
-        sizePolicy8.setHeightForWidth(releaseLabel_3->sizePolicy().hasHeightForWidth());
-        releaseLabel_3->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(releaseLabel_3->sizePolicy().hasHeightForWidth());
+        releaseLabel_3->setSizePolicy(sizePolicy);
 
         releaseVLayout_3->addWidget(releaseLabel_3, 0, Qt::AlignHCenter);
 
@@ -2727,8 +2737,8 @@ public:
 
         karplusInstrumentFrame = new QFrame(instrumentFrameFrame);
         karplusInstrumentFrame->setObjectName(QStringLiteral("karplusInstrumentFrame"));
-        sizePolicy8.setHeightForWidth(karplusInstrumentFrame->sizePolicy().hasHeightForWidth());
-        karplusInstrumentFrame->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(karplusInstrumentFrame->sizePolicy().hasHeightForWidth());
+        karplusInstrumentFrame->setSizePolicy(sizePolicy);
         karplusInstrumentFrame->setMinimumSize(QSize(10, 0));
         QPalette palette17;
         palette17.setBrush(QPalette::Active, QPalette::Base, brush3);
@@ -2793,8 +2803,8 @@ public:
         framesVLayout_2->setObjectName(QStringLiteral("framesVLayout_2"));
         envelopeParamsFrame_2 = new QFrame(karplusInstrumentFrame);
         envelopeParamsFrame_2->setObjectName(QStringLiteral("envelopeParamsFrame_2"));
-        sizePolicy2.setHeightForWidth(envelopeParamsFrame_2->sizePolicy().hasHeightForWidth());
-        envelopeParamsFrame_2->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(envelopeParamsFrame_2->sizePolicy().hasHeightForWidth());
+        envelopeParamsFrame_2->setSizePolicy(sizePolicy3);
         envelopeParamsFrame_2->setFrameShape(QFrame::Panel);
         envelopeParamsFrame_2->setFrameShadow(QFrame::Sunken);
         envelopeParamsFrame_2->setLineWidth(2);
@@ -2826,8 +2836,8 @@ public:
 
         decayLabel_2 = new QLabel(envelopeParamsFrame_2);
         decayLabel_2->setObjectName(QStringLiteral("decayLabel_2"));
-        sizePolicy8.setHeightForWidth(decayLabel_2->sizePolicy().hasHeightForWidth());
-        decayLabel_2->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(decayLabel_2->sizePolicy().hasHeightForWidth());
+        decayLabel_2->setSizePolicy(sizePolicy);
 
         decayVLayout_2->addWidget(decayLabel_2, 0, Qt::AlignHCenter);
 
@@ -2853,8 +2863,8 @@ public:
 
         releaseLabel_2 = new QLabel(envelopeParamsFrame_2);
         releaseLabel_2->setObjectName(QStringLiteral("releaseLabel_2"));
-        sizePolicy8.setHeightForWidth(releaseLabel_2->sizePolicy().hasHeightForWidth());
-        releaseLabel_2->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(releaseLabel_2->sizePolicy().hasHeightForWidth());
+        releaseLabel_2->setSizePolicy(sizePolicy);
 
         releaseVLayout_2->addWidget(releaseLabel_2, 0, Qt::AlignHCenter);
 
@@ -2880,8 +2890,8 @@ public:
 
         sustainLabel_2 = new QLabel(envelopeParamsFrame_2);
         sustainLabel_2->setObjectName(QStringLiteral("sustainLabel_2"));
-        sizePolicy8.setHeightForWidth(sustainLabel_2->sizePolicy().hasHeightForWidth());
-        sustainLabel_2->setSizePolicy(sizePolicy8);
+        sizePolicy.setHeightForWidth(sustainLabel_2->sizePolicy().hasHeightForWidth());
+        sustainLabel_2->setSizePolicy(sizePolicy);
 
         sustainVLayout_2->addWidget(sustainLabel_2, 0, Qt::AlignHCenter);
 
@@ -2916,8 +2926,8 @@ public:
 
         effectsScrollArea = new QScrollArea(centralWidget);
         effectsScrollArea->setObjectName(QStringLiteral("effectsScrollArea"));
-        sizePolicy2.setHeightForWidth(effectsScrollArea->sizePolicy().hasHeightForWidth());
-        effectsScrollArea->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(effectsScrollArea->sizePolicy().hasHeightForWidth());
+        effectsScrollArea->setSizePolicy(sizePolicy3);
         effectsScrollArea->setMinimumSize(QSize(0, 180));
         QPalette palette18;
         palette18.setBrush(QPalette::Active, QPalette::Mid, brush7);
@@ -3036,11 +3046,11 @@ public:
 
         oscillator2Frame_6 = new QFrame(eq8Frame);
         oscillator2Frame_6->setObjectName(QStringLiteral("oscillator2Frame_6"));
-        QSizePolicy sizePolicy15(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy15.setHorizontalStretch(0);
-        sizePolicy15.setVerticalStretch(0);
-        sizePolicy15.setHeightForWidth(oscillator2Frame_6->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_6->setSizePolicy(sizePolicy15);
+        QSizePolicy sizePolicy14(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy14.setHorizontalStretch(0);
+        sizePolicy14.setVerticalStretch(0);
+        sizePolicy14.setHeightForWidth(oscillator2Frame_6->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_6->setSizePolicy(sizePolicy14);
         oscillator2Frame_6->setFrameShape(QFrame::Panel);
         oscillator2Frame_6->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_6->setLineWidth(2);
@@ -3058,8 +3068,8 @@ public:
 
         slidersFrame_3 = new QFrame(oscillator2Frame_6);
         slidersFrame_3->setObjectName(QStringLiteral("slidersFrame_3"));
-        sizePolicy13.setHeightForWidth(slidersFrame_3->sizePolicy().hasHeightForWidth());
-        slidersFrame_3->setSizePolicy(sizePolicy13);
+        sizePolicy12.setHeightForWidth(slidersFrame_3->sizePolicy().hasHeightForWidth());
+        slidersFrame_3->setSizePolicy(sizePolicy12);
         slidersFrame_3->setFrameShape(QFrame::StyledPanel);
         slidersFrame_3->setFrameShadow(QFrame::Raised);
         horizontalLayout_6 = new QHBoxLayout(slidersFrame_3);
@@ -3324,8 +3334,8 @@ public:
 
         frame_4 = new QFrame(reverbEffectFrame);
         frame_4->setObjectName(QStringLiteral("frame_4"));
-        sizePolicy12.setHeightForWidth(frame_4->sizePolicy().hasHeightForWidth());
-        frame_4->setSizePolicy(sizePolicy12);
+        sizePolicy11.setHeightForWidth(frame_4->sizePolicy().hasHeightForWidth());
+        frame_4->setSizePolicy(sizePolicy11);
         frame_4->setFrameShape(QFrame::Panel);
         frame_4->setFrameShadow(QFrame::Sunken);
         frame_4->setLineWidth(2);
@@ -3345,8 +3355,8 @@ public:
 
         reverbTypeComboBox = new QComboBox(frame_4);
         reverbTypeComboBox->setObjectName(QStringLiteral("reverbTypeComboBox"));
-        sizePolicy5.setHeightForWidth(reverbTypeComboBox->sizePolicy().hasHeightForWidth());
-        reverbTypeComboBox->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(reverbTypeComboBox->sizePolicy().hasHeightForWidth());
+        reverbTypeComboBox->setSizePolicy(sizePolicy6);
         reverbTypeComboBox->setMaximumSize(QSize(16777215, 17));
 
         horizontalLayout_11->addWidget(reverbTypeComboBox);
@@ -3359,8 +3369,8 @@ public:
 
         oscillator2Frame_7 = new QFrame(reverbEffectFrame);
         oscillator2Frame_7->setObjectName(QStringLiteral("oscillator2Frame_7"));
-        sizePolicy15.setHeightForWidth(oscillator2Frame_7->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_7->setSizePolicy(sizePolicy15);
+        sizePolicy14.setHeightForWidth(oscillator2Frame_7->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_7->setSizePolicy(sizePolicy14);
         oscillator2Frame_7->setFrameShape(QFrame::Panel);
         oscillator2Frame_7->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_7->setLineWidth(2);
@@ -3503,8 +3513,8 @@ public:
 
         oscillator2Frame_8 = new QFrame(flangerEffectFrame);
         oscillator2Frame_8->setObjectName(QStringLiteral("oscillator2Frame_8"));
-        sizePolicy12.setHeightForWidth(oscillator2Frame_8->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_8->setSizePolicy(sizePolicy12);
+        sizePolicy11.setHeightForWidth(oscillator2Frame_8->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_8->setSizePolicy(sizePolicy11);
         oscillator2Frame_8->setFrameShape(QFrame::Panel);
         oscillator2Frame_8->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_8->setLineWidth(2);
@@ -3708,8 +3718,8 @@ public:
 
         oscillator2Frame_5 = new QFrame(vibratoEffectFrame);
         oscillator2Frame_5->setObjectName(QStringLiteral("oscillator2Frame_5"));
-        sizePolicy12.setHeightForWidth(oscillator2Frame_5->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_5->setSizePolicy(sizePolicy12);
+        sizePolicy11.setHeightForWidth(oscillator2Frame_5->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_5->setSizePolicy(sizePolicy11);
         oscillator2Frame_5->setFrameShape(QFrame::Panel);
         oscillator2Frame_5->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_5->setLineWidth(2);
@@ -3889,8 +3899,8 @@ public:
 
         oscillator2Frame_9 = new QFrame(wahwahEffectFrame);
         oscillator2Frame_9->setObjectName(QStringLiteral("oscillator2Frame_9"));
-        sizePolicy12.setHeightForWidth(oscillator2Frame_9->sizePolicy().hasHeightForWidth());
-        oscillator2Frame_9->setSizePolicy(sizePolicy12);
+        sizePolicy11.setHeightForWidth(oscillator2Frame_9->sizePolicy().hasHeightForWidth());
+        oscillator2Frame_9->setSizePolicy(sizePolicy11);
         oscillator2Frame_9->setFrameShape(QFrame::Panel);
         oscillator2Frame_9->setFrameShadow(QFrame::Sunken);
         oscillator2Frame_9->setLineWidth(2);
@@ -3963,6 +3973,10 @@ public:
 
 
         horizontalLayout_9->addLayout(effectsScrollAreaLayout);
+
+        horizontalSpacer_13 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_9->addItem(horizontalSpacer_13);
 
         effectsScrollArea->setWidget(effectsScrollAreaContents);
 

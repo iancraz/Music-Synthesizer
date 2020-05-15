@@ -14,6 +14,7 @@
 using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
+	recordFlag = false;
 	QPixmap pixmap("images/splash.png");
 	QSplashScreen* splash = new QSplashScreen(pixmap);
 	splash->show();
@@ -173,7 +174,16 @@ void Leandro::addMidiFile(string filename, bool autoSet) {
 		tempTrack->midifile = midifile;
 		tempTrack->trackIndex = track;
 		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
-		if (autoSet) {
+		bool isMusical = false;
+		int evs = 0;
+		MidiEvent event;
+		while (evs < midifile->getEventCount(track) && !isMusical) {
+			event = midifile->getEvent(track, evs);
+			if (event.isNote())
+				isMusical = true;
+			evs++;
+		}
+		if (autoSet && isMusical) {
 			tempChannel = new Channel(this->channelCreationCounter++, this);
 			tempChannel->setChannelTrack(tempTrack);
 			if (tempChannel->events.size() != 0) this->addChannel(tempChannel);
@@ -192,6 +202,10 @@ void Leandro::updateCallbackData() {
 	this->callData.currentSample = &(this->currentSample);
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
+	this->callData.recordFlag = recordFlag;
+	this->callData.wav = wav;
+	this->callData.wavCounter = &wavCounter;
+
 };
 
 int Leandro::getFirstFreeChannelFrame() {
@@ -780,7 +794,8 @@ void Leandro::instrumentValueChanged() {
 		adsrinst->setWF1(ui.waveform1ComboBoxADSR->currentIndex());
 		adsrinst->setWF2(ui.waveform2ComboBoxADSR->currentIndex());
 		adsrinst->setWF1Level(((float)ui.levelWF1DialADSR->value()) / 100.0);
-		adsrinst->setWF1Level(((float)ui.levelWF2DialADSR->value()) / 100.0);
+		adsrinst->setWF2Level(((float)ui.levelWF2DialADSR->value()) / 100.0);
+		
 		break;
 
 	case synthType::additive:
@@ -977,9 +992,9 @@ void Leandro::initGUI() {
 	
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
-	//QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
 
-	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
+	//QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
 
 	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
 	QObject::connect(ui.stopButton, &QPushButton::clicked, this, &Leandro::stopStreaming);
@@ -1161,7 +1176,7 @@ void Leandro::channel1Closed() {
 void Leandro::channel1setActive() {
 	Channel* channel = nullptr;
 	int i;
-	for (i = 0; i < channels.size()-1; i++) {}
+	for (i = 0; i < channels.size(); i++)
 	{
 		if (channels.at(i)->channelFrame == ui.frameChannel1)
 			channel = channels.at(i);

@@ -3,7 +3,7 @@
 
 //#define MAX_BUFFER_SIZE 440000
 #define E_PI	3.14159265359
-#define E_AVERAGE_TRESHOLD	1e-4
+#define E_AVERAGE_TRESHOLD	1e-3
 
 Effect::Effect() {
 	// Effect constructor here. Should set defaults, load data and allocate memory as needed.
@@ -476,6 +476,7 @@ WahwahEffect::WahwahEffect(wahwahParams_t * _params){
 	this->Q = 5; //De 2 a 10
 	this->width = 500;
 	this->G_c = 1.5; // Correción de volumen
+	this->type = effectType::wahwah;
 	return;
 }
 
@@ -556,6 +557,7 @@ Eq8BandEffect::Eq8BandEffect(eq8bandParams_t* _params) {
 	defineBandwidth();
 	compFilterParameters();
 	this->x = new float[_params->maxSoundBufferSize];
+	this->type = effectType::eq8band;
 	return;
 }
 
@@ -567,6 +569,7 @@ gains_t Eq8BandEffect::getGains() {
 	gains_t temp;
 	for (unsigned int i = 0; i < numberOfBands; i++) {
 		temp.gains[i] = 20 * log10(g[i]);
+		temp.gains[i] = (temp.gains[i] + 12.0) / 24.0;
 	}
 	return temp;
 }
@@ -641,6 +644,7 @@ void Eq8BandEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffe
 TremoloEffect::TremoloEffect(tremoloParams_t* _params) {
 	this->alpha = _params->alpha;
 	this->f_lfo = _params->f_lfo / _params->sampleRate;
+	this->type = effectType::tremolo;
 	return;
 }
 

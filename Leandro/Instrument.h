@@ -69,11 +69,11 @@ public:
 	void setWF1Level(float _level) { level1=_level; }
 	void setWF2(int _waveform) { wform2 = _waveform; }
 	void setWF2Level(float _level) { level2 = _level; }
-	void setAttack(float _seconds) { params->tAttack = _seconds; }
-	void setDecay(float _seconds) { params->tDecay = _seconds; }
-	void setSustainRate(float _rate) { params->sustainRate = _rate; }
-	void setSustainLevel(float _level) { params->sustainLevel = _level; }
-	void setRelease(float _seconds) { params->tRelease = _seconds; }
+	void setAttack(float _seconds);
+	void setDecay(float _seconds);
+	void setSustainRate(float _rate);
+	void setSustainLevel(float _level);
+	void setRelease(float _seconds);
 
 	void setParams(adsrParams_t* params);
 

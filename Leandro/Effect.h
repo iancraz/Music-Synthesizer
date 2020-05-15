@@ -12,7 +12,7 @@ typedef void effectCallback(
 
 typedef enum {E_PLAIN, E_ECO, E_LOWPASS}mode_t;
 
-enum class effectType { reverb, flanger, vibrato, wahwah, eq8band };
+enum class effectType { reverb, flanger, vibrato, wahwah, eq8band, tremolo };
 
 class Effect {
 public:
