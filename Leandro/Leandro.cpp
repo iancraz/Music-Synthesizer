@@ -9,13 +9,16 @@
 #include <string>
 #include "AudioFile.h"
 #include <qfiledialog.h>
-
+#include <QSplashScreen>
 
 using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
-
+	QPixmap pixmap("images/splash.png");
+	QSplashScreen* splash = new QSplashScreen(pixmap);
+	splash->show();
 	loadData();
+	splash->close();
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->channelCreationCounter = 0;
