@@ -144,6 +144,7 @@
     <None Include="mario_midi.mid" />
     <None Include="packages.config" />
     <None Include="config.json" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="mididata.txt" />
