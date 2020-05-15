@@ -252,7 +252,7 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		if (mode == "Plain Reverb")
 			params->mode = E_PLAIN;
 		else if (mode == "Echo Reverb")
-			params->mode == E_ECO;
+			params->mode = E_ECO;
 		else if (mode == "Low-Pass Reverb")
 			params->mode = E_LOWPASS;
 		effectModel* model = new effectModel;
