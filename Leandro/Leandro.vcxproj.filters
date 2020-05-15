@@ -61,7 +61,16 @@
     <ClCompile Include="Options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ADSR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Sample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Karplus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,6 +126,9 @@
     <ClInclude Include="ui_Leandro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rapidcsv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -130,9 +142,9 @@
     </None>
     <None Include="sm64.mid" />
     <None Include="mario_midi.mid" />
-    <None Include="pirates.mid" />
-    <None Include="calesita64.mid" />
+    <None Include="packages.config" />
     <None Include="config.json" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="mididata.txt" />

@@ -22,7 +22,7 @@ void Effect::callback(void* soundBuffer, const unsigned int maxSoundBufferSize, 
 unsigned int Effect::getBufferSize(float* buffer) {
 	unsigned int i;	//Habria que poner try y catch, pero por ahora vamos con esto
 	for (i = 0; buffer[i] != INFINITY; i++);
-	return i-1;
+	return i - 1;
 }
 
 unsigned int Effect::copyBuffer2in(float* buffer, float* in, unsigned int maxSize) {
@@ -31,15 +31,15 @@ unsigned int Effect::copyBuffer2in(float* buffer, float* in, unsigned int maxSiz
 	for (i = 0; buffer[i] != INFINITY; i++) {
 		in[i] = buffer[i];
 	}
-	return i-1;
+	return i - 1;
 }
 
 unsigned int Effect::setBufferCrap2zero(float* buffer, unsigned int maxBufferSize) {
 	unsigned int i;	//Habria que poner try y catch, pero por ahora vamos con esto
 	for (i = 0; buffer[i] != INFINITY; i++);
-	for (unsigned int u = i-1; u < maxBufferSize; u++)
+	for (unsigned int u = i - 1; u < maxBufferSize; u++)
 		buffer[u] = 0;
-	return i-1;
+	return i - 1;
 }
 
 void Effect::setArray2zero(float* arr, unsigned int size) {
@@ -90,11 +90,12 @@ void Effect::restartAverage() {
 //									REVERB EFFECT									  //
 
 //ReverbEffect::ReverbEffect(mode_t mode, float delay, float att, unsigned int maxSoundBufferSize) {
-ReverbEffect::ReverbEffect(reverbParams_t * _params){
+ReverbEffect::ReverbEffect(reverbParams_t* _params) {
 	this->mode = (short int)_params->mode;
 	this->delay = _params->delay; //In seconds
 	this->a = _params->att;
 	this->x = new float[_params->maxSoundBufferSize];
+	this->type = effectType::reverb;
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
@@ -177,13 +178,14 @@ void ReverbEffect::callback(void* soundBuffer, const unsigned int maxSoundBuffer
 //									FLANGER EFFECT									  //
 
 //FlangerEffect::FlangerEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float Mw, float Mo, float g_fb, float g_ff) {
-FlangerEffect::FlangerEffect(flangerParams_t * _params){
+FlangerEffect::FlangerEffect(flangerParams_t* _params) {
 	this->fo = _params->fo;
 	this->Mo = _params->Mo * _params->sampleRate;
 	this->Mw = this->Mo * _params->Mw;
 	this->g_fb = _params->g_fb;
 	this->g_ff = _params->g_ff;
 	this->x = new float[_params->maxSoundBufferSize];
+	this->type = effectType::flanger;
 	setArray2zero(average, AVERAGE_SIZE);
 	return;
 }
@@ -267,12 +269,13 @@ float FlangerEffect::linearInterpolation(float num, float* in) {
 //									VIBRATO EFFECT									  //
 
 //VibratoEffect::VibratoEffect(float fo, const int sampleRate, unsigned int maxSoundBufferSize, float W, float M_avg) {
-VibratoEffect::VibratoEffect(vibratoParams_t * _params){
+VibratoEffect::VibratoEffect(vibratoParams_t* _params) {
 	this->W = (float)(_params->W / (2 * E_PI * _params->fo));
 	this->fo = _params->fo;
 	this->x = new float[_params->maxSoundBufferSize];
 	this->comodin = new float[_params->maxSoundBufferSize];
 	this->M_avg = _params->M_avg * (float)_params->sampleRate;
+	this->type = effectType::vibrato;
 	restartAverage();
 	return;
 }

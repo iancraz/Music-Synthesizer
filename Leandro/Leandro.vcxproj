@@ -81,10 +81,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Additive.cpp" />
+    <ClCompile Include="ADSR.cpp" />
     <ClCompile Include="Binasc.cpp" />
     <ClCompile Include="Channel.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Instrument.cpp" />
+    <ClCompile Include="Karplus.cpp" />
     <ClCompile Include="Leandro.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiEvent.cpp" />
@@ -93,6 +95,7 @@
     <ClCompile Include="MidiMessage.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Sample.cpp" />
+    <ClCompile Include="Sampling.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Leandro.h" />
@@ -118,15 +121,16 @@
     <ClInclude Include="MidiFile.h" />
     <ClInclude Include="MidiMessage.h" />
     <ClInclude Include="Options.h" />
+    <ClInclude Include="rapidcsv.h" />
     <ClInclude Include="Sample.h" />
     <ClInclude Include="ui_Leandro.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="calesita64.mid" />
+    <None Include="ClassDiagram.cd" />
     <None Include="config.json" />
     <None Include="generateFiles.bat" />
     <None Include="mario_midi.mid" />
-    <None Include="pirates.mid" />
+    <None Include="packages.config" />
     <None Include="sm64.mid" />
   </ItemGroup>
   <ItemGroup>
@@ -136,5 +140,13 @@
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
   </ImportGroup>
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\boost.1.72.0.0\build\boost.targets" Condition="Exists('packages\boost.1.72.0.0\build\boost.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\boost.1.72.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.72.0.0\build\boost.targets'))" />
+  </Target>
 </Project>

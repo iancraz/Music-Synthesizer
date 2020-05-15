@@ -1,1 +1,35 @@
-﻿  Leandro.vcxproj -> C:\Users\Mr_Gigawatt\source\repos\ASSd\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
+﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
+  uic Leandro.ui
+  rcc Leandro.qrc
+  moc Leandro.h
+   RCC: Warning: No resources in 'C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.qrc'.
+  Additive.cpp
+  ADSR.cpp
+  Binasc.cpp
+  Channel.cpp
+  Effect.cpp
+  Instrument.cpp
+  Karplus.cpp
+  Leandro.cpp
+  main.cpp
+  MidiEvent.cpp
+  MidiEventList.cpp
+  MidiFile.cpp
+  MidiMessage.cpp
+  Options.cpp
+  Sample.cpp
+  Sampling.cpp
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(182,16): error C2660: 'Leandro::loadSynthData': function does not take 0 arguments
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(119,7): message : see declaration of 'Leandro::loadSynthData' (compiling source file Leandro.cpp)
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(183,18): error C2660: 'Leandro::loadEffectsData': function does not take 0 arguments
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(117,7): message : see declaration of 'Leandro::loadEffectsData' (compiling source file Leandro.cpp)
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(186,33): error C2511: 'void Leandro::loadEffectsData(void)': overloaded member function not found in 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(190,31): error C2511: 'void Leandro::loadSynthData(void)': overloaded member function not found in 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(747,79): error C2039: 'loadTestMidi': is not a member of 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(747,91): error C2065: 'loadTestMidi': undeclared identifier
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(837,15): error C2039: 'loadTestMidi': is not a member of 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.h(50): message : see declaration of 'Leandro'
+C:\Users\lisan\Documents\Repositorios\ASSD\TP2---Sintesis-v2\Leandro\Leandro.cpp(838,2): error C3861: 'addMidiFile': identifier not found

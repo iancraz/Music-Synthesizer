@@ -1,51 +1,212 @@
 {
-	"additive": {
-		"types": ["clarinete", "piano"],
-		"clarinete": {
-			"min-key": 50,
-			"max-key": 86,
-			"first-octave": 3,
-			"octaves-count": 4,
-			"n-harmonics": 12,
+	"synth":{
+		"additive": {
+			"types": ["clarinete", "piano"],
+			"clarinete": {
+				"min-key": 50,
+				"max-key": 86,
+				"first-octave": 3,
+				"octaves-count": 4,
+				"n-harmonics": 12,
 
-			"files": {
-				"0": "additive/clarinete/clarinete_envelopes_3.csv",
-				"1": "additive/clarinete/clarinete_envelopes_4.csv",
-				"2": "additive/clarinete/clarinete_envelopes_5.csv",
-				"3": "additive/clarinete/clarinete_envelopes_6.csv"
+				"files": {
+					"0": "additive/clarinete/clarinete_envelopes_3.csv",
+					"1": "additive/clarinete/clarinete_envelopes_4.csv",
+					"2": "additive/clarinete/clarinete_envelopes_5.csv",
+					"3": "additive/clarinete/clarinete_envelopes_6.csv"
+				}
+			},
+
+			"piano": {
+				"min-key": 21,
+				"max-key": 107,
+				"first-octave": 0,
+				"octaves-count": 8,
+				"n-harmonics": 12,
+
+				"files": {
+					"0": "additive/piano/piano_envelopes_0.csv",
+					"1": "additive/piano/piano_envelopes_1.csv",
+					"2": "additive/piano/piano_envelopes_2.csv",
+					"3": "additive/piano/piano_envelopes_3.csv",
+					"4": "additive/piano/piano_envelopes_4.csv",
+					"5": "additive/piano/piano_envelopes_5.csv",
+					"6": "additive/piano/piano_envelopes_6.csv",
+					"7": "additive/piano/piano_envelopes_7.csv"
+				}
 			}
 		},
-
-		"piano": {
-			"min-key": 21,
-			"max-key": 107,
-			"first-octave": 0,
-			"octaves-count": 8,
-			"n-harmonics": 12,
-
-			"files": {
-				"0": "additive/piano/piano_envelopes_0.csv",
-				"1": "additive/piano/piano_envelopes_1.csv",
-				"2": "additive/piano/piano_envelopes_2.csv",
-				"3": "additive/piano/piano_envelopes_3.csv",
-				"4": "additive/piano/piano_envelopes_4.csv",
-				"5": "additive/piano/piano_envelopes_5.csv",
-				"6": "additive/piano/piano_envelopes_6.csv",
-				"7": "additive/piano/piano_envelopes_7.csv"
+		"adsr": {
+			"types":  ["default"],
+			"default": {
+				"t-attack": 0.5,
+				"t-decay": 2.0,
+				"sustain-rate": 0.005,
+				"sustain-level": 0.7,
+				"t-release": 2.0,
+				"k": 1.0,
+				"waveform": [ "sine", "square" ],
+				"levels": [ 1.0, 1.0 ]
+			}
+		},
+		"sampling": {
+			"types":["grand-piano", "celectronic-piano"],
+			"grand-piano":{
+				"min-octave": 2,
+				"max-octave": 6,
+				"files": [
+					"sampling/grand-piano/C2",
+					"sampling/grand-piano/C3",
+					"sampling/grand-piano/C4",
+					"sampling/grand-piano/C5",
+					"sampling/grand-piano/C6"
+				],
+				"note-pressed-time": 0.375
+			},
+			"celectronic-piano":{
+				"min-octave": 2,
+				"max-octave": 6,
+				"files": [
+					"sampling/electronic-piano/C2",
+					"sampling/electronic-piano/C3",
+					"sampling/electronic-piano/C4",
+					"sampling/electronic-piano/C5",
+					"sampling/electronic-piano/C6"
+				],
+				"note-pressed-time": 1.0
+			}
+		},
+		"karplus": {
+			"types": ["plunked-string", "cymbal"],
+			"plunked-string":{
+				"noise-type": "normal",
+				"grl": 1.0,
+				"b-factor": 1.0,
+				"s-factor": 1.0,
+				"body-filter": false
+			},
+			"cymbal": {
+				"noise-type": "normal",
+				"grl": 1.0,
+				"b-factor": 0.5,
+				"s-factor": 1.05,
+				"body-filter": false
 			}
 		}
 	},
-	"adsr": {
-		"default": {
-			"t-attack": 0.5,
-			"t-decay": 2.0,
-			"sustain-rate": 0.005,
-			"sustain-level": 0.7,
-			"t-release": 2.0,
-			"k": 1.0,
-			"waveform": [ "sine", "square" ],
-			"levels": [ 1.0, 1.0 ]
+	"effects":{
+		"reverb":{
+			"types": ["plain", "echo", "low-pass"],
+			"plain":{
+				"delay": 0.2,
+				"att": 0.5
+			},
+			"echo":{
+				"delay": 1.0,
+				"att": 0.5
+			},
+			"low-pass":{
+				"delay": 1.0,
+				"att": 0.5
+			}
+		},
+		"vibrato":{
+			"types": ["default"],
+			"default":{
+				"f0": 10.0,
+				"width": 1.0e3,
+				"m-avg": 10.0
+			}
+		},
+		"flanger":{
+			"types": ["default"],
+			"default":{
+				"f0": 2.5,
+				"m0": 1.0e-3,
+				"mw": 5.0,
+				"g-fb": 0.3,
+				"g-ff": 0.9
+			}
+		},
+		"wah-wah":{
+			"types": ["default"],
+			"default":{
+				"f-lfo": 2.5,
+				"f-min": 500.0
+			}
+		},
+		"equalizer":{
+			"types": ["1965", "lo-fidelity", "musical-presence", "quick-high-pass" , "QuickLowPass", "VocalPresenceBoost", "VocalPresenceCut"],
+			"1965": [
+				0.25,
+				0.5,
+				0.35,
+				0.375,
+				0.88,
+				0.55,
+				0.86,
+				0.28
+			],
+			"lo-fidelity": [
+				0.5,
+				0.595,
+				0.41,
+				0.5,
+				0.67,
+				0.67,
+				0.4,
+				0.13
+			],
+			"musical-presence": [
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.60,
+				0.71,
+				0.58,
+				0.5
+			],
+			"quick-high-pass": [
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.5,
+				0.5,
+				0.5,
+				0.5
+			]
+			"quick-low-pass": [
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"vocal-presence-boost": [
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.77,
+				0.5,
+				0.5
+			],
+			"vocal-presence-cut": [
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.23,
+				0.5,
+				0.5
+			]
 		}
 	}
-
 }
