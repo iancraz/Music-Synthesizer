@@ -13,7 +13,7 @@
 using namespace std;
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
-	loadData();
+	//loadData();
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->channelCreationCounter = 0;
@@ -242,6 +242,14 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		reverbParams_t* params = new reverbParams_t;
 		params->att = effectModelData["att"].asFloat();
 		params->delay = effectModelData["delay"].asFloat();
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		string mode = *it;
+		if (mode == "Plain Reverb")
+			params->mode = E_PLAIN;
+		else if (mode == "Echo Reverb")
+			params->mode == E_ECO;
+		else if (mode == "Low-Pass Reverb")
+			params->mode = E_LOWPASS;
 		effectModel* model = new effectModel;
 		model->effectName = *it;
 		model->type = effectType::reverb;
@@ -265,7 +273,7 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		params->M_avg = vibratoData["m-avg"].asFloat();
 		params->sampleRate = SAMPLE_RATE;
 		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
-
+		
 		effectModel* model = new effectModel;
 		model->effectName = *it;
 		model->type = effectType::vibrato;
@@ -290,7 +298,7 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		params->Mw = effectModelData["mw"].asFloat();
 		params->g_fb = effectModelData["g-fb"].asFloat();
 		params->g_ff = effectModelData["g-ff"].asFloat();
-
+		
 		effectModel* model = new effectModel;
 		model->effectName = *it;
 		model->type = effectType::vibrato;
@@ -312,6 +320,7 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		params->f_min = effectModelData["f-min"].asFloat();
 		params->samplingRate = SAMPLE_RATE;
 		params->maxBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		
 		effectModel* model = new effectModel;
 		model->effectName = *it;
 		model->type = effectType::wahwah;
@@ -334,6 +343,7 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		}
 		params->sampleRate = SAMPLE_RATE;
 		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		
 		effectModel* model = new effectModel;
 		model->effectName = *it;
 		model->type = effectType::eq8band;
