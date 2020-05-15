@@ -65,20 +65,8 @@
 			}
 		},
 		"sampling": {
-			"types":["Sampling Grand Piano", "Sampling Electronic Piano"],
-			"Sampling Grand Piano":{
-				"min-octave": 2,
-				"max-octave": 6,
-				"files": [
-					"sampling/grand-piano/C2",
-					"sampling/grand-piano/C3",
-					"sampling/grand-piano/C4",
-					"sampling/grand-piano/C5",
-					"sampling/grand-piano/C6"
-				],
-				"note-pressed-time": 0.375
-			},
-			"Sampling Electronic Piano":{
+			"types": [ "Sampling Electronic Piano", "Sampling Steinway Grand Piano", "Sampling Flying Clav", "Sampling Classic Rock Organ", "Sampling Hard Rock Guitar" ],
+			"Sampling Electronic Piano": {
 				"min-octave": 2,
 				"max-octave": 6,
 				"files": [
@@ -87,6 +75,58 @@
 					"sampling/electronic-piano/C4",
 					"sampling/electronic-piano/C5",
 					"sampling/electronic-piano/C6"
+				],
+				"note-pressed-time": 0.375
+			},
+			"Sampling Steinway Grand Piano": {
+				"min-octave": 2,
+				"max-octave": 6,
+				"files": [
+					"sampling/steinway-piano/C2",
+					"sampling/steinway-piano/C3",
+					"sampling/steinway-piano/C4",
+					"sampling/steinway-piano/C5",
+					"sampling/steinway-piano/C6"
+				],
+				"note-pressed-time": 1.0
+			},
+
+			"Sampling Flying Clav": {
+				"min-octave": 2,
+				"max-octave": 6,
+				"files": [
+					"sampling/flying-clav/C2",
+					"sampling/flying-clav/C3",
+					"sampling/flying-clav/C4",
+					"sampling/flying-clav/C5",
+					"sampling/flying-clav/C6"
+				],
+				"note-pressed-time": 1.0
+			},
+
+			"Sampling Classic Rock Organ": {
+				"min-octave": 1,
+				"max-octave": 6,
+				"files": [
+					"sampling/rock-organ/C1",
+					"sampling/rock-organ/C2",
+					"sampling/rock-organ/C3",
+					"sampling/rock-organ/C4",
+					"sampling/rock-organ/C5",
+					"sampling/rock-organ/C6"
+				],
+				"note-pressed-time": 1.0
+			},
+
+			"Sampling Hard Rock Guitar": {
+				"min-octave": 2,
+				"max-octave": 6,
+				"files": [
+					"sampling/rock-guitar/C2",
+					"sampling/rock-guitar/C3",
+					"sampling/rock-guitar/C4",
+					"sampling/rock-guitar/C5",
+					"sampling/rock-guitar/C6"
 				],
 				"note-pressed-time": 1.0
 			}

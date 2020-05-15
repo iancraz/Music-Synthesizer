@@ -56,8 +56,11 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 		outputBuffer[i] = 0;
 	}
 
-	if (keyNumber < firstKey || keyNumber > lastKey)
+	if (keyNumber < firstKey || keyNumber > lastKey) {
+		outputBuffer[0] = INFINITY;
 		return -1;
+	}
+
 
 	for (int k = 0; k < harmonicsCount; k++) {
 		float r = harmonicFactors[k];

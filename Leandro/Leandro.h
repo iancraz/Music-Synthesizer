@@ -114,6 +114,7 @@ public:
 
 	void addNewChannel();
 	void startStreaming();
+	void pauseStreaming();
 	void stopStreaming();
 
 	void instrumentValueChanged();

@@ -1154,15 +1154,23 @@ void Leandro::initGUI() {
 
 void Leandro::startStreaming() {
 	PaError err = Pa_StartStream(stream);
-	if (err != paNoError) 
-		int pepa=0;
+	
+	
+
+}
+
+void Leandro::pauseStreaming() {
+	PaError err = Pa_StopStream(stream);
 
 }
 void Leandro::stopStreaming() {
 	PaError err = Pa_StopStream(stream);
-	if (err != paNoError)
-		int pepa = 0;
-
+	currentSample = 0;
+	activeBuffer[0] = INFINITY;
+	for (int i = 0; i < noteBuffers.size(); i++) {
+		noteBuffers.at(i)->buffer[0] = INFINITY;
+		noteBuffers.at(i)->startingFrame = -1;
+	}
 }
 
 void Leandro::channel1Closed() {
@@ -1173,7 +1181,6 @@ void Leandro::channel1Closed() {
 		if (channels.at(i)->channelFrame == ui.frameChannel1)
 			channel = channels.at(i);
 	}
-
 }
 void Leandro::channel1setActive() {
 	Channel* channel = nullptr;
