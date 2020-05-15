@@ -2948,7 +2948,7 @@ public:
         effectsScrollArea->setWidgetResizable(true);
         effectsScrollAreaContents = new QWidget();
         effectsScrollAreaContents->setObjectName(QStringLiteral("effectsScrollAreaContents"));
-        effectsScrollAreaContents->setGeometry(QRect(-87, 0, 1139, 391));
+        effectsScrollAreaContents->setGeometry(QRect(0, 0, 1139, 391));
         horizontalLayout_9 = new QHBoxLayout(effectsScrollAreaContents);
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
@@ -3368,6 +3368,7 @@ public:
         reverbAttnDial = new QDial(oscillator2Frame_7);
         reverbAttnDial->setObjectName(QStringLiteral("reverbAttnDial"));
         reverbAttnDial->setMaximumSize(QSize(60, 16777215));
+        reverbAttnDial->setMaximum(60);
         reverbAttnDial->setNotchesVisible(true);
 
         verticalLayout_23->addWidget(reverbAttnDial, 0, Qt::AlignHCenter);

@@ -3,7 +3,7 @@
 
 //#define MAX_BUFFER_SIZE 440000
 #define E_PI	3.14159265359
-#define E_AVERAGE_TRESHOLD	1e-3
+#define E_AVERAGE_TRESHOLD	1e-4
 
 Effect::Effect() {
 	// Effect constructor here. Should set defaults, load data and allocate memory as needed.

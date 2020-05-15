@@ -120,9 +120,10 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 
 
 	//// LO QUE AGREGO IAN ES ESTO/////////////////
-	if (data->recordFlag) {
+	if (*data->recordFlag) {
 		for (unsigned int i = 0; i < (unsigned int)(frameCount / 2); i++) {
 			data->wav[*(data->wavCounter) + i] = out[2 * i];
+			data->wav[*(data->wavCounter) + i+1] = INFINITY;
 		}
 		*data->wavCounter += (int)(frameCount/2.0);
 	}
@@ -925,7 +926,7 @@ void Leandro::record2Wav() {
 		AudioFile<double>::AudioBuffer buffer;
 		buffer.resize(1);
 		buffer[0].resize(wavCounter);
-		for (int i = 0; i < wavCounter - 1; i++) {
+		for (int i = 0; wav[i]!=INFINITY; i++) {
 			buffer[0][i] = wav[i];
 		}
 		bool ok = audioFile.setAudioBuffer(buffer);
@@ -969,6 +970,8 @@ void Leandro::initGUI() {
 	channelFrames.push_back(ui.frameChannel9);
 	channelFrames.push_back(ui.frameChannel10);
 
+
+
 	midiLists.push_back(ui.midiListChannel1);
 	midiLists.push_back(ui.midiListChannel2);
 	midiLists.push_back(ui.midiListChannel3);
@@ -979,6 +982,39 @@ void Leandro::initGUI() {
 	midiLists.push_back(ui.midiListChannel8);
 	midiLists.push_back(ui.midiListChannel9);
 	midiLists.push_back(ui.midiListChannel10);
+
+	ui.midiListChannel1->setHidden(true);
+	ui.midiListChannel2->setHidden(true);
+	ui.midiListChannel3->setHidden(true);
+	ui.midiListChannel4->setHidden(true);
+	ui.midiListChannel5->setHidden(true);
+	ui.midiListChannel6->setHidden(true);
+	ui.midiListChannel7->setHidden(true);
+	ui.midiListChannel8->setHidden(true);
+	ui.midiListChannel9->setHidden(true);
+	ui.midiListChannel10->setHidden(true);
+
+	ui.closeButtonChannel1->setHidden(true);
+	ui.closeButtonChannel2->setHidden(true);
+	ui.closeButtonChannel3->setHidden(true);
+	ui.closeButtonChannel4->setHidden(true);
+	ui.closeButtonChannel5->setHidden(true);
+	ui.closeButtonChannel6->setHidden(true);
+	ui.closeButtonChannel7->setHidden(true);
+	ui.closeButtonChannel8->setHidden(true);
+	ui.closeButtonChannel9->setHidden(true);
+	ui.closeButtonChannel10->setHidden(true);
+
+	ui.inputComboBoxChannel1->setHidden(true);
+	ui.inputComboBoxChannel2->setHidden(true);
+	ui.inputComboBoxChannel3->setHidden(true);
+	ui.inputComboBoxChannel4->setHidden(true);
+	ui.inputComboBoxChannel5->setHidden(true);
+	ui.inputComboBoxChannel6->setHidden(true);
+	ui.inputComboBoxChannel7->setHidden(true);
+	ui.inputComboBoxChannel8->setHidden(true);
+	ui.inputComboBoxChannel9->setHidden(true);
+	ui.inputComboBoxChannel10->setHidden(true);
 
 	ui.frameChannel1->setHidden(true);
 	ui.frameChannel2->setHidden(true);
@@ -1004,7 +1040,7 @@ void Leandro::initGUI() {
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
 	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
-	QObject::connect(ui.spectrogramButton, &QPushButton::clicked, this, &Leandro::showSpectrogram);
+	//QObject::connect(ui.spectrogramButton, &QPushButton::clicked, this, &Leandro::showSpectrogram);
 
 	//QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
 
@@ -1186,7 +1222,6 @@ void Leandro::pauseStreaming() {
 void Leandro::stopStreaming() {
 	if (recordFlag) toggleRecord();
 	PaError err = Pa_StopStream(stream);
-	currentSample = 0;
 	activeBuffer[0] = INFINITY;
 	for (int i = 0; i < noteBuffers.size(); i++) {
 		noteBuffers.at(i)->buffer[0] = INFINITY;
@@ -1200,6 +1235,7 @@ void Leandro::stopStreaming() {
 
 	ui.spectoFrame->setHidden(false);
 	if(wavCounter) ui.exportToWavButton_2->setEnabled(true);
+	currentSample = 0;
 }
 
 void Leandro::toggleRecord() {
@@ -1834,7 +1870,12 @@ void Leandro::loadMidiFile() {
 
 
 void Leandro::calcSpecgram() {
-	Spectrogram temp(wav,wavCounter);
+	int i = 0;
+	while (wav[i] != INFINITY) {
+		i++;
+	}
+	
+	Spectrogram temp(wav,i);
 	unsigned int nfft = 1024;
 	unsigned int overlap = 128;
 	bool show = false;
