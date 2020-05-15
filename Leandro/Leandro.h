@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <qiconengineplugin.h>
 #include "ui_Leandro.h"
 #include "midifile.h"
 #include "Channel.h"
