@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDial>
@@ -1797,11 +1796,11 @@ public:
         karplusStretchSlider = new QSlider(envelopeParamsFrame_2);
         karplusStretchSlider->setObjectName(QString::fromUtf8("karplusStretchSlider"));
         karplusStretchSlider->setAutoFillBackground(false);
-        karplusStretchSlider->setStyleSheet(QStringLiteral("QSlider::handle:vertical {background-color: rgb(255, 181, 50);}"));
-        karplusStretchSlider->setMinimum(1);
-        karplusStretchSlider->setMaximum(50);
-        karplusStretchSlider->setValue(1);
-        karplusStretchSlider->setSliderPosition(1);
+        karplusStretchSlider->setStyleSheet(QString::fromUtf8("QSlider::handle:vertical {background-color: rgb(255, 181, 50);}"));
+        karplusStretchSlider->setMinimum(100);
+        karplusStretchSlider->setMaximum(5000);
+        karplusStretchSlider->setValue(100);
+        karplusStretchSlider->setSliderPosition(100);
         karplusStretchSlider->setOrientation(Qt::Vertical);
         karplusStretchSlider->setInvertedAppearance(false);
         karplusStretchSlider->setTickPosition(QSlider::TicksBothSides);
@@ -1877,7 +1876,7 @@ public:
         verticalLayout_19->addLayout(envelopeParamsHLayout_2);
 
         karplusResFilterCheckBox = new QCheckBox(envelopeParamsFrame_2);
-        karplusResFilterCheckBox->setObjectName(QStringLiteral("karplusResFilterCheckBox"));
+        karplusResFilterCheckBox->setObjectName(QString::fromUtf8("karplusResFilterCheckBox"));
 
         verticalLayout_19->addWidget(karplusResFilterCheckBox, 0, Qt::AlignHCenter);
 
@@ -3106,11 +3105,12 @@ public:
         sustainLabel_3->setText(QCoreApplication::translate("LeandroClass", "Loop Start", nullptr));
         releaseLabel_3->setText(QCoreApplication::translate("LeandroClass", "Loop End", nullptr));
         deleteKarplusButton->setText(QString());
-        instrumentNameLabel_2->setText(QApplication::translate("LeandroClass", "Karplus-Strong", Q_NULLPTR));
-        instrumentNameKarplus->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
-        decayLabel_2->setText(QApplication::translate("LeandroClass", "Stretch", Q_NULLPTR));
-        releaseLabel_2->setText(QApplication::translate("LeandroClass", "Decay Loss", Q_NULLPTR));
-        sustainLabel_2->setText(QApplication::translate("LeandroClass", "Blend", Q_NULLPTR));
+        instrumentNameLabel_2->setText(QCoreApplication::translate("LeandroClass", "Karplus-Strong", nullptr));
+        instrumentNameKarplus->setText(QCoreApplication::translate("LeandroClass", "InstrumentName", nullptr));
+        decayLabel_2->setText(QCoreApplication::translate("LeandroClass", "Stretch", nullptr));
+        releaseLabel_2->setText(QCoreApplication::translate("LeandroClass", "Decay Loss", nullptr));
+        sustainLabel_2->setText(QCoreApplication::translate("LeandroClass", "Blend", nullptr));
+        karplusResFilterCheckBox->setText(QCoreApplication::translate("LeandroClass", "Resonance Filter", nullptr));
         delete8EqButton->setText(QString());
         label_5->setText(QCoreApplication::translate("LeandroClass", "8-Band Equalizer", nullptr));
         eq8MoveLeftButton->setText(QString());
