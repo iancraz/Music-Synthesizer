@@ -81,9 +81,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Additive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Binasc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -135,6 +132,7 @@
     <None Include="mario_midi.mid" />
     <None Include="pirates.mid" />
     <None Include="calesita64.mid" />
+    <None Include="config.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="mididata.txt" />

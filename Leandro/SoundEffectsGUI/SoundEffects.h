@@ -5,7 +5,7 @@
 #include "Effect.h"
 
 typedef struct {
-	bool reverbPlain, reverbEco, reverbLowpass, vibrato, flanger, wahwah, eq;
+	bool reverbPlain, reverbEco, reverbLowpass, vibrato, flanger, wahwah, eq, tremolo;
 }effects_s;
 
 class SoundEffects : public QMainWindow

@@ -1,12 +1,15 @@
-#include "Additive.h"
+#include "Instrument.h"
 #include "Leandro.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include "rapidcsv.h"
+#include "json/json.h"
 
 
-void ADSRInstrument::setParams(adsrParams_t* _params) {
+void
+ADSRInstrument::setParams(adsrParams_t* _params) {
 	if (_params->tAttack < 15.0 && _params->tDecay < 15.0 && _params->sustainLevel <= 1.0 && _params->sustainRate <= 1.0 && _params->tRelease < 15 && _params->k < 5.0 && _params->tAttack > 0.0 && _params->tDecay > 0.0 && _params->sustainLevel > 0.0 && _params->sustainRate > 0.0 && _params->tRelease > 0.0 && _params->k > 0.0)
 		params = *_params;
 	else
@@ -29,7 +32,8 @@ ADSRInstrument::ADSRInstrument(adsrParams_t* _params, const unsigned int buffLen
 	generateEnvelope(sampleRate, buffLength);
 }
 
-int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength) {
+int
+ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength) {
 	//long noteDuration_n = durSeconds * (float)sampleRate;
 	int nAttack = params.tAttack * (float)sampleRate;
 	int nDecay = params.tDecay * (float)sampleRate;
@@ -64,68 +68,15 @@ int ADSRInstrument::generateEnvelope(const unsigned int sampleRate, const unsign
 	}
 
 	return i - 1;
-	/*
-
-		if (noteDuration_n > nAttack + nDecay) {
-			while (i < nAttack) {
-				envelope[i] = (params.k * A0) / params.tAttack * (float)i / (float)sampleRate;
-				i++;
-			}
-			while (i < nAttack + nDecay) {
-				envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / (float)sampleRate;
-				i++;
-			}
-			int nSustain = noteDuration_n - (nAttack + nDecay);
-			while (i < nAttack + nDecay + nSustain) {
-				if (A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / (float)sampleRate > 0)
-					envelope[i] = A0 - params.sustainRate * (float)(i - (nAttack + nDecay)) / (float)sampleRate;
-				else
-					break;
-				i++;
-			}
-			float Ar = envelope[i - 1];
-			while (i < nAttack + nDecay + nSustain + nRelease) {
-				envelope[i] = Ar - Ar / params.tRelease * (float)(i - (nAttack + nDecay + nSustain)) / (float)sampleRate;
-				i++;
-			}
-		}
-		else if (noteDuration_n > nAttack && noteDuration_n < nAttack + nDecay) {
-			while (i < nAttack) {
-				envelope[i] = (float)i / (float)sampleRate * (params.k * (float)A0) / params.tAttack;
-				i++;
-			}
-			while (i < (noteDuration_n)) {
-				envelope[i] = params.k * A0 - A0 * (params.k - 1) / params.tDecay * (float)(i - nAttack) / (float)sampleRate;
-				i++;
-			}
-			float Ar = envelope[i - 1];
-			while (i < noteDuration_n + nDecay) {
-				envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / (float)sampleRate;
-				i++;
-			}
-		}
-		else if (noteDuration_n < nAttack) {
-			while (i < noteDuration_n) {
-				envelope[i] = (float)i / (float)sampleRate * (params.k * (float)A0) / params.tAttack;
-				i++;
-			}
-			float Ar = envelope[i - 1];
-			while (i < noteDuration_n + nRelease) {
-				envelope[i] = Ar - Ar / params.tRelease * (float)(i - noteDuration_n) / (float)sampleRate;
-				i++;
-			}
-		}
-		return i-1;
-		*/
 }
 
 int
 ADSRInstrument::synthFunction(float* outputBuffer,
-	const unsigned int outputBufferSize,
-	const int keyNumber,
-	const float durSeconds,
-	const int velocity,
-	const int sampleRate) {
+							  const unsigned int outputBufferSize,
+							  const int keyNumber,
+							  const float durSeconds,
+							  const int velocity,
+							  const int sampleRate) {
 	//unsigned int envelopeDuration = generateEnvelope(durSeconds, (float)velocity / 127.0, sampleRate);
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 	unsigned int nPressedLength = durSeconds * sampleRate;
@@ -148,50 +99,125 @@ ADSRInstrument::synthFunction(float* outputBuffer,
 	return 0;
 }
 
-AdditiveInstrument::AdditiveInstrument(std::string fileName, std::string _name) {
+AdditiveInstrument::AdditiveInstrument(additiveParams_t params, unsigned int bufferLength) {
+	instrumentName = params.name;
+	firstKey = params.firstKey;
+	lastKey = params.lastKey;
+	harmonicsCount = params.harmonicsCount;
+	envelopeLengths = params.envelopeLengths;
+	octavesEnvelopes = params.octavesEnvelopes;
+	int octavesCount = params.octavesEnvelopes.size();
+
+
+	envelopes = new float** [octavesCount];
+	for (int i = 0; i < octavesCount; i++) {
+		envelopes[i] = new float* [harmonicsCount];
+		for (int j = 0; j < harmonicsCount; j++) {
+			envelopes[i][j] = new float[envelopeLengths[i]];
+			for (int k = 0; k < envelopeLengths[i]; k++) {
+				envelopes[i][j][k] = octavesEnvelopes[i][j][k];
+			}
+		}
+	}
 
 }
 
-int AdditiveInstrument::synthFunction(float* outputBuffer,
-	const unsigned int outputBufferSize,
-	const int keyNumber,
-	const float lengthInSeconds,
-	const int velocity,
-	const int sampleRate) {
+int
+AdditiveInstrument::synthFunction(float* outputBuffer,
+								  const unsigned int outputBufferSize,
+								  int keyNumber,
+								  const float lengthInSeconds,
+								  const int velocity,
+								  const int sampleRate) {
 	int noteDuration_n = lengthInSeconds * sampleRate;
 	int synthDuration = (noteDuration_n < outputBufferSize) ? noteDuration_n : outputBufferSize;
-	float A0 = pow((float)velocity / 127.0, 1.0 / 7.0);
-	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
+	float A0 = (float)velocity / 127.0;
 
+	int firstOctave = (int)(firstKey / 12) - 1;
 
-	//TODO: for debug
-	//ofstream file("note.txt");
+	while (keyNumber < firstKey)
+		keyNumber += 12;
 
-	for (int h = 0; h < outputBufferSize; h++) {
-		outputBuffer[h] = 0;
+	while (keyNumber > lastKey) {
+		keyNumber -= 12;
 	}
-	float maxValue = 0;
+
+	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
+	float maxValue = 1;
+	// determinar la cotava a utilizar 
+	
 	int last;
-	for (int k = 0; k < 7; k++) {
+	int octave = (int)(keyNumber / 12) - 1 - firstOctave;
+
+	for (int i = 0; i < outputBufferSize; i++) {
+		outputBuffer[i] = 0;
+	}
+
+	for (int k = 0; k < harmonicsCount; k++) {
 		int i = 0;
-		while (i < noteDuration_n && i < outputBufferSize) {
-			outputBuffer[i] += envelope[k][i] * A0 * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
-			maxValue = abs(outputBuffer[i]) > maxValue ? abs(outputBuffer[i]) : maxValue;
-			i++;
-		}
-		last = i;
-		while (i < noteDuration_n + releaseLength && i < outputBufferSize) {
-			outputBuffer[i] += envelope[k][last-1] * release[i - noteDuration_n] * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
-			maxValue = abs(outputBuffer[i]) > maxValue ? abs(outputBuffer[i]) : maxValue;
+		while (i < noteDuration_n && i < outputBufferSize && i < envelopeLengths[octave]) {
+			outputBuffer[i] += envelopes[octave][k][i] * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
+			maxValue = abs(outputBuffer[i]) > maxValue && outputBuffer[i] != 0.0 ? abs(outputBuffer[i]) : maxValue;
 			i++;
 		}
 		last = i;
 	}
 	for (int j = 0; j < last - 1; j++) {
-		outputBuffer[j] /= maxValue;
+		outputBuffer[j] = outputBuffer[j] * A0 / maxValue;
 		//file << outputBuffer[j] << std::endl;
 	}
 	//file.close();
 	outputBuffer[last - 1] = INFINITY;
 	return 0;
+}
+
+additiveParams_t AdditiveInstrument::parseAdditiveJson(Json::Value data) {
+	unsigned int minKey = data["min-key"].asUInt();
+	unsigned int maxKey = data["max-key"].asUInt();
+	unsigned int firstOctave = data["first-octave"].asUInt();
+	unsigned int octavesCount = data["octaves-count"].asUInt();
+	unsigned int harmonicsCount = data["n-harmonics"].asUInt();
+
+
+	std::vector<std::string> listOfFiles;
+	Json::Value files = data["files"];
+	int size = files.size();
+	for (int i = 0; i < files.size(); i++) {
+		listOfFiles.push_back(files[to_string(i)].asCString());
+	}
+
+	vector<int> envelopesLengths;
+
+	vector<vector<float*>> octavesVectors;
+	for (int i = 0; i < octavesCount; i++) {
+		vector<float*> temp;
+		octavesVectors.push_back(parseEnvelopeFile(listOfFiles[i], &envelopesLengths));
+	}
+
+	additiveParams_t ret;
+	ret.firstKey = minKey;
+	ret.lastKey = maxKey;
+	ret.envelopeLengths = envelopesLengths;
+	ret.harmonicsCount = harmonicsCount;
+	ret.octavesCount = octavesCount;
+	ret.octavesEnvelopes = octavesVectors;
+	return ret;
+}
+
+vector<float*>
+AdditiveInstrument::parseEnvelopeFile(std::string path, vector<int>* envelopesLengths) {
+	rapidcsv::Document doc(path, rapidcsv::LabelParams(-1, -1), rapidcsv::SeparatorParams(';'));
+	unsigned int colCount = doc.GetColumnCount();
+	unsigned int rowLength = doc.GetRowCount();
+	envelopesLengths->push_back(rowLength);
+	vector<float*> ret;
+	for (int i = 0; i < colCount; i++) {
+		float* tempbuff = new float[rowLength];
+		for (int j = 0; j < rowLength; j++) {
+			float val = (float)doc.GetCell<float>(i, j);
+			tempbuff[j] = val;
+		}
+		ret.push_back(tempbuff);
+	}
+	return ret;
 }

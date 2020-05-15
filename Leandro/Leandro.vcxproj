@@ -106,7 +106,6 @@
     <QtRcc Include="Leandro.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Additive.h" />
     <ClInclude Include="AudioFile.h" />
     <ClInclude Include="Binasc.h" />
     <ClInclude Include="bufferAssets.h" />
@@ -124,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="calesita64.mid" />
+    <None Include="config.json" />
     <None Include="generateFiles.bat" />
     <None Include="mario_midi.mid" />
     <None Include="pirates.mid" />

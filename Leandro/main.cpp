@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <time.h>
 
-Instrument* randInst();
 
 int main(int argc, char* argv[])
 {
@@ -28,7 +27,21 @@ int main(int argc, char* argv[])
 	params2.sustainLevel = 0.3;
 
 	//program.addChannel(channel1);
-	program.addMidiFile("", "etude.mid", true);
+	program.addMidiFile("", "pirates.mid", true);
+	program.loadData();
+
+
+	instrumentModel* pianoModel = program.instrumentModels.at(1);
+	instrumentModel* clarinetModel = program.instrumentModels.at(0);
+
+	additiveParams_t* pianoParams = (additiveParams_t*)pianoModel->params;
+	additiveParams_t* clarinetParams = (additiveParams_t*)clarinetModel->params;
+
+	Instrument* clarinet = new AdditiveInstrument(*clarinetParams, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE);
+	Instrument* piano = new AdditiveInstrument(*pianoParams, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE);
+
+	Instrument* instrumentList[] = { clarinet, piano };
+
 	//Instrument* instrument = new AdditiveInstrument("piano_envelope.txt", "Additive Piano");
 	for (int i = 0; i < program.channels.size(); i++) {
 		//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
@@ -37,7 +50,7 @@ int main(int argc, char* argv[])
 
 		//Instrument* instrument = randInst();
 		//Effect* effect = new VibratoEffect();
-		program.channels[i]->setChannelInstrument(instrument);
+		program.channels[i]->setChannelInstrument(clarinet);
 		//program.channels[i]->addEffectToChannel(effect);
 	}
 	//Instrument* instrument = new ADSRInstrument(&params1, MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE, SAMPLE_RATE);
@@ -51,30 +64,4 @@ int main(int argc, char* argv[])
 
 	program.show();
 	return a.exec();
-}
-
-Instrument* randInst() {
-	srand(time(NULL));
-	int randInt = rand() % 3 + 1;
-	Instrument* ret;
-	std::string str;
-	std::string name;
-	switch (randInt) {
-	case 1:
-		str = "guitar_envelope.txt";
-		name = "Additive Guitar";
-		break;
-	case 2:
-		str = "piano_envelope.txt";
-		name = "Additive Piano";
-		break;
-	case 3:
-		str = "trumpet_envelope.txt";
-		name = "Additive Trumpet";
-		break;
-	default:
-		break;
-	}
-	ret = new AdditiveInstrument(str, name);
-	return ret;
 }

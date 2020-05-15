@@ -9,6 +9,6 @@ with open('debug.txt') as data:
 
 t = np.arange(0, len(y))/44100
 y = np.array(y, dtype=np.float32)
-wavfile.write('data2.wav', 44100, y)
+wavfile.write('pirates_clarinete.wav', 44100, y)
 plt.plot(y)
 plt.show()

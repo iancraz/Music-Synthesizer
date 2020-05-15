@@ -16,10 +16,10 @@ Spectrogram::~Spectrogram() {
     return;
 }
 
-void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window,bool showTime , bool save, string name) {
+void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window, unsigned int overlap, bool showTime , bool save, string name) {
     ofstream out("data.ian");
     out << name << endl;
-    out << to_string(samplingRate) << ',' << to_string(nfft) <<',' << to_string(window) << ',';
+    out << to_string(samplingRate) << ',' << to_string(nfft) << ',' << to_string(window) << ',' << to_string(overlap) << ',';
     if (save)
         out << to_string(1) << ',';
     else

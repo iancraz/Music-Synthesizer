@@ -153,7 +153,6 @@ Sample::~Sample() {
 
 }
 
-
 void Sample::hanning(float* w, int N, short itype)
 {
 	int half, i, idx, n;

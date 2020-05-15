@@ -1,16 +1,14 @@
 #pragma once
-#include "portaudio.h"
-#include "midifile.h"
-#include "Options.h"
 #include "bufferAssets.h"
 #include "Sample.h"
+#include "json/json.h"
+#include <string>
 
 #define MAX_LOOP_TIME (0.370)
 #define MIN_LOOP_TIME (0.)
 
 
 using namespace std;
-using namespace smf;
 
 typedef int instrumentCallback(
 	float* outputBuffer,
@@ -23,8 +21,7 @@ typedef int instrumentCallback(
 
 enum class synthType { additive, fm, karplus, sampling };
 
-class Instrument
-{
+class Instrument {
 public:
 	synthType type;
 	int instrumentID;
@@ -83,6 +80,53 @@ private:
 	
 };
 
+typedef struct {
+	float tAttack;
+	float tDecay;
+	float sustainRate;
+	float sustainLevel;
+	float tRelease;
+	float k;
+}adsrParams_t;
 
+class ADSRInstrument : public Instrument {
+public:
+	ADSRInstrument(adsrParams_t* _params, const unsigned int buffLength, const unsigned int sampleRate);
+	~ADSRInstrument() {}
+	void setParams(adsrParams_t* params);
 
+protected:
+	adsrParams_t params;
+	instrumentCallback synthFunction;
+	int generateEnvelope(const unsigned int sampleRate, const unsigned int buffLength);
 
+	float* envelope;
+	float* release;
+};
+
+typedef struct {
+	std::string name;
+	unsigned int octavesCount;
+	unsigned int harmonicsCount;
+	vector<int> envelopeLengths;
+	unsigned int firstKey;
+	unsigned int lastKey;
+	vector<vector<float*>> octavesEnvelopes;
+}additiveParams_t;
+
+class AdditiveInstrument : public Instrument {
+public:
+	AdditiveInstrument(additiveParams_t params, unsigned int bufferLength);
+	instrumentCallback synthFunction;
+
+	static additiveParams_t parseAdditiveJson(Json::Value _data);
+	static vector<float*> parseEnvelopeFile(std::string path, vector<int>* envelopesLengths);
+
+protected:
+	unsigned int firstKey;
+	unsigned int lastKey;
+	unsigned int harmonicsCount;
+	std::vector<int> envelopeLengths;
+	std::vector<std::vector<float*>> octavesEnvelopes;
+	float*** envelopes;
+};

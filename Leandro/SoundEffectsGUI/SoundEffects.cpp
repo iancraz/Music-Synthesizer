@@ -155,6 +155,33 @@ void SoundEffects::computeEffects() {
 		VibratoEffect effect(&params);
 		effect.callback(input, numSamples, sampleRate);
 	}
+	if (eff.tremolo) {
+		tremoloParams_t params;
+		params.alpha = this->ui.tremoloAlpha->sliderPosition() /100.0;
+		params.f_lfo = this->ui.tremoloFreq->sliderPosition()/100.0 * 20.0 + 0.2;
+		params.sampleRate = sampleRate;
+		TremoloEffect effect(&params);
+		effect.callback(input, numSamples, sampleRate);
+	}
+
+	//PRUEBA EQ 8 BANDAS
+
+	/*eq8bandParams_t params;
+	params.gains[0] = 1;
+	params.gains[1] = 1;
+	params.gains[2] = 1;
+	params.gains[3] = 0;
+	params.gains[4] = 0;
+	params.gains[5] = 0;
+	params.gains[6] = 0;
+	params.gains[7] = 0;
+	params.sampleRate = sampleRate;
+	params.maxSoundBufferSize = numSamples;
+	Eq8BandEffect effect(&params);
+	effect.callback(input, numSamples, sampleRate);*/
+
+	// PRUEBA TREMOLO
+
 	return;
 }
 
@@ -175,6 +202,8 @@ void SoundEffects::checkBoxes() {
 		eff.eq = true;
 	if (ui.wahBox->isChecked())
 		eff.wahwah = true;
+	if (ui.tremoloCheckBox->isChecked())
+		eff.tremolo = true;
 }
 
 void SoundEffects::resetEffects() {
@@ -185,4 +214,5 @@ void SoundEffects::resetEffects() {
 	eff.reverbPlain = false;
 	eff.vibrato = false;
 	eff.wahwah = false;
+	eff.tremolo = false;
 }

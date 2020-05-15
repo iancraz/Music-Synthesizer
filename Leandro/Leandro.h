@@ -31,6 +31,13 @@ typedef struct {
 	ofstream* debugStream;
 }callbackData;
 
+typedef struct {
+	string instrumentName;
+	synthType type;
+	void* params;
+}instrumentModel;
+
+
 class Leandro : public QMainWindow
 {
 	Q_OBJECT
@@ -59,6 +66,11 @@ public:
 
 	void addMidiFile(string directory, string filename, bool autoSet);
 	void updateCallbackData();
+
+	void loadData();
+	vector<instrumentModel*> instrumentModels;
 private:
 	Ui::LeandroClass ui;
+
+
 };

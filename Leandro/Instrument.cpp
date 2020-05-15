@@ -26,11 +26,6 @@ KarplusInstrument::~KarplusInstrument() {
 	// Destructor class for KarplusInstrument. Should destroy all elements and free all allocated memory on stack.
 }
 
-
-
-
-
-
 //	SAMPLING CLASS FUNCTIONS
 
 
@@ -65,7 +60,6 @@ SamplingInstrument::SamplingInstrument(int num_instrument, const unsigned int bu
 			cout << "Cargando C" + to_string(i) << endl;
 			sample = new Sample("./Samples/Piano Electronico Clasico/C" + to_string(i), i);
 			samples->push_back(sample);
-
 		}
 
 		//selected_sample->note_pressed_time = 0.375;
