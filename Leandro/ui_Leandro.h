@@ -1748,6 +1748,7 @@ public:
 
         spectoFrame = new QFrame(frame_2);
         spectoFrame->setObjectName(QStringLiteral("spectoFrame"));
+        spectoFrame->setMaximumSize(QSize(16777215, 263));
         spectoFrame->setAutoFillBackground(true);
         spectoFrame->setFrameShape(QFrame::Panel);
         spectoFrame->setFrameShadow(QFrame::Raised);
@@ -1761,6 +1762,8 @@ public:
         spectogramLayout->setObjectName(QStringLiteral("spectogramLayout"));
         imageLabel = new QLabel(spectoFrame);
         imageLabel->setObjectName(QStringLiteral("imageLabel"));
+        imageLabel->setMaximumSize(QSize(16777215, 250));
+        imageLabel->setScaledContents(true);
 
         spectogramLayout->addWidget(imageLabel);
 
@@ -1785,7 +1788,7 @@ public:
         activeChannelAssetsPanel->setObjectName(QStringLiteral("activeChannelAssetsPanel"));
         instrumentFrameFrame = new QFrame(centralWidget);
         instrumentFrameFrame->setObjectName(QStringLiteral("instrumentFrameFrame"));
-        instrumentFrameFrame->setMinimumSize(QSize(20, 0));
+        instrumentFrameFrame->setMinimumSize(QSize(289, 0));
         QPalette palette13;
         palette13.setBrush(QPalette::Active, QPalette::Base, brush3);
         palette13.setBrush(QPalette::Active, QPalette::Window, brush13);

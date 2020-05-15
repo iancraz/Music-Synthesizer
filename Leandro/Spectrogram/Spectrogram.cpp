@@ -17,7 +17,7 @@ Spectrogram::~Spectrogram() {
 }
 
 void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, window_t window, unsigned int overlap, bool showTime , bool save, string name) {
-    ofstream out("data.ian");
+    ofstream out("./Spectrogram/data.ian");
     out << name << endl;
     out << to_string(samplingRate) << ',' << to_string(nfft) << ',' << to_string(window) << ',' << to_string(overlap) << ',';
     if (save)
@@ -40,7 +40,7 @@ void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, 
     }
     out << endl;
     out.close();
-    system("python ./Spectrogram/plot.py");
+    system("py Spectrogram\\plot.py");
 #ifdef DEBUG
     cout << "Finalizado el calculo." << endl;
 #endif

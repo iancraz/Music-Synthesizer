@@ -3857,6 +3857,12 @@
                </item>
                <item>
                 <widget class="QFrame" name="spectoFrame">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>263</height>
+                  </size>
+                 </property>
                  <property name="autoFillBackground">
                   <bool>true</bool>
                  </property>
@@ -3874,8 +3880,17 @@
                    <layout class="QHBoxLayout" name="spectogramLayout">
                     <item>
                      <widget class="QLabel" name="imageLabel">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>250</height>
+                       </size>
+                      </property>
                       <property name="text">
                        <string/>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>
@@ -3899,7 +3914,7 @@
          <widget class="QFrame" name="instrumentFrameFrame">
           <property name="minimumSize">
            <size>
-            <width>20</width>
+            <width>289</width>
             <height>0</height>
            </size>
           </property>

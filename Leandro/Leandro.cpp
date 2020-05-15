@@ -50,6 +50,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 												   your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 	this->wav = new float[MAX_WAV_SIZE];
+	this->wav[0] = INFINITY;
 	this->updateCallbackData();
 	
 	
@@ -115,19 +116,12 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Left channel
 		*out++ = (1.0 / addedFrames) * data->activeBuffer[frame];  // Right channel
 		//*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
-	}
-	*(data->currentSample) += frameCount;
-
-
-	//// LO QUE AGREGO IAN ES ESTO/////////////////
-	if (*data->recordFlag) {
-		for (unsigned int i = 0; i < (unsigned int)(frameCount / 2); i++) {
-			data->wav[*(data->wavCounter) + i] = out[2 * i];
-			data->wav[*(data->wavCounter) + i+1] = INFINITY;
+		if (*data->recordFlag) {
+			data->wav[(*data->wavCounter)++] = (1.0 / addedFrames) * data->activeBuffer[frame];
+			data->wav[(*data->wavCounter) + 1] = INFINITY;
 		}
-		*data->wavCounter += (int)(frameCount/2.0);
-	}
-	///////////////////////////////////////////////
+		}
+	*(data->currentSample) += frameCount;
 
 	return paContinue;
 }
@@ -208,7 +202,7 @@ void Leandro::updateCallbackData() {
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
 	this->callData.recordFlag = &recordFlag;
-	this->callData.wav = wav;
+	this->callData.wav = this->wav;
 	this->callData.wavCounter = &wavCounter;
 
 };
@@ -921,7 +915,7 @@ void Leandro::wahwahValueChanged() {
 //	Record to WAV
 
 void Leandro::record2Wav() {
-	if (recordFlag) {
+
 		AudioFile<double> audioFile;
 		AudioFile<double>::AudioBuffer buffer;
 		buffer.resize(1);
@@ -931,7 +925,7 @@ void Leandro::record2Wav() {
 		}
 		bool ok = audioFile.setAudioBuffer(buffer);
 		audioFile.save("out.wav");
-	}
+
 	return;
 }
 
@@ -1849,6 +1843,7 @@ void Leandro::channel10TrackChanged() {
 }
 
 void Leandro::showSpectrogram() {
+	
 	QDialog popup(this);
 	popup.show();
 }
@@ -1870,15 +1865,17 @@ void Leandro::loadMidiFile() {
 
 
 void Leandro::calcSpecgram() {
-	int i = 0;
-	while (wav[i] != INFINITY) {
-		i++;
+	if (wav[0] != INFINITY) {
+		int i = 0;
+		while (wav[i] != INFINITY) {
+			i++;
+		}
+
+		Spectrogram temp(wav, i);
+		unsigned int nfft = 1024;
+		unsigned int overlap = 128;
+		bool show = false;
+		temp.calcSpectrogram(SAMPLE_RATE, nfft, WINDOW_NONE, overlap, show, true, "spectogram.png");
 	}
-	
-	Spectrogram temp(wav,i);
-	unsigned int nfft = 1024;
-	unsigned int overlap = 128;
-	bool show = false;
-	temp.calcSpectrogram(SAMPLE_RATE, nfft, WINDOW_NONE, overlap, show, true, "spectogram.png");
 	return;
 }
