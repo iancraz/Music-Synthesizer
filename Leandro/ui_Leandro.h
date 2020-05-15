@@ -51,18 +51,118 @@ public:
     QScrollArea *scrollAreaChannels_2;
     QWidget *scrollAreaChannelsWidgetContents_2;
     QHBoxLayout *channelsContainerLayout;
+    QFrame *frame_2;
+    QHBoxLayout *horizontalLayout_13;
     QFrame *frameChannel1;
     QVBoxLayout *verticalLayoutFrameChannel1;
     QHBoxLayout *channelTopLayout;
     QLabel *nameLabelChannel1;
     QPushButton *closeButtonChannel1;
-    QPushButton *setActiveButtonChannel1_2;
+    QPushButton *setActiveButtonChannel1;
     QSpacerItem *verticalSpacerChannel1;
-    QComboBox *inputComboBoxChannel1_2;
-    QListWidget *midiListChannel1_2;
-    QDial *levelDialChannel1_2;
+    QComboBox *inputComboBoxChannel1;
+    QListWidget *midiListChannel1;
+    QDial *levelDialChannel1;
     QLabel *levelLabelChannel1_2;
-    QFrame *frame_2;
+    QFrame *frameChannel2;
+    QVBoxLayout *verticalLayoutFrameChannel1_2;
+    QHBoxLayout *channelTopLayout_2;
+    QLabel *nameLabelChannel2;
+    QPushButton *closeButtonChannel2;
+    QPushButton *setActiveButtonChannel2;
+    QSpacerItem *verticalSpacerChannel1_2;
+    QComboBox *inputComboBoxChannel2;
+    QListWidget *midiListChannel2;
+    QDial *levelDialChannel2;
+    QLabel *levelLabelChannel1_3;
+    QFrame *frameChannel3;
+    QVBoxLayout *verticalLayoutFrameChannel1_3;
+    QHBoxLayout *channelTopLayout_3;
+    QLabel *nameLabelChannel3;
+    QPushButton *closeButtonChannel3;
+    QPushButton *setActiveButtonChannel3;
+    QSpacerItem *verticalSpacerChannel1_3;
+    QComboBox *inputComboBoxChannel3;
+    QListWidget *midiListChannel3;
+    QDial *levelDialChannel3;
+    QLabel *levelLabelChannel1_4;
+    QFrame *frameChannel4;
+    QVBoxLayout *verticalLayoutFrameChannel1_4;
+    QHBoxLayout *channelTopLayout_4;
+    QLabel *nameLabelChannel4;
+    QPushButton *closeButtonChannel4;
+    QPushButton *setActiveButtonChannel4;
+    QSpacerItem *verticalSpacerChannel1_4;
+    QComboBox *inputComboBoxChannel4;
+    QListWidget *midiListChannel4;
+    QDial *levelDialChannel4;
+    QLabel *levelLabelChannel1_5;
+    QFrame *frameChannel5;
+    QVBoxLayout *verticalLayoutFrameChannel1_5;
+    QHBoxLayout *channelTopLayout_5;
+    QLabel *nameLabelChannel5;
+    QPushButton *closeButtonChannel5;
+    QPushButton *setActiveButtonChannel5;
+    QSpacerItem *verticalSpacerChannel1_5;
+    QComboBox *inputComboBoxChannel5;
+    QListWidget *midiListChannel5;
+    QDial *levelDialChannel5;
+    QLabel *levelLabelChannel1_6;
+    QFrame *frameChannel6;
+    QVBoxLayout *verticalLayoutFrameChannel1_6;
+    QHBoxLayout *channelTopLayout_6;
+    QLabel *nameLabelChannel6;
+    QPushButton *closeButtonChannel6;
+    QPushButton *setActiveButtonChannel6;
+    QSpacerItem *verticalSpacerChannel1_6;
+    QComboBox *inputComboBoxChannel6;
+    QListWidget *midiListChannel6;
+    QDial *levelDialChannel6;
+    QLabel *levelLabelChannel1_7;
+    QFrame *frameChannel7;
+    QVBoxLayout *verticalLayoutFrameChannel1_7;
+    QHBoxLayout *channelTopLayout_7;
+    QLabel *nameLabelChannel7;
+    QPushButton *closeButtonChannel7;
+    QPushButton *setActiveButtonChannel7;
+    QSpacerItem *verticalSpacerChannel1_7;
+    QComboBox *inputComboBoxChannel7;
+    QListWidget *midiListChannel7;
+    QDial *levelDialChannel7;
+    QLabel *levelLabelChannel1_8;
+    QFrame *frameChannel8;
+    QVBoxLayout *verticalLayoutFrameChannel1_8;
+    QHBoxLayout *channelTopLayout_8;
+    QLabel *nameLabelChannel8;
+    QPushButton *closeButtonChannel8;
+    QPushButton *setActiveButtonChannel8;
+    QSpacerItem *verticalSpacerChannel1_8;
+    QComboBox *inputComboBoxChannel8;
+    QListWidget *midiListChannel8;
+    QDial *levelDialChannel8;
+    QLabel *levelLabelChannel1_9;
+    QFrame *frameChannel9;
+    QVBoxLayout *verticalLayoutFrameChannel1_9;
+    QHBoxLayout *channelTopLayout_9;
+    QLabel *nameLabelChannel9;
+    QPushButton *closeButtonChannel9;
+    QPushButton *setActiveButtonChannel9;
+    QSpacerItem *verticalSpacerChannel1_9;
+    QComboBox *inputComboBoxChannel9;
+    QListWidget *midiListChannel9;
+    QDial *levelDialChannel9;
+    QLabel *levelLabelChannel1_10;
+    QFrame *frameChannel10;
+    QVBoxLayout *verticalLayoutFrameChannel1_10;
+    QHBoxLayout *channelTopLayout_10;
+    QLabel *nameLabelChannel10;
+    QPushButton *closeButtonChannel10;
+    QPushButton *setActiveButtonChannel10;
+    QSpacerItem *verticalSpacerChannel1_10;
+    QComboBox *inputComboBoxChannel10;
+    QListWidget *midiListChannel10;
+    QDial *levelDialChannel10;
+    QLabel *levelLabelChannel1_11;
     QHBoxLayout *activeChannelAssetsPanel;
     QFrame *instrumentFrameFrame;
     QGridLayout *gridLayout_2;
@@ -581,7 +681,7 @@ public:
         scrollAreaChannels_2->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2480, 283));
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2480, 294));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -592,7 +692,15 @@ public:
         channelsContainerLayout->setContentsMargins(11, 11, 11, 11);
         channelsContainerLayout->setObjectName(QStringLiteral("channelsContainerLayout"));
         channelsContainerLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        frameChannel1 = new QFrame(scrollAreaChannelsWidgetContents_2);
+        frame_2 = new QFrame(scrollAreaChannelsWidgetContents_2);
+        frame_2->setObjectName(QStringLiteral("frame_2"));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        horizontalLayout_13 = new QHBoxLayout(frame_2);
+        horizontalLayout_13->setSpacing(6);
+        horizontalLayout_13->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        frameChannel1 = new QFrame(frame_2);
         frameChannel1->setObjectName(QStringLiteral("frameChannel1"));
         QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Expanding);
         sizePolicy4.setHorizontalStretch(0);
@@ -644,59 +752,59 @@ public:
 
         verticalLayoutFrameChannel1->addLayout(channelTopLayout);
 
-        setActiveButtonChannel1_2 = new QPushButton(frameChannel1);
-        setActiveButtonChannel1_2->setObjectName(QStringLiteral("setActiveButtonChannel1_2"));
+        setActiveButtonChannel1 = new QPushButton(frameChannel1);
+        setActiveButtonChannel1->setObjectName(QStringLiteral("setActiveButtonChannel1"));
         QSizePolicy sizePolicy6(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy6.setHorizontalStretch(0);
         sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(setActiveButtonChannel1_2->sizePolicy().hasHeightForWidth());
-        setActiveButtonChannel1_2->setSizePolicy(sizePolicy6);
-        setActiveButtonChannel1_2->setMinimumSize(QSize(0, 17));
-        setActiveButtonChannel1_2->setFont(font2);
-        setActiveButtonChannel1_2->setAutoFillBackground(true);
-        setActiveButtonChannel1_2->setFlat(true);
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel1->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel1->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel1->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel1->setFont(font2);
+        setActiveButtonChannel1->setAutoFillBackground(true);
+        setActiveButtonChannel1->setFlat(true);
 
-        verticalLayoutFrameChannel1->addWidget(setActiveButtonChannel1_2, 0, Qt::AlignHCenter);
+        verticalLayoutFrameChannel1->addWidget(setActiveButtonChannel1, 0, Qt::AlignHCenter);
 
         verticalSpacerChannel1 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayoutFrameChannel1->addItem(verticalSpacerChannel1);
 
-        inputComboBoxChannel1_2 = new QComboBox(frameChannel1);
-        inputComboBoxChannel1_2->setObjectName(QStringLiteral("inputComboBoxChannel1_2"));
+        inputComboBoxChannel1 = new QComboBox(frameChannel1);
+        inputComboBoxChannel1->setObjectName(QStringLiteral("inputComboBoxChannel1"));
         QSizePolicy sizePolicy7(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy7.setHorizontalStretch(0);
         sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(inputComboBoxChannel1_2->sizePolicy().hasHeightForWidth());
-        inputComboBoxChannel1_2->setSizePolicy(sizePolicy7);
-        inputComboBoxChannel1_2->setMinimumSize(QSize(0, 17));
-        inputComboBoxChannel1_2->setFont(font2);
-        inputComboBoxChannel1_2->setContextMenuPolicy(Qt::DefaultContextMenu);
-        inputComboBoxChannel1_2->setAutoFillBackground(true);
-        inputComboBoxChannel1_2->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
-        inputComboBoxChannel1_2->setIconSize(QSize(16, 10));
-        inputComboBoxChannel1_2->setFrame(false);
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel1->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel1->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel1->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel1->setFont(font2);
+        inputComboBoxChannel1->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel1->setAutoFillBackground(true);
+        inputComboBoxChannel1->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel1->setIconSize(QSize(16, 10));
+        inputComboBoxChannel1->setFrame(false);
 
-        verticalLayoutFrameChannel1->addWidget(inputComboBoxChannel1_2, 0, Qt::AlignHCenter);
+        verticalLayoutFrameChannel1->addWidget(inputComboBoxChannel1, 0, Qt::AlignHCenter);
 
-        midiListChannel1_2 = new QListWidget(frameChannel1);
-        new QListWidgetItem(midiListChannel1_2);
-        midiListChannel1_2->setObjectName(QStringLiteral("midiListChannel1_2"));
-        sizePolicy4.setHeightForWidth(midiListChannel1_2->sizePolicy().hasHeightForWidth());
-        midiListChannel1_2->setSizePolicy(sizePolicy4);
-        midiListChannel1_2->setMaximumSize(QSize(100, 16777215));
-        midiListChannel1_2->setFont(font);
-        midiListChannel1_2->setFrameShape(QFrame::Panel);
-        midiListChannel1_2->setLineWidth(2);
+        midiListChannel1 = new QListWidget(frameChannel1);
+        new QListWidgetItem(midiListChannel1);
+        midiListChannel1->setObjectName(QStringLiteral("midiListChannel1"));
+        sizePolicy4.setHeightForWidth(midiListChannel1->sizePolicy().hasHeightForWidth());
+        midiListChannel1->setSizePolicy(sizePolicy4);
+        midiListChannel1->setMaximumSize(QSize(100, 16777215));
+        midiListChannel1->setFont(font);
+        midiListChannel1->setFrameShape(QFrame::Panel);
+        midiListChannel1->setLineWidth(2);
 
-        verticalLayoutFrameChannel1->addWidget(midiListChannel1_2, 0, Qt::AlignHCenter);
+        verticalLayoutFrameChannel1->addWidget(midiListChannel1, 0, Qt::AlignHCenter);
 
-        levelDialChannel1_2 = new QDial(frameChannel1);
-        levelDialChannel1_2->setObjectName(QStringLiteral("levelDialChannel1_2"));
-        sizePolicy4.setHeightForWidth(levelDialChannel1_2->sizePolicy().hasHeightForWidth());
-        levelDialChannel1_2->setSizePolicy(sizePolicy4);
+        levelDialChannel1 = new QDial(frameChannel1);
+        levelDialChannel1->setObjectName(QStringLiteral("levelDialChannel1"));
+        sizePolicy4.setHeightForWidth(levelDialChannel1->sizePolicy().hasHeightForWidth());
+        levelDialChannel1->setSizePolicy(sizePolicy4);
 
-        verticalLayoutFrameChannel1->addWidget(levelDialChannel1_2);
+        verticalLayoutFrameChannel1->addWidget(levelDialChannel1);
 
         levelLabelChannel1_2 = new QLabel(frameChannel1);
         levelLabelChannel1_2->setObjectName(QStringLiteral("levelLabelChannel1_2"));
@@ -714,12 +822,926 @@ public:
         verticalLayoutFrameChannel1->addWidget(levelLabelChannel1_2);
 
 
-        channelsContainerLayout->addWidget(frameChannel1);
+        horizontalLayout_13->addWidget(frameChannel1);
 
-        frame_2 = new QFrame(scrollAreaChannelsWidgetContents_2);
-        frame_2->setObjectName(QStringLiteral("frame_2"));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
+        frameChannel2 = new QFrame(frame_2);
+        frameChannel2->setObjectName(QStringLiteral("frameChannel2"));
+        sizePolicy4.setHeightForWidth(frameChannel2->sizePolicy().hasHeightForWidth());
+        frameChannel2->setSizePolicy(sizePolicy4);
+        frameChannel2->setMaximumSize(QSize(125, 16777215));
+        QPalette palette4;
+        palette4.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette4.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette4.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette4.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel2->setPalette(palette4);
+        frameChannel2->setAutoFillBackground(true);
+        frameChannel2->setFrameShape(QFrame::Panel);
+        frameChannel2->setFrameShadow(QFrame::Raised);
+        frameChannel2->setLineWidth(3);
+        verticalLayoutFrameChannel1_2 = new QVBoxLayout(frameChannel2);
+        verticalLayoutFrameChannel1_2->setSpacing(6);
+        verticalLayoutFrameChannel1_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_2->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_2"));
+        channelTopLayout_2 = new QHBoxLayout();
+        channelTopLayout_2->setSpacing(6);
+        channelTopLayout_2->setObjectName(QStringLiteral("channelTopLayout_2"));
+        nameLabelChannel2 = new QLabel(frameChannel2);
+        nameLabelChannel2->setObjectName(QStringLiteral("nameLabelChannel2"));
+        nameLabelChannel2->setFont(font1);
+        nameLabelChannel2->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_2->addWidget(nameLabelChannel2);
+
+        closeButtonChannel2 = new QPushButton(frameChannel2);
+        closeButtonChannel2->setObjectName(QStringLiteral("closeButtonChannel2"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel2->sizePolicy().hasHeightForWidth());
+        closeButtonChannel2->setSizePolicy(sizePolicy5);
+        closeButtonChannel2->setIcon(icon);
+        closeButtonChannel2->setIconSize(QSize(12, 12));
+        closeButtonChannel2->setFlat(true);
+
+        channelTopLayout_2->addWidget(closeButtonChannel2);
+
+
+        verticalLayoutFrameChannel1_2->addLayout(channelTopLayout_2);
+
+        setActiveButtonChannel2 = new QPushButton(frameChannel2);
+        setActiveButtonChannel2->setObjectName(QStringLiteral("setActiveButtonChannel2"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel2->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel2->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel2->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel2->setFont(font2);
+        setActiveButtonChannel2->setAutoFillBackground(true);
+        setActiveButtonChannel2->setFlat(true);
+
+        verticalLayoutFrameChannel1_2->addWidget(setActiveButtonChannel2, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_2->addItem(verticalSpacerChannel1_2);
+
+        inputComboBoxChannel2 = new QComboBox(frameChannel2);
+        inputComboBoxChannel2->setObjectName(QStringLiteral("inputComboBoxChannel2"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel2->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel2->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel2->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel2->setFont(font2);
+        inputComboBoxChannel2->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel2->setAutoFillBackground(true);
+        inputComboBoxChannel2->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel2->setIconSize(QSize(16, 10));
+        inputComboBoxChannel2->setFrame(false);
+
+        verticalLayoutFrameChannel1_2->addWidget(inputComboBoxChannel2, 0, Qt::AlignHCenter);
+
+        midiListChannel2 = new QListWidget(frameChannel2);
+        new QListWidgetItem(midiListChannel2);
+        midiListChannel2->setObjectName(QStringLiteral("midiListChannel2"));
+        sizePolicy4.setHeightForWidth(midiListChannel2->sizePolicy().hasHeightForWidth());
+        midiListChannel2->setSizePolicy(sizePolicy4);
+        midiListChannel2->setMaximumSize(QSize(100, 16777215));
+        midiListChannel2->setFont(font);
+        midiListChannel2->setFrameShape(QFrame::Panel);
+        midiListChannel2->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_2->addWidget(midiListChannel2, 0, Qt::AlignHCenter);
+
+        levelDialChannel2 = new QDial(frameChannel2);
+        levelDialChannel2->setObjectName(QStringLiteral("levelDialChannel2"));
+        sizePolicy4.setHeightForWidth(levelDialChannel2->sizePolicy().hasHeightForWidth());
+        levelDialChannel2->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_2->addWidget(levelDialChannel2);
+
+        levelLabelChannel1_3 = new QLabel(frameChannel2);
+        levelLabelChannel1_3->setObjectName(QStringLiteral("levelLabelChannel1_3"));
+        levelLabelChannel1_3->setFont(font3);
+        levelLabelChannel1_3->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_2->addWidget(levelLabelChannel1_3);
+
+
+        horizontalLayout_13->addWidget(frameChannel2);
+
+        frameChannel3 = new QFrame(frame_2);
+        frameChannel3->setObjectName(QStringLiteral("frameChannel3"));
+        sizePolicy4.setHeightForWidth(frameChannel3->sizePolicy().hasHeightForWidth());
+        frameChannel3->setSizePolicy(sizePolicy4);
+        frameChannel3->setMaximumSize(QSize(125, 16777215));
+        QPalette palette5;
+        palette5.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette5.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette5.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette5.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette5.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette5.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel3->setPalette(palette5);
+        frameChannel3->setAutoFillBackground(true);
+        frameChannel3->setFrameShape(QFrame::Panel);
+        frameChannel3->setFrameShadow(QFrame::Raised);
+        frameChannel3->setLineWidth(3);
+        verticalLayoutFrameChannel1_3 = new QVBoxLayout(frameChannel3);
+        verticalLayoutFrameChannel1_3->setSpacing(6);
+        verticalLayoutFrameChannel1_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_3->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_3"));
+        channelTopLayout_3 = new QHBoxLayout();
+        channelTopLayout_3->setSpacing(6);
+        channelTopLayout_3->setObjectName(QStringLiteral("channelTopLayout_3"));
+        nameLabelChannel3 = new QLabel(frameChannel3);
+        nameLabelChannel3->setObjectName(QStringLiteral("nameLabelChannel3"));
+        nameLabelChannel3->setFont(font1);
+        nameLabelChannel3->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_3->addWidget(nameLabelChannel3);
+
+        closeButtonChannel3 = new QPushButton(frameChannel3);
+        closeButtonChannel3->setObjectName(QStringLiteral("closeButtonChannel3"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel3->sizePolicy().hasHeightForWidth());
+        closeButtonChannel3->setSizePolicy(sizePolicy5);
+        closeButtonChannel3->setIcon(icon);
+        closeButtonChannel3->setIconSize(QSize(12, 12));
+        closeButtonChannel3->setFlat(true);
+
+        channelTopLayout_3->addWidget(closeButtonChannel3);
+
+
+        verticalLayoutFrameChannel1_3->addLayout(channelTopLayout_3);
+
+        setActiveButtonChannel3 = new QPushButton(frameChannel3);
+        setActiveButtonChannel3->setObjectName(QStringLiteral("setActiveButtonChannel3"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel3->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel3->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel3->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel3->setFont(font2);
+        setActiveButtonChannel3->setAutoFillBackground(true);
+        setActiveButtonChannel3->setFlat(true);
+
+        verticalLayoutFrameChannel1_3->addWidget(setActiveButtonChannel3, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_3->addItem(verticalSpacerChannel1_3);
+
+        inputComboBoxChannel3 = new QComboBox(frameChannel3);
+        inputComboBoxChannel3->setObjectName(QStringLiteral("inputComboBoxChannel3"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel3->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel3->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel3->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel3->setFont(font2);
+        inputComboBoxChannel3->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel3->setAutoFillBackground(true);
+        inputComboBoxChannel3->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel3->setIconSize(QSize(16, 10));
+        inputComboBoxChannel3->setFrame(false);
+
+        verticalLayoutFrameChannel1_3->addWidget(inputComboBoxChannel3, 0, Qt::AlignHCenter);
+
+        midiListChannel3 = new QListWidget(frameChannel3);
+        new QListWidgetItem(midiListChannel3);
+        midiListChannel3->setObjectName(QStringLiteral("midiListChannel3"));
+        sizePolicy4.setHeightForWidth(midiListChannel3->sizePolicy().hasHeightForWidth());
+        midiListChannel3->setSizePolicy(sizePolicy4);
+        midiListChannel3->setMaximumSize(QSize(100, 16777215));
+        midiListChannel3->setFont(font);
+        midiListChannel3->setFrameShape(QFrame::Panel);
+        midiListChannel3->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_3->addWidget(midiListChannel3, 0, Qt::AlignHCenter);
+
+        levelDialChannel3 = new QDial(frameChannel3);
+        levelDialChannel3->setObjectName(QStringLiteral("levelDialChannel3"));
+        sizePolicy4.setHeightForWidth(levelDialChannel3->sizePolicy().hasHeightForWidth());
+        levelDialChannel3->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_3->addWidget(levelDialChannel3);
+
+        levelLabelChannel1_4 = new QLabel(frameChannel3);
+        levelLabelChannel1_4->setObjectName(QStringLiteral("levelLabelChannel1_4"));
+        levelLabelChannel1_4->setFont(font3);
+        levelLabelChannel1_4->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_3->addWidget(levelLabelChannel1_4);
+
+
+        horizontalLayout_13->addWidget(frameChannel3);
+
+        frameChannel4 = new QFrame(frame_2);
+        frameChannel4->setObjectName(QStringLiteral("frameChannel4"));
+        sizePolicy4.setHeightForWidth(frameChannel4->sizePolicy().hasHeightForWidth());
+        frameChannel4->setSizePolicy(sizePolicy4);
+        frameChannel4->setMaximumSize(QSize(125, 16777215));
+        QPalette palette6;
+        palette6.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette6.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette6.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette6.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette6.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette6.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel4->setPalette(palette6);
+        frameChannel4->setAutoFillBackground(true);
+        frameChannel4->setFrameShape(QFrame::Panel);
+        frameChannel4->setFrameShadow(QFrame::Raised);
+        frameChannel4->setLineWidth(3);
+        verticalLayoutFrameChannel1_4 = new QVBoxLayout(frameChannel4);
+        verticalLayoutFrameChannel1_4->setSpacing(6);
+        verticalLayoutFrameChannel1_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_4->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_4"));
+        channelTopLayout_4 = new QHBoxLayout();
+        channelTopLayout_4->setSpacing(6);
+        channelTopLayout_4->setObjectName(QStringLiteral("channelTopLayout_4"));
+        nameLabelChannel4 = new QLabel(frameChannel4);
+        nameLabelChannel4->setObjectName(QStringLiteral("nameLabelChannel4"));
+        nameLabelChannel4->setFont(font1);
+        nameLabelChannel4->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_4->addWidget(nameLabelChannel4);
+
+        closeButtonChannel4 = new QPushButton(frameChannel4);
+        closeButtonChannel4->setObjectName(QStringLiteral("closeButtonChannel4"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel4->sizePolicy().hasHeightForWidth());
+        closeButtonChannel4->setSizePolicy(sizePolicy5);
+        closeButtonChannel4->setIcon(icon);
+        closeButtonChannel4->setIconSize(QSize(12, 12));
+        closeButtonChannel4->setFlat(true);
+
+        channelTopLayout_4->addWidget(closeButtonChannel4);
+
+
+        verticalLayoutFrameChannel1_4->addLayout(channelTopLayout_4);
+
+        setActiveButtonChannel4 = new QPushButton(frameChannel4);
+        setActiveButtonChannel4->setObjectName(QStringLiteral("setActiveButtonChannel4"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel4->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel4->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel4->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel4->setFont(font2);
+        setActiveButtonChannel4->setAutoFillBackground(true);
+        setActiveButtonChannel4->setFlat(true);
+
+        verticalLayoutFrameChannel1_4->addWidget(setActiveButtonChannel4, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_4->addItem(verticalSpacerChannel1_4);
+
+        inputComboBoxChannel4 = new QComboBox(frameChannel4);
+        inputComboBoxChannel4->setObjectName(QStringLiteral("inputComboBoxChannel4"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel4->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel4->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel4->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel4->setFont(font2);
+        inputComboBoxChannel4->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel4->setAutoFillBackground(true);
+        inputComboBoxChannel4->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel4->setIconSize(QSize(16, 10));
+        inputComboBoxChannel4->setFrame(false);
+
+        verticalLayoutFrameChannel1_4->addWidget(inputComboBoxChannel4, 0, Qt::AlignHCenter);
+
+        midiListChannel4 = new QListWidget(frameChannel4);
+        new QListWidgetItem(midiListChannel4);
+        midiListChannel4->setObjectName(QStringLiteral("midiListChannel4"));
+        sizePolicy4.setHeightForWidth(midiListChannel4->sizePolicy().hasHeightForWidth());
+        midiListChannel4->setSizePolicy(sizePolicy4);
+        midiListChannel4->setMaximumSize(QSize(100, 16777215));
+        midiListChannel4->setFont(font);
+        midiListChannel4->setFrameShape(QFrame::Panel);
+        midiListChannel4->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_4->addWidget(midiListChannel4, 0, Qt::AlignHCenter);
+
+        levelDialChannel4 = new QDial(frameChannel4);
+        levelDialChannel4->setObjectName(QStringLiteral("levelDialChannel4"));
+        sizePolicy4.setHeightForWidth(levelDialChannel4->sizePolicy().hasHeightForWidth());
+        levelDialChannel4->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_4->addWidget(levelDialChannel4);
+
+        levelLabelChannel1_5 = new QLabel(frameChannel4);
+        levelLabelChannel1_5->setObjectName(QStringLiteral("levelLabelChannel1_5"));
+        levelLabelChannel1_5->setFont(font3);
+        levelLabelChannel1_5->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_4->addWidget(levelLabelChannel1_5);
+
+
+        horizontalLayout_13->addWidget(frameChannel4);
+
+        frameChannel5 = new QFrame(frame_2);
+        frameChannel5->setObjectName(QStringLiteral("frameChannel5"));
+        sizePolicy4.setHeightForWidth(frameChannel5->sizePolicy().hasHeightForWidth());
+        frameChannel5->setSizePolicy(sizePolicy4);
+        frameChannel5->setMaximumSize(QSize(125, 16777215));
+        QPalette palette7;
+        palette7.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette7.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette7.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette7.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette7.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette7.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel5->setPalette(palette7);
+        frameChannel5->setAutoFillBackground(true);
+        frameChannel5->setFrameShape(QFrame::Panel);
+        frameChannel5->setFrameShadow(QFrame::Raised);
+        frameChannel5->setLineWidth(3);
+        verticalLayoutFrameChannel1_5 = new QVBoxLayout(frameChannel5);
+        verticalLayoutFrameChannel1_5->setSpacing(6);
+        verticalLayoutFrameChannel1_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_5->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_5"));
+        channelTopLayout_5 = new QHBoxLayout();
+        channelTopLayout_5->setSpacing(6);
+        channelTopLayout_5->setObjectName(QStringLiteral("channelTopLayout_5"));
+        nameLabelChannel5 = new QLabel(frameChannel5);
+        nameLabelChannel5->setObjectName(QStringLiteral("nameLabelChannel5"));
+        nameLabelChannel5->setFont(font1);
+        nameLabelChannel5->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_5->addWidget(nameLabelChannel5);
+
+        closeButtonChannel5 = new QPushButton(frameChannel5);
+        closeButtonChannel5->setObjectName(QStringLiteral("closeButtonChannel5"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel5->sizePolicy().hasHeightForWidth());
+        closeButtonChannel5->setSizePolicy(sizePolicy5);
+        closeButtonChannel5->setIcon(icon);
+        closeButtonChannel5->setIconSize(QSize(12, 12));
+        closeButtonChannel5->setFlat(true);
+
+        channelTopLayout_5->addWidget(closeButtonChannel5);
+
+
+        verticalLayoutFrameChannel1_5->addLayout(channelTopLayout_5);
+
+        setActiveButtonChannel5 = new QPushButton(frameChannel5);
+        setActiveButtonChannel5->setObjectName(QStringLiteral("setActiveButtonChannel5"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel5->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel5->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel5->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel5->setFont(font2);
+        setActiveButtonChannel5->setAutoFillBackground(true);
+        setActiveButtonChannel5->setFlat(true);
+
+        verticalLayoutFrameChannel1_5->addWidget(setActiveButtonChannel5, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_5->addItem(verticalSpacerChannel1_5);
+
+        inputComboBoxChannel5 = new QComboBox(frameChannel5);
+        inputComboBoxChannel5->setObjectName(QStringLiteral("inputComboBoxChannel5"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel5->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel5->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel5->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel5->setFont(font2);
+        inputComboBoxChannel5->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel5->setAutoFillBackground(true);
+        inputComboBoxChannel5->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel5->setIconSize(QSize(16, 10));
+        inputComboBoxChannel5->setFrame(false);
+
+        verticalLayoutFrameChannel1_5->addWidget(inputComboBoxChannel5, 0, Qt::AlignHCenter);
+
+        midiListChannel5 = new QListWidget(frameChannel5);
+        new QListWidgetItem(midiListChannel5);
+        midiListChannel5->setObjectName(QStringLiteral("midiListChannel5"));
+        sizePolicy4.setHeightForWidth(midiListChannel5->sizePolicy().hasHeightForWidth());
+        midiListChannel5->setSizePolicy(sizePolicy4);
+        midiListChannel5->setMaximumSize(QSize(100, 16777215));
+        midiListChannel5->setFont(font);
+        midiListChannel5->setFrameShape(QFrame::Panel);
+        midiListChannel5->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_5->addWidget(midiListChannel5, 0, Qt::AlignHCenter);
+
+        levelDialChannel5 = new QDial(frameChannel5);
+        levelDialChannel5->setObjectName(QStringLiteral("levelDialChannel5"));
+        sizePolicy4.setHeightForWidth(levelDialChannel5->sizePolicy().hasHeightForWidth());
+        levelDialChannel5->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_5->addWidget(levelDialChannel5);
+
+        levelLabelChannel1_6 = new QLabel(frameChannel5);
+        levelLabelChannel1_6->setObjectName(QStringLiteral("levelLabelChannel1_6"));
+        levelLabelChannel1_6->setFont(font3);
+        levelLabelChannel1_6->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_5->addWidget(levelLabelChannel1_6);
+
+
+        horizontalLayout_13->addWidget(frameChannel5);
+
+        frameChannel6 = new QFrame(frame_2);
+        frameChannel6->setObjectName(QStringLiteral("frameChannel6"));
+        sizePolicy4.setHeightForWidth(frameChannel6->sizePolicy().hasHeightForWidth());
+        frameChannel6->setSizePolicy(sizePolicy4);
+        frameChannel6->setMaximumSize(QSize(125, 16777215));
+        QPalette palette8;
+        palette8.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette8.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette8.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette8.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette8.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette8.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel6->setPalette(palette8);
+        frameChannel6->setAutoFillBackground(true);
+        frameChannel6->setFrameShape(QFrame::Panel);
+        frameChannel6->setFrameShadow(QFrame::Raised);
+        frameChannel6->setLineWidth(3);
+        verticalLayoutFrameChannel1_6 = new QVBoxLayout(frameChannel6);
+        verticalLayoutFrameChannel1_6->setSpacing(6);
+        verticalLayoutFrameChannel1_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_6->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_6"));
+        channelTopLayout_6 = new QHBoxLayout();
+        channelTopLayout_6->setSpacing(6);
+        channelTopLayout_6->setObjectName(QStringLiteral("channelTopLayout_6"));
+        nameLabelChannel6 = new QLabel(frameChannel6);
+        nameLabelChannel6->setObjectName(QStringLiteral("nameLabelChannel6"));
+        nameLabelChannel6->setFont(font1);
+        nameLabelChannel6->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_6->addWidget(nameLabelChannel6);
+
+        closeButtonChannel6 = new QPushButton(frameChannel6);
+        closeButtonChannel6->setObjectName(QStringLiteral("closeButtonChannel6"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel6->sizePolicy().hasHeightForWidth());
+        closeButtonChannel6->setSizePolicy(sizePolicy5);
+        closeButtonChannel6->setIcon(icon);
+        closeButtonChannel6->setIconSize(QSize(12, 12));
+        closeButtonChannel6->setFlat(true);
+
+        channelTopLayout_6->addWidget(closeButtonChannel6);
+
+
+        verticalLayoutFrameChannel1_6->addLayout(channelTopLayout_6);
+
+        setActiveButtonChannel6 = new QPushButton(frameChannel6);
+        setActiveButtonChannel6->setObjectName(QStringLiteral("setActiveButtonChannel6"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel6->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel6->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel6->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel6->setFont(font2);
+        setActiveButtonChannel6->setAutoFillBackground(true);
+        setActiveButtonChannel6->setFlat(true);
+
+        verticalLayoutFrameChannel1_6->addWidget(setActiveButtonChannel6, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_6->addItem(verticalSpacerChannel1_6);
+
+        inputComboBoxChannel6 = new QComboBox(frameChannel6);
+        inputComboBoxChannel6->setObjectName(QStringLiteral("inputComboBoxChannel6"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel6->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel6->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel6->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel6->setFont(font2);
+        inputComboBoxChannel6->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel6->setAutoFillBackground(true);
+        inputComboBoxChannel6->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel6->setIconSize(QSize(16, 10));
+        inputComboBoxChannel6->setFrame(false);
+
+        verticalLayoutFrameChannel1_6->addWidget(inputComboBoxChannel6, 0, Qt::AlignHCenter);
+
+        midiListChannel6 = new QListWidget(frameChannel6);
+        new QListWidgetItem(midiListChannel6);
+        midiListChannel6->setObjectName(QStringLiteral("midiListChannel6"));
+        sizePolicy4.setHeightForWidth(midiListChannel6->sizePolicy().hasHeightForWidth());
+        midiListChannel6->setSizePolicy(sizePolicy4);
+        midiListChannel6->setMaximumSize(QSize(100, 16777215));
+        midiListChannel6->setFont(font);
+        midiListChannel6->setFrameShape(QFrame::Panel);
+        midiListChannel6->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_6->addWidget(midiListChannel6, 0, Qt::AlignHCenter);
+
+        levelDialChannel6 = new QDial(frameChannel6);
+        levelDialChannel6->setObjectName(QStringLiteral("levelDialChannel6"));
+        sizePolicy4.setHeightForWidth(levelDialChannel6->sizePolicy().hasHeightForWidth());
+        levelDialChannel6->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_6->addWidget(levelDialChannel6);
+
+        levelLabelChannel1_7 = new QLabel(frameChannel6);
+        levelLabelChannel1_7->setObjectName(QStringLiteral("levelLabelChannel1_7"));
+        levelLabelChannel1_7->setFont(font3);
+        levelLabelChannel1_7->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_6->addWidget(levelLabelChannel1_7);
+
+
+        horizontalLayout_13->addWidget(frameChannel6);
+
+        frameChannel7 = new QFrame(frame_2);
+        frameChannel7->setObjectName(QStringLiteral("frameChannel7"));
+        sizePolicy4.setHeightForWidth(frameChannel7->sizePolicy().hasHeightForWidth());
+        frameChannel7->setSizePolicy(sizePolicy4);
+        frameChannel7->setMaximumSize(QSize(125, 16777215));
+        QPalette palette9;
+        palette9.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette9.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette9.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette9.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette9.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette9.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel7->setPalette(palette9);
+        frameChannel7->setAutoFillBackground(true);
+        frameChannel7->setFrameShape(QFrame::Panel);
+        frameChannel7->setFrameShadow(QFrame::Raised);
+        frameChannel7->setLineWidth(3);
+        verticalLayoutFrameChannel1_7 = new QVBoxLayout(frameChannel7);
+        verticalLayoutFrameChannel1_7->setSpacing(6);
+        verticalLayoutFrameChannel1_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_7->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_7"));
+        channelTopLayout_7 = new QHBoxLayout();
+        channelTopLayout_7->setSpacing(6);
+        channelTopLayout_7->setObjectName(QStringLiteral("channelTopLayout_7"));
+        nameLabelChannel7 = new QLabel(frameChannel7);
+        nameLabelChannel7->setObjectName(QStringLiteral("nameLabelChannel7"));
+        nameLabelChannel7->setFont(font1);
+        nameLabelChannel7->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_7->addWidget(nameLabelChannel7);
+
+        closeButtonChannel7 = new QPushButton(frameChannel7);
+        closeButtonChannel7->setObjectName(QStringLiteral("closeButtonChannel7"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel7->sizePolicy().hasHeightForWidth());
+        closeButtonChannel7->setSizePolicy(sizePolicy5);
+        closeButtonChannel7->setIcon(icon);
+        closeButtonChannel7->setIconSize(QSize(12, 12));
+        closeButtonChannel7->setFlat(true);
+
+        channelTopLayout_7->addWidget(closeButtonChannel7);
+
+
+        verticalLayoutFrameChannel1_7->addLayout(channelTopLayout_7);
+
+        setActiveButtonChannel7 = new QPushButton(frameChannel7);
+        setActiveButtonChannel7->setObjectName(QStringLiteral("setActiveButtonChannel7"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel7->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel7->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel7->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel7->setFont(font2);
+        setActiveButtonChannel7->setAutoFillBackground(true);
+        setActiveButtonChannel7->setFlat(true);
+
+        verticalLayoutFrameChannel1_7->addWidget(setActiveButtonChannel7, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_7->addItem(verticalSpacerChannel1_7);
+
+        inputComboBoxChannel7 = new QComboBox(frameChannel7);
+        inputComboBoxChannel7->setObjectName(QStringLiteral("inputComboBoxChannel7"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel7->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel7->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel7->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel7->setFont(font2);
+        inputComboBoxChannel7->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel7->setAutoFillBackground(true);
+        inputComboBoxChannel7->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel7->setIconSize(QSize(16, 10));
+        inputComboBoxChannel7->setFrame(false);
+
+        verticalLayoutFrameChannel1_7->addWidget(inputComboBoxChannel7, 0, Qt::AlignHCenter);
+
+        midiListChannel7 = new QListWidget(frameChannel7);
+        new QListWidgetItem(midiListChannel7);
+        midiListChannel7->setObjectName(QStringLiteral("midiListChannel7"));
+        sizePolicy4.setHeightForWidth(midiListChannel7->sizePolicy().hasHeightForWidth());
+        midiListChannel7->setSizePolicy(sizePolicy4);
+        midiListChannel7->setMaximumSize(QSize(100, 16777215));
+        midiListChannel7->setFont(font);
+        midiListChannel7->setFrameShape(QFrame::Panel);
+        midiListChannel7->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_7->addWidget(midiListChannel7, 0, Qt::AlignHCenter);
+
+        levelDialChannel7 = new QDial(frameChannel7);
+        levelDialChannel7->setObjectName(QStringLiteral("levelDialChannel7"));
+        sizePolicy4.setHeightForWidth(levelDialChannel7->sizePolicy().hasHeightForWidth());
+        levelDialChannel7->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_7->addWidget(levelDialChannel7);
+
+        levelLabelChannel1_8 = new QLabel(frameChannel7);
+        levelLabelChannel1_8->setObjectName(QStringLiteral("levelLabelChannel1_8"));
+        levelLabelChannel1_8->setFont(font3);
+        levelLabelChannel1_8->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_7->addWidget(levelLabelChannel1_8);
+
+
+        horizontalLayout_13->addWidget(frameChannel7);
+
+        frameChannel8 = new QFrame(frame_2);
+        frameChannel8->setObjectName(QStringLiteral("frameChannel8"));
+        sizePolicy4.setHeightForWidth(frameChannel8->sizePolicy().hasHeightForWidth());
+        frameChannel8->setSizePolicy(sizePolicy4);
+        frameChannel8->setMaximumSize(QSize(125, 16777215));
+        QPalette palette10;
+        palette10.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette10.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette10.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette10.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette10.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette10.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel8->setPalette(palette10);
+        frameChannel8->setAutoFillBackground(true);
+        frameChannel8->setFrameShape(QFrame::Panel);
+        frameChannel8->setFrameShadow(QFrame::Raised);
+        frameChannel8->setLineWidth(3);
+        verticalLayoutFrameChannel1_8 = new QVBoxLayout(frameChannel8);
+        verticalLayoutFrameChannel1_8->setSpacing(6);
+        verticalLayoutFrameChannel1_8->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_8->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_8"));
+        channelTopLayout_8 = new QHBoxLayout();
+        channelTopLayout_8->setSpacing(6);
+        channelTopLayout_8->setObjectName(QStringLiteral("channelTopLayout_8"));
+        nameLabelChannel8 = new QLabel(frameChannel8);
+        nameLabelChannel8->setObjectName(QStringLiteral("nameLabelChannel8"));
+        nameLabelChannel8->setFont(font1);
+        nameLabelChannel8->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_8->addWidget(nameLabelChannel8);
+
+        closeButtonChannel8 = new QPushButton(frameChannel8);
+        closeButtonChannel8->setObjectName(QStringLiteral("closeButtonChannel8"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel8->sizePolicy().hasHeightForWidth());
+        closeButtonChannel8->setSizePolicy(sizePolicy5);
+        closeButtonChannel8->setIcon(icon);
+        closeButtonChannel8->setIconSize(QSize(12, 12));
+        closeButtonChannel8->setFlat(true);
+
+        channelTopLayout_8->addWidget(closeButtonChannel8);
+
+
+        verticalLayoutFrameChannel1_8->addLayout(channelTopLayout_8);
+
+        setActiveButtonChannel8 = new QPushButton(frameChannel8);
+        setActiveButtonChannel8->setObjectName(QStringLiteral("setActiveButtonChannel8"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel8->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel8->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel8->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel8->setFont(font2);
+        setActiveButtonChannel8->setAutoFillBackground(true);
+        setActiveButtonChannel8->setFlat(true);
+
+        verticalLayoutFrameChannel1_8->addWidget(setActiveButtonChannel8, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_8->addItem(verticalSpacerChannel1_8);
+
+        inputComboBoxChannel8 = new QComboBox(frameChannel8);
+        inputComboBoxChannel8->setObjectName(QStringLiteral("inputComboBoxChannel8"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel8->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel8->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel8->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel8->setFont(font2);
+        inputComboBoxChannel8->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel8->setAutoFillBackground(true);
+        inputComboBoxChannel8->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel8->setIconSize(QSize(16, 10));
+        inputComboBoxChannel8->setFrame(false);
+
+        verticalLayoutFrameChannel1_8->addWidget(inputComboBoxChannel8, 0, Qt::AlignHCenter);
+
+        midiListChannel8 = new QListWidget(frameChannel8);
+        new QListWidgetItem(midiListChannel8);
+        midiListChannel8->setObjectName(QStringLiteral("midiListChannel8"));
+        sizePolicy4.setHeightForWidth(midiListChannel8->sizePolicy().hasHeightForWidth());
+        midiListChannel8->setSizePolicy(sizePolicy4);
+        midiListChannel8->setMaximumSize(QSize(100, 16777215));
+        midiListChannel8->setFont(font);
+        midiListChannel8->setFrameShape(QFrame::Panel);
+        midiListChannel8->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_8->addWidget(midiListChannel8, 0, Qt::AlignHCenter);
+
+        levelDialChannel8 = new QDial(frameChannel8);
+        levelDialChannel8->setObjectName(QStringLiteral("levelDialChannel8"));
+        sizePolicy4.setHeightForWidth(levelDialChannel8->sizePolicy().hasHeightForWidth());
+        levelDialChannel8->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_8->addWidget(levelDialChannel8);
+
+        levelLabelChannel1_9 = new QLabel(frameChannel8);
+        levelLabelChannel1_9->setObjectName(QStringLiteral("levelLabelChannel1_9"));
+        levelLabelChannel1_9->setFont(font3);
+        levelLabelChannel1_9->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_8->addWidget(levelLabelChannel1_9);
+
+
+        horizontalLayout_13->addWidget(frameChannel8);
+
+        frameChannel9 = new QFrame(frame_2);
+        frameChannel9->setObjectName(QStringLiteral("frameChannel9"));
+        sizePolicy4.setHeightForWidth(frameChannel9->sizePolicy().hasHeightForWidth());
+        frameChannel9->setSizePolicy(sizePolicy4);
+        frameChannel9->setMaximumSize(QSize(125, 16777215));
+        QPalette palette11;
+        palette11.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette11.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette11.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette11.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette11.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette11.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel9->setPalette(palette11);
+        frameChannel9->setAutoFillBackground(true);
+        frameChannel9->setFrameShape(QFrame::Panel);
+        frameChannel9->setFrameShadow(QFrame::Raised);
+        frameChannel9->setLineWidth(3);
+        verticalLayoutFrameChannel1_9 = new QVBoxLayout(frameChannel9);
+        verticalLayoutFrameChannel1_9->setSpacing(6);
+        verticalLayoutFrameChannel1_9->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_9->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_9"));
+        channelTopLayout_9 = new QHBoxLayout();
+        channelTopLayout_9->setSpacing(6);
+        channelTopLayout_9->setObjectName(QStringLiteral("channelTopLayout_9"));
+        nameLabelChannel9 = new QLabel(frameChannel9);
+        nameLabelChannel9->setObjectName(QStringLiteral("nameLabelChannel9"));
+        nameLabelChannel9->setFont(font1);
+        nameLabelChannel9->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_9->addWidget(nameLabelChannel9);
+
+        closeButtonChannel9 = new QPushButton(frameChannel9);
+        closeButtonChannel9->setObjectName(QStringLiteral("closeButtonChannel9"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel9->sizePolicy().hasHeightForWidth());
+        closeButtonChannel9->setSizePolicy(sizePolicy5);
+        closeButtonChannel9->setIcon(icon);
+        closeButtonChannel9->setIconSize(QSize(12, 12));
+        closeButtonChannel9->setFlat(true);
+
+        channelTopLayout_9->addWidget(closeButtonChannel9);
+
+
+        verticalLayoutFrameChannel1_9->addLayout(channelTopLayout_9);
+
+        setActiveButtonChannel9 = new QPushButton(frameChannel9);
+        setActiveButtonChannel9->setObjectName(QStringLiteral("setActiveButtonChannel9"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel9->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel9->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel9->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel9->setFont(font2);
+        setActiveButtonChannel9->setAutoFillBackground(true);
+        setActiveButtonChannel9->setFlat(true);
+
+        verticalLayoutFrameChannel1_9->addWidget(setActiveButtonChannel9, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_9->addItem(verticalSpacerChannel1_9);
+
+        inputComboBoxChannel9 = new QComboBox(frameChannel9);
+        inputComboBoxChannel9->setObjectName(QStringLiteral("inputComboBoxChannel9"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel9->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel9->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel9->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel9->setFont(font2);
+        inputComboBoxChannel9->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel9->setAutoFillBackground(true);
+        inputComboBoxChannel9->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel9->setIconSize(QSize(16, 10));
+        inputComboBoxChannel9->setFrame(false);
+
+        verticalLayoutFrameChannel1_9->addWidget(inputComboBoxChannel9, 0, Qt::AlignHCenter);
+
+        midiListChannel9 = new QListWidget(frameChannel9);
+        new QListWidgetItem(midiListChannel9);
+        midiListChannel9->setObjectName(QStringLiteral("midiListChannel9"));
+        sizePolicy4.setHeightForWidth(midiListChannel9->sizePolicy().hasHeightForWidth());
+        midiListChannel9->setSizePolicy(sizePolicy4);
+        midiListChannel9->setMaximumSize(QSize(100, 16777215));
+        midiListChannel9->setFont(font);
+        midiListChannel9->setFrameShape(QFrame::Panel);
+        midiListChannel9->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_9->addWidget(midiListChannel9, 0, Qt::AlignHCenter);
+
+        levelDialChannel9 = new QDial(frameChannel9);
+        levelDialChannel9->setObjectName(QStringLiteral("levelDialChannel9"));
+        sizePolicy4.setHeightForWidth(levelDialChannel9->sizePolicy().hasHeightForWidth());
+        levelDialChannel9->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_9->addWidget(levelDialChannel9);
+
+        levelLabelChannel1_10 = new QLabel(frameChannel9);
+        levelLabelChannel1_10->setObjectName(QStringLiteral("levelLabelChannel1_10"));
+        levelLabelChannel1_10->setFont(font3);
+        levelLabelChannel1_10->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_9->addWidget(levelLabelChannel1_10);
+
+
+        horizontalLayout_13->addWidget(frameChannel9);
+
+        frameChannel10 = new QFrame(frame_2);
+        frameChannel10->setObjectName(QStringLiteral("frameChannel10"));
+        sizePolicy4.setHeightForWidth(frameChannel10->sizePolicy().hasHeightForWidth());
+        frameChannel10->setSizePolicy(sizePolicy4);
+        frameChannel10->setMaximumSize(QSize(125, 16777215));
+        QPalette palette12;
+        palette12.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette12.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette12.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette12.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette12.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette12.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        frameChannel10->setPalette(palette12);
+        frameChannel10->setAutoFillBackground(true);
+        frameChannel10->setFrameShape(QFrame::Panel);
+        frameChannel10->setFrameShadow(QFrame::Raised);
+        frameChannel10->setLineWidth(3);
+        verticalLayoutFrameChannel1_10 = new QVBoxLayout(frameChannel10);
+        verticalLayoutFrameChannel1_10->setSpacing(6);
+        verticalLayoutFrameChannel1_10->setContentsMargins(11, 11, 11, 11);
+        verticalLayoutFrameChannel1_10->setObjectName(QStringLiteral("verticalLayoutFrameChannel1_10"));
+        channelTopLayout_10 = new QHBoxLayout();
+        channelTopLayout_10->setSpacing(6);
+        channelTopLayout_10->setObjectName(QStringLiteral("channelTopLayout_10"));
+        nameLabelChannel10 = new QLabel(frameChannel10);
+        nameLabelChannel10->setObjectName(QStringLiteral("nameLabelChannel10"));
+        nameLabelChannel10->setFont(font1);
+        nameLabelChannel10->setAlignment(Qt::AlignCenter);
+
+        channelTopLayout_10->addWidget(nameLabelChannel10);
+
+        closeButtonChannel10 = new QPushButton(frameChannel10);
+        closeButtonChannel10->setObjectName(QStringLiteral("closeButtonChannel10"));
+        sizePolicy5.setHeightForWidth(closeButtonChannel10->sizePolicy().hasHeightForWidth());
+        closeButtonChannel10->setSizePolicy(sizePolicy5);
+        closeButtonChannel10->setIcon(icon);
+        closeButtonChannel10->setIconSize(QSize(12, 12));
+        closeButtonChannel10->setFlat(true);
+
+        channelTopLayout_10->addWidget(closeButtonChannel10);
+
+
+        verticalLayoutFrameChannel1_10->addLayout(channelTopLayout_10);
+
+        setActiveButtonChannel10 = new QPushButton(frameChannel10);
+        setActiveButtonChannel10->setObjectName(QStringLiteral("setActiveButtonChannel10"));
+        sizePolicy6.setHeightForWidth(setActiveButtonChannel10->sizePolicy().hasHeightForWidth());
+        setActiveButtonChannel10->setSizePolicy(sizePolicy6);
+        setActiveButtonChannel10->setMinimumSize(QSize(0, 17));
+        setActiveButtonChannel10->setFont(font2);
+        setActiveButtonChannel10->setAutoFillBackground(true);
+        setActiveButtonChannel10->setFlat(true);
+
+        verticalLayoutFrameChannel1_10->addWidget(setActiveButtonChannel10, 0, Qt::AlignHCenter);
+
+        verticalSpacerChannel1_10 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayoutFrameChannel1_10->addItem(verticalSpacerChannel1_10);
+
+        inputComboBoxChannel10 = new QComboBox(frameChannel10);
+        inputComboBoxChannel10->setObjectName(QStringLiteral("inputComboBoxChannel10"));
+        sizePolicy7.setHeightForWidth(inputComboBoxChannel10->sizePolicy().hasHeightForWidth());
+        inputComboBoxChannel10->setSizePolicy(sizePolicy7);
+        inputComboBoxChannel10->setMinimumSize(QSize(0, 17));
+        inputComboBoxChannel10->setFont(font2);
+        inputComboBoxChannel10->setContextMenuPolicy(Qt::DefaultContextMenu);
+        inputComboBoxChannel10->setAutoFillBackground(true);
+        inputComboBoxChannel10->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+        inputComboBoxChannel10->setIconSize(QSize(16, 10));
+        inputComboBoxChannel10->setFrame(false);
+
+        verticalLayoutFrameChannel1_10->addWidget(inputComboBoxChannel10, 0, Qt::AlignHCenter);
+
+        midiListChannel10 = new QListWidget(frameChannel10);
+        new QListWidgetItem(midiListChannel10);
+        midiListChannel10->setObjectName(QStringLiteral("midiListChannel10"));
+        sizePolicy4.setHeightForWidth(midiListChannel10->sizePolicy().hasHeightForWidth());
+        midiListChannel10->setSizePolicy(sizePolicy4);
+        midiListChannel10->setMaximumSize(QSize(100, 16777215));
+        midiListChannel10->setFont(font);
+        midiListChannel10->setFrameShape(QFrame::Panel);
+        midiListChannel10->setLineWidth(2);
+
+        verticalLayoutFrameChannel1_10->addWidget(midiListChannel10, 0, Qt::AlignHCenter);
+
+        levelDialChannel10 = new QDial(frameChannel10);
+        levelDialChannel10->setObjectName(QStringLiteral("levelDialChannel10"));
+        sizePolicy4.setHeightForWidth(levelDialChannel10->sizePolicy().hasHeightForWidth());
+        levelDialChannel10->setSizePolicy(sizePolicy4);
+
+        verticalLayoutFrameChannel1_10->addWidget(levelDialChannel10);
+
+        levelLabelChannel1_11 = new QLabel(frameChannel10);
+        levelLabelChannel1_11->setObjectName(QStringLiteral("levelLabelChannel1_11"));
+        levelLabelChannel1_11->setFont(font3);
+        levelLabelChannel1_11->setAlignment(Qt::AlignCenter);
+
+        verticalLayoutFrameChannel1_10->addWidget(levelLabelChannel1_11);
+
+
+        horizontalLayout_13->addWidget(frameChannel10);
+
 
         channelsContainerLayout->addWidget(frame_2);
 
@@ -736,14 +1758,14 @@ public:
         instrumentFrameFrame = new QFrame(centralWidget);
         instrumentFrameFrame->setObjectName(QStringLiteral("instrumentFrameFrame"));
         instrumentFrameFrame->setMinimumSize(QSize(20, 0));
-        QPalette palette4;
-        palette4.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette4.setBrush(QPalette::Active, QPalette::Window, brush13);
-        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette4.setBrush(QPalette::Inactive, QPalette::Window, brush13);
-        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush13);
-        palette4.setBrush(QPalette::Disabled, QPalette::Window, brush13);
-        instrumentFrameFrame->setPalette(palette4);
+        QPalette palette13;
+        palette13.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette13.setBrush(QPalette::Active, QPalette::Window, brush13);
+        palette13.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette13.setBrush(QPalette::Inactive, QPalette::Window, brush13);
+        palette13.setBrush(QPalette::Disabled, QPalette::Base, brush13);
+        palette13.setBrush(QPalette::Disabled, QPalette::Window, brush13);
+        instrumentFrameFrame->setPalette(palette13);
         instrumentFrameFrame->setAutoFillBackground(true);
         instrumentFrameFrame->setFrameShape(QFrame::Panel);
         instrumentFrameFrame->setFrameShadow(QFrame::Sunken);
@@ -766,14 +1788,14 @@ public:
         sizePolicy8.setHeightForWidth(adsrInstrumentFrame->sizePolicy().hasHeightForWidth());
         adsrInstrumentFrame->setSizePolicy(sizePolicy8);
         adsrInstrumentFrame->setMinimumSize(QSize(10, 0));
-        QPalette palette5;
-        palette5.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette5.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette5.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette5.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette5.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette5.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        adsrInstrumentFrame->setPalette(palette5);
+        QPalette palette14;
+        palette14.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette14.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette14.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette14.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette14.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette14.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        adsrInstrumentFrame->setPalette(palette14);
         adsrInstrumentFrame->setAutoFillBackground(true);
         adsrInstrumentFrame->setFrameShape(QFrame::Panel);
         adsrInstrumentFrame->setFrameShadow(QFrame::Raised);
@@ -1169,14 +2191,14 @@ public:
         sizePolicy8.setHeightForWidth(additiveInstrumentFrame->sizePolicy().hasHeightForWidth());
         additiveInstrumentFrame->setSizePolicy(sizePolicy8);
         additiveInstrumentFrame->setMinimumSize(QSize(10, 0));
-        QPalette palette6;
-        palette6.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette6.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette6.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette6.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette6.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette6.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        additiveInstrumentFrame->setPalette(palette6);
+        QPalette palette15;
+        palette15.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette15.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette15.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette15.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette15.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette15.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        additiveInstrumentFrame->setPalette(palette15);
         additiveInstrumentFrame->setAutoFillBackground(true);
         additiveInstrumentFrame->setFrameShape(QFrame::Panel);
         additiveInstrumentFrame->setFrameShadow(QFrame::Raised);
@@ -1538,14 +2560,14 @@ public:
         sizePolicy8.setHeightForWidth(samplingInstrumentFrame->sizePolicy().hasHeightForWidth());
         samplingInstrumentFrame->setSizePolicy(sizePolicy8);
         samplingInstrumentFrame->setMinimumSize(QSize(10, 0));
-        QPalette palette7;
-        palette7.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette7.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette7.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette7.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette7.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette7.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        samplingInstrumentFrame->setPalette(palette7);
+        QPalette palette16;
+        palette16.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette16.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette16.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette16.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette16.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette16.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        samplingInstrumentFrame->setPalette(palette16);
         samplingInstrumentFrame->setAutoFillBackground(true);
         samplingInstrumentFrame->setFrameShape(QFrame::Panel);
         samplingInstrumentFrame->setFrameShadow(QFrame::Raised);
@@ -1708,14 +2730,14 @@ public:
         sizePolicy8.setHeightForWidth(karplusInstrumentFrame->sizePolicy().hasHeightForWidth());
         karplusInstrumentFrame->setSizePolicy(sizePolicy8);
         karplusInstrumentFrame->setMinimumSize(QSize(10, 0));
-        QPalette palette8;
-        palette8.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette8.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette8.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette8.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette8.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette8.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        karplusInstrumentFrame->setPalette(palette8);
+        QPalette palette17;
+        palette17.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette17.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette17.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette17.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette17.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette17.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        karplusInstrumentFrame->setPalette(palette17);
         karplusInstrumentFrame->setAutoFillBackground(true);
         karplusInstrumentFrame->setFrameShape(QFrame::Panel);
         karplusInstrumentFrame->setFrameShadow(QFrame::Raised);
@@ -1897,19 +2919,19 @@ public:
         sizePolicy2.setHeightForWidth(effectsScrollArea->sizePolicy().hasHeightForWidth());
         effectsScrollArea->setSizePolicy(sizePolicy2);
         effectsScrollArea->setMinimumSize(QSize(0, 180));
-        QPalette palette9;
-        palette9.setBrush(QPalette::Active, QPalette::Mid, brush7);
-        palette9.setBrush(QPalette::Active, QPalette::Base, brush3);
+        QPalette palette18;
+        palette18.setBrush(QPalette::Active, QPalette::Mid, brush7);
+        palette18.setBrush(QPalette::Active, QPalette::Base, brush3);
         QBrush brush14(QColor(73, 73, 73, 255));
         brush14.setStyle(Qt::SolidPattern);
-        palette9.setBrush(QPalette::Active, QPalette::Window, brush14);
-        palette9.setBrush(QPalette::Inactive, QPalette::Mid, brush7);
-        palette9.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette9.setBrush(QPalette::Inactive, QPalette::Window, brush14);
-        palette9.setBrush(QPalette::Disabled, QPalette::Mid, brush7);
-        palette9.setBrush(QPalette::Disabled, QPalette::Base, brush14);
-        palette9.setBrush(QPalette::Disabled, QPalette::Window, brush14);
-        effectsScrollArea->setPalette(palette9);
+        palette18.setBrush(QPalette::Active, QPalette::Window, brush14);
+        palette18.setBrush(QPalette::Inactive, QPalette::Mid, brush7);
+        palette18.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette18.setBrush(QPalette::Inactive, QPalette::Window, brush14);
+        palette18.setBrush(QPalette::Disabled, QPalette::Mid, brush7);
+        palette18.setBrush(QPalette::Disabled, QPalette::Base, brush14);
+        palette18.setBrush(QPalette::Disabled, QPalette::Window, brush14);
+        effectsScrollArea->setPalette(palette18);
         effectsScrollArea->setAcceptDrops(false);
         effectsScrollArea->setAutoFillBackground(true);
         effectsScrollArea->setFrameShape(QFrame::Panel);
@@ -1933,14 +2955,14 @@ public:
         eq8Frame = new QFrame(effectsScrollAreaContents);
         eq8Frame->setObjectName(QStringLiteral("eq8Frame"));
         eq8Frame->setMaximumSize(QSize(250, 16777215));
-        QPalette palette10;
-        palette10.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette10.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette10.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette10.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette10.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette10.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        eq8Frame->setPalette(palette10);
+        QPalette palette19;
+        palette19.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette19.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette19.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette19.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette19.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette19.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        eq8Frame->setPalette(palette19);
         QFont font5;
         font5.setBold(false);
         font5.setWeight(50);
@@ -2228,14 +3250,14 @@ public:
         reverbEffectFrame = new QFrame(effectsScrollAreaContents);
         reverbEffectFrame->setObjectName(QStringLiteral("reverbEffectFrame"));
         reverbEffectFrame->setMaximumSize(QSize(250, 16777215));
-        QPalette palette11;
-        palette11.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette11.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette11.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette11.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette11.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette11.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        reverbEffectFrame->setPalette(palette11);
+        QPalette palette20;
+        palette20.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette20.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette20.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette20.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette20.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette20.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        reverbEffectFrame->setPalette(palette20);
         reverbEffectFrame->setFont(font5);
         reverbEffectFrame->setAutoFillBackground(true);
         reverbEffectFrame->setFrameShape(QFrame::Panel);
@@ -2407,14 +3429,14 @@ public:
         flangerEffectFrame = new QFrame(effectsScrollAreaContents);
         flangerEffectFrame->setObjectName(QStringLiteral("flangerEffectFrame"));
         flangerEffectFrame->setMaximumSize(QSize(250, 16777215));
-        QPalette palette12;
-        palette12.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette12.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette12.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette12.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette12.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette12.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        flangerEffectFrame->setPalette(palette12);
+        QPalette palette21;
+        palette21.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette21.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette21.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette21.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette21.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette21.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        flangerEffectFrame->setPalette(palette21);
         flangerEffectFrame->setFont(font5);
         flangerEffectFrame->setAutoFillBackground(true);
         flangerEffectFrame->setFrameShape(QFrame::Panel);
@@ -2612,14 +3634,14 @@ public:
         vibratoEffectFrame = new QFrame(effectsScrollAreaContents);
         vibratoEffectFrame->setObjectName(QStringLiteral("vibratoEffectFrame"));
         vibratoEffectFrame->setMaximumSize(QSize(250, 16777215));
-        QPalette palette13;
-        palette13.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette13.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette13.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette13.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette13.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette13.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        vibratoEffectFrame->setPalette(palette13);
+        QPalette palette22;
+        palette22.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette22.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette22.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette22.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette22.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette22.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        vibratoEffectFrame->setPalette(palette22);
         vibratoEffectFrame->setFont(font5);
         vibratoEffectFrame->setAutoFillBackground(true);
         vibratoEffectFrame->setFrameShape(QFrame::Panel);
@@ -2793,14 +3815,14 @@ public:
         wahwahEffectFrame = new QFrame(effectsScrollAreaContents);
         wahwahEffectFrame->setObjectName(QStringLiteral("wahwahEffectFrame"));
         wahwahEffectFrame->setMaximumSize(QSize(250, 16777215));
-        QPalette palette14;
-        palette14.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette14.setBrush(QPalette::Active, QPalette::Window, brush7);
-        palette14.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette14.setBrush(QPalette::Inactive, QPalette::Window, brush7);
-        palette14.setBrush(QPalette::Disabled, QPalette::Base, brush7);
-        palette14.setBrush(QPalette::Disabled, QPalette::Window, brush7);
-        wahwahEffectFrame->setPalette(palette14);
+        QPalette palette23;
+        palette23.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette23.setBrush(QPalette::Active, QPalette::Window, brush7);
+        palette23.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette23.setBrush(QPalette::Inactive, QPalette::Window, brush7);
+        palette23.setBrush(QPalette::Disabled, QPalette::Base, brush7);
+        palette23.setBrush(QPalette::Disabled, QPalette::Window, brush7);
+        wahwahEffectFrame->setPalette(palette23);
         wahwahEffectFrame->setFont(font5);
         wahwahEffectFrame->setAutoFillBackground(true);
         wahwahEffectFrame->setFrameShape(QFrame::Panel);
@@ -3060,20 +4082,164 @@ public:
         addEffectButton->setText(QApplication::translate("LeandroClass", "Add to Channel", Q_NULLPTR));
         nameLabelChannel1->setText(QApplication::translate("LeandroClass", "Channel 1", Q_NULLPTR));
         closeButtonChannel1->setText(QString());
-        setActiveButtonChannel1_2->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
-        inputComboBoxChannel1_2->clear();
-        inputComboBoxChannel1_2->insertItems(0, QStringList()
+        setActiveButtonChannel1->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel1->clear();
+        inputComboBoxChannel1->insertItems(0, QStringList()
          << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
          << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
         );
 
-        const bool __sortingEnabled = midiListChannel1_2->isSortingEnabled();
-        midiListChannel1_2->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = midiListChannel1_2->item(0);
+        const bool __sortingEnabled = midiListChannel1->isSortingEnabled();
+        midiListChannel1->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = midiListChannel1->item(0);
         ___qlistwidgetitem->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
-        midiListChannel1_2->setSortingEnabled(__sortingEnabled);
+        midiListChannel1->setSortingEnabled(__sortingEnabled);
 
         levelLabelChannel1_2->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel2->setText(QApplication::translate("LeandroClass", "Channel 2", Q_NULLPTR));
+        closeButtonChannel2->setText(QString());
+        setActiveButtonChannel2->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel2->clear();
+        inputComboBoxChannel2->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled1 = midiListChannel2->isSortingEnabled();
+        midiListChannel2->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem1 = midiListChannel2->item(0);
+        ___qlistwidgetitem1->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel2->setSortingEnabled(__sortingEnabled1);
+
+        levelLabelChannel1_3->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel3->setText(QApplication::translate("LeandroClass", "Channel 3", Q_NULLPTR));
+        closeButtonChannel3->setText(QString());
+        setActiveButtonChannel3->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel3->clear();
+        inputComboBoxChannel3->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled2 = midiListChannel3->isSortingEnabled();
+        midiListChannel3->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem2 = midiListChannel3->item(0);
+        ___qlistwidgetitem2->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel3->setSortingEnabled(__sortingEnabled2);
+
+        levelLabelChannel1_4->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel4->setText(QApplication::translate("LeandroClass", "Channel 4", Q_NULLPTR));
+        closeButtonChannel4->setText(QString());
+        setActiveButtonChannel4->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel4->clear();
+        inputComboBoxChannel4->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled3 = midiListChannel4->isSortingEnabled();
+        midiListChannel4->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem3 = midiListChannel4->item(0);
+        ___qlistwidgetitem3->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel4->setSortingEnabled(__sortingEnabled3);
+
+        levelLabelChannel1_5->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel5->setText(QApplication::translate("LeandroClass", "Channel 5", Q_NULLPTR));
+        closeButtonChannel5->setText(QString());
+        setActiveButtonChannel5->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel5->clear();
+        inputComboBoxChannel5->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled4 = midiListChannel5->isSortingEnabled();
+        midiListChannel5->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem4 = midiListChannel5->item(0);
+        ___qlistwidgetitem4->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel5->setSortingEnabled(__sortingEnabled4);
+
+        levelLabelChannel1_6->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel6->setText(QApplication::translate("LeandroClass", "Channel 6", Q_NULLPTR));
+        closeButtonChannel6->setText(QString());
+        setActiveButtonChannel6->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel6->clear();
+        inputComboBoxChannel6->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled5 = midiListChannel6->isSortingEnabled();
+        midiListChannel6->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem5 = midiListChannel6->item(0);
+        ___qlistwidgetitem5->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel6->setSortingEnabled(__sortingEnabled5);
+
+        levelLabelChannel1_7->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel7->setText(QApplication::translate("LeandroClass", "Channel 7", Q_NULLPTR));
+        closeButtonChannel7->setText(QString());
+        setActiveButtonChannel7->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel7->clear();
+        inputComboBoxChannel7->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled6 = midiListChannel7->isSortingEnabled();
+        midiListChannel7->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem6 = midiListChannel7->item(0);
+        ___qlistwidgetitem6->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel7->setSortingEnabled(__sortingEnabled6);
+
+        levelLabelChannel1_8->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel8->setText(QApplication::translate("LeandroClass", "Channel 8", Q_NULLPTR));
+        closeButtonChannel8->setText(QString());
+        setActiveButtonChannel8->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel8->clear();
+        inputComboBoxChannel8->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled7 = midiListChannel8->isSortingEnabled();
+        midiListChannel8->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem7 = midiListChannel8->item(0);
+        ___qlistwidgetitem7->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel8->setSortingEnabled(__sortingEnabled7);
+
+        levelLabelChannel1_9->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel9->setText(QApplication::translate("LeandroClass", "Channel 9", Q_NULLPTR));
+        closeButtonChannel9->setText(QString());
+        setActiveButtonChannel9->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel9->clear();
+        inputComboBoxChannel9->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled8 = midiListChannel9->isSortingEnabled();
+        midiListChannel9->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem8 = midiListChannel9->item(0);
+        ___qlistwidgetitem8->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel9->setSortingEnabled(__sortingEnabled8);
+
+        levelLabelChannel1_10->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        nameLabelChannel10->setText(QApplication::translate("LeandroClass", "Channel 10", Q_NULLPTR));
+        closeButtonChannel10->setText(QString());
+        setActiveButtonChannel10->setText(QApplication::translate("LeandroClass", "Set Active", Q_NULLPTR));
+        inputComboBoxChannel10->clear();
+        inputComboBoxChannel10->insertItems(0, QStringList()
+         << QApplication::translate("LeandroClass", "MIDI Track", Q_NULLPTR)
+         << QApplication::translate("LeandroClass", "PC Keyboard", Q_NULLPTR)
+        );
+
+        const bool __sortingEnabled9 = midiListChannel10->isSortingEnabled();
+        midiListChannel10->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem9 = midiListChannel10->item(0);
+        ___qlistwidgetitem9->setText(QApplication::translate("LeandroClass", "MIDI 1 - Track 1", Q_NULLPTR));
+        midiListChannel10->setSortingEnabled(__sortingEnabled9);
+
+        levelLabelChannel1_11->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
         deleteADSRButton->setText(QString());
         instrumentNameLabel->setText(QApplication::translate("LeandroClass", "Waveform + ADSR", Q_NULLPTR));
         InstrumentNameADSR->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));

@@ -2,7 +2,7 @@
 #include "json/json.h"
 
 SamplingInstrument::SamplingInstrument(samplingParams_t * params) {
-
+	this->type = synthType::sampling;
 	repeat_time_begin = 0.05;
 	repeat_time_end = 0.1;
 	lenght_temp_buffer = params->buffLength;

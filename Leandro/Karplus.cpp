@@ -7,6 +7,7 @@
 using namespace std;
 
 karplusInstrument::karplusInstrument(karPlusParams_t* _params) {
+	this->type = synthType::karplus;
     params.BFactor = _params->BFactor;
     params.Grl = _params->Grl;
     params.SFactor = _params->SFactor;

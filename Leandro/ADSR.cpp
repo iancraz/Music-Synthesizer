@@ -27,8 +27,9 @@ void ADSRInstrument::setParams(adsrParams_t* _params) {
 }
 
 ADSRInstrument::ADSRInstrument(adsrParams_t* _params) {
+	this->params = new adsrParams_t;
 	if (_params) setParams(_params);
-
+	this->type = synthType::adsr;
 
 	this->wform1 = _params->wform1;
 	this->level1 = _params->level1;

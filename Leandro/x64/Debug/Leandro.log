@@ -1,2 +1,5 @@
-﻿  Leandro.cpp
+﻿  ADSR.cpp
+  Additive.cpp
+  Karplus.cpp
+  Sampling.cpp
   Leandro.vcxproj -> C:\Users\Matías\source\repos\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe

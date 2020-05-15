@@ -47,6 +47,9 @@ public:
 	void addToGUI(Ui_LeandroClass* programUI);
 	void removeFromGUI(Ui_LeandroClass* programUI);
 	
+	QFrame* channelFrame;
+	QPushButton* setActiveButtonChannel;
+
 	// Setters
 	void setChannelTrack(midiTrack* midiTrack); 
 	void updateMidiTrack();
@@ -61,20 +64,10 @@ public:
 	void setActive();
 	void destroyThisChannelFromProgram();
 	
+	int frameNumber;
+
 	queue<midiEvent> events; // Queue of events in the midi track the channel's currently playing
-	QFrame* frameChannel;
-	QVBoxLayout* verticalLayoutFrameChannel;
-	QLabel* nameLabelChannel;
-	QPushButton* setActiveButtonChannel;
-	QPushButton* closeButtonChannel;
-	QHBoxLayout* channelTopLayout;
-	QSpacerItem* verticalSpacerChannel;
-	QHBoxLayout* inputComboBoxLayoutChannel;
-	QLabel* InputLabelChannel;
-	QComboBox* inputComboBoxChannel;
-	QListWidget* midiListChannel;
-	QDial* levelDialChannel;
-	QLabel* levelLabelChannel;
+	
 
 	QHBoxLayout* effectsLayout;
 	QHBoxLayout* instrumentLayout;
@@ -86,7 +79,7 @@ public:
 
 	Leandro* program;
 
-private:
+
 	int ID;
 	float volume; // Volume multiplier between 0 and 1
 	bool keyboard; // True if input is directly through keyboard

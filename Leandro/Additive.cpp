@@ -8,6 +8,7 @@
 #include "json/json.h"
 
 AdditiveInstrument::AdditiveInstrument(additiveParams_t * params) {
+	this->type = synthType::additive;
 	instrumentName = params->name;
 	firstKey = params->firstKey;
 	lastKey = params->lastKey;

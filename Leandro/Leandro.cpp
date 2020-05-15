@@ -40,6 +40,9 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
+	
+	
+	
 	initGUI();
 	// GUI function connections
 	
@@ -112,7 +115,9 @@ void Leandro::addChannel(Channel* newChannel) {
 		this->noteBuffers.push_back(tempBuffer);
 	}
 	// Append new channel to channel list
-	newChannel->addToGUI(&ui);
+	
+	newChannel->channelFrame = channelFrames.at(getFirstFreeChannelFrame());
+	newChannel->channelFrame->setHidden(false);
 	setActiveChannel(newChannel);
 	this->channels.push_back(newChannel);
 	this->updateCallbackData();
@@ -127,7 +132,7 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 			this->noteBuffers.erase(noteBuffers.begin() + i);
 		}
 	// Destroy channel and remove from channel list
-	channel->removeFromGUI(&this->ui);
+	channel->channelFrame->setHidden(true);
 	channel->~Channel();
 	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
 }
@@ -165,6 +170,20 @@ void Leandro::updateCallbackData() {
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
 };
+
+int Leandro::getFirstFreeChannelFrame() {
+	int i;
+	bool foundIt = false;
+	for (i = 0; i < channelFrames.size(); i++) {
+		if (channelFrames.at(i)->isHidden())
+		{
+			foundIt = true;
+			break;
+		}
+	}
+	if (!foundIt) return -1;
+	else return i;
+}
 
 // Data loading related methods
 
@@ -425,20 +444,20 @@ void Leandro::updateAvailableAssetsInGUI() {
 	ui.effectsList->clear();
 	for (int i = 0; i < effectModels.size(); i++) {
 		___qlistwidgetitem = new QListWidgetItem;
-		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", instrumentModels.at(i)->instrumentName.c_str(), nullptr));
-		ui.instrumentsList->addItem(___qlistwidgetitem);
+		___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", effectModels.at(i)->effectName.c_str(), nullptr));
+		ui.effectsList->addItem(___qlistwidgetitem);
 	}
 }
 
 void Leandro::updateGUIMidiLists() {
-	for (int i = 0; i < channels.size(); i++) {
-		channels.at(i)->midiListChannel->clear();
+	for (int i = 0; i < midiLists.size(); i++) {
+		midiLists.at(i)->clear();
 		for (int j = 0; j < midiTracks.size(); j++) {
 			char* trackName = new char[(midiTracks.at(j)->trackName.size()) + 1];
 			strcpy(trackName, midiTracks.at(j)->trackName.c_str());
 			QListWidgetItem* ___qlistwidgetitem = new QListWidgetItem;
 			___qlistwidgetitem->setText(QCoreApplication::translate("LeandroClass", trackName, nullptr));
-			channels.at(i)->midiListChannel->addItem(___qlistwidgetitem);
+			midiLists.at(i)->addItem(___qlistwidgetitem);
 		}
 	}
 }
@@ -462,9 +481,9 @@ void Leandro::updateActiveAssetsBay() {
 }
 
 void Leandro::setActiveChannel(Channel* channel) {
-	if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
+	//if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
 	activeChannel = channel;
-	activeChannel->setActiveButtonChannel->setDisabled(true);
+	//activeChannel->setActiveButtonChannel->setDisabled(true);
 
 	updateActiveAssetsBay();
 } 
@@ -608,6 +627,7 @@ void Leandro::setInstrumentForActiveChannel() {
 			break;
 		}
 	activeChannel->setChannelInstrument(instrument);
+	updateActiveAssetsBay();
 }
 
 void Leandro::addEffectToActiveChannel() {
@@ -634,6 +654,7 @@ void Leandro::addEffectToActiveChannel() {
 			break;
 		}
 	activeChannel->addEffectToChannel(effect);
+	updateActiveAssetsBay();
 }
 
 void Leandro::removeInstrumentFromActiveChannel() {
@@ -861,7 +882,52 @@ void Leandro::wahwahValueChanged() {
 void Leandro::initGUI() {
 	ui.setupUi(this);
 	ui.retranslateUi(this);
-	
+
+	updateAvailableAssetsInGUI();
+
+	channelFrames.push_back(ui.frameChannel1);
+	channelFrames.push_back(ui.frameChannel2);
+	channelFrames.push_back(ui.frameChannel3);
+	channelFrames.push_back(ui.frameChannel4);
+	channelFrames.push_back(ui.frameChannel5);
+	channelFrames.push_back(ui.frameChannel6);
+	channelFrames.push_back(ui.frameChannel7);
+	channelFrames.push_back(ui.frameChannel8);
+	channelFrames.push_back(ui.frameChannel9);
+	channelFrames.push_back(ui.frameChannel10);
+
+	midiLists.push_back(ui.midiListChannel1);
+	midiLists.push_back(ui.midiListChannel2);
+	midiLists.push_back(ui.midiListChannel3);
+	midiLists.push_back(ui.midiListChannel4);
+	midiLists.push_back(ui.midiListChannel5);
+	midiLists.push_back(ui.midiListChannel6);
+	midiLists.push_back(ui.midiListChannel7);
+	midiLists.push_back(ui.midiListChannel8);
+	midiLists.push_back(ui.midiListChannel9);
+	midiLists.push_back(ui.midiListChannel10);
+
+	ui.frameChannel1->setHidden(true);
+	ui.frameChannel2->setHidden(true);
+	ui.frameChannel3->setHidden(true);
+	ui.frameChannel4->setHidden(true);
+	ui.frameChannel5->setHidden(true);
+	ui.frameChannel6->setHidden(true);
+	ui.frameChannel7->setHidden(true);
+	ui.frameChannel8->setHidden(true);
+	ui.frameChannel9->setHidden(true);
+	ui.frameChannel10->setHidden(true);
+
+	ui.adsrInstrumentFrame->setHidden(true);
+	ui.additiveInstrumentFrame->setHidden(true);
+	ui.samplingInstrumentFrame->setHidden(true);
+	ui.karplusInstrumentFrame->setHidden(true);
+	ui.reverbEffectFrame->setHidden(true);
+	ui.flangerEffectFrame->setHidden(true);
+	ui.vibratoEffectFrame->setHidden(true);
+	ui.wahwahEffectFrame->setHidden(true);
+	ui.eq8Frame->setHidden(true);
+
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
 	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
@@ -956,7 +1022,674 @@ void Leandro::initGUI() {
 	QObject::connect(ui.eqSlider5k, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
 	QObject::connect(ui.eqSlider10k, &QSlider::valueChanged, this, &Leandro::eq8BandValueChanged);
 
+	// Channels
+	QObject::connect(ui.closeButtonChannel1, &QPushButton::clicked, this, &Leandro::channel1Closed);
+	QObject::connect(ui.setActiveButtonChannel1, &QPushButton::clicked, this, &Leandro::channel1setActive);
+	QObject::connect(ui.inputComboBoxChannel1, &QComboBox::currentTextChanged, this, &Leandro::channel1InputChanged);
+	QObject::connect(ui.levelDialChannel1, &QDial::valueChanged, this, &Leandro::channel1VolChanged);
+	QObject::connect(ui.midiListChannel1, &QListWidget::itemSelectionChanged, this, &Leandro::channel1TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel2, &QPushButton::clicked, this, &Leandro::channel2Closed);
+	QObject::connect(ui.setActiveButtonChannel2, &QPushButton::clicked, this, &Leandro::channel2setActive);
+	QObject::connect(ui.inputComboBoxChannel2, &QComboBox::currentTextChanged, this, &Leandro::channel2InputChanged);
+	QObject::connect(ui.levelDialChannel2, &QDial::valueChanged, this, &Leandro::channel2VolChanged);
+	QObject::connect(ui.midiListChannel2, &QListWidget::itemSelectionChanged, this, &Leandro::channel2TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel3, &QPushButton::clicked, this, &Leandro::channel3Closed);
+	QObject::connect(ui.setActiveButtonChannel3, &QPushButton::clicked, this, &Leandro::channel3setActive);
+	QObject::connect(ui.inputComboBoxChannel3, &QComboBox::currentTextChanged, this, &Leandro::channel3InputChanged);
+	QObject::connect(ui.levelDialChannel3, &QDial::valueChanged, this, &Leandro::channel3VolChanged);
+	QObject::connect(ui.midiListChannel3, &QListWidget::itemSelectionChanged, this, &Leandro::channel3TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel4, &QPushButton::clicked, this, &Leandro::channel4Closed);
+	QObject::connect(ui.setActiveButtonChannel4, &QPushButton::clicked, this, &Leandro::channel4setActive);
+	QObject::connect(ui.inputComboBoxChannel4, &QComboBox::currentTextChanged, this, &Leandro::channel4InputChanged);
+	QObject::connect(ui.levelDialChannel4, &QDial::valueChanged, this, &Leandro::channel4VolChanged);
+	QObject::connect(ui.midiListChannel4, &QListWidget::itemSelectionChanged, this, &Leandro::channel4TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel5, &QPushButton::clicked, this, &Leandro::channel5Closed);
+	QObject::connect(ui.setActiveButtonChannel5, &QPushButton::clicked, this, &Leandro::channel5setActive);
+	QObject::connect(ui.inputComboBoxChannel5, &QComboBox::currentTextChanged, this, &Leandro::channel5InputChanged);
+	QObject::connect(ui.levelDialChannel5, &QDial::valueChanged, this, &Leandro::channel5VolChanged);
+	QObject::connect(ui.midiListChannel5, &QListWidget::itemSelectionChanged, this, &Leandro::channel5TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel6, &QPushButton::clicked, this, &Leandro::channel6Closed);
+	QObject::connect(ui.setActiveButtonChannel6, &QPushButton::clicked, this, &Leandro::channel6setActive);
+	QObject::connect(ui.inputComboBoxChannel6, &QComboBox::currentTextChanged, this, &Leandro::channel6InputChanged);
+	QObject::connect(ui.levelDialChannel6, &QDial::valueChanged, this, &Leandro::channel6VolChanged);
+	QObject::connect(ui.midiListChannel6, &QListWidget::itemSelectionChanged, this, &Leandro::channel6TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel7, &QPushButton::clicked, this, &Leandro::channel7Closed);
+	QObject::connect(ui.setActiveButtonChannel7, &QPushButton::clicked, this, &Leandro::channel7setActive);
+	QObject::connect(ui.inputComboBoxChannel7, &QComboBox::currentTextChanged, this, &Leandro::channel7InputChanged);
+	QObject::connect(ui.levelDialChannel7, &QDial::valueChanged, this, &Leandro::channel7VolChanged);
+	QObject::connect(ui.midiListChannel7, &QListWidget::itemSelectionChanged, this, &Leandro::channel7TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel8, &QPushButton::clicked, this, &Leandro::channel8Closed);
+	QObject::connect(ui.setActiveButtonChannel8, &QPushButton::clicked, this, &Leandro::channel8setActive);
+	QObject::connect(ui.inputComboBoxChannel8, &QComboBox::currentTextChanged, this, &Leandro::channel8InputChanged);
+	QObject::connect(ui.levelDialChannel8, &QDial::valueChanged, this, &Leandro::channel8VolChanged);
+	QObject::connect(ui.midiListChannel8, &QListWidget::itemSelectionChanged, this, &Leandro::channel8TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel9, &QPushButton::clicked, this, &Leandro::channel9Closed);
+	QObject::connect(ui.setActiveButtonChannel9, &QPushButton::clicked, this, &Leandro::channel9setActive);
+	QObject::connect(ui.inputComboBoxChannel9, &QComboBox::currentTextChanged, this, &Leandro::channel9InputChanged);
+	QObject::connect(ui.levelDialChannel9, &QDial::valueChanged, this, &Leandro::channel9VolChanged);
+	QObject::connect(ui.midiListChannel9, &QListWidget::itemSelectionChanged, this, &Leandro::channel9TrackChanged);
+
+	QObject::connect(ui.closeButtonChannel10, &QPushButton::clicked, this, &Leandro::channel10Closed);
+	QObject::connect(ui.setActiveButtonChannel10, &QPushButton::clicked, this, &Leandro::channel10setActive);
+	QObject::connect(ui.inputComboBoxChannel10, &QComboBox::currentTextChanged, this, &Leandro::channel10InputChanged);
+	QObject::connect(ui.levelDialChannel10, &QDial::valueChanged, this, &Leandro::channel10VolChanged);
+	QObject::connect(ui.midiListChannel10, &QListWidget::itemSelectionChanged, this, &Leandro::channel10TrackChanged);
+
+
+	
+
+	
 }
+
+void Leandro::channel1Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel1)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel1setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size()-1; i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel1)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel1InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel1)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel1->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel1VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel1)
+			channel = channels.at(i);
+	}
+	channel->volume = (1.0 / 100.0) * (float)ui.levelDialChannel1->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel1TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel1)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel1->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel2Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel2)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel2setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel2)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel2InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel2)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel2->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel2VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel2)
+			channel = channels.at(i);
+	}
+	channel->volume = (2.0 / 200.0) * (float)ui.levelDialChannel2->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel2TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel2)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel2->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel3Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel3)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel3setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel3)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel3InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel3)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel3->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel3VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel3)
+			channel = channels.at(i);
+	}
+	channel->volume = (3.0 / 300.0) * (float)ui.levelDialChannel3->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel3TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel3)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel3->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel4Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel4)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel4setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel4)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel4InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel4)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel4->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel4VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel4)
+			channel = channels.at(i);
+	}
+	channel->volume = (4.0 / 400.0) * (float)ui.levelDialChannel4->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel4TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel4)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel4->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel5Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel5)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel5setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel5)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel5InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel5)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel5->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel5VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel5)
+			channel = channels.at(i);
+	}
+	channel->volume = (5.0 / 500.0) * (float)ui.levelDialChannel5->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel5TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel5)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel5->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel6Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel6)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel6setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel6)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel6InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel6)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel6->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel6VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel6)
+			channel = channels.at(i);
+	}
+	channel->volume = (6.0 / 600.0) * (float)ui.levelDialChannel6->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel6TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel6)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel6->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel7Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel7)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel7setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel7)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel7InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel7)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel7->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel7VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel7)
+			channel = channels.at(i);
+	}
+	channel->volume = (7.0 / 700.0) * (float)ui.levelDialChannel7->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel7TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel7)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel7->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel8Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel8)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel8setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel8)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel8InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel8)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel8->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel8VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel8)
+			channel = channels.at(i);
+	}
+	channel->volume = (8.0 / 800.0) * (float)ui.levelDialChannel8->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel8TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel8)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel8->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel9Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel9)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel9setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel9)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel9InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel9)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel9->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel9VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel9)
+			channel = channels.at(i);
+	}
+	channel->volume = (9.0 / 900.0) * (float)ui.levelDialChannel9->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel9TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel9)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel9->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+void Leandro::channel10Closed() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel10)
+			channel = channels.at(i);
+	}
+
+}
+void Leandro::channel10setActive() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel10)
+			channel = channels.at(i);
+	}
+	setActiveChannel(channel);
+
+}
+void Leandro::channel10InputChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel10)
+			channel = channels.at(i);
+	}
+	channel->keyboard = false;
+	if ((ui.inputComboBoxChannel10->currentText().toStdString() == "PC Keyboard")) channel->keyboard = true;
+	channel->updateCallbackData();
+
+}
+void Leandro::channel10VolChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel10)
+			channel = channels.at(i);
+	}
+	channel->volume = (10.0 / 1000.0) * (float)ui.levelDialChannel10->value();
+	channel->updateCallbackData();
+}
+void Leandro::channel10TrackChanged() {
+	Channel* channel = nullptr;
+	int i;
+	for (i = 0; i < channels.size(); i++) {}
+	{
+		if (channels.at(i)->channelFrame == ui.frameChannel10)
+			channel = channels.at(i);
+	}
+	for (int i = 0; i < midiTracks.size(); i++)
+		if ((ui.midiListChannel10->currentItem()->text().toStdString() == midiTracks.at(i)->trackName)) {
+			channel->setChannelTrack(midiTracks.at(i));
+			break;
+		}
+}
+
+
 
 // TEST FUNCTIONS
 

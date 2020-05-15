@@ -68,6 +68,8 @@ public:
 	vector<timedBuffer*> noteBuffers;
 	vector<instrumentModel*> instrumentModels;
 	vector<effectModel*> effectModels;
+	vector<QFrame*> channelFrames;
+	vector<QListWidget*>midiLists;
 	float* activeBuffer;
 	Channel* activeChannel;
 
@@ -79,7 +81,7 @@ public:
 	void addChannel(Channel* newChannel);
 	void destroyChannel(Channel* channel);
 	void addMidiFile(string directory, string filename, bool autoSet);
-	
+	int getFirstFreeChannelFrame();
 
 	// GUI-related, system-triggered functions
 	void initGUI();
@@ -122,6 +124,68 @@ public:
 
 	void loadSynthData(Json::Value synthRoot);
 	void loadTestMidi();
+
+	void channel1Closed();
+	void channel1setActive();
+	void channel1InputChanged();
+	void channel1VolChanged();
+	void channel1TrackChanged();
+
+	void channel2Closed();
+	void channel2setActive();
+	void channel2InputChanged();
+	void channel2VolChanged();
+	void channel2TrackChanged();
+
+	void channel3Closed();
+	void channel3setActive();
+	void channel3InputChanged();
+	void channel3VolChanged();
+	void channel3TrackChanged();
+
+	void channel4Closed();
+	void channel4setActive();
+	void channel4InputChanged();
+	void channel4VolChanged();
+	void channel4TrackChanged();
+
+	void channel5Closed();
+	void channel5setActive();
+	void channel5InputChanged();
+	void channel5VolChanged();
+	void channel5TrackChanged();
+
+	void channel6Closed();
+	void channel6setActive();
+	void channel6InputChanged();
+	void channel6VolChanged();
+	void channel6TrackChanged();
+
+	void channel7Closed();
+	void channel7setActive();
+	void channel7InputChanged();
+	void channel7VolChanged();
+	void channel7TrackChanged();
+
+	void channel8Closed();
+	void channel8setActive();
+	void channel8InputChanged();
+	void channel8VolChanged();
+	void channel8TrackChanged();
+
+	void channel9Closed();
+	void channel9setActive();
+	void channel9InputChanged();
+	void channel9VolChanged();
+	void channel9TrackChanged();
+
+	void channel10Closed();
+	void channel10setActive();
+	void channel10InputChanged();
+	void channel10VolChanged();
+	void channel10TrackChanged();
+
+
 
 private:
 	Ui::LeandroClass ui;
