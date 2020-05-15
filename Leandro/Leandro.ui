@@ -5895,7 +5895,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="playButton_2">
+       <widget class="QPushButton" name="playButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -5932,7 +5932,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="stopButton_2">
+       <widget class="QPushButton" name="stopButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -5952,7 +5952,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="recordButton_2">
+       <widget class="QPushButton" name="recordButton">
         <property name="text">
          <string/>
         </property>
