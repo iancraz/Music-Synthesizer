@@ -7,6 +7,8 @@
 #include "Effect.h"
 #include <fstream>
 #include <string>
+#include "AudioFile.h"
+#include <qfiledialog.h>
 
 using namespace std;
 
@@ -45,10 +47,14 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	
 	initGUI();
 	// GUI function connections
+
+	this->wav = new float[MAX_WAV_SIZE];
+	restarWavRecording();
 	
 }
 
 Leandro::~Leandro() {
+	delete[] wav;
 	for (int i = 0; i < this->noteBuffers.size(); i++) free(this->noteBuffers[i]->buffer);
 }
 
@@ -101,6 +107,17 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
 	}
 	*(data->currentSample) += frameCount;
+
+
+	//// LO QUE AGREGO IAN ES ESTO/////////////////
+	if (data->recordFlag) {
+		for (unsigned int i = 0; i < (unsigned int)(frameCount / 2); i++) {
+			data->wav[*(data->wavCounter) + i] = out[2 * i];
+		}
+		*data->wavCounter += frameCount;
+	}
+	///////////////////////////////////////////////
+
 	return paContinue;
 }
 
@@ -137,9 +154,10 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
 }
 
-void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
+
+void Leandro::addMidiFile(string filename, bool autoSet) {
 	MidiFile* midifile = new MidiFile;
-	midifile->read(directory + filename);
+	midifile->read(filename);
 	midifile->doTimeAnalysis();
 	midifile->linkNotePairs();
 	midiTrack* tempTrack;
@@ -728,19 +746,6 @@ void Leandro::removeEffectFromActiveChannel() {
 	updateActiveAssetsBay();
 }
 
-void Leandro::startStreaming() {
-	PaError err = Pa_StartStream(stream);
-	if (err != paNoError) throw "Error! PortAudio couldnt start stream";
-
-}
-
-void Leandro::stopStreaming() {
-	PaError err = Pa_StopStream(stream);
-	if (err != paNoError) throw "Error! PortAudio couldnt stop stream";
-
-}
-
-
 
 // GUI triggered setters
 
@@ -873,6 +878,33 @@ void Leandro::wahwahValueChanged() {
 }
 
 
+// GUI triggered setters
+
+
+
+
+//	Record to WAV
+
+void Leandro::record2Wav() {
+	if (recordFlag) {
+		AudioFile<double> audioFile;
+		AudioFile<double>::AudioBuffer buffer;
+		buffer.resize(1);
+		buffer[0].resize(wavCounter);
+		for (int i = 0; i < wavCounter - 1; i++) {
+			buffer[0][i] = wav[i];
+		}
+		bool ok = audioFile.setAudioBuffer(buffer);
+		audioFile.save("out.wav");
+	}
+	return;
+}
+
+void Leandro::restarWavRecording(){
+	this->wavCounter = 0;
+	return;
+}
+
 
 
 
@@ -930,13 +962,7 @@ void Leandro::initGUI() {
 
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
-	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
-	QObject::connect(ui.stopButton, &QPushButton::clicked, this, &Leandro::stopStreaming);
-	
-	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); // TEST
-
-	
-
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
@@ -1694,5 +1720,12 @@ void Leandro::channel10TrackChanged() {
 // TEST FUNCTIONS
 
 void Leandro::loadTestMidi() {
-	addMidiFile("", "sm64.mid", true);
+	addMidiFile("sm64.mid");
+}
+
+void Leandro::loadMidiFile() {
+	QString fileName = QFileDialog::getOpenFileName(this,
+													tr("Load Midi File"), "",
+													tr("Midi Files (*.mid);;All Files (*)"));
+	addMidiFile(fileName.toStdString());
 }

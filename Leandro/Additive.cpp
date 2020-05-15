@@ -16,6 +16,9 @@ AdditiveInstrument::AdditiveInstrument(additiveParams_t * params) {
 	envelopeLengths = params->envelopeLengths;
 	octavesEnvelopes = params->octavesEnvelopes;
 	int octavesCount = params->octavesEnvelopes.size();
+	for (int i = 0; i < harmonicsCount; i++) {
+		harmonicFactors.push_back(1.0);
+	}
 
 
 	envelopes = new float** [octavesCount];
@@ -62,9 +65,11 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 	}
 
 	for (int k = 0; k < harmonicsCount; k++) {
+		float r = harmonicFactors[k];
+		float r3 = -0.1 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.1 - (-0.1))));
 		int i = 0;
 		while (i < noteDuration_n && i < outputBufferSize && i < envelopeLengths[octave]) {
-			outputBuffer[i] += envelopes[octave][k][i] * (float)sin(2.0 * M_PI * freq * (float)(k + 1) / (float)sampleRate * (float)i);
+			outputBuffer[i] += envelopes[octave][k][i] * r *(float)sin(2.0 * M_PI * freq * (1.0 + r3) * (float)(k + 1) / (float)sampleRate * (float)i);
 			maxValue = abs(outputBuffer[i]) > maxValue && outputBuffer[i] != 0.0 ? abs(outputBuffer[i]) : maxValue;
 			i++;
 		}
@@ -72,9 +77,7 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 	}
 	for (int j = 0; j < last - 1; j++) {
 		outputBuffer[j] = outputBuffer[j] * A0 / maxValue;
-		//file << outputBuffer[j] << std::endl;
 	}
-	//file.close();
 	outputBuffer[last - 1] = INFINITY;
 	return 0;
 }

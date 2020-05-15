@@ -19,6 +19,7 @@
 #define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 50
 #define MAX_NOTE_LENGTH_SECONDS 10
 #define	ACTIVE_BUFFER_FRAME_SIZE 44100
+#define MAX_WAV_SIZE (SAMPLE_RATE * 60 * 6)
 
 using namespace std;
 
@@ -45,6 +46,11 @@ typedef struct {
 	__int64* currentSample;
 	vector<Channel*>* channels;
 	ofstream* debugStream;
+
+	//ESTO AGREGO IANNNN
+	float* wav;
+	unsigned int * wavCounter;
+	bool recordFlag;
 }callbackData;
 
 
@@ -80,6 +86,9 @@ public:
 
 	void addChannel(Channel* newChannel);
 	void destroyChannel(Channel* channel);
+	void addMidiFile(string filename, bool autoSet = true);
+	
+
 	void addMidiFile(string directory, string filename, bool autoSet);
 	int getFirstFreeChannelFrame();
 
@@ -189,6 +198,11 @@ public:
 
 private:
 	Ui::LeandroClass ui;
+	bool recordFlag;
+	void record2Wav();
+	void restarWavRecording();
+	float* wav;
+	unsigned int wavCounter;
 
 
 };
