@@ -781,6 +781,7 @@ void Leandro::instrumentValueChanged() {
 		adsrinst->setWF2(ui.waveform2ComboBoxADSR->currentIndex());
 		adsrinst->setWF1Level(((float)ui.levelWF1DialADSR->value()) / 100.0);
 		adsrinst->setWF1Level(((float)ui.levelWF2DialADSR->value()) / 100.0);
+		
 		break;
 
 	case synthType::additive:

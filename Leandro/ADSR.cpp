@@ -165,3 +165,34 @@ ADSRInstrument::synthFunction(float* outputBuffer,
 	return 0;
 }
 
+void ADSRInstrument::setAttack(float _seconds)
+{
+	if (params->tAttack != _seconds) {
+		params->tAttack = _seconds;
+		generateEnvelope(SAMPLE_RATE, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+	}
+}
+void ADSRInstrument::setDecay(float _seconds) {
+	if (params->tDecay != _seconds) {
+		params->tDecay = _seconds;
+		generateEnvelope(SAMPLE_RATE, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+	}
+}
+void ADSRInstrument::setSustainRate(float _rate) {
+	if (params->sustainRate != _rate) {
+		params->sustainRate = _rate;
+		generateEnvelope(SAMPLE_RATE, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+	}
+}
+void ADSRInstrument::setSustainLevel(float _level) {
+	if (params->sustainLevel != _level) {
+		params->sustainLevel = _level;
+		generateEnvelope(SAMPLE_RATE, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+	}
+}
+void ADSRInstrument::setRelease(float _seconds) {
+	if (params->tRelease != _seconds) {
+		params->tRelease = _seconds;
+		generateEnvelope(SAMPLE_RATE, SAMPLE_RATE * MAX_NOTE_LENGTH_SECONDS);
+	}
+}
