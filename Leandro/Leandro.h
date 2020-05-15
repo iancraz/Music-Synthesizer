@@ -199,7 +199,7 @@ public:
 	void channel10VolChanged();
 	void channel10TrackChanged();
 
-
+	void showSpectrogram();
 
 	void calcSpecgram();
 
