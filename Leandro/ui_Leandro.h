@@ -48,9 +48,9 @@ public:
     QLabel *label_8;
     QListWidget *effectsList;
     QPushButton *addEffectButton;
-    QScrollArea *scrollAreaChannels_2;
+    QScrollArea *channelScrollArea;
     QWidget *scrollAreaChannelsWidgetContents_2;
-    QHBoxLayout *channelsContainerLayout;
+    QGridLayout *gridLayout_11;
     QFrame *frame_2;
     QHBoxLayout *horizontalLayout_13;
     QFrame *frameChannel1;
@@ -164,6 +164,10 @@ public:
     QDial *levelDialChannel10;
     QLabel *levelLabelChannel1_11;
     QSpacerItem *horizontalSpacer_12;
+    QFrame *spectoFrame;
+    QGridLayout *gridLayout_10;
+    QHBoxLayout *spectogramLayout;
+    QLabel *imageLabel;
     QHBoxLayout *activeChannelAssetsPanel;
     QFrame *instrumentFrameFrame;
     QGridLayout *gridLayout_2;
@@ -175,7 +179,6 @@ public:
     QPushButton *deleteADSRButton;
     QLabel *instrumentNameLabel;
     QSpacerItem *horizontalSpacer_3;
-    QLabel *InstrumentNameADSR;
     QFrame *line_2;
     QVBoxLayout *framesVLayout;
     QFrame *oscillator1Frame;
@@ -226,7 +229,6 @@ public:
     QPushButton *deleteAdditiveButton;
     QLabel *instrumentNameLabel_4;
     QSpacerItem *horizontalSpacer_5;
-    QLabel *instrumentNameAdditive;
     QFrame *line_8;
     QVBoxLayout *framesVLayout_4;
     QFrame *oscillator2Frame_4;
@@ -277,7 +279,6 @@ public:
     QPushButton *deleteSamplingButton;
     QLabel *instrumentNameLabel_3;
     QSpacerItem *horizontalSpacer_11;
-    QLabel *instrumentNameSampling;
     QFrame *line_6;
     QVBoxLayout *framesVLayout_3;
     QFrame *line_7;
@@ -301,7 +302,6 @@ public:
     QPushButton *deleteKarplusButton;
     QLabel *instrumentNameLabel_2;
     QSpacerItem *horizontalSpacer_10;
-    QLabel *instrumentNameKarplus;
     QFrame *line_4;
     QVBoxLayout *framesVLayout_2;
     QFrame *envelopeParamsFrame_2;
@@ -453,14 +453,16 @@ public:
     QPushButton *pauseButton;
     QPushButton *stopButton;
     QPushButton *recordButton;
+    QLabel *recLabel;
     QSpacerItem *horizontalSpacer_4;
+    QPushButton *exportToWavButton_2;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *LeandroClass)
     {
         if (LeandroClass->objectName().isEmpty())
             LeandroClass->setObjectName(QStringLiteral("LeandroClass"));
-        LeandroClass->resize(2638, 783);
+        LeandroClass->resize(2060, 783);
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -655,13 +657,13 @@ public:
 
         horizontalLayout_5->addWidget(frame_3, 0, Qt::AlignHCenter);
 
-        scrollAreaChannels_2 = new QScrollArea(centralWidget);
-        scrollAreaChannels_2->setObjectName(QStringLiteral("scrollAreaChannels_2"));
+        channelScrollArea = new QScrollArea(centralWidget);
+        channelScrollArea->setObjectName(QStringLiteral("channelScrollArea"));
         QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(scrollAreaChannels_2->sizePolicy().hasHeightForWidth());
-        scrollAreaChannels_2->setSizePolicy(sizePolicy3);
+        sizePolicy3.setHeightForWidth(channelScrollArea->sizePolicy().hasHeightForWidth());
+        channelScrollArea->setSizePolicy(sizePolicy3);
         QPalette palette2;
         palette2.setBrush(QPalette::Active, QPalette::Base, brush3);
         palette2.setBrush(QPalette::Active, QPalette::Window, brush13);
@@ -669,26 +671,26 @@ public:
         palette2.setBrush(QPalette::Inactive, QPalette::Window, brush13);
         palette2.setBrush(QPalette::Disabled, QPalette::Base, brush13);
         palette2.setBrush(QPalette::Disabled, QPalette::Window, brush13);
-        scrollAreaChannels_2->setPalette(palette2);
-        scrollAreaChannels_2->setAutoFillBackground(true);
-        scrollAreaChannels_2->setFrameShape(QFrame::Panel);
-        scrollAreaChannels_2->setFrameShadow(QFrame::Sunken);
-        scrollAreaChannels_2->setLineWidth(3);
-        scrollAreaChannels_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        scrollAreaChannels_2->setWidgetResizable(true);
+        channelScrollArea->setPalette(palette2);
+        channelScrollArea->setAutoFillBackground(true);
+        channelScrollArea->setFrameShape(QFrame::Panel);
+        channelScrollArea->setFrameShadow(QFrame::Sunken);
+        channelScrollArea->setLineWidth(3);
+        channelScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        channelScrollArea->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 2324, 294));
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 1746, 283));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(scrollAreaChannelsWidgetContents_2->sizePolicy().hasHeightForWidth());
         scrollAreaChannelsWidgetContents_2->setSizePolicy(sizePolicy4);
-        channelsContainerLayout = new QHBoxLayout(scrollAreaChannelsWidgetContents_2);
-        channelsContainerLayout->setSpacing(6);
-        channelsContainerLayout->setContentsMargins(11, 11, 11, 11);
-        channelsContainerLayout->setObjectName(QStringLiteral("channelsContainerLayout"));
-        channelsContainerLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        gridLayout_11 = new QGridLayout(scrollAreaChannelsWidgetContents_2);
+        gridLayout_11->setSpacing(6);
+        gridLayout_11->setContentsMargins(11, 11, 11, 11);
+        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        gridLayout_11->setSizeConstraint(QLayout::SetDefaultConstraint);
         frame_2 = new QFrame(scrollAreaChannelsWidgetContents_2);
         frame_2->setObjectName(QStringLiteral("frame_2"));
         frame_2->setFrameShape(QFrame::StyledPanel);
@@ -697,6 +699,7 @@ public:
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
         frameChannel1 = new QFrame(frame_2);
         frameChannel1->setObjectName(QStringLiteral("frameChannel1"));
         QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -1743,12 +1746,36 @@ public:
 
         horizontalLayout_13->addItem(horizontalSpacer_12);
 
+        spectoFrame = new QFrame(frame_2);
+        spectoFrame->setObjectName(QStringLiteral("spectoFrame"));
+        spectoFrame->setAutoFillBackground(true);
+        spectoFrame->setFrameShape(QFrame::Panel);
+        spectoFrame->setFrameShadow(QFrame::Raised);
+        spectoFrame->setLineWidth(2);
+        gridLayout_10 = new QGridLayout(spectoFrame);
+        gridLayout_10->setSpacing(6);
+        gridLayout_10->setContentsMargins(11, 11, 11, 11);
+        gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
+        spectogramLayout = new QHBoxLayout();
+        spectogramLayout->setSpacing(6);
+        spectogramLayout->setObjectName(QStringLiteral("spectogramLayout"));
+        imageLabel = new QLabel(spectoFrame);
+        imageLabel->setObjectName(QStringLiteral("imageLabel"));
 
-        channelsContainerLayout->addWidget(frame_2);
+        spectogramLayout->addWidget(imageLabel);
 
-        scrollAreaChannels_2->setWidget(scrollAreaChannelsWidgetContents_2);
 
-        horizontalLayout_5->addWidget(scrollAreaChannels_2);
+        gridLayout_10->addLayout(spectogramLayout, 0, 0, 1, 1);
+
+
+        horizontalLayout_13->addWidget(spectoFrame);
+
+
+        gridLayout_11->addWidget(frame_2, 0, 0, 1, 1);
+
+        channelScrollArea->setWidget(scrollAreaChannelsWidgetContents_2);
+
+        horizontalLayout_5->addWidget(channelScrollArea);
 
 
         verticalLayout_6->addLayout(horizontalLayout_5);
@@ -1840,11 +1867,6 @@ public:
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         nameHLayout->addItem(horizontalSpacer_3);
-
-        InstrumentNameADSR = new QLabel(adsrInstrumentFrame);
-        InstrumentNameADSR->setObjectName(QStringLiteral("InstrumentNameADSR"));
-
-        nameHLayout->addWidget(InstrumentNameADSR, 0, Qt::AlignLeft|Qt::AlignBottom);
 
 
         gridLayout_3->addLayout(nameHLayout, 0, 0, 1, 1);
@@ -2234,11 +2256,6 @@ public:
 
         nameHLayout_4->addItem(horizontalSpacer_5);
 
-        instrumentNameAdditive = new QLabel(additiveInstrumentFrame);
-        instrumentNameAdditive->setObjectName(QStringLiteral("instrumentNameAdditive"));
-
-        nameHLayout_4->addWidget(instrumentNameAdditive, 0, Qt::AlignBottom);
-
 
         gridLayout_7->addLayout(nameHLayout_4, 0, 0, 1, 1);
 
@@ -2603,11 +2620,6 @@ public:
 
         nameHLayout_3->addItem(horizontalSpacer_11);
 
-        instrumentNameSampling = new QLabel(samplingInstrumentFrame);
-        instrumentNameSampling->setObjectName(QStringLiteral("instrumentNameSampling"));
-
-        nameHLayout_3->addWidget(instrumentNameSampling, 0, Qt::AlignBottom);
-
 
         gridLayout_6->addLayout(nameHLayout_3, 0, 0, 1, 1);
 
@@ -2773,11 +2785,6 @@ public:
 
         nameHLayout_2->addItem(horizontalSpacer_10);
 
-        instrumentNameKarplus = new QLabel(karplusInstrumentFrame);
-        instrumentNameKarplus->setObjectName(QStringLiteral("instrumentNameKarplus"));
-
-        nameHLayout_2->addWidget(instrumentNameKarplus, 0, Qt::AlignBottom);
-
 
         gridLayout_5->addLayout(nameHLayout_2, 0, 0, 1, 1);
 
@@ -2941,7 +2948,7 @@ public:
         effectsScrollArea->setWidgetResizable(true);
         effectsScrollAreaContents = new QWidget();
         effectsScrollAreaContents->setObjectName(QStringLiteral("effectsScrollAreaContents"));
-        effectsScrollAreaContents->setGeometry(QRect(0, 0, 1252, 401));
+        effectsScrollAreaContents->setGeometry(QRect(-87, 0, 1139, 391));
         horizontalLayout_9 = new QHBoxLayout(effectsScrollAreaContents);
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
@@ -3949,9 +3956,31 @@ public:
 
         horizontalLayout_10->addWidget(recordButton);
 
+        recLabel = new QLabel(centralWidget);
+        recLabel->setObjectName(QStringLiteral("recLabel"));
+        QFont font7;
+        font7.setPointSize(9);
+        font7.setBold(true);
+        font7.setWeight(75);
+        recLabel->setFont(font7);
+        recLabel->setStyleSheet(QStringLiteral("color: rgb(253, 180, 50)"));
+
+        horizontalLayout_10->addWidget(recLabel);
+
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_10->addItem(horizontalSpacer_4);
+
+        exportToWavButton_2 = new QPushButton(centralWidget);
+        exportToWavButton_2->setObjectName(QStringLiteral("exportToWavButton_2"));
+        exportToWavButton_2->setFont(font1);
+        exportToWavButton_2->setAutoFillBackground(true);
+        QIcon icon7;
+        icon7.addFile(QStringLiteral(":/iconspng/iconspng/049-checked.png"), QSize(), QIcon::Normal, QIcon::Off);
+        exportToWavButton_2->setIcon(icon7);
+        exportToWavButton_2->setFlat(true);
+
+        horizontalLayout_10->addWidget(exportToWavButton_2);
 
 
         gridLayout->addLayout(horizontalLayout_10, 0, 0, 1, 1);
@@ -4133,9 +4162,9 @@ public:
         midiListChannel10->setSortingEnabled(__sortingEnabled9);
 
         levelLabelChannel1_11->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
+        imageLabel->setText(QString());
         deleteADSRButton->setText(QString());
         instrumentNameLabel->setText(QApplication::translate("LeandroClass", "Waveform + ADSR", Q_NULLPTR));
-        InstrumentNameADSR->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
         oscillator1Label->setText(QApplication::translate("LeandroClass", "Oscillator 1", Q_NULLPTR));
         waveform1Label->setText(QApplication::translate("LeandroClass", "Waveform", Q_NULLPTR));
         waveform1ComboBoxADSR->clear();
@@ -4162,7 +4191,6 @@ public:
         releaseLabel->setText(QApplication::translate("LeandroClass", "Release", Q_NULLPTR));
         deleteAdditiveButton->setText(QString());
         instrumentNameLabel_4->setText(QApplication::translate("LeandroClass", "Harmonic Addition", Q_NULLPTR));
-        instrumentNameAdditive->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
         oscillator2Label_4->setText(QApplication::translate("LeandroClass", "Harmonic Level Control", Q_NULLPTR));
         sliderLabelH0->setText(QApplication::translate("LeandroClass", "0", Q_NULLPTR));
         label_29->setText(QApplication::translate("LeandroClass", "1", Q_NULLPTR));
@@ -4178,13 +4206,11 @@ public:
         label_2->setText(QApplication::translate("LeandroClass", "11", Q_NULLPTR));
         deleteSamplingButton->setText(QString());
         instrumentNameLabel_3->setText(QApplication::translate("LeandroClass", "Sampling", Q_NULLPTR));
-        instrumentNameSampling->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
         envelopeParamsLabel_3->setText(QApplication::translate("LeandroClass", "Sample Playback Parameters", Q_NULLPTR));
         sustainLabel_3->setText(QApplication::translate("LeandroClass", "Loop Start", Q_NULLPTR));
         releaseLabel_3->setText(QApplication::translate("LeandroClass", "Loop End", Q_NULLPTR));
         deleteKarplusButton->setText(QString());
         instrumentNameLabel_2->setText(QApplication::translate("LeandroClass", "Karplus-Strong", Q_NULLPTR));
-        instrumentNameKarplus->setText(QApplication::translate("LeandroClass", "InstrumentName", Q_NULLPTR));
         decayLabel_2->setText(QApplication::translate("LeandroClass", "Stretch", Q_NULLPTR));
         releaseLabel_2->setText(QApplication::translate("LeandroClass", "Decay Loss", Q_NULLPTR));
         sustainLabel_2->setText(QApplication::translate("LeandroClass", "Blend", Q_NULLPTR));
@@ -4234,6 +4260,8 @@ public:
         pauseButton->setText(QString());
         stopButton->setText(QString());
         recordButton->setText(QString());
+        recLabel->setText(QApplication::translate("LeandroClass", "REC", Q_NULLPTR));
+        exportToWavButton_2->setText(QApplication::translate("LeandroClass", "Export To Wav", Q_NULLPTR));
     } // retranslateUi
 
 };

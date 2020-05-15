@@ -51,8 +51,8 @@ typedef struct {
 	//ESTO AGREGO IANNNN
 	float* wav;
 	unsigned int * wavCounter;
-	bool recordFlag;
-	bool specgramFlag;
+	bool * recordFlag;
+	
 }callbackData;
 
 
@@ -116,6 +116,7 @@ public:
 	void startStreaming();
 	void pauseStreaming();
 	void stopStreaming();
+	void toggleRecord();
 
 	void instrumentValueChanged();
 	void reverbValueChanged();

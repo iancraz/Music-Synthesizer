@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2638</width>
+    <width>2060</width>
     <height>783</height>
    </rect>
   </property>
@@ -763,7 +763,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QScrollArea" name="scrollAreaChannels_2">
+         <widget class="QScrollArea" name="channelScrollArea">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -857,8 +857,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>2324</width>
-             <height>294</height>
+             <width>1746</width>
+             <height>283</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -867,11 +867,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <layout class="QHBoxLayout" name="channelsContainerLayout">
+           <layout class="QGridLayout" name="gridLayout_11">
             <property name="sizeConstraint">
              <enum>QLayout::SetDefaultConstraint</enum>
             </property>
-            <item>
+            <item row="0" column="0">
              <widget class="QFrame" name="frame_2">
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -880,6 +880,18 @@
                <enum>QFrame::Raised</enum>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
                 <widget class="QFrame" name="frameChannel1">
                  <property name="sizePolicy">
@@ -3843,6 +3855,35 @@
                  </property>
                 </spacer>
                </item>
+               <item>
+                <widget class="QFrame" name="spectoFrame">
+                 <property name="autoFillBackground">
+                  <bool>true</bool>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::Panel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <property name="lineWidth">
+                  <number>2</number>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_10">
+                  <item row="0" column="0">
+                   <layout class="QHBoxLayout" name="spectogramLayout">
+                    <item>
+                     <widget class="QLabel" name="imageLabel">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
               </layout>
              </widget>
             </item>
@@ -4114,13 +4155,6 @@
                        </size>
                       </property>
                      </spacer>
-                    </item>
-                    <item alignment="Qt::AlignLeft|Qt::AlignBottom">
-                     <widget class="QLabel" name="InstrumentNameADSR">
-                      <property name="text">
-                       <string>InstrumentName</string>
-                      </property>
-                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -4931,13 +4965,6 @@
                       </property>
                      </spacer>
                     </item>
-                    <item alignment="Qt::AlignBottom">
-                     <widget class="QLabel" name="instrumentNameAdditive">
-                      <property name="text">
-                       <string>InstrumentName</string>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </item>
                   <item row="1" column="0">
@@ -5554,13 +5581,6 @@
                       </property>
                      </spacer>
                     </item>
-                    <item alignment="Qt::AlignBottom">
-                     <widget class="QLabel" name="instrumentNameSampling">
-                      <property name="text">
-                       <string>InstrumentName</string>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </item>
                   <item row="1" column="0">
@@ -5939,13 +5959,6 @@
                       </property>
                      </spacer>
                     </item>
-                    <item alignment="Qt::AlignBottom">
-                     <widget class="QLabel" name="instrumentNameKarplus">
-                      <property name="text">
-                       <string>InstrumentName</string>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </item>
                   <item row="1" column="0">
@@ -6283,10 +6296,10 @@
           <widget class="QWidget" name="effectsScrollAreaContents">
            <property name="geometry">
             <rect>
-             <x>0</x>
+             <x>-87</x>
              <y>0</y>
-             <width>1252</width>
-             <height>401</height>
+             <width>1139</width>
+             <height>391</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -8368,6 +8381,23 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="recLabel">
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(253, 180, 50)</string>
+        </property>
+        <property name="text">
+         <string>REC</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_4">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -8379,6 +8409,29 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exportToWavButton_2">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Export To Wav</string>
+        </property>
+        <property name="icon">
+         <iconset resource="Leandro.qrc">
+          <normaloff>:/iconspng/iconspng/049-checked.png</normaloff>:/iconspng/iconspng/049-checked.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

@@ -17,6 +17,7 @@ using namespace std;
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	recordFlag = false;
 	specgramFlag = false;
+	wavCounter = 0;
 	QPixmap pixmap("images/splash.png");
 	QSplashScreen* splash = new QSplashScreen(pixmap);
 	splash->show();
@@ -48,7 +49,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 							   &(this->callData)); /*This is a pointer that will be passed to
 												   your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
-
+	this->wav = new float[MAX_WAV_SIZE];
 	this->updateCallbackData();
 	
 	
@@ -56,7 +57,8 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	initGUI();
 	// GUI function connections
 
-	this->wav = new float[MAX_WAV_SIZE];
+	
+	
 	restarWavRecording();
 	
 }
@@ -118,11 +120,11 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 
 
 	//// LO QUE AGREGO IAN ES ESTO/////////////////
-	if (data->recordFlag || data->specgramFlag) {
+	if (data->recordFlag) {
 		for (unsigned int i = 0; i < (unsigned int)(frameCount / 2); i++) {
 			data->wav[*(data->wavCounter) + i] = out[2 * i];
 		}
-		*data->wavCounter += frameCount;
+		*data->wavCounter += (int)(frameCount/2.0);
 	}
 	///////////////////////////////////////////////
 
@@ -204,7 +206,7 @@ void Leandro::updateCallbackData() {
 	this->callData.currentSample = &(this->currentSample);
 	this->callData.channels = &(this->channels);
 	this->callData.debugStream = &this->debugStream;
-	this->callData.recordFlag = recordFlag;
+	this->callData.recordFlag = &recordFlag;
 	this->callData.wav = wav;
 	this->callData.wavCounter = &wavCounter;
 
@@ -949,6 +951,13 @@ void Leandro::initGUI() {
 
 	updateAvailableAssetsInGUI();
 
+	ui.exportToWavButton_2->setDisabled(true);
+	ui.spectoFrame->setHidden(true);
+	ui.recLabel->setHidden(true);
+
+	ui.newChannelButton->setHidden(true);
+	ui.newChannelButton->setDisabled(true);
+
 	channelFrames.push_back(ui.frameChannel1);
 	channelFrames.push_back(ui.frameChannel2);
 	channelFrames.push_back(ui.frameChannel3);
@@ -999,7 +1008,12 @@ void Leandro::initGUI() {
 	//QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi); //DEBUG
 
 	QObject::connect(ui.playButton, &QPushButton::clicked, this, &Leandro::startStreaming);
+	QObject::connect(ui.pauseButton, &QPushButton::clicked, this, &Leandro::pauseStreaming);
 	QObject::connect(ui.stopButton, &QPushButton::clicked, this, &Leandro::stopStreaming);
+	QObject::connect(ui.recordButton, &QPushButton::clicked, this, &Leandro::toggleRecord);
+	QObject::connect(ui.exportToWavButton_2, &QPushButton::clicked, this, &Leandro::record2Wav);
+
+	
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
@@ -1153,6 +1167,11 @@ void Leandro::initGUI() {
 }
 
 void Leandro::startStreaming() {
+
+	ui.spectoFrame->setHidden(true);
+	ui.exportToWavButton_2->setEnabled(false);
+	wavCounter = 0;
+	
 	PaError err = Pa_StartStream(stream);
 	
 	
@@ -1164,6 +1183,7 @@ void Leandro::pauseStreaming() {
 
 }
 void Leandro::stopStreaming() {
+	if (recordFlag) toggleRecord();
 	PaError err = Pa_StopStream(stream);
 	currentSample = 0;
 	activeBuffer[0] = INFINITY;
@@ -1171,7 +1191,26 @@ void Leandro::stopStreaming() {
 		noteBuffers.at(i)->buffer[0] = INFINITY;
 		noteBuffers.at(i)->startingFrame = -1;
 	}
+	calcSpecgram();
+
+	QPixmap image("spectogram.png");
+
+	ui.imageLabel->setPixmap(image);
+
+	ui.spectoFrame->setHidden(false);
+	if(wavCounter) ui.exportToWavButton_2->setEnabled(true);
 }
+
+void Leandro::toggleRecord() {
+	if (recordFlag) {
+		recordFlag = false;
+		ui.recLabel->setHidden(true);
+	}
+	else {
+		recordFlag = true;
+		ui.recLabel->setHidden(false);
+	}
+	}
 
 void Leandro::channel1Closed() {
 	Channel* channel = nullptr;
@@ -1792,7 +1831,7 @@ void Leandro::calcSpecgram() {
 	Spectrogram temp(wav,wavCounter);
 	unsigned int nfft = 1024;
 	unsigned int overlap = 128;
-	bool show = true;
-	temp.calcSpectrogram(SAMPLE_RATE, nfft, WINDOW_NONE, overlap, show, true, "specgram.png");
+	bool show = false;
+	temp.calcSpectrogram(SAMPLE_RATE, nfft, WINDOW_NONE, overlap, show, true, "spectogram.png");
 	return;
 }

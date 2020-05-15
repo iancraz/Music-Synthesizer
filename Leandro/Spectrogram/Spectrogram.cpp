@@ -40,7 +40,7 @@ void Spectrogram::calcSpectrogram(unsigned int samplingRate, unsigned int nfft, 
     }
     out << endl;
     out.close();
-    system("python ./plot.py");
+    system("python ./Spectrogram/plot.py");
 #ifdef DEBUG
     cout << "Finalizado el calculo." << endl;
 #endif

@@ -96,6 +96,7 @@
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Sample.cpp" />
     <ClCompile Include="Sampling.cpp" />
+    <ClCompile Include="Spectrogram\Spectrogram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Leandro.h" />
@@ -123,6 +124,7 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="rapidcsv.h" />
     <ClInclude Include="Sample.h" />
+    <ClInclude Include="Spectrogram\Spectrogram.h" />
     <ClInclude Include="ui_Leandro.h" />
   </ItemGroup>
   <ItemGroup>

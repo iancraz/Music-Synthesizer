@@ -73,6 +73,9 @@
     <ClCompile Include="Karplus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spectrogram\Spectrogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Leandro.h">
@@ -133,6 +136,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spectrogram\Spectrogram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
