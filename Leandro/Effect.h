@@ -260,3 +260,18 @@ protected:
 	filter2_t midFilter;
 	float* x;
 };
+
+typedef struct {
+	float alpha, f_lfo;
+	unsigned int sampleRate;
+}tremoloParams_t;
+
+class TremoloEffect : public Effect {
+public:
+	TremoloEffect(tremoloParams_t* _params);
+	~TremoloEffect();
+	effectCallback callback;
+protected:
+	float alpha;
+	float f_lfo;
+};
