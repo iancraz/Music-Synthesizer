@@ -10,10 +10,9 @@ typedef void effectCallback(
 
 typedef enum { E_PLAIN, E_ECO, E_LOWPASS }mode_t;
 
-enum class effectType{ reverb, flanger, vibrato, wahwah, eq8band };
+enum class effectType { reverb, flanger, vibrato, wahwah, eq8band };
 
-class Effect
-{
+class Effect {
 public:
 	// Effect parameters here
 
@@ -21,7 +20,7 @@ public:
 	~Effect();
 	virtual effectCallback callback;
 	effectType type;
-	
+
 protected:
 	unsigned int getBufferSize(float* buffer); //Da el tamao del buffer hasta el elemento que contenga INFINITY
 	unsigned int copyBuffer2in(float* buffer, float* in, unsigned int maxSize); //Copia el array Buffer al array in, y devuelve el tama?o del buffer hasta el elemento INFINITY
@@ -43,8 +42,7 @@ typedef struct {
 	unsigned int maxSoundBufferSize;
 }reverbParams_t;
 
-class ReverbEffect : public Effect
-{
+class ReverbEffect : public Effect {
 public:
 	//ReverbEffect(mode_t mode = E_PLAIN, float delay = 0.2, float att = 0.5, unsigned int maxSoundBufferSize = (44e3 * 15));
 	ReverbEffect(reverbParams_t* _params);
@@ -112,7 +110,6 @@ private:
 	float linearInterpolation(float num, float* in);
 };
 
-
 typedef struct {
 	float fo;
 	int sampleRate;
@@ -143,8 +140,6 @@ protected:
 private:
 	float linearInterpolation(float num);
 };
-
-
 
 typedef struct {
 	float f_min;
@@ -222,7 +217,6 @@ protected:
 	float freqMax = 20e3;
 };
 
-
 typedef struct {
 	float gainLow;
 	float gainMid;
@@ -230,8 +224,6 @@ typedef struct {
 	unsigned int maxSoundBufferSize;
 	unsigned int sampleRate;
 }equalizatorParams_t;
-
-
 
 class EqualizatorEffect : public Effect {
 	//Habria que corregirle algunos parametros para que suene mejor

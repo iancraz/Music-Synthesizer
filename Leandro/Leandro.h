@@ -10,9 +10,10 @@
 #include "Options.h"
 #include "Instrument.h"
 #include "Effect.h"
-#include<list>
-#include<vector>
+#include <list>
+#include <vector>
 #include <fstream>
+#include "json/json.h"
 
 #define SAMPLE_RATE (44100)
 #define MAX_SIMULTANEOUS_NOTES_PER_CHANNEL 15
@@ -33,7 +34,6 @@ typedef struct {
 	string effectName;
 	effectType type;
 	void* params;
-	float** resourceMatrix;
 }effectModel;
 
 
@@ -110,7 +110,6 @@ public:
 
 	void loadSynthData(Json::Value synthRoot);
 
-	void loadEqualizerData(Json::Value equialzierRoot);
 
 private:
 	Ui::LeandroClass ui;

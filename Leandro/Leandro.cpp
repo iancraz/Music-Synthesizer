@@ -4,13 +4,14 @@
 #include "Channel.h"
 #include "portaudio.h"
 #include "instrument.h"
+#include "Effect.h"
 #include <fstream>
 #include <string>
 
 using namespace std;
 
-Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
-{
+Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
+	loadData();
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->channelCreationCounter = 0;
@@ -20,30 +21,27 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent)
 
 	/* Open an audio I/O stream. */
 	err = Pa_OpenDefaultStream(&(this->stream),
-		0,          /* no input channels */
-		2,          /* stereo output */
-		paFloat32,  /* 32 bit floating point output */
-		SAMPLE_RATE,
-		paFramesPerBufferUnspecified,
-		//5000,
-		  /* frames per buffer, i.e. the number
-						   of sample frames that PortAudio will
-						   request from the callback. Many apps
-						   may want to use
-						   paFramesPerBufferUnspecified, which
-						   tells PortAudio to pick the best,
-						   possibly changing, buffer size.*/
-		this->callback, /* this is your callback function */
-		&(this->callData)); /*This is a pointer that will be passed to
-							your callback*/
+							   0,          /* no input channels */
+							   2,          /* stereo output */
+							   paFloat32,  /* 32 bit floating point output */
+							   SAMPLE_RATE,
+							   paFramesPerBufferUnspecified,
+							   //5000,
+								 /* frames per buffer, i.e. the number
+												  of sample frames that PortAudio will
+												  request from the callback. Many apps
+												  may want to use
+												  paFramesPerBufferUnspecified, which
+												  tells PortAudio to pick the best,
+												  possibly changing, buffer size.*/
+							   this->callback, /* this is your callback function */
+							   &(this->callData)); /*This is a pointer that will be passed to
+												   your callback*/
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
 
 	// GUI function connections
-
-	
-	
 
 }
 
@@ -52,12 +50,12 @@ Leandro::~Leandro() {
 }
 
 int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers and output results to stream
-	const void* input,
-	void* output,
-	unsigned long frameCount,
-	const PaStreamCallbackTimeInfo* timeInfo,
-	PaStreamCallbackFlags statusFlags,
-	void* userData) {
+					  const void* input,
+					  void* output,
+					  unsigned long frameCount,
+					  const PaStreamCallbackTimeInfo* timeInfo,
+					  PaStreamCallbackFlags statusFlags,
+					  void* userData) {
 	// Void pointer casts
 	float* out = (float*)output;
 	callbackData* data = (callbackData*)userData;
@@ -123,8 +121,7 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 	// Free used memory and destroy note buffers, up to MAX_SIMULTANEOUS_NOTES_PER_CHANNEL, if there are enough empty ones
 	int k = MAX_SIMULTANEOUS_NOTES_PER_CHANNEL;
 	for (int i = 0; i < this->noteBuffers.size() && k>0; i++)
-		if (this->noteBuffers[i]->buffer[0] == INFINITY)
-		{
+		if (this->noteBuffers[i]->buffer[0] == INFINITY) {
 			free(this->noteBuffers[i]->buffer);
 			this->noteBuffers.erase(noteBuffers.begin() + i);
 		}
@@ -148,7 +145,7 @@ void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
 		tempTrack->trackIndex = track;
 		tempTrack->trackName = "Track " + to_string(track) + " - " + filename;
 		if (autoSet) {
-			tempChannel = new Channel(this->channelCreationCounter++,this);
+			tempChannel = new Channel(this->channelCreationCounter++, this);
 			tempChannel->setChannelTrack(tempTrack);
 			if (tempChannel->events.size() != 0) this->addChannel(tempChannel);
 			else delete tempChannel;
@@ -216,7 +213,7 @@ void Leandro::setActiveChannel(Channel* channel) {
 	activeChannel->setActiveButtonChannel->setDisabled(true);
 
 	updateActiveAssetsBay();
-} 
+}
 
 void Leandro::updateActiveAssetsBay() {
 	ui.adsrInstrumentFrame->setHidden(true);
@@ -228,17 +225,16 @@ void Leandro::updateActiveAssetsBay() {
 	ui.vibratoEffectFrame->setHidden(true);
 	ui.wahwahEffectFrame->setHidden(true);
 	ui.eq8Frame->setHidden(true);
-	
+
 	if (activeChannel->instrument) showInstrument(activeChannel->instrument);
-	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
-	{
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++) {
 		showEffect(activeChannel->effects.at(effIndex)); // TODO PRIORITY add effect order: IDEA: implement function that reorganizes effects using replaceWidget function
 	}
 
 }
 
 void Leandro::showInstrument(Instrument* instrument) {
-	
+
 
 	ADSRInstrument* adsrinst = (ADSRInstrument*)instrument;
 	AdditiveInstrument* additiveinst = (AdditiveInstrument*)instrument;
@@ -248,33 +244,33 @@ void Leandro::showInstrument(Instrument* instrument) {
 
 
 	switch (instrument->type) {
-		case synthType::adsr:
-			
-			ui.adsrInstrumentFrame->setHidden(false);
-			ui.waveform1ComboBoxADSR->setCurrentIndex(adsrinst->getWF1());
-			ui.waveform2ComboBoxADSR->setCurrentIndex(adsrinst->getWF2());
-			ui.levelWF1DialADSR->setValue((int)(adsrinst->getWF1Level() * 100));
-			ui.levelWF2DialADSR->setValue((int)(adsrinst->getWF2Level() * 100));
-			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
-			ui.decayDialADSR->setValue((int)(adsrinst->getDecay() * 1000));
-			ui.sustainRateDialADSR->setValue((int)(adsrinst->getSustainRate()*1000));
-			ui.sustainLevelDialADSR->setValue((int)(adsrinst->getSustainLevel() * 100));
-			ui.releaseDialADSR->setValue((int)(adsrinst->getRelease() * 1000));
-			ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
-			break;
-		case synthType::additive:
-			ui.additiveInstrumentFrame->setHidden(false);
-			
-			break;
-		case synthType::karplus:
-			ui.karplusInstrumentFrame->setHidden(false);
-			
-			break;
-		case synthType::sampling:
-			ui.samplingInstrumentFrame->setHidden(false);
-			
-			break;
-		}
+	case synthType::adsr:
+
+		ui.adsrInstrumentFrame->setHidden(false);
+		ui.waveform1ComboBoxADSR->setCurrentIndex(adsrinst->getWF1());
+		ui.waveform2ComboBoxADSR->setCurrentIndex(adsrinst->getWF2());
+		ui.levelWF1DialADSR->setValue((int)(adsrinst->getWF1Level() * 100));
+		ui.levelWF2DialADSR->setValue((int)(adsrinst->getWF2Level() * 100));
+		ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
+		ui.decayDialADSR->setValue((int)(adsrinst->getDecay() * 1000));
+		ui.sustainRateDialADSR->setValue((int)(adsrinst->getSustainRate() * 1000));
+		ui.sustainLevelDialADSR->setValue((int)(adsrinst->getSustainLevel() * 100));
+		ui.releaseDialADSR->setValue((int)(adsrinst->getRelease() * 1000));
+		ui.attackDialADSR->setValue((int)(adsrinst->getAttack() * 1000));
+		break;
+	case synthType::additive:
+		ui.additiveInstrumentFrame->setHidden(false);
+
+		break;
+	case synthType::karplus:
+		ui.karplusInstrumentFrame->setHidden(false);
+
+		break;
+	case synthType::sampling:
+		ui.samplingInstrumentFrame->setHidden(false);
+
+		break;
+	}
 
 }
 
@@ -283,7 +279,7 @@ void Leandro::showEffect(Effect* effect) {
 	ReverbEffect* reverb = (ReverbEffect*)effect;
 	VibratoEffect* vibrato = (VibratoEffect*)effect;
 	WahwahEffect* wahwah = (WahwahEffect*)effect;
-	Eq8BandEffect* eq8band= (Eq8BandEffect*)effect;
+	Eq8BandEffect* eq8band = (Eq8BandEffect*)effect;
 
 
 
@@ -339,10 +335,9 @@ void Leandro::addNewChannel() {
 
 };
 
-
 void Leandro::setInstrumentForActiveChannel() {
 	Instrument* instrument = nullptr;
-	for(int i=0;i<instrumentModels.size();i++)
+	for (int i = 0; i < instrumentModels.size(); i++)
 		if (ui.instrumentsList->currentItem()->text().toStdString() == instrumentModels.at(i)->instrumentName) {
 			switch (instrumentModels.at(i)->type) {
 			case synthType::adsr:
@@ -364,9 +359,8 @@ void Leandro::setInstrumentForActiveChannel() {
 }
 
 void Leandro::removeEffectFromActiveChannel() {
-	
-	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++)
-	{
+
+	for (int effIndex = 0; effIndex < activeChannel->effects.size(); effIndex++) {
 		switch (activeChannel->effects.at(effIndex)->type) {
 		case effectType::flanger:
 			if (ui.flangerEffectFrame->isHidden()) {
@@ -461,15 +455,6 @@ void Leandro::addEffectToActiveChannel() {
 }
 
 void Leandro::loadData() {
-	loadSynthData();
-	loadEffectsData();
-}
-
-void Leandro::loadEffectsData() {
-
-}
-
-void Leandro::loadSynthData() {
 	// parseo el json
 	Json::Value root;
 	Json::CharReaderBuilder builder;
@@ -477,8 +462,127 @@ void Leandro::loadSynthData() {
 	JSONCPP_STRING errs;
 	Json::parseFromStream(builder, configFile, &root, &errs);
 
+	loadSynthData(root["synth"]);
+	loadEffectsData(root["effects"]);
+}
+
+void Leandro::loadEffectsData(Json::Value effectsData) {
+	// reverb
+	Json::Value reverbData = effectsData["reverb"];
+	list<string> typesList;
+
+	for (int i = 0; i < reverbData["types"].size(); i++) {
+		typesList.push_back(reverbData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = reverbData[*it];
+		reverbParams_t* params = new reverbParams_t;
+		params->att = effectModelData["att"].asFloat();
+		params->delay = effectModelData["delay"].asFloat();
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::reverb;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+
+	// Vibrato
+	Json::Value vibratoData = effectsData["vibrato"];
+	typesList.clear();
+	for (int i = 0; i < vibratoData["types"].size(); i++) {
+		typesList.push_back(vibratoData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = vibratoData[*it];
+		vibratoParams_t* params = new vibratoParams_t;
+		params->fo = vibratoData["f0"].asFloat();
+		params->W = vibratoData["width"].asFloat();
+		params->M_avg = vibratoData["m-avg"].asFloat();
+		params->sampleRate = SAMPLE_RATE;
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::vibrato;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+	// Flanger
+	Json::Value flangerData = effectsData["flanger"];
+	typesList.clear();
+	for (int i = 0; i < flangerData["types"].size(); i++) {
+		typesList.push_back(flangerData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = flangerData[*it];
+		flangerParams_t* params = new flangerParams_t;
+		params->sampleRate = SAMPLE_RATE;
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		params->fo = effectModelData["f0"].asFloat();
+		params->Mo = effectModelData["m0"].asFloat();
+		params->Mw = effectModelData["mw"].asFloat();
+		params->g_fb = effectModelData["g-fb"].asFloat();
+		params->g_ff = effectModelData["g-ff"].asFloat();
+		
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::vibrato;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+	// Wah-wah
+	Json::Value wahData = effectsData["wah-wah"];
+	typesList.clear();
+	for (int i = 0; i < wahData["types"].size(); i++) {
+		typesList.push_back(wahData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = wahData[*it];
+		wahwahParams_t* params = new wahwahParams_t;
+		params->f_LFO = effectModelData["f-lfo"].asFloat();
+		params->f_min = effectModelData["f-min"].asFloat();
+		params->samplingRate = SAMPLE_RATE;
+		params->maxBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::wahwah;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}
+
+	// Equalizer
+	Json::Value equalizerData = effectsData["equalizer"];
+	typesList.clear();
+	for (int i = 0; i < equalizerData["types"].size(); i++) {
+		typesList.push_back(equalizerData["types"][i].asCString());
+	}
+
+	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
+		Json::Value effectModelData = equalizerData[*it];
+		eq8bandParams_t* params = new eq8bandParams_t;
+		for (int i = 0; i < effectModelData.size(); i++) {
+			params->gains[i] = effectModelData[i].asFloat();
+		}
+		params->sampleRate = SAMPLE_RATE;
+		params->maxSoundBufferSize = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		effectModel* model = new effectModel;
+		model->effectName = *it;
+		model->type = effectType::eq8band;
+		model->params = (void*)params;
+		effectModels.push_back(model);
+	}	
+}
+
+void Leandro::loadSynthData(Json::Value synthData) {
 	//agarro los instrumentos aditivos
-	Json::Value additiveData = root["additive"];
+	Json::Value additiveData = synthData["additive"];
 
 	list<string> typesList;
 	for (int i = 0; i < additiveData["types"].size(); i++) {
@@ -496,38 +600,38 @@ void Leandro::loadSynthData() {
 	}
 
 	// adsr
-	Json::Value adsrData = root["adsr"];
+	Json::Value adsrData = synthData["adsr"];
 
 	typesList.clear();
-	for (int i = 0; i < additiveData["types"].size(); i++) {
-		typesList.push_back(additiveData["types"][i].asCString());
+	for (int i = 0; i < adsrData["types"].size(); i++) {
+		typesList.push_back(adsrData["types"][i].asCString());
 	}
 
 	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
-		Json::Value instrumentModelData = additiveData[*it];
+		Json::Value instrumentModelData = adsrData[*it];
 		adsrParams_t params;
 		params.buffLength = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
 		params.sampleRate = SAMPLE_RATE;
-		params.tAttack = adsrData["t-attack"].asFloat();
-		params.tDecay = adsrData["t-decay"].asFloat();
-		params.sustainRate = adsrData["sustain-rate"].asFloat();
-		params.sustainLevel = adsrData["sustain-level"].asFloat();
-		params.tRelease = adsrData["t-release"].asFloat();
-		params.k = adsrData["k"].asFloat();
-		string wf1 = adsrData["waveform"][0].asCString();
-		string wf2 = adsrData["waveform"][1].asCString();
+		params.tAttack = instrumentModelData["t-attack"].asFloat();
+		params.tDecay = instrumentModelData["t-decay"].asFloat();
+		params.sustainRate = instrumentModelData["sustain-rate"].asFloat();
+		params.sustainLevel = instrumentModelData["sustain-level"].asFloat();
+		params.tRelease = instrumentModelData["t-release"].asFloat();
+		params.k = instrumentModelData["k"].asFloat();
+		string wf1 = instrumentModelData["waveform"][0].asCString();
+		string wf2 = instrumentModelData["waveform"][1].asCString();
 
 		if (wf1 == "sine")
 			params.wform1 = sine;
 		else if (wf1 == "square")
 			params.wform1 = square;
-		params.level1 = adsrData["levels"][0].asFloat();
+		params.level1 = instrumentModelData["levels"][0].asFloat();
 
 		if (wf2 == "sine")
 			params.wform2 = sine;
 		else if (wf2 == "square")
 			params.wform2 = square;
-		params.level2 = adsrData["levels"][1].asFloat();
+		params.level2 = instrumentModelData["levels"][1].asFloat();
 
 		instrumentModel model;
 		model.instrumentName = *it;
@@ -537,7 +641,7 @@ void Leandro::loadSynthData() {
 	}
 
 	// Sampling
-	Json::Value samplingData = root["sampling"];
+	Json::Value samplingData = synthData["sampling"];
 
 	typesList.clear();
 	for (int i = 0; i < samplingData["types"].size(); i++) {
@@ -554,10 +658,9 @@ void Leandro::loadSynthData() {
 		model.type = synthType::sampling;
 		instrumentModels.push_back(new instrumentModel(model));
 	}
-	
 
 	// Karplus
-	Json::Value karplusData = root["karplus"];
+	Json::Value karplusData = synthData["karplus"];
 	typesList.clear();
 	for (int i = 0; i < karplusData["types"].size(); i++) {
 		typesList.push_back(karplusData["types"][i].asCString());
@@ -566,11 +669,11 @@ void Leandro::loadSynthData() {
 	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
 		Json::Value instrumentModelData = karplusData[*it];
 		karPlusParams_t* params = new karPlusParams_t;
-		params->BFactor = karplusData["b-factor"].asFloat();
-		params->SFactor = karplusData["s-factor"].asFloat();
-		params->Grl = karplusData["grl"].asFloat();
-		params->bodyFilter = karplusData["body-filter"].asBool();
-		string noiseType = karplusData["noise-type"].asCString();
+		params->BFactor = instrumentModelData["b-factor"].asFloat();
+		params->SFactor = instrumentModelData["s-factor"].asFloat();
+		params->Grl = instrumentModelData["grl"].asFloat();
+		params->bodyFilter = instrumentModelData["body-filter"].asBool();
+		string noiseType = instrumentModelData["noise-type"].asCString();
 		if (noiseType == "normal")
 			params->noiseType = NORMAL_RANDOM;
 		else if (noiseType == "uniform")
@@ -581,22 +684,16 @@ void Leandro::loadSynthData() {
 		model.type = synthType::karplus;
 		instrumentModels.push_back(new instrumentModel(model));
 	}
-
 }
 
-
 // GUI triggered setters
-
-
-
-
 
 // GUI init
 
 void Leandro::initGUI() {
 	ui.setupUi(this);
 	ui.retranslateUi(this);
-	
+
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);

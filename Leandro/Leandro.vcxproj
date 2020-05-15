@@ -126,6 +126,7 @@
     <ClInclude Include="ui_Leandro.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="config.json" />
     <None Include="generateFiles.bat" />
     <None Include="mario_midi.mid" />
