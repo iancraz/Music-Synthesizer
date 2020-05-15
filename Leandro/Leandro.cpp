@@ -7,6 +7,7 @@
 #include "Effect.h"
 #include <fstream>
 #include <string>
+#include "AudioFile.h"
 
 using namespace std;
 
@@ -42,10 +43,14 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	this->updateCallbackData();
 	initGUI();
 	// GUI function connections
+
+	this->wav = new float[MAX_WAV_SIZE];
+	restarWavRecording();
 	
 }
 
 Leandro::~Leandro() {
+	delete[] wav;
 	for (int i = 0; i < this->noteBuffers.size(); i++) free(this->noteBuffers[i]->buffer);
 }
 
@@ -98,6 +103,17 @@ int Leandro::callback( // Call all channel callbacks, sum all dynamic buffers an
 		*data->debugStream << (1.0 / addedFrames) * data->activeBuffer[frame] << endl;
 	}
 	*(data->currentSample) += frameCount;
+
+
+	//// LO QUE AGREGO IAN ES ESTO/////////////////
+	if (data->recordFlag) {
+		for (unsigned int i = 0; i < (unsigned int)(frameCount / 2); i++) {
+			data->wav[*(data->wavCounter) + i] = out[2 * i];
+		}
+		*data->wavCounter += frameCount;
+	}
+	///////////////////////////////////////////////
+
 	return paContinue;
 }
 
@@ -851,6 +867,31 @@ void Leandro::wahwahValueChanged() {
 	wahwahEffect->setFLFO((float)ui.wahwahLFOSlider->value() / 100.0);
 }
 
+
+
+
+
+//	Record to WAV
+
+void Leandro::record2Wav() {
+	if (recordFlag) {
+		AudioFile<double> audioFile;
+		AudioFile<double>::AudioBuffer buffer;
+		buffer.resize(1);
+		buffer[0].resize(wavCounter);
+		for (int i = 0; i < wavCounter - 1; i++) {
+			buffer[0][i] = wav[i];
+		}
+		bool ok = audioFile.setAudioBuffer(buffer);
+		audioFile.save("out.wav");
+	}
+	return;
+}
+
+void Leandro::restarWavRecording(){
+	this->wavCounter = 0;
+	return;
+}
 
 
 

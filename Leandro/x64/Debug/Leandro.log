@@ -1,20 +1,2 @@
-﻿  moc Leandro.h
-  Additive.cpp
-  ADSR.cpp
-  Binasc.cpp
-  Channel.cpp
-  Effect.cpp
-  Instrument.cpp
-  Karplus.cpp
-  Leandro.cpp
-  main.cpp
-  MidiEvent.cpp
-  MidiEventList.cpp
-  MidiFile.cpp
-  MidiMessage.cpp
-  Options.cpp
-  Sample.cpp
-  Sampling.cpp
-  qrc_Leandro.cpp
-  moc_Leandro.cpp
+﻿  Leandro.cpp
   Leandro.vcxproj -> C:\Users\Ian Diaz\Desktop\TP2---Sintesis-v2\Leandro\x64\Debug\Leandro.exe
