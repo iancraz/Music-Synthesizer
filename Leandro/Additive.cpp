@@ -48,7 +48,6 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 
 	float freq = 440.0 * pow(2.0, ((float)keyNumber - 69.0) / 12.0);
 	float maxValue = 1;
-	// determinar la cotava a utilizar 
 
 	int last;
 	int octave = (int)(keyNumber / 12) - 1 - firstOctave;
@@ -56,6 +55,12 @@ AdditiveInstrument::synthFunction(float* outputBuffer,
 	for (int i = 0; i < outputBufferSize; i++) {
 		outputBuffer[i] = 0;
 	}
+
+	if (keyNumber < firstKey || keyNumber > lastKey) {
+		outputBuffer[0] = INFINITY;
+		return -1;
+	}
+
 
 	for (int k = 0; k < harmonicsCount; k++) {
 		float r = harmonicFactors[k];

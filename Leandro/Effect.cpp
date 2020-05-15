@@ -569,6 +569,7 @@ gains_t Eq8BandEffect::getGains() {
 	gains_t temp;
 	for (unsigned int i = 0; i < numberOfBands; i++) {
 		temp.gains[i] = 20 * log10(g[i]);
+		temp.gains[i] = (temp.gains[i] + 12.0) / 24.0;
 	}
 	return temp;
 }
@@ -578,6 +579,7 @@ void Eq8BandEffect::setGains(gains_t G) {
 		float temp = -12.0 + G.gains[i] * 24.0;
 		g[i] = pow(10, temp / 20.0);
 	}
+	compFilterParameters();
 	return;
 }
 
