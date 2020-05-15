@@ -7,6 +7,7 @@
 #include "Effect.h"
 #include <fstream>
 #include <string>
+#include <qfiledialog.h>
 
 using namespace std;
 
@@ -40,7 +41,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	if (err != paNoError) throw "Error: PortAudio failed to open stream! %s", Pa_GetErrorText(err);
 
 	this->updateCallbackData();
-
+	initGUI();
 	// GUI function connections
 
 }
@@ -132,9 +133,10 @@ void Leandro::destroyChannel(Channel* channel) { // Channel destructor
 	this->channels.erase(remove(this->channels.begin(), this->channels.end(), channel), this->channels.end());
 }
 
-void Leandro::addMidiFile(string directory, string filename, bool autoSet) {
+
+void Leandro::addMidiFile(string filename, bool autoSet) {
 	MidiFile* midifile = new MidiFile;
-	midifile->read(directory + filename);
+	midifile->read(filename);
 	midifile->doTimeAnalysis();
 	midifile->linkNotePairs();
 	midiTrack* tempTrack;
@@ -853,7 +855,7 @@ void Leandro::initGUI() {
 	
 	// Button connections
 	QObject::connect(ui.newChannelButton, &QPushButton::clicked, this, &Leandro::addNewChannel);
-	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadTestMidi);
+	QObject::connect(ui.importMidiButton, &QPushButton::clicked, this, &Leandro::loadMidiFile);
 
 	QObject::connect(ui.setInstrumentButton, &QPushButton::clicked, this, &Leandro::setInstrumentForActiveChannel);
 	QObject::connect(ui.addEffectButton, &QPushButton::clicked, this, &Leandro::addEffectToActiveChannel);
@@ -944,5 +946,12 @@ void Leandro::initGUI() {
 // TEST FUNCTIONS
 
 void Leandro::loadTestMidi() {
-	addMidiFile("", "sm64.mid", true);
+	addMidiFile("sm64.mid");
+}
+
+void Leandro::loadMidiFile() {
+	QString fileName = QFileDialog::getOpenFileName(this,
+													tr("Load Midi File"), "",
+													tr("Midi Files (*.mid);;All Files (*)"));
+	addMidiFile(fileName.toStdString());
 }
