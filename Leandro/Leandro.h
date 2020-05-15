@@ -88,8 +88,9 @@ public:
 	void destroyChannel(Channel* channel);
 	void addMidiFile(string filename, bool autoSet = true);
 	
+	void loadMidiFile();
 
-	void addMidiFile(string directory, string filename, bool autoSet);
+	//void addMidiFile(string directory, string filename, bool autoSet);
 	int getFirstFreeChannelFrame();
 
 	// GUI-related, system-triggered functions
