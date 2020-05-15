@@ -3,7 +3,7 @@
 #include <QtWidgets/QApplication>
 #include <stdio.h>
 #include <time.h>
-#include <QSplashScreen>
+
 
 
 int main(int argc, char* argv[])
