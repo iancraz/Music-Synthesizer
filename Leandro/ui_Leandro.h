@@ -462,7 +462,7 @@ public:
     {
         if (LeandroClass->objectName().isEmpty())
             LeandroClass->setObjectName(QStringLiteral("LeandroClass"));
-        LeandroClass->resize(2060, 783);
+        LeandroClass->resize(1213, 794);
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -680,7 +680,7 @@ public:
         channelScrollArea->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 1746, 283));
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(-240, 0, 1356, 276));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);

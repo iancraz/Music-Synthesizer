@@ -81,6 +81,8 @@ public:
 	float* activeBuffer;
 	Channel* activeChannel;
 
+	bool guiLoaded;
+
 	~Leandro();
 
 	static PaStreamCallback callback;

@@ -25,6 +25,7 @@ typedef struct {
 void dataLoadCallback(loadingCBData data);
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
+	guiLoaded = false;
 	recordFlag = false;
 	specgramFlag = false;
 	wavCounter = 0;
@@ -66,6 +67,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	
 	
 	initGUI();
+	guiLoaded = true;
 	// GUI function connections
 	splash->close();
 	
@@ -245,7 +247,7 @@ void Leandro::addToAvailableAssets(effectModel* model) {
 
 void Leandro::addModel(instrumentModel* model) {
 	instrumentModels.push_back(model);
-	updateAvailableAssetsInGUI();
+	if (guiLoaded) updateAvailableAssetsInGUI();
 }
 
 void Leandro::loadData() {
