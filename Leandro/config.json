@@ -105,10 +105,10 @@
 			},
 
 			"Sampling Classic Rock Organ": {
-				"min-octave": 1,
+				"min-octave": 2,
 				"max-octave": 6,
 				"files": [
-					"sampling/rock-organ/C1",
+//					"sampling/rock-organ/C1",
 					"sampling/rock-organ/C2",
 					"sampling/rock-organ/C3",
 					"sampling/rock-organ/C4",

@@ -333,7 +333,7 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 		
 		effectModel* model = new effectModel;
 		model->effectName = *it;
-		model->type = effectType::vibrato;
+		model->type = effectType::flanger;
 		model->params = (void*)params;
 		effectModels.push_back(model);
 	}
