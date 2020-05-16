@@ -92,6 +92,7 @@ public:
 	
 	void loadMidiFile();
 
+	void addModel(instrumentModel* model);
 	//void addMidiFile(string directory, string filename, bool autoSet);
 	int getFirstFreeChannelFrame();
 

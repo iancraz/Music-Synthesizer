@@ -7,12 +7,22 @@
 #include "Effect.h"
 #include <fstream>
 #include <string>
+#include <thread>
 #include "AudioFile.h"
 #include <qfiledialog.h>
 #include <QSplashScreen>
 #include "Spectrogram/Spectrogram.h"
 
 using namespace std;
+
+typedef struct {
+	Json::Value instrumentModelData;
+	synthType type;
+	string name;
+	Leandro* program;
+}loadingCBData;
+
+void dataLoadCallback(loadingCBData data);
 
 Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	recordFlag = false;
@@ -22,7 +32,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	QSplashScreen* splash = new QSplashScreen(pixmap);
 	splash->show();
 	loadData();
-	splash->close();
+	
 	PaError err = Pa_Initialize();
 	if (err != paNoError) throw "Error: PortAudio failed to initialize! %s", Pa_GetErrorText(err);
 	this->channelCreationCounter = 0;
@@ -57,7 +67,7 @@ Leandro::Leandro(QWidget* parent) : QMainWindow(parent) {
 	
 	initGUI();
 	// GUI function connections
-
+	splash->close();
 	
 	
 	restarWavRecording();
@@ -233,6 +243,10 @@ void Leandro::addToAvailableAssets(effectModel* model) {
 	updateAvailableAssetsInGUI();
 }
 
+void Leandro::addModel(instrumentModel* model) {
+	instrumentModels.push_back(model);
+	updateAvailableAssetsInGUI();
+}
 
 void Leandro::loadData() {
 	// parseo el json
@@ -370,6 +384,30 @@ void Leandro::loadEffectsData(Json::Value effectsData) {
 	}
 }
 
+void dataLoadCallback(loadingCBData data) {
+	additiveParams_t* instrumentParams=nullptr;
+	samplingParams_t* params = nullptr;
+	instrumentModel model;
+	
+	switch (data.type) {
+	case synthType::additive:
+		instrumentParams = new additiveParams_t(AdditiveInstrument::parseAdditiveJson(data.instrumentModelData));
+		model.type = synthType::additive;
+		model.params = (void*)instrumentParams;
+		model.instrumentName = data.name;
+		data.program->addModel(new instrumentModel(model));
+		break;
+	case synthType::sampling:
+		samplingParams_t* params = SamplingInstrument::parseSamplingJson(data.instrumentModelData);
+		params->buffLength = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
+		model.instrumentName = data.name;
+		model.params = (void*)params;
+		model.type = synthType::sampling;
+		data.program->addModel(new instrumentModel(model));
+	}
+	return;
+}
+
 void Leandro::loadSynthData(Json::Value synthData) {
 	//agarro los instrumentos aditivos
 	Json::Value additiveData = synthData["additive"];
@@ -381,12 +419,14 @@ void Leandro::loadSynthData(Json::Value synthData) {
 
 	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
 		Json::Value instrumentModelData = additiveData[*it];
-		additiveParams_t* instrumentParams = new additiveParams_t(AdditiveInstrument::parseAdditiveJson(instrumentModelData));
-		instrumentModel model;
-		model.type = synthType::additive;
-		model.params = (void*)instrumentParams;
-		model.instrumentName = *it;
-		instrumentModels.push_back(new instrumentModel(model));
+		loadingCBData* data = new loadingCBData;
+		data->instrumentModelData = instrumentModelData;
+		data->type = synthType::additive;
+		data->program = this;
+		data->name = *it;
+
+		std::thread dataThread(dataLoadCallback, *data);
+		dataThread.detach();
 	}
 
 	// adsr
@@ -440,13 +480,14 @@ void Leandro::loadSynthData(Json::Value synthData) {
 
 	for (list<string>::iterator it = typesList.begin(); it != typesList.end(); it++) {
 		Json::Value instrumentModelData = samplingData[*it];
-		samplingParams_t* params = SamplingInstrument::parseSamplingJson(instrumentModelData);
-		params->buffLength = MAX_NOTE_LENGTH_SECONDS * SAMPLE_RATE;
-		instrumentModel model;
-		model.instrumentName = *it;
-		model.params = (void*)params;
-		model.type = synthType::sampling;
-		instrumentModels.push_back(new instrumentModel(model));
+		loadingCBData* data = new loadingCBData;
+		data->instrumentModelData = instrumentModelData;
+		data->type = synthType::sampling;
+		data->program = this;
+		data->name = *it;
+
+		std::thread dataThread(dataLoadCallback, *data);
+		dataThread.detach();
 	}
 
 	// Karplus
