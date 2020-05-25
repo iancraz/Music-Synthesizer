@@ -84,47 +84,48 @@ Sample::Sample(string file_path, int octave_) {
 
 		note_pressed_time = ((float)peaks[count] / (float)fs);
 
-
-		//note_pressed_time = 0.5;
+		if (note_pressed_time < 0)
+			note_pressed_time = 1.;
 
 		
 		//DESCOMPOSICION DEL SAMPLE
 		float* sample_x = nullptr;
+		lenght_sample_s = P_0 * 2;
+
 
 		for (int i = 0; i < lenght_peaks; i++) {
-			sample_x = new float[lenght_sample];
+			sample_x = new float[lenght_sample_s];
 			sample_s.push_back(sample_x);
 		}
 
 		for (int i = 0; i < lenght_peaks; i++) {
-			for (int j = 0; j < lenght_sample; j++) {
+			for (int j = 0; j < lenght_sample_s; j++) {
 				sample_s[i][j] = 0;
 			}
 		}
 
 		int idx_peaks = 0;
 
-
 		for (int idx_peaks = 0; idx_peaks < lenght_peaks; idx_peaks++) {
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
 
-				if ((((int)peaks[idx_peaks] + right_i) > lenght_sample) || ((((int)peaks[idx_peaks] + right_i)) > lenght_sample)) {
+				if ((((int)(lenght_sample_s / 2) + right_i) > lenght_sample) || ((((int)peaks[idx_peaks] + right_i)) > lenght_sample)) {
 
-					break;
+					continue;
 				}
 				else {
-					sample_s[idx_peaks][(int)peaks[idx_peaks] + right_i] = sample[(int)peaks[idx_peaks] + right_i] * h_s[(int)(T / 2) + right_i];
+					sample_s[idx_peaks][(int)(lenght_sample_s / 2) + right_i] = sample[(int)peaks[idx_peaks] + right_i] * h_s[(int)(T / 2) + right_i];
 				}
 			}
 
 			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
 
-				if (((peaks[idx_peaks] - (int)(T / 2) + left_i) < 0) || ((((int)peaks[idx_peaks] - (int)(T / 2) + left_i)) > lenght_sample)) {
-					break;
+				if ((((int)(lenght_sample_s / 2) - (int)(T / 2) + left_i) < 0) || ((((int)peaks[idx_peaks] - (int)(T / 2) + left_i)) < 0)) {
+					continue;
 				}
 				else {
-					sample_s[idx_peaks][peaks[idx_peaks] - (int)(T / 2) + left_i] = sample[(int)peaks[idx_peaks] - (int)(T / 2) + left_i] * h_s[left_i];
+					sample_s[idx_peaks][(int)(lenght_sample_s / 2) - (int)(T / 2) + left_i] = sample[(int)peaks[idx_peaks] - (int)(T / 2) + left_i] * h_s[left_i];
 				}
 			}
 		}

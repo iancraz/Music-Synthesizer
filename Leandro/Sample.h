@@ -29,6 +29,8 @@ public:
 
 	float note_pressed_time;
 
+
+	int lenght_sample_s;
 	void hanning(float* w, int N, short itype);
 
 

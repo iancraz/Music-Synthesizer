@@ -91,7 +91,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 	int N_0 = selected_sample->lenght_sample; //Se guarda el largo del sample
 	int lenght_peaks = selected_sample->lenght_peaks; //se guarda el largo del arreglo de peaks
 	int T = selected_sample->T; //Se guarda el ancho de la ventana que se usa para descomponer al Sample
-
+	int lenght_sample_s = selected_sample->lenght_sample_s;
 
 
 	//Constantes de la nueva nota sintetizada
@@ -181,17 +181,17 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			idx = get_nearest_peak(selected_sample, new_peaks + correction);
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
-				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)selected_sample->peaks[idx] + right_i) > N_0))
+				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)(lenght_sample_s / 2) + right_i) > N_0))
 					continue;
 				else
-					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
+					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) + right_i];
 			}
 
 			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
-				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > N_0))
+				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)(lenght_sample_s / 2) - (int)(T / 2) + left_i) > N_0))
 					continue;
 				else
-					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] - (int)(T / 2) + left_i];
+					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) - (int)(T / 2) + left_i];
 			}
 		}
 
@@ -225,6 +225,7 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			temp_buffer_2[i] = 0;
 
 		temp_buffer[N_1] = INFINITY;
+	
 	}
 
 	//CASO 2 - SE DESEA OBTENER UNA NOTA CON MAYOR TIEMPO DE PRESIONADO QUE EL SAMPLE
@@ -246,17 +247,17 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			idx = get_nearest_peak(selected_sample, new_peaks);
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
-				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)selected_sample->peaks[idx] + right_i) > N_0))
+				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)(lenght_sample_s / 2) + right_i) > N_0))
 					continue;
 				else
-					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
+					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) + right_i];
 			}
 
 			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
-				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > N_0))
+				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)(lenght_sample_s / 2) - (int)(T / 2) + left_i) > N_0))
 					continue;
 				else
-					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] - (int)(T / 2) + left_i];
+					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) - (int)(T / 2) + left_i];
 			}
 		}
 
@@ -278,18 +279,18 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			idx = get_nearest_peak(selected_sample, temp_buffer_2[count]);
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
-				if (idx > lenght_peaks || idx < 0 || (new_peaks + right_i) > lenght_temp_buffer || (new_peaks + right_i) < 0 || ((int)selected_sample->peaks[idx] + right_i) > selected_sample->lenght_sample || ((int)selected_sample->peaks[idx] + right_i) < 0)
+				if (idx > lenght_peaks || idx < 0 || (new_peaks + right_i) > lenght_temp_buffer || (new_peaks + right_i) < 0 || ((int)selected_sample->peaks[idx] + right_i) > selected_sample->lenght_sample || ((int)(lenght_sample_s / 2) + right_i) < 0)
 					continue;
 				else
-					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
+					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) + right_i];
 			}
 
 			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
 
-				if (idx > lenght_peaks || idx < 0 || (new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer || (new_peaks - (int)(T / 2) + left_i) < 0 || ((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > selected_sample->lenght_sample || ((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0)
+				if (idx > lenght_peaks || idx < 0 || (new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer || (new_peaks - (int)(T / 2) + left_i) < 0 || ((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > selected_sample->lenght_sample || ((int)(lenght_sample_s / 2) - (int)(T / 2) + left_i) < 0)
 					continue;
 				else
-					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] - (int)(T / 2) + left_i];
+					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) - (int)(T / 2) + left_i];
 			}
 
 			if (idx > peaks_idx_end_repeat - 1) {
@@ -312,22 +313,25 @@ void SamplingInstrument::key_modification(int num_octave, float B, float new_not
 			idx = get_nearest_peak(selected_sample, new_peaks + correction);
 
 			for (int right_i = 0; right_i < (int)(T / 2); right_i++) {
-				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)selected_sample->peaks[idx] + right_i) > N_0) || (new_peaks + right_i) < 0)
+				if ((new_peaks + right_i > lenght_temp_buffer) || idx > lenght_peaks || idx < 0 || (((int)selected_sample->peaks[idx] + right_i) < 0) || (((int)(lenght_sample_s / 2) + right_i) > N_0) || (new_peaks + right_i) < 0)
 					continue;
 				else
-					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] + right_i];
+					temp_buffer[new_peaks + right_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) + right_i];
 			}
 
 			for (int left_i = 0; left_i < (int)(T / 2); left_i++) {
-				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) > N_0))
+				if (((new_peaks - (int)(T / 2) + left_i) > lenght_temp_buffer) || ((new_peaks - (int)(T / 2) + left_i) < 0) || idx <0 || idx > lenght_peaks || (((int)selected_sample->peaks[idx] - (int)(T / 2) + left_i) < 0) || (((int)(lenght_sample_s / 2) - (int)(T / 2) + left_i) > N_0))
 					continue;
 				else
-					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)selected_sample->peaks[idx] - (int)(T / 2) + left_i];
+					temp_buffer[new_peaks - (int)(T / 2) + left_i] += selected_sample->sample_s[idx][(int)(lenght_sample_s / 2) - (int)(T / 2) + left_i];
 			}
 		}
 
 		temp_buffer[N_1] = INFINITY;
+		
 	}
+
+	
 }
 int SamplingInstrument::get_nearest_peak(Sample* selected_sample, int number) {
 	int peaks_lenght = selected_sample->lenght_peaks;
