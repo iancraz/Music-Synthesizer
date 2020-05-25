@@ -570,10 +570,12 @@ void Leandro::updateActiveAssetsBay() {
 }
 
 void Leandro::setActiveChannel(Channel* channel) {
+	
 	//if (activeChannel) activeChannel->setActiveButtonChannel->setEnabled(true);
 	activeChannel = channel;
 	//activeChannel->setActiveButtonChannel->setDisabled(true);
-
+	ui.instrumentsList->setEnabled(true);
+	ui.effectsList->setEnabled(true);
 	updateActiveAssetsBay();
 } 
 
@@ -692,58 +694,62 @@ void Leandro::showEffect(Effect* effect) {
 void Leandro::addNewChannel() {
 	Channel* newChannel = new Channel(this->channelCreationCounter++, this);
 	addChannel(newChannel);
-
+	ui.playButton->setEnabled(true);
 };
 
 void Leandro::setInstrumentForActiveChannel() {
-	Instrument* instrument = nullptr;
-	for (int i = 0; i < instrumentModels.size(); i++)
-		if (ui.instrumentsList->currentItem()->text().toStdString() == instrumentModels.at(i)->instrumentName) {
-			switch (instrumentModels.at(i)->type) {
-			case synthType::adsr:
-				instrument = new ADSRInstrument((adsrParams_t*)instrumentModels.at(i)->params);
-				break;
-			case synthType::additive:
-				instrument = new AdditiveInstrument((additiveParams_t*)instrumentModels.at(i)->params);
-				break;
-			case synthType::karplus:
-				instrument = new karplusInstrument((karPlusParams_t*)instrumentModels.at(i)->params);
-				break;
-			case synthType::sampling:
-				instrument = new SamplingInstrument((samplingParams_t*)instrumentModels.at(i)->params);
+	if (ui.instrumentsList->currentItem()) {
+		Instrument* instrument = nullptr;
+		for (int i = 0; i < instrumentModels.size(); i++)
+			if (ui.instrumentsList->currentItem()->text().toStdString() == instrumentModels.at(i)->instrumentName) {
+				switch (instrumentModels.at(i)->type) {
+				case synthType::adsr:
+					instrument = new ADSRInstrument((adsrParams_t*)instrumentModels.at(i)->params);
+					break;
+				case synthType::additive:
+					instrument = new AdditiveInstrument((additiveParams_t*)instrumentModels.at(i)->params);
+					break;
+				case synthType::karplus:
+					instrument = new karplusInstrument((karPlusParams_t*)instrumentModels.at(i)->params);
+					break;
+				case synthType::sampling:
+					instrument = new SamplingInstrument((samplingParams_t*)instrumentModels.at(i)->params);
+					break;
+				}
 				break;
 			}
-			break;
-		}
-	activeChannel->setChannelInstrument(instrument);
-	updateActiveAssetsBay();
+		activeChannel->setChannelInstrument(instrument);
+		updateActiveAssetsBay();
+	}
 }
 
 void Leandro::addEffectToActiveChannel() {
-	Effect* effect = nullptr;
-	for (int i = 0; i < effectModels.size(); i++)
-		if (ui.effectsList->currentItem()->text().toStdString() == effectModels.at(i)->effectName) {
-			switch (effectModels.at(i)->type) {
-			case effectType::flanger:
-				effect = new FlangerEffect((flangerParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::reverb:
-				effect = new ReverbEffect((reverbParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::vibrato:
-				effect = new VibratoEffect((vibratoParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::wahwah:
-				effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
-				break;
-			case effectType::eq8band:
-				effect = new Eq8BandEffect((eq8bandParams_t*)effectModels.at(i)->params);
+	if (ui.effectsList->currentItem()) {
+		Effect* effect = nullptr;
+		for (int i = 0; i < effectModels.size(); i++)
+			if (ui.effectsList->currentItem()->text().toStdString() == effectModels.at(i)->effectName) {
+				switch (effectModels.at(i)->type) {
+				case effectType::flanger:
+					effect = new FlangerEffect((flangerParams_t*)effectModels.at(i)->params);
+					break;
+				case effectType::reverb:
+					effect = new ReverbEffect((reverbParams_t*)effectModels.at(i)->params);
+					break;
+				case effectType::vibrato:
+					effect = new VibratoEffect((vibratoParams_t*)effectModels.at(i)->params);
+					break;
+				case effectType::wahwah:
+					effect = new WahwahEffect((wahwahParams_t*)effectModels.at(i)->params);
+					break;
+				case effectType::eq8band:
+					effect = new Eq8BandEffect((eq8bandParams_t*)effectModels.at(i)->params);
+					break;
+				}
 				break;
 			}
-			break;
-		}
-	activeChannel->addEffectToChannel(effect);
-	updateActiveAssetsBay();
+		activeChannel->addEffectToChannel(effect);
+		updateActiveAssetsBay();
+	}
 }
 
 void Leandro::removeInstrumentFromActiveChannel() {
@@ -995,6 +1001,14 @@ void Leandro::initGUI() {
 
 	ui.newChannelButton->setHidden(true);
 	ui.newChannelButton->setDisabled(true);
+
+	//ui.setInstrumentButton->setEnabled(false);
+	//ui.addEffectButton->setEnabled(false);
+
+	ui.playButton->setEnabled(false);
+	ui.stopButton->setEnabled(false);
+	ui.pauseButton->setEnabled(false);
+	ui.recordButton->setEnabled(false);
 
 	channelFrames.push_back(ui.frameChannel1);
 	channelFrames.push_back(ui.frameChannel2);
@@ -1248,15 +1262,26 @@ void Leandro::startStreaming() {
 	
 	PaError err = Pa_StartStream(stream);
 	
-	
-
+	ui.playButton->setEnabled(false);
+	ui.stopButton->setEnabled(true);
+	ui.pauseButton->setEnabled(true);
+	ui.recordButton->setEnabled(true);
+	//ui.importMidiButton->setEnabled(false);
 }
 
 void Leandro::pauseStreaming() {
 	PaError err = Pa_StopStream(stream);
-
+	ui.playButton->setEnabled(true);
+	ui.stopButton->setEnabled(true);
+	ui.pauseButton->setEnabled(false);
+	ui.recordButton->setEnabled(true);
 }
 void Leandro::stopStreaming() {
+	ui.playButton->setEnabled(true);
+	ui.stopButton->setEnabled(false);
+	ui.pauseButton->setEnabled(false);
+	ui.recordButton->setEnabled(false);
+	//ui.importMidiButton->setEnabled(true);
 	if (recordFlag) toggleRecord();
 	PaError err = Pa_StopStream(stream);
 	activeBuffer[0] = INFINITY;
@@ -1271,8 +1296,11 @@ void Leandro::stopStreaming() {
 	ui.imageLabel->setPixmap(image);
 
 	ui.spectoFrame->setHidden(false);
+	for (int i = 0; i < channels.size(); i++)
+		channels.at(i)->events = channels.at(i)->originalEvents;
 	if(wavCounter) ui.exportToWavButton_2->setEnabled(true);
-	currentSample = 0;
+	this->currentSample = 0;
+	
 }
 
 void Leandro::toggleRecord() {
@@ -1904,7 +1932,11 @@ void Leandro::loadMidiFile() {
 													tr("Load Midi File"), "",
 													tr("Midi Files (*.mid);;All Files (*)"));
 	addMidiFile(fileName.toStdString());
-}
+	if (!this->channels.empty()) {
+		ui.importMidiButton->setEnabled(false);
+		ui.playButton->setEnabled(true);
+	}
+	}
 
 
 void Leandro::calcSpecgram() {

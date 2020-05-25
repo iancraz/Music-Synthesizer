@@ -67,7 +67,7 @@ public:
 	int frameNumber;
 
 	queue<midiEvent> events; // Queue of events in the midi track the channel's currently playing
-	
+	queue<midiEvent> originalEvents;
 
 	QHBoxLayout* effectsLayout;
 	QHBoxLayout* instrumentLayout;

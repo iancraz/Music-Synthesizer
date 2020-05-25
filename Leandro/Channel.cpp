@@ -24,7 +24,7 @@ Channel::Channel(int channelCreationCounter, Leandro* _program) {
 	//Clear vectors
 	this->effects.clear();
 	while (!this->events.empty()) this->events.pop();
-
+	
 
 	// Callback update
 	this->updateCallbackData();
@@ -147,6 +147,7 @@ void Channel::setChannelTrack(midiTrack* miditrack) {
 			tempEvent.velocity = (*file)[track][event].getVelocity();
 
 			this->events.push(tempEvent);
+			this->originalEvents.push(tempEvent);
 		}
 	}
 	this->updateCallbackData();
