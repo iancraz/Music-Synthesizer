@@ -600,6 +600,7 @@ public:
 
         instrumentsList = new QListWidget(frame_3);
         instrumentsList->setObjectName(QStringLiteral("instrumentsList"));
+        instrumentsList->setEnabled(false);
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -636,6 +637,7 @@ public:
 
         effectsList = new QListWidget(frame_3);
         effectsList->setObjectName(QStringLiteral("effectsList"));
+        effectsList->setEnabled(false);
         sizePolicy1.setHeightForWidth(effectsList->sizePolicy().hasHeightForWidth());
         effectsList->setSizePolicy(sizePolicy1);
         effectsList->setMinimumSize(QSize(0, 0));
@@ -680,7 +682,7 @@ public:
         channelScrollArea->setWidgetResizable(true);
         scrollAreaChannelsWidgetContents_2 = new QWidget();
         scrollAreaChannelsWidgetContents_2->setObjectName(QStringLiteral("scrollAreaChannelsWidgetContents_2"));
-        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(-240, 0, 1356, 276));
+        scrollAreaChannelsWidgetContents_2->setGeometry(QRect(0, 0, 1356, 276));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -803,6 +805,7 @@ public:
         levelDialChannel1->setObjectName(QStringLiteral("levelDialChannel1"));
         sizePolicy5.setHeightForWidth(levelDialChannel1->sizePolicy().hasHeightForWidth());
         levelDialChannel1->setSizePolicy(sizePolicy5);
+        levelDialChannel1->setValue(99);
 
         verticalLayoutFrameChannel1->addWidget(levelDialChannel1);
 
@@ -913,6 +916,7 @@ public:
         levelDialChannel2->setObjectName(QStringLiteral("levelDialChannel2"));
         sizePolicy5.setHeightForWidth(levelDialChannel2->sizePolicy().hasHeightForWidth());
         levelDialChannel2->setSizePolicy(sizePolicy5);
+        levelDialChannel2->setValue(99);
 
         verticalLayoutFrameChannel1_2->addWidget(levelDialChannel2);
 
@@ -1015,6 +1019,7 @@ public:
         levelDialChannel3->setObjectName(QStringLiteral("levelDialChannel3"));
         sizePolicy5.setHeightForWidth(levelDialChannel3->sizePolicy().hasHeightForWidth());
         levelDialChannel3->setSizePolicy(sizePolicy5);
+        levelDialChannel3->setValue(99);
 
         verticalLayoutFrameChannel1_3->addWidget(levelDialChannel3);
 
@@ -1117,6 +1122,7 @@ public:
         levelDialChannel4->setObjectName(QStringLiteral("levelDialChannel4"));
         sizePolicy5.setHeightForWidth(levelDialChannel4->sizePolicy().hasHeightForWidth());
         levelDialChannel4->setSizePolicy(sizePolicy5);
+        levelDialChannel4->setValue(99);
 
         verticalLayoutFrameChannel1_4->addWidget(levelDialChannel4);
 
@@ -1219,6 +1225,7 @@ public:
         levelDialChannel5->setObjectName(QStringLiteral("levelDialChannel5"));
         sizePolicy5.setHeightForWidth(levelDialChannel5->sizePolicy().hasHeightForWidth());
         levelDialChannel5->setSizePolicy(sizePolicy5);
+        levelDialChannel5->setValue(99);
 
         verticalLayoutFrameChannel1_5->addWidget(levelDialChannel5);
 
@@ -1321,6 +1328,7 @@ public:
         levelDialChannel6->setObjectName(QStringLiteral("levelDialChannel6"));
         sizePolicy5.setHeightForWidth(levelDialChannel6->sizePolicy().hasHeightForWidth());
         levelDialChannel6->setSizePolicy(sizePolicy5);
+        levelDialChannel6->setValue(99);
 
         verticalLayoutFrameChannel1_6->addWidget(levelDialChannel6);
 
@@ -1423,6 +1431,7 @@ public:
         levelDialChannel7->setObjectName(QStringLiteral("levelDialChannel7"));
         sizePolicy5.setHeightForWidth(levelDialChannel7->sizePolicy().hasHeightForWidth());
         levelDialChannel7->setSizePolicy(sizePolicy5);
+        levelDialChannel7->setValue(99);
 
         verticalLayoutFrameChannel1_7->addWidget(levelDialChannel7);
 
@@ -1525,6 +1534,7 @@ public:
         levelDialChannel8->setObjectName(QStringLiteral("levelDialChannel8"));
         sizePolicy5.setHeightForWidth(levelDialChannel8->sizePolicy().hasHeightForWidth());
         levelDialChannel8->setSizePolicy(sizePolicy5);
+        levelDialChannel8->setValue(99);
 
         verticalLayoutFrameChannel1_8->addWidget(levelDialChannel8);
 
@@ -1627,6 +1637,7 @@ public:
         levelDialChannel9->setObjectName(QStringLiteral("levelDialChannel9"));
         sizePolicy5.setHeightForWidth(levelDialChannel9->sizePolicy().hasHeightForWidth());
         levelDialChannel9->setSizePolicy(sizePolicy5);
+        levelDialChannel9->setValue(99);
 
         verticalLayoutFrameChannel1_9->addWidget(levelDialChannel9);
 
@@ -1729,6 +1740,7 @@ public:
         levelDialChannel10->setObjectName(QStringLiteral("levelDialChannel10"));
         sizePolicy5.setHeightForWidth(levelDialChannel10->sizePolicy().hasHeightForWidth());
         levelDialChannel10->setSizePolicy(sizePolicy5);
+        levelDialChannel10->setValue(99);
 
         verticalLayoutFrameChannel1_10->addWidget(levelDialChannel10);
 
@@ -4175,7 +4187,6 @@ public:
         waveform1ComboBoxADSR->insertItems(0, QStringList()
          << QApplication::translate("LeandroClass", "Sine", Q_NULLPTR)
          << QApplication::translate("LeandroClass", "Square", Q_NULLPTR)
-         << QApplication::translate("LeandroClass", "Sawtooth", Q_NULLPTR)
         );
         level1Label->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
         oscillator2Label->setText(QApplication::translate("LeandroClass", "Oscillator 2", Q_NULLPTR));
@@ -4184,7 +4195,6 @@ public:
         waveform2ComboBoxADSR->insertItems(0, QStringList()
          << QApplication::translate("LeandroClass", "Sine", Q_NULLPTR)
          << QApplication::translate("LeandroClass", "Square", Q_NULLPTR)
-         << QApplication::translate("LeandroClass", "Sawtooth", Q_NULLPTR)
         );
         level2Label->setText(QApplication::translate("LeandroClass", "Level", Q_NULLPTR));
         envelopeParamsLabel->setText(QApplication::translate("LeandroClass", "Envelope Parameters", Q_NULLPTR));

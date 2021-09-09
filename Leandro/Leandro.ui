@@ -638,6 +638,9 @@
            </item>
            <item>
             <widget class="QListWidget" name="instrumentsList">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -709,6 +712,9 @@
            </item>
            <item>
             <widget class="QListWidget" name="effectsList">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -855,7 +861,7 @@
           <widget class="QWidget" name="scrollAreaChannelsWidgetContents_2">
            <property name="geometry">
             <rect>
-             <x>-240</x>
+             <x>0</x>
              <y>0</y>
              <width>1356</width>
              <height>276</height>
@@ -1161,6 +1167,9 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="value">
+                     <number>99</number>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -1455,6 +1464,9 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="value">
+                     <number>99</number>
                     </property>
                    </widget>
                   </item>
@@ -1751,6 +1763,9 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="value">
+                     <number>99</number>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -2045,6 +2060,9 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="value">
+                     <number>99</number>
                     </property>
                    </widget>
                   </item>
@@ -2341,6 +2359,9 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="value">
+                     <number>99</number>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -2635,6 +2656,9 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="value">
+                     <number>99</number>
                     </property>
                    </widget>
                   </item>
@@ -2931,6 +2955,9 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="value">
+                     <number>99</number>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -3225,6 +3252,9 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="value">
+                     <number>99</number>
                     </property>
                    </widget>
                   </item>
@@ -3521,6 +3551,9 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="value">
+                     <number>99</number>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -3815,6 +3848,9 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="value">
+                     <number>99</number>
                     </property>
                    </widget>
                   </item>
@@ -4272,11 +4308,6 @@
                                <string>Square</string>
                               </property>
                              </item>
-                             <item>
-                              <property name="text">
-                               <string>Sawtooth</string>
-                              </property>
-                             </item>
                             </widget>
                            </item>
                           </layout>
@@ -4431,11 +4462,6 @@
                              <item>
                               <property name="text">
                                <string>Square</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Sawtooth</string>
                               </property>
                              </item>
                             </widget>
