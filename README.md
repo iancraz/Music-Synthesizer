@@ -690,6 +690,41 @@ In the figure below you can see how the waveform and the spectrogram of the sign
 
 <img src="./docs/Wah-wah_img.png" style="width:600px;"/>
 
+### Reverb Effects
+
+#### Schroeder Reverberator
+
+For the reverb effect, the flat reverb type was implemented with the transfer given by,
+
+$$H(z)=\frac{1}{1-gz^{-M}}$$
+
+It can be seen that its difference equation is given by,
+
+$$y(n)= x(n)+g y(n-M)$$
+
+##### Results
+
+In the figure below you can see how the waveform and spectrogram of the signal are affected when the effect is applied.
+
+<img src="./docs/Reverb_plain_img.png" style="width:600px;"/>
+
+#### Low-pass reverb
+
+In a similar way to how the Schroeder reverberator was implemented, a simple low-pass filter of the form,
+
+$$y(n)=\frac{x(n)-x(n-1)}{2}$$
+
+Therefore, the difference equation of the Schroeder reverberator with the low-pass filter is of the form,
+
+$$y(n)=x(n)+\frac{1}{2}g \left(y(n-M) + y(n-M-1) \right)$$
+
+##### Results
+
+In the figure below you can see how the waveform and spectrogram of the signal are affected when the effect is applied.
+
+<img src="./docs/Reverb_lowpass_img.png" style="width:600px;"/>
+
+
 
 ## Program implementation
 >[Table of contents](#table-of-contents)
