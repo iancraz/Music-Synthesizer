@@ -724,7 +724,55 @@ In the figure below you can see how the waveform and spectrogram of the signal a
 
 <img src="./docs/Reverb_lowpass_img.png" style="width:600px;"/>
 
+### Effects based on amplitd Modulation
 
+Next, one of the implemented amplitude modulation effects, the tremolo, will be detailed.
+
+#### Tremolo
+
+The tremolo is the effect that results from multiplying the input signal by another variable signal in time, therefore its function in time will be given by,
+
+$$y(n)=m(n)x(n)$$
+
+Being,
+
+$$m(n) = 1 + \alpha cos\left(2 \pi n \frac{f_{LFO}}{f_s} \right)$$
+
+A block diagram of the system can be seen in the figure below.
+
+<img src="./docs/tremolo.png" style="width:500px;"/>
+
+##### Results
+
+In the figure below you can see how applying the tremolo effect affects the spectrogram.
+
+<img src="./docs/tremolo_img.png" style="width:600px;"/>
+
+### Program implementation
+
+To use the effects mentioned above, a GUI program was implemented separate from the main instrument synthesis program, in order to be able to use the effects with .wav files. The design of the program can be seen in the figure below.
+
+<img src="./docs/Effects_soft.png" style="width:700px;"/>
+
+Below we will proceed to detail a small user manual for the use of said program.
+
+#### User Manual
+
+##### Uploaded file
+
+To begin applying effects to a file in the program, the file must be loaded into the program. This is done from the top bar of the window, inserting the path and name of the file .wav that you want to load. If everything goes well, a banner saying 'File uploaded successfully' should pop up in the bottom right corner of the screen.
+
+##### Effect settings
+
+To load the different effects to the song loaded in the program, you must check the box for the effect you want to use and move the effect configuration bars as desired.
+
+##### Saved modified file
+
+Once the file has been loaded into the program, and the effects to be applied have been selected and configured, you must proceed to choose a name for the output file in the lower right bar, and when finished click the 'Save File' button.
+
+#### Conclusion
+
+As could be seen, the digital effects used can generate different types of sounds. It is important to clarify that, when using IIR filters in some of the filters, the sound output through a speaker could saturate/clip the sound. This is why special care must be taken in the transfer coefficients of the IIR filter.
 
 ## Program implementation
 >[Table of contents](#table-of-contents)
