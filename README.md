@@ -18,14 +18,14 @@ After experimenting with different "instruments" and filters, you might like wha
 
 # Table of Contents
 
-* [Fast Fourier Transform](fast-fourier-transform)
-* [Sample-Based Synthesis](sample-based-synthesis)
-* [Additive Synthesis](additive-synthesis)
-* [Sound synthesis using physical models](sound-synthesis-using-physical-models)
-* [Waveform synthesis](waveform-synthesis)
-* [Random behavior](random-behavior)
-* [Digital Effects](digital-effects)
-* [Program implementation](program-implementation)
+* [Fast Fourier Transform](#fast-fourier-transform)
+* [Sample-Based Synthesis](#sample-based-synthesis)
+* [Additive Synthesis](#additive-synthesis)
+* [Sound synthesis using physical models](#sound-synthesis-using-physical-models)
+* [Digital Effects](#digital-effects)
+* [Program implementation](#program-implementation)
+* [Contact](#contact)
+* [License](#license)
 
 ## Fast Fourier Transform
 >[Table of contents](#table-of-contents)
@@ -116,10 +116,12 @@ $$x(n) = 10 sin(2\pi100 n T) + 5 sin(2\pi 200 n T) + 2.5 sin(2\pi 300 n T)\\
 >[Table of contents](#table-of-contents)
 
 ### Introduction
+>[Sample-Based Synthesis](sample-based-synthesis)
 
 Sample-based synthesis is very different from other forms of synthesis such as additive synthesis. As seen above this type of synthesis uses basic functions such as sine, square, triangle or sawtooth to synthesize different sounds. However, sample-based synthesis uses a sample to recreate another sound. This sample, henceforth referred to as a sample, can be a recorded sound or instrument. Consequently, this form of synthesis allows you to recreate a more realistic sound since you are working on a real sound. In addition, it is less demanding on the CPU than other forms of synthesis, such as synthesis using physical models, since the output signal is not calculated in real time but pre-recorded samples are used. However, this type of synthesis involves a similar difficulty. Suppose you want to synthesize a piano. By this method it is possible but it would require to have pre-recorded all the notes of the piano with all the possible durations. This is clearly impossible since the memory is finite. For this reason, algorithms are used to perform time and frequency stretching and compression to form from a pre-recorded note another note with different frequency and different duration. This is the objective of this section, to be able to determine an appropriate algorithm so that, from a recorded note, another note of different frequency and duration can be created. In this way, with just a few samples, we can synthesize an instrument. Taking all this into consideration, it is proposed to synthesize a piano.
 
 ### Pitch shifting
+>[Sample-Based Synthesis](sample-based-synthesis)
 
 First, the possibility of modifying the pitch of a note is analyzed. The pitch is one of the four essential qualities of sound. It determines whether a sound is high-pitched or low-pitched. The higher the frequency, the higher the pitch, and the lower the frequency, the lower the pitch. The Pitch is determined by the fundamental frequency of the signal.
 
@@ -194,6 +196,7 @@ Figure above shows the method on a Sample of C4 of a classical electronic piano 
 In conclusion, pitch shifting was successfully achieved on a Sample. It was possible to perform the shift of the fundamental frequency of the sample while maintaining the duration of the sample. As additional considerations, it is possible to work using different windows such as Barlett or similar and with different width to analyze the different results.  
 
 ### Time-scale Modification
+>[Sample-Based Synthesis](sample-based-synthesis)
 
 Second, temporal scaling is analyzed. The method to perform the scaling is very similar to the method to perform the pitch shifting. The difference is that now we are not interested in changing the Pitch but, what we want is to modify the time of the signal. To achieve this, the TD-PSOLA method is also used. The steps of the method are the same as those described in Pitch Correction and others suffer some changes. Step 1 remains exactly the same, the signal is decomposed into a series of short time analysis signals. Step 2 undergoes a small correction. Remember that now you want to have the same Pitch so the distance between each synthesis signal must have the same distance from each other as the analysis signals. This would be $P_0 = P_1$. From this follows the main problem. Suppose one wants to shorten the signal time. Then, some synthesis signals must be removed so that the total time is reduced but the Pitch remains the same. The opposite happens if you want to increase the signal time. To achieve this, synthesis signals must be repeated to fill the time. Once the position of each synthesis signal is known, it is possible to continue with step 3 and compose the final signal.
 
@@ -212,6 +215,7 @@ Figure below shows a modification of a C4 note. The first graph shows the origin
 <img src="./docs/key_modification.png" style="width:500px;"/>
 
 ### Conclusion
+>[Sample-Based Synthesis](sample-based-synthesis)
 
 It was possible to understand the basics of sample synthesis, its operation and implementation. It was possible to perform the time shift and the fundamental frequency to synthesize any note of a piano. 
 
@@ -221,6 +225,7 @@ With the knowledge acquired, it was possible to synthesize several instruments s
 >[Table of contents](#table-of-contents)
 
 ### Introduction
+>[Additive Synthesis](#additive-synthesis)
 
 Additive synthesis is based on the concept of Fourier Series, specifically on the fact that a periodic signal can be written as a sum of sinusoidal signals of different frequencies and amplitudes:
 
@@ -235,6 +240,7 @@ $$y(t) = \sum _{k=1}^N{A_k(t) cos\left(2\pi k f_0 + \phi_k\right)}$$
 Considering the above, two additive synthesis models were proposed in this report. The first of them, which we will denote ADSR, proposes that the envelope that modulates in amplitude is the same for all the partials that make up the signal. The second proposal assumes, as stated in te expression above, that each partial is modulated by a different envelope $A_k(t)$. The following sections explain the procedure implemented to obtain the models of 4 different instruments using the second synthesis proposal.
 
 ### Getting parameters
+>[Additive Synthesis](#additive-synthesis)
 
 It was proposed to implement the additive synthesis of 4 instruments: piano, clarinet, trombone and trumpet. For each of these instruments, audio samples were taken in .wav format, and a very selective band-pass filter was applied to them, so that the envelope signal $A_k(t)$ corresponding to the partial of interest $k$ could be obtained. Particularly, the first 12 harmonics of the signals were selected.
 
@@ -339,10 +345,12 @@ with xlsxwriter.Workbook('OCT' + str(oct) + '.xlsx') as workbook:
 ```
 
 ### Parameters
+>[Additive Synthesis](#additive-synthesis)
 
 The parameters that were presented to the GUI user to modify the synthesis model in question were the coefficients of each of the 12 harmonics that make up the signal, that is, they were given the possibility of modifying the amplitudes of its components. spectral, to give the instrument different tones.
 
 ### Results
+>[Additive Synthesis](#additive-synthesis)
 
 Below is the result obtained using the aforementioned method for the synthesis of an acoustic piano note.
 
@@ -355,10 +363,14 @@ It was observed that the syntheses corresponding to the wind instruments result 
 >[Table of contents](#table-of-contents)
 
 ### Introduction
+>[Sound synthesis using physical models](#sound-synthesis-using-physical-models)
+
 There are many musical synthesis techniques, which include frequency modulated (FM) synthesis, waveshaping, additive and subtractive synthesis, but to achieve fidelity sounds they require arithmetic speed that can be found in highly processing computers or digital synthesizers, inaccessible to most. This type of synthesis allows its application in a simple way and on most computers on the market.
 It is not only an algorithm that can be easily applied in software, but also in hardware. Compared to additive synthesis, the sound of the plucked string is much more natural and fluid since in experiments a sine wave generator was needed to produce a similar tone (Sleator 1981).
 
 ### Waveform synthesis
+>[Sound synthesis using physical models](#sound-synthesis-using-physical-models)
+
 This method is one of the bases to explain the synthesis through physical models. It consists of repeating a number of samples continuously to generate a pure periodic signal.
 
 $$y\left(n\right)=y\left(n-p\right)$$
@@ -443,6 +455,8 @@ Next, the digital effects applied in the implemented program will be explained a
 <img src="./docs/Original_img.png" style="width:600px;"/>
 
 ### Delay-based effects
+>[Digital Effects](#digital-effects)
+
 The Delay lines are one of the most important blocks that build several of the most outstanding effects. In general, they are easy to implement, and small changes in their parameters reproduce different effects that will be seen below.
 
 #### Delay
@@ -570,6 +584,7 @@ In the figure below you can see how the waveform and the spectrogram of the sign
 <img src="./docs/Flanger_img.png" style="width:600px;"/>
 
 ### Filter-based effects
+>[Digital Effects](#digital-effects)
 
 Although in the previous section we dedicated ourselves to analyzing the effects based on delay, throughout the next section we will focus on the effects based on filters, whether low-pass, high-pass, band-pass, peaking/ notch, shelving and pass-all.
 
@@ -691,6 +706,7 @@ In the figure below you can see how the waveform and the spectrogram of the sign
 <img src="./docs/Wah-wah_img.png" style="width:600px;"/>
 
 ### Reverb Effects
+>[Digital Effects](#digital-effects)
 
 #### Schroeder Reverberator
 
@@ -725,6 +741,7 @@ In the figure below you can see how the waveform and spectrogram of the signal a
 <img src="./docs/Reverb_lowpass_img.png" style="width:600px;"/>
 
 ### Effects based on amplitd Modulation
+>[Digital Effects](#digital-effects)
 
 Next, one of the implemented amplitude modulation effects, the tremolo, will be detailed.
 
@@ -749,6 +766,7 @@ In the figure below you can see how applying the tremolo effect affects the spec
 <img src="./docs/tremolo_img.png" style="width:600px;"/>
 
 ### Program implementation
+>[Digital Effects](#digital-effects)
 
 To use the effects mentioned above, a GUI program was implemented separate from the main instrument synthesis program, in order to be able to use the effects with .wav files. The design of the program can be seen in the figure below.
 
@@ -780,6 +798,7 @@ As could be seen, the digital effects used can generate different types of sound
 To develop the program, the C++ language was used due to its ability to carry out tasks more quickly than other languages ​​such as Python. In this work, we focus on creating a program capable of synthesizing notes in real time, and reproducing them with effects also in real time. This is why a program was required that was fast enough to process the amount of data necessary so that the sound did not get stuck at any time.
 
 ### Graphic interface
+>[Program implementation](#program-implementation)
 
 For the graphical interface, the Open Source Qt library was used, due to its relative ease of use and its extensive development in graphical functions. Some screenshots of the program can be seen in the figures below.
 
@@ -790,15 +809,18 @@ For the graphical interface, the Open Source Qt library was used, due to its rel
 <img src="./docs/gui_additive_effects.PNG" style="width:1000px;"/>
 
 ### Audio Management
+>[Program implementation](#program-implementation)
 
 To manage the audio to be reproduced, the PortAudio library was used, since it had functions that were simple enough to understand and easy to apply to be able to reproduce a given sound. Furthermore, with the calls to callbacks that this library provided, it gave us a wide range of possibilities to apply algorithms to the signals that were subsequently going to be reproduced. This is why each synthesis, and in the effects, had to develop the necessary callbacks to be able to be used in protaudio, and following strict programming rules so that the algorithms used do not take too much time.
 Some of the restrictions used were: a) Do not allocate or allocate memory within the callbacks, b) do not have very high algorithm complexity orders, and c) that the algorithms do not process unnecessary information.
 
 ### Synthesis data management
+>[Program implementation](#program-implementation)
 
 As already discussed in previous sections, the different synthesis methods require previous data on instruments and other parameters, which is why it was decided that for our program, the data loading is done during the beginning of the program. For this reason, although the program may take a few seconds to start, once started it can begin synthesizing any audio without any loading screen or any delay.
 
 ### Presets for effects
+>[Program implementation](#program-implementation)
 
 For each effect, the user was provided with different presets, along with different dials to adjust the parameters of each effect to taste. In this way, no effect is fixed, but rather it can be modified, along with the synthesis parameters, to generate any type of sound desired, and hear the result in real time.
 
