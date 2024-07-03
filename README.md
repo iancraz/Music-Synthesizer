@@ -569,6 +569,126 @@ In the figure below you can see how the waveform and the spectrogram of the sign
 
 <img src="./docs/Flanger_img.png" style="width:600px;"/>
 
+### Filter-based effects
+
+Although in the previous section we dedicated ourselves to analyzing the effects based on delay, throughout the next section we will focus on the effects based on filters, whether low-pass, high-pass, band-pass, peaking/ notch, shelving and pass-all.
+
+#### Equalization
+
+Although there are many effects based on filters, the main and most used is the equalizer. The equalizer is the digital effect that is responsible for "equalizing" (e.g. equalizing) the different frequency bands to compensate for non-ideal behaviors due to equipment and room acoustics. All equalizers used today are filter-based, and most equalizers are composed of multiple sub-filters.
+It is known that the number of bands to be equalized is arbitrary and chosen by the person who designs the equalizer program, which is why it is necessary to clarify that in order to keep the development of this report limited, we will focus on developing a 3-band equalizer. bands. These will be the low, mid and high tones, and the center frequencies of each band will be calculated in a similar way to how they were done in the Circuit Theory report (e.g. logarithmically). In the figure below you can see a block diagram of a 3-band equalizer with cascade connection.
+
+<img src="./docs/eq.png" style="width:600px;"/>
+
+For the application of a 3-band digital equalizer, 2 shelving type filters and one peaking/notch type filter will be used. For this, the following transfer functions will be used\footnote{It is necessary to highlight that although for practical purposes the analysis of the mathematical obtaining of these transfers will not be carried out, they are fully detailed in chapter 3 of the book \cite{ eff1}.},
+
+$$H_{LS}(z)=\frac{\left(Gtan(\omega_c/2)+\sqrt{G}\right)z+\left(Gtan(\omega_c/2)-\sqrt{G}\right)}{\left(tan(\omega_c/2)+\sqrt{G}\right)z+\left(tan(\omega_c/2)-\sqrt{G}\right)}$$
+
+$$H_{HS}(z)=\frac{\left(\sqrt{G}tan(\omega_c/2)+G\right)z+\left(\sqrt{G}tan(\omega_c/2)-G\right)}{\left(\sqrt{G}tan(\omega_c/2)+1\right)z+\left(\sqrt{G}tan(\omega_c/2)-1\right)}$$
+
+$$H_{PN}(z)=\frac{\left(\sqrt{G}+Gtan(B/2)\right)z^2-\left(2\sqrt{G}cos(\omega_c)\right)z+\left(\sqrt{G}-Gtan(B/2)\right)}{\left(\sqrt{G}+tan(B/2)\right)z^2-\left(2\sqrt{G}cos(\omega_c)\right)z+\left(\sqrt{G}-tan(B/2)\right)}$$
+
+##### Parameters
+
+As can be seen in the equations below, the formulas They are too bulky and not at all simple. This is why we will proceed to set a few parameters in order to obtain a transfer that is easier to implement and more understandable as well.
+The first parameters to set will be the center frequencies of each filter, since our equalizer will have fixed equalization bands. This is why by arbitrarily choosing $\omega_{c_{LS}}=200(Hz)$, the other frequencies will be determined by the logarithmic scale. Therefore, the central frequencies to be used will be,
+
+$$\omega_{c_{LS}}=300(Hz)$$
+
+$$\omega_{c_{PN}}=700(Hz)$$
+
+$$\omega_{c_{HS}}=1.5(kHz)$$
+
+The next parameters to set will be the respective bandwidths of each filter. For this, the following bandwidths were chosen:
+
+$$B=400(Hz)$$
+
+Finally, it is known that typical tone controls have a gain variation of $\pm12(dB)$, which is why the value of $G$, is necessarily confined to the interval, 0.25 < $G$ < 4
+
+##### Interconnection of stages
+
+Although there are 2 ways to interconnect the filters, for this particular case the filters will be connected in cascade. This is because in general, these types of 3-band filters are usually connected in cascade because they give a better output.
+
+##### Efficiency
+
+As seen throughout the entire report, the efficiency of algorithms is crucial in the development of this type of systems, and that is why, for these types of purposes, paying special attention to efficiency is no exception. This is why it was decided not to calculate the filter coefficients in each pass, but to calculate them only when the values ​​change.
+
+##### Implementation
+
+To implement this type of filters, it is not enough to have the transfer as a function of z, that is why it is anti-transformed into z and the recurrence equations of the filters are obtained. These equations are detailed below, and these will be the ones that will be implemented in the program's effects system.
+For the cases of $H_{LS}$ and $H_{HS}$ where,
+
+$$H(z)= \frac{Az+B}{Cz+D}$$
+
+We obtain,
+
+$$y(n)=\frac{Ax(n)+Bx(n-1)-Dy(n-1)}{C}$$
+
+On the other hand, for $H_{PN}$ where,
+
+$$H(z)=\frac{Az^2+Bz+C}{Dz^2+Bz+E}$$
+
+we have,
+
+$$y(n)=\frac{Ax(n)+Bx(n-1)+Cx(n-2)-By(n-1)-Ey(n-2)}{D}$$
+
+##### Results
+
+The results of applying the equalizer in different ways can be seen in the figures below.
+
+<img src="./docs/EQ_bass_img.png" style="width:600px;"/>
+<img src="./docs/EQ_mid_img.png" style="width:600px;"/>
+<img src="./docs/EQ_high_img.png" style="width:600px;"/>
+
+#### 8 Band Equalizer
+
+To implement an 8-band equalizer, all the previously explained theory was used, with the exception that on this occasion, all the filters were of the Peaking-Notch type, and each one corresponded to the transfer described in the third transfer equation described above.
+
+##### Determination of frequencies
+
+To determine the central frequencies of each filter, a logarithmic distance between them was used, following the expression below.
+
+$$f_k = 10^{\left(2+\frac{log(20000) - log(100)}{8} k\right)}$$
+
+##### Determination of Bandwidth
+
+To determine the bandwidths of each filter, the expression below was taken arbitrarily.
+
+$$B_k = \frac{f_k}{3}$$
+
+##### Determining the Gain
+
+Finally, to determine the range of gains, an interval of $\pm 12(dB)$ was taken, in the same way as for the other effects, giving a gain interval of 0.25< $G_k$ < 4.
+
+#### Wah-Wah
+
+Luckily for the reader, the Wah-Wah effect uses only 1 digital filter, and because of this, the mathematical calculations to be done are less. Without theoretical justification in this report, we will proceed to give below the transfer equation of a Wah-Wah.
+
+$$H(z)=\frac{b_0z^2 + b_2}{z^2 +a_1z+a_2}$$
+
+Where, $b_0=\frac{K}{K^2Q+K+Q}$, $b_2=-b_0$, $a_1=\frac{2Q(K^2-1)}{K^2Q+K+ Q}$ and $a_2=\frac{K^2Q-K+Q}{K^2Q+K+Q}$.
+Being $K=tan\left(\pi \frac{f_c}{f_S}\right)$.
+
+Therefore, its expression in differences will be determined by,
+
+$$y(n)=b_0x(n)+b_2x(n-2)-a_1y(n-1)-a_2y(n-2)$$
+
+##### Low Frequency Oscillator (LFO)
+
+As seen in the transfer equation described above, the Wah-Wah uses a low-pass equation, however, the special thing about a wah-wah effect is that unlike a common resonant low-pass filter and current, this filter changes depending on the cutoff frequency $\omega_c$. For the purposes of this report, we will focus on the so-called 'Auto-Wah', which generates the Wah-Wah effect without the need for a pedal to change the frequency. For this, an LFO is implemented in such a way that the frequency is determined as follows,
+
+$$f_c(n)=f_{min}+\frac{W}{2}\left(1+cos\left(2\pi n \frac{f_{LFO}}{f_s}\right)\right)$$
+
+
+The values ​​they will take will be confined to, $0.2(Hz)$ < $f_{LFO}$ < $5(Hz)$ and $f_{min}$ > $250(Hz)$. In the figure below it can be seen a block diagram of a Wah-Wah.
+
+<img src="./docs/wahwah.png" style="width:500px;"/>
+
+##### Results
+
+In the figure below you can see how the waveform and the spectrogram of the signal are affected when the effect is applied.
+
+<img src="./docs/Wah-wah_img.png" style="width:600px;"/>
 
 
 ## Program implementation
