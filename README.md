@@ -438,6 +438,139 @@ a\approx \left(R_L\cdot cos\left(\frac{\omega}{2}\right)\right)^{\frac{1}{p+\fra
 ## Digital Effects
 >[Table of contents](#table-of-contents)
 
+Next, the digital effects applied in the implemented program will be explained and developed and compared with the sound seen in figure \ref{fig:original}. In addition to this, along with the report, the original sound files and the applied effects are attached so that the effect can be better appreciated.
+
+<img src="./docs/Original_img.png" style="width:600px;"/>
+
+### Delay-based effects
+The Delay lines are one of the most important blocks that build several of the most outstanding effects. In general, they are easy to implement, and small changes in their parameters reproduce different effects that will be seen below.
+
+#### Delay
+
+##### Basic Delay
+
+The basic Delay plays an audio signal after a specified time. This time can vary arbitrarily from milliseconds to several seconds. In the figure elow you can see a basic diagram of a delay block.
+
+<img src="./docs/Basic_delay.png" style="width:500px;"/>
+
+This delay block can be expressed with the equation seen below.
+
+$$y(n)=x(n)+g x\left(n-N\right)$$
+
+It is important to emphasize that the delay block is Linear Time Invariant (LTI). On the other hand, it can be easily shown that the Z transform of the delay block is determined by the equation below.
+
+$$H(z)=1+gz^{-N}=\frac{z^{N}+g}{z^{N}}$$
+
+###### Results
+
+In the figure below you can see how the waveform and the spectrogram of the signal are affected when the effect is applied.
+
+<img src="./docs/Reverb_Eco_img.png" style="width:600px;"/>
+
+##### Delay with Feedback
+
+While basic delay is very easy to implement, it has some problems. The main one, being that it only produces a single echo to the output signal. On the other hand, feedback can cause the sound at the output to have a continuous echo, which is what is sought most of the time. A block diagram of the delay with feedback can be seen in figure below.
+
+<img src="./docs/Feedback_delay.png" style="width:500px;"/>
+
+You can easily arrive at the equation below of the delay with feedback.
+
+$$y(n)=g_{FB}y(n-N)+x(n)+( g_{FF}-g_{FB})x(n-N)$$
+
+Finally, applying the Z Transform to the previous expression, we trivially arrive at:
+
+$$H(z)=\frac{1+z^{-N}(g_{FF}-g_{FB})}{1-z^{-N}g_{FB}}$$
+
+#### Vibrato
+
+Vibrato is defined as a quasi-periodic variation in the pitch of a note. Vibrato is characterized by its frequency (how often the pitch of a note changes) and its width (the total variation in the pitch of the note).
+
+##### Theory
+
+The implementation of vibrato is based on a delay block modulated by a low frequency oscillator (LFO). A basic diagram of vibrato can be seen in the figure below.
+
+<img src="./docs/Vibrato.png" style="width:500px;"/>
+
+The expression of vibrato is given by;
+
+$$y(n)=x\left( n- M(n) \right)$$
+
+Being,
+
+$$M(n)=M_{avg}+W sin\left(2 \pi n \frac{f}{f_s} \right)$$
+
+Where $M_{avg}$ is the average vibrato delay, $W$ is the modulation width, $f$ is the LFO frequency, and $f_s$ is the sampling frequency.
+
+##### Interpolation
+
+It is important to clarify that for this effect to work it is necessary to have values ​​of $x(n-M(n))$ for when $n-M(n)\notin \mathbb{Z}$. For this, since $x$ is not defined in $\mathbb{Z}$, it is necessary to perform an interpolation of $x$. Although there are different types of interpolation depending on the case, for the purposes of this work it was decided to use linear interpolation.
+
+$$ x(t) = (n+1-t) \cdot x(n) + (t-n) \cdot x(n+1)$$
+
+for n<t<n+1 
+
+##### Results
+
+In the figure below you can see how the waveform and the spectrogram of the signal are affected when the effect is applied. You can clearly see how the frequencies do not remain constant, but rather follow the shape of a sine wave very small in frequency.
+
+<img src="./docs/Vibrato_img .png" style="width:600px;"/>
+
+#### Flanger
+
+##### Basic Flanger
+
+The flanger effect is based on the principle of constructive and destructive interference. A basic flanger is broadly related to basic delay and can be seen in the equation below.
+
+$$y(n)=x(n)+gx(n-N)$$
+
+The delay $M(n)$ varies with respect to an LFO in a similar (but not identical) way to that of vibrato. By applying the Z Transform to the basic flanger equation we can obtain:
+
+$$H(z)=1+gz^{-M(n)}$$
+
+In this way, its frequency response will be defined by,
+
+$$H(f)=1+g e^{-i2\pi f M(n)}$$
+
+where $t= nT$.
+
+##### Flanger with Feedback
+
+In the same way as the feedback delay was explained, the flanger gets its own feedback form broadly related to its delay version. A figure of the flanger with feedback is seen in the figure below.
+
+<img src="./docs/flanger_feedback.png" style="width:500px;"/>
+
+In the same way as with the delay, its expression is given by,
+
+$$y(n)=g_{FB}y\left(n-M(n) \right)+ x(n)+(g_{FF}-g_{FB})x\left(n-M(n) \right)$$
+
+Being its Z Transform,
+
+$$H(z)=\frac{1+z^{-M(n)}(g_{FF}-g_{FB})}{1-z^{-M(n)}g_{FB}}$$
+
+Finally, its frequency response will be given by,
+
+$$H(f) = \frac{1+e^{-i2\pi f M(n)}\left(g_{ff} - g_{fb}\right)}{1-e^{-i2\pi f M(n)}g_{fb}}$$
+
+where $t= nT$.
+
+##### LFO
+
+It is important to clarify that since $M(n)$ must vary in time, it can vary in different ways (sinusoidal, triangular, sawtooth, etc.). However, the most used variation is that of the sine. The expression for $M(n)$ is expressed as,
+
+$$M(n)= M_0 + \frac{M_W}{2} \left(1 + sin\left(2 \pi n \frac{f_{LFO}}{f_s} \right) \right)$$
+
+##### Interpolation
+
+In the same way as with vibrato, for flanger (basic or with feedback), an interpolation of the input signal is also used. For this case, the linear interpolation explained in vibrato is also used again.
+
+##### Results
+
+In the figure below you can see how the waveform and the spectrogram of the signal are affected when the effect is applied.
+
+<img src="./docs/Flanger_img.png" style="width:600px;"/>
+
+
+
 ## Program implementation
 >[Table of contents](#table-of-contents)
 
