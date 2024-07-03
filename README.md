@@ -777,6 +777,30 @@ As could be seen, the digital effects used can generate different types of sound
 ## Program implementation
 >[Table of contents](#table-of-contents)
 
+To develop the program, the C++ language was used due to its ability to carry out tasks more quickly than other languages ​​such as Python. In this work, we focus on creating a program capable of synthesizing notes in real time, and reproducing them with effects also in real time. This is why a program was required that was fast enough to process the amount of data necessary so that the sound did not get stuck at any time.
+
+### Graphic interface
+
+For the graphical interface, the Open Source Qt library was used, due to its relative ease of use and its extensive development in graphical functions. Some screenshots of the program can be seen in the figures below.
+
+<img src="./docs/gui.PNG" style="width:1000px;"/>
+<img src="./docs/gui_adsr.PNG" style="width:1000px;"/>
+<img src="./docs/gui_sample_effect.PNG" style="width:1000px;"/>
+<img src="./docs/gui_karplus.PNG" style="width:1000px;"/>
+<img src="./docs/gui_additive_effects.PNG" style="width:1000px;"/>
+
+### Audio Management
+
+To manage the audio to be reproduced, the PortAudio library was used, since it had functions that were simple enough to understand and easy to apply to be able to reproduce a given sound. Furthermore, with the calls to callbacks that this library provided, it gave us a wide range of possibilities to apply algorithms to the signals that were subsequently going to be reproduced. This is why each synthesis, and in the effects, had to develop the necessary callbacks to be able to be used in protaudio, and following strict programming rules so that the algorithms used do not take too much time.
+Some of the restrictions used were: a) Do not allocate or allocate memory within the callbacks, b) do not have very high algorithm complexity orders, and c) that the algorithms do not process unnecessary information.
+
+### Synthesis data management
+
+As already discussed in previous sections, the different synthesis methods require previous data on instruments and other parameters, which is why it was decided that for our program, the data loading is done during the beginning of the program. For this reason, although the program may take a few seconds to start, once started it can begin synthesizing any audio without any loading screen or any delay.
+
+### Presets for effects
+
+For each effect, the user was provided with different presets, along with different dials to adjust the parameters of each effect to taste. In this way, no effect is fixed, but rather it can be modified, along with the synthesis parameters, to generate any type of sound desired, and hear the result in real time.
 
 # Contact
 >[Table of contents](#table-of-contents)
