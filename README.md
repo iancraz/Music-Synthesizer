@@ -1,6 +1,6 @@
 # Leandro: ableton-style audio synthesis software
 
-<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"><img src="./docs/by-nc_small.png" alt="CC BY-NC 4.0" style="width:100px;"/></a>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"><img src="./docs/by-nc-sa_small.png" alt="CC BY-NC-SA 4.0" style="width:100px;"/></a>
 
 Leandro is a piece of software that explores different methods of audio synthesis and different audio filters, written entirely in C++, using portaudio and Qt.
 
@@ -814,7 +814,7 @@ Please do not hesitate to reach out to me if you find any issue with the code or
 # License
 >[Table of contents](#table-of-contents)
 
-<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"><img src="./docs/by-nc.png" alt="CC BY-NC 4.0" style="width:200px;"/></a>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"><img src="./docs/by-nc-sa.png" alt="CC BY-NC-SA 4.0" style="width:200px;"/></a>
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/iancraz/Music-Synthesizer">Music Synthesizer</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.linkedin.com/in/iancraz/">Ian C. Diaz</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
 
